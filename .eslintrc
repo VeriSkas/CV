@@ -6,6 +6,8 @@
     "node": true
   },
   "extends": [
+    "plugin:react/recommended",
+    "standard-with-typescript",
     "eslint:recommended"
   ],
   "parserOptions": {
@@ -16,10 +18,15 @@
     }
   },
   "rules": {
-    "no-console": "off",
+    "no-console": "warn",
+    "prefer-const": ["error", {
+      "destructuring": "all",
+      "ignoreReadBeforeAssign": true
+  }],
     "react/jsx-uses-vars": "error",
     "react/jsx-uses-react": "error",
     "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
     "no-restricted-syntax": [
       "error",
       {
@@ -28,8 +35,10 @@
       }
     ],
     "quotes": [2, "single", { "avoidEscape": true }],
+    "jsx-quotes": ["error", "prefer-double"],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "plugins": [
     "react",

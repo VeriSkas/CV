@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "lint-staged": {
-    "*.{js, jsx}": [
+    "*.{ts, tsx}": [
       "node_modules/.bin/eslint --max-warnings=0",
       "prettier --write"
     ]
@@ -21,11 +21,17 @@
   "devDependencies": {
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
     "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
+    "eslint": "^8.32.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^27.0.1",
+    "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.0",
