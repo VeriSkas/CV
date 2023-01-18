@@ -1,0 +1,58 @@
+@import '../../shared/styles/colors.scss';
+@import '../../shared/styles/sizes.scss';
+
+.Header {
+  max-width: $maxContentWidth;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 20px);
+  height: 100%;
+
+  .MenuIcon {
+    cursor: pointer;
+
+    .Icon {
+      width: 25px;
+      height: 25px;
+
+      path {
+        color: $mainRed;
+      }
+    }
+  }
+
+  .UserInfo {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    font-size: calc(12px + 8 * (100vw / 1536));
+
+    .UserEmail {
+      display: inline-block;
+      margin-right: 10px;
+      max-width: 200px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .UserLogo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $mainRed;
+      cursor: pointer;
+      position: relative;
+
+      .UserLetter {
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 0;
+      }
+    }
+  }
+}
