@@ -1,36 +1,39 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
 
 import { Header } from '../../components/UI/Header/Header';
-import classes from './MainPage.module.scss';
 import { SideBar } from '../../components/SideBar/SideBar';
 import { DropDown } from '../../components/UI/DropDown/DropDown';
 import { links } from '../../shared/constants';
+import classes from './MainPage.module.scss';
 
-export const MainPage = () => {
+export const MainPage: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
   const { profile, settings, logout } = links;
   const dropdownOptions = [profile, settings, logout];
+  const email = localStorage.getItem('email') ?? '';
 
-  const onClose = () => {
+  const onClose = (): void => {
     setIsOpenSidebar(false);
   };
 
-  const onOpen = () => {
+  const onOpen = (): void => {
     setIsOpenSidebar(true);
   };
 
-  const toggleDropDown = () => {
+  const toggleDropDown = (): void => {
     setIsOpenDropDown((prev) => !prev);
   };
 
-  const onCloseDropDown = (label: string) => {
+  const onCloseDropDown = (label: string): void => {
     if (label === 'Logout') {
-      localStorage.removeItem('email');
+      localStorage.clear();
+
+      props.auth(false);
     }
   };
 
@@ -45,13 +48,15 @@ export const MainPage = () => {
             </IconContext.Provider>
           </div>
           <div className={classes.UserInfo}>
-            <span className={classes.UserEmail}>sveta@mail.ru</span>
+            <span className={classes.UserEmail}>{email}</span>
             <div className={classes.UserLogo} onClick={toggleDropDown}>
-              <span className={classes.UserLetter}>s</span>
+              <span className={classes.UserLetter}>{email[0]}</span>
               {isOpenDropDown && (
                 <DropDown
                   options={dropdownOptions}
-                  onClose={(label: string) => onCloseDropDown(label)}
+                  onClose={(label: string) => {
+                    onCloseDropDown(label);
+                  }}
                 />
               )}
             </div>

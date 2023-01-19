@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import { Header } from '../../components/UI/Header/Header';
 import classes from './SignInAndUp.module.scss';
 
-export const SignInAndUp = () => {
+export const SignInAndUp: FC = () => {
   return (
     <>
       <Header>

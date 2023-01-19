@@ -28,6 +28,9 @@
     "react/jsx-uses-react": "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/semi": "off",
+    "@typescript-eslint/comma-dangle": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
     "no-restricted-syntax": [
       "error",
       {
