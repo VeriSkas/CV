@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { ButtonProps } from '../../../shared/interfaces';
 import classes from './Button.module.scss';
 
-export const Button = (props: ButtonProps) => {
-  const cls = [classes.Button, classes[props.type || '']];
-  const clickedBtn = props.onClick ? true : false;
+export const Button: FC<ButtonProps> = (props) => {
+  const cls = [classes.Button, classes[props.type ?? '']];
+  const clickedBtn = !!props.onClick;
 
   return (
     <>

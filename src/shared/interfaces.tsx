@@ -21,6 +21,12 @@ export interface InputProps {
   placeholder?: string;
 }
 
+export interface InputSearchProps {
+  placeholder?: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
 export interface Inputs {
   [key: string]: string;
 }
@@ -39,4 +45,31 @@ export interface ILink {
   to: string;
   label: string;
   icon: JSX.Element;
+}
+
+export interface EmployeeTableOption {
+  name: string;
+  active: boolean;
+  ascendingSort?: boolean;
+}
+
+export interface UserInfo {
+  id: string;
+  email: string;
+  profile: {
+    avatar: string | null,
+    firstName: string,
+    lastName: string,
+    fullName: string | null,
+  };
+  position: string | null;
+  department: string | null;
+}
+
+export interface SortType {
+  department: string;
+  email: string;
+  position: string;
+  firstName: string;
+  lastName: string;
 }

@@ -13,7 +13,7 @@ import { FaAddressCard } from 'react-icons/fa';
 import { GrWorkshop } from 'react-icons/gr';
 import { CgProfile } from 'react-icons/cg';
 
-import { IInput, ILink } from './interfaces';
+import { EmployeeTableOption, IInput, ILink } from './interfaces';
 import {
   BtnText,
   ErrorMessages,
@@ -122,4 +122,12 @@ export const links: { [key: string]: ILink } = {
     label: 'Settings',
     icon: <MdSettings />,
   },
+};
+
+export const employeeTableOptions: { [key: string]: EmployeeTableOption } = {
+  firstName: { name: 'First Name', active: false },
+  lastName: { name: 'Last Name', active: false },
+  email: { name: 'Email', active: false },
+  department: { name: 'Department', active: false },
+  position: { name: 'Position', active: false },
 };

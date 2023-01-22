@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Auth } from './containers/Auth/Auth';
+import { Employees } from './containers/Employees/Employees';
 import { MainPage } from './containers/MainPage/MainPage';
 import { SignInAndUp } from './containers/SignInAndUp/SignInAndUp';
 import { SignUp } from './containers/SignUp/SignUp';
@@ -30,7 +31,9 @@ export const App: FC = () => {
           }}
         />
       }
-    ></Route>
+    >
+      <Route index element={<Employees />} />
+    </Route>
   );
   const unProtectedRoutes = (
     <>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { IconContext } from 'react-icons';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
@@ -7,7 +7,7 @@ import { InputProps } from '../../../shared/interfaces';
 import { InputTypes } from '../../../shared/text';
 import classes from './Input.module.scss';
 
-export const Input = (props: InputProps) => {
+export const Input: FC<InputProps> = (props) => {
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -25,7 +25,9 @@ export const Input = (props: InputProps) => {
       {props.type === InputTypes.password && (
         <div
           className={classes.Eye}
-          onClick={() => setToggle((prevToggle) => !prevToggle)}
+          onClick={() => {
+            setToggle((prevToggle) => !prevToggle);
+          }}
         >
           <IconContext.Provider value={{ className: classes.Icon }}>
             {toggle ? <BsEyeSlashFill /> : <BsEyeFill />}

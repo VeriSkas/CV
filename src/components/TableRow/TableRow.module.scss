@@ -1,0 +1,52 @@
+@import '../../shared/styles/colors.scss';
+
+.TableRow {
+  display: grid;
+  grid-template-columns: 70px repeat(5, 1fr) 70px;
+  border-top: 1px solid $borderColor;
+  border-bottom: 1px solid $borderColor;
+
+  .Item {
+    padding: 16px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    .UserAvatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .UserLogo, .Options {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .UserLogo {
+      background: #bdbdbd;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .Options {
+      cursor: pointer;
+
+      &:hover {
+        background: #bdbdbd50;
+      }
+
+      &:active {
+        background: #bdbdbd;
+        transition: background .5s;
+      }
+    }
+  }
+}

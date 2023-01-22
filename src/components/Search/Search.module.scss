@@ -1,0 +1,39 @@
+@import '../../shared/styles/colors.scss';
+
+.Search {
+  position: relative;
+  width: 300px;
+
+  input {
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid rgba($color: #000000, $alpha: .3);
+    padding: 10px 15px 10px 35px;
+    width: 100%;
+    outline: none;
+    transition: all 300ms ease-in-out;
+    font-family: Arial, Helvetica, sans-serif;
+    background: transparent;
+
+    &:hover {
+      border: 1px solid rgba($color: #000000, $alpha: 1);
+    }
+  }
+
+  .IconSearch {
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+
+    .Icon {
+      width: 20px;
+      height: 20px;
+
+      path {
+        color: rgba($color: #000000, $alpha: .3);
+      }
+    }
+  }
+}
