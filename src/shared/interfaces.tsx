@@ -42,8 +42,8 @@ export interface IInput {
 }
 
 export interface ILink {
-  to: string;
   label: string;
+  to: string;
   icon: JSX.Element;
 }
 
@@ -51,6 +51,17 @@ export interface EmployeeTableOption {
   name: string;
   active: boolean;
   ascendingSort?: boolean;
+}
+
+export interface DropDownOption {
+  label: string;
+  to?: string;
+  icon?: JSX.Element;
+}
+
+export interface DropDownProps {
+  options: DropDownOption[];
+  onClose: (label: string) => void;
 }
 
 export interface UserInfo {

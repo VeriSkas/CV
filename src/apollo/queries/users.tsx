@@ -33,3 +33,11 @@ export const GET_USER = gql`
     }
   }
 `;
+
+export const DELETE_USER = gql`
+  mutation Users($id: ID!) {
+    deleteUser(id: $id) {
+      affected
+    }
+  }
+`;

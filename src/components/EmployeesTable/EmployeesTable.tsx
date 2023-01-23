@@ -35,12 +35,12 @@ export const EmployeesTable: FC<{ searchValue: string }> = (props) => {
             .includes(props.searchValue.toLowerCase())
         )
         .map((user) => {
-          return <TableRow key={user.id} user={user} />;
+          return <TableRow key={user.id} user={user}/>;
         });
     }
 
     return users.map((user) => {
-      return <TableRow key={user.id} user={user} />;
+      return <TableRow key={user.id} user={user}/>;
     });
   };
 

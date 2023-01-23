@@ -13,7 +13,12 @@ import { FaAddressCard } from 'react-icons/fa';
 import { GrWorkshop } from 'react-icons/gr';
 import { CgProfile } from 'react-icons/cg';
 
-import { EmployeeTableOption, IInput, ILink } from './interfaces';
+import {
+  DropDownOption,
+  EmployeeTableOption,
+  IInput,
+  ILink,
+} from './interfaces';
 import {
   BtnText,
   ErrorMessages,
@@ -130,4 +135,15 @@ export const employeeTableOptions: { [key: string]: EmployeeTableOption } = {
   email: { name: 'Email', active: false },
   department: { name: 'Department', active: false },
   position: { name: 'Position', active: false },
+};
+
+export const employeeDropDownOptions: { [key: string]: DropDownOption } = {
+  updateUser: {
+    to: '/employees',
+    label: 'Update employee',
+  },
+  removeUser: {
+    to: '/employees',
+    label: 'Delete employee',
+  },
 };
