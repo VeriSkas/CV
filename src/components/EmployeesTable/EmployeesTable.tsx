@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 import { OperationVariables, useQuery } from '@apollo/client';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
@@ -22,7 +22,7 @@ export const EmployeesTable: FC<{ searchValue: string }> = (props) => {
     }
   }, [data]);
 
-  const renderTableRows = (): any => {
+  const renderTableRows = (): ReactNode => {
     if (!users) {
       return <p>No employees</p>;
     }
@@ -44,7 +44,7 @@ export const EmployeesTable: FC<{ searchValue: string }> = (props) => {
     });
   };
 
-  const renderHeaderOptions = (): any => {
+  const renderHeaderOptions = (): ReactNode => {
     return Object.keys(headerValue).map((key) => {
       const option = headerValue[key];
 

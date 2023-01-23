@@ -1,6 +1,6 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { FC, ReactNode } from 'react';
 
+import { NavLink } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { IconContext } from 'react-icons';
 
@@ -8,7 +8,9 @@ import { links } from '../../shared/constants';
 import classes from './SideBar.module.scss';
 import { Backdrop } from '../UI/Backdrop/Backdrop';
 
-export const SideBar = (props: any) => {
+export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = (
+  props
+) => {
   const {
     employees,
     projects,
@@ -28,7 +30,7 @@ export const SideBar = (props: any) => {
     languages,
   ];
 
-  const renderLinks = () => {
+  const renderLinks = (): ReactNode => {
     return navLinks.map((link) => {
       return (
         <li key={link.label}>

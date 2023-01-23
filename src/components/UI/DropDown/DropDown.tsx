@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { FC, ReactNode } from 'react';
 
+import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 
 import { DropDownOption, DropDownProps } from '../../../shared/interfaces';
 import classes from './DropDown.module.scss';
 
 export const DropDown: FC<DropDownProps> = (props) => {
-  const renderOptions = (): any => {
+  const renderOptions = (): ReactNode => {
     return props.options.map((option: DropDownOption) => {
       return (
         <li
