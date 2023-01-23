@@ -18,6 +18,7 @@ export const Input: FC<InputProps> = (props) => {
       <input
         {...props.register(props.label, { ...props.validation })}
         type={props.type && !toggle ? props.type : InputTypes.text}
+        defaultValue={props.defaultValue ?? ''}
         id={props.label && props.labelName}
         placeholder={props.placeholder}
       />

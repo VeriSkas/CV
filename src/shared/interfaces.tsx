@@ -10,6 +10,7 @@ export interface ButtonProps {
 export interface InputProps {
   label: string;
   labelName?: string;
+  defaultValue?: string;
   type: string;
   validation: {
     [key: string]:
@@ -34,11 +35,19 @@ export interface Inputs {
 export interface IInput {
   type: string;
   label: string;
+  labelName?: string;
+  defaultValue?: string;
   validation: {
     [key: string]:
       | { value: number | boolean | RegExp, message: string }
       | ((value: string) => boolean | string),
   };
+}
+
+export interface LoginSignUpFormProps {
+  text: { [key: string]: string };
+  path: string;
+  onSubmit: (data: { email: string, password: string }) => void;
 }
 
 export interface ILink {

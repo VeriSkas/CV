@@ -6,11 +6,20 @@ export const InputTypes = {
 
 export const InputLabels = {
   email: 'email',
-  nickname: 'nickname',
   password: 'password',
-  password2: 'password2',
-  select: 'Choose user',
-  selectLine: 'Line width:',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  department: 'department',
+  position: 'position',
+};
+
+export const InputLabelNames = {
+  email: 'Email',
+  password: 'Password',
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  department: 'Department',
+  position: 'Position',
 };
 
 export const ErrorMessages = {

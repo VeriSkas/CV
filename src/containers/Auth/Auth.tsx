@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 
 import { AUTH } from '../../apollo/queries/auth';
-import { Form } from '../../components/UI/Form/Form';
+import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
 import { authFormText } from '../../shared/constants';
 
 export const Auth: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
@@ -30,8 +30,9 @@ export const Auth: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
   };
 
   return (
-    <Form
+    <LoginSignUpForm
       text={text}
+      path="/login"
       onSubmit={(data: { email: string, password: string }) => {
         onSubmit(data);
       }}

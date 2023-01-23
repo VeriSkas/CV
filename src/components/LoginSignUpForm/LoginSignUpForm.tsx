@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
+
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { inputs } from '../../../shared/constants';
-import { Inputs } from '../../../shared/interfaces';
-import { Button } from '../Button/Button';
-import { Input } from '../Input/Input';
-import classes from './Form.module.scss';
+import { inputs } from '../../shared/constants';
+import { Inputs, LoginSignUpFormProps } from '../../shared/interfaces';
+import { Button } from '../UI/Button/Button';
+import { Input } from '../UI/Input/Input';
+import classes from './LoginSignUpForm.module.scss';
 
-export const Form = (props: any) => {
+export const LoginSignUpForm: FC<LoginSignUpFormProps> = (props) => {
   const {
     register,
     handleSubmit,
@@ -18,7 +19,7 @@ export const Form = (props: any) => {
     mode: 'all',
   });
 
-  const submitForm = (data: Inputs) => {
+  const submitForm = (data: Inputs): void => {
     const email = data.email;
     const password = data.password;
 
@@ -26,7 +27,7 @@ export const Form = (props: any) => {
     reset();
   };
 
-  const renderInputs = () => {
+  const renderInputs = (): ReactNode => {
     const authInputs = [{ ...inputs.email }, { ...inputs.password }];
 
     return authInputs.map((input) => {
@@ -45,8 +46,11 @@ export const Form = (props: any) => {
   };
 
   return (
-    <div className={classes.Form}>
-      <form onSubmit={handleSubmit(submitForm)} className={classes.Form_form}>
+    <div className={classes.LoginSignUpForm}>
+      <form
+        onSubmit={handleSubmit(submitForm)}
+        className={classes.LoginSignUpForm_form}
+      >
         <h1>{props.text.title}</h1>
         <h3>{props.text.subtitle}</h3>
         {renderInputs()}

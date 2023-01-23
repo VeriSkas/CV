@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 
 import { SIGN_UP } from '../../apollo/queries/signUp';
-import { Form } from '../../components/UI/Form/Form';
+import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
 import { paths, signUpFormText } from '../../shared/constants';
 
 export const SignUp: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
@@ -28,7 +28,7 @@ export const SignUp: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
   };
 
   return (
-    <Form
+    <LoginSignUpForm
       text={text}
       path={paths.login}
       onSubmit={(data: { email: string, password: string }) => {

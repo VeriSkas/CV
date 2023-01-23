@@ -23,13 +23,13 @@ export const GET_USER = gql`
       id
       email
       profile {
-        first_name
-        last_name
-        full_name
+        firstName: first_name
+        lastName: last_name
+        fullName: full_name
         avatar
       }
-      department_name
-      position_name
+      department: department_name
+      position: position_name
     }
   }
 `;

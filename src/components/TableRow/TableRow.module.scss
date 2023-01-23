@@ -31,7 +31,7 @@
     }
 
     .UserLogo {
-      background: #bdbdbd;
+      background: $logoBackground;
       font-size: 20px;
       color: #fff;
     }
@@ -45,7 +45,7 @@
       }
 
       &:active {
-        background: #bdbdbd;
+        background: $logoBackground;
         transition: background .5s;
       }
     }

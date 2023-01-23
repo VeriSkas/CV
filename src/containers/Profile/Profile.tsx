@@ -5,9 +5,10 @@ import { OperationVariables, useQuery } from '@apollo/client';
 import { GET_USER } from '../../apollo/queries/users';
 import classes from './Profile.module.scss';
 import { UserInfo } from '../../shared/interfaces';
+import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 
 export const Profile: FC<{}> = () => {
-  const { loading } = useQuery<{ user: UserInfo }, OperationVariables>(
+  const { loading, data } = useQuery<{ user: UserInfo }, OperationVariables>(
     GET_USER,
     {
       variables: {
@@ -17,6 +18,15 @@ export const Profile: FC<{}> = () => {
   );
 
   return (
-    <div className={classes.Profile}>{loading ? 'Loading...' : 'Profile'}</div>
+    <div className={classes.Profile}>
+      {loading ? (
+        'Loading...'
+      ) : (
+        <div className={classes.ProfileContainer}>
+          <h2 className={classes.Title}>Profile</h2>
+          {data && <EmployeeForm user={data.user} />}
+        </div>
+      )}
+    </div>
   );
 };

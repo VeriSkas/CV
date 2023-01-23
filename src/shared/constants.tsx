@@ -22,6 +22,7 @@ import {
 import {
   BtnText,
   ErrorMessages,
+  InputLabelNames,
   InputLabels,
   InputTypes,
   SubtitleText,
@@ -52,6 +53,56 @@ export const inputs: { [key: string]: IInput } = {
       required: { value: true, message: ErrorMessages.inputRequired },
       minLength: { value: 6, message: ErrorMessages.inputMinLength(6) },
       maxLength: { value: 32, message: ErrorMessages.inputMaxLength(32) },
+    },
+  },
+  firstName: {
+    type: InputTypes.text,
+    label: InputLabels.firstName,
+    labelName: InputLabelNames.firstName,
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 5, message: ErrorMessages.inputMinLength(5) },
+      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
+    },
+  },
+  lastName: {
+    type: InputTypes.text,
+    label: InputLabels.lastName,
+    labelName: InputLabelNames.lastName,
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 5, message: ErrorMessages.inputMinLength(5) },
+      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
+    },
+  },
+  email2: {
+    type: InputTypes.email,
+    label: InputLabels.email,
+    labelName: InputLabelNames.email,
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 5, message: ErrorMessages.inputMinLength(5) },
+      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
+      pattern: {
+        value: regExpForEmail,
+        message: ErrorMessages.inputEmail,
+      },
+    },
+  },
+  department: {
+    type: InputTypes.text,
+    label: InputLabels.department,
+    labelName: InputLabelNames.department,
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+    },
+  },
+  position: {
+    type: InputTypes.text,
+    label: InputLabels.position,
+    labelName: InputLabelNames.position,
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
     },
   },
 };
