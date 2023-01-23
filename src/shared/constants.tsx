@@ -113,7 +113,7 @@ export const links: { [key: string]: ILink } = {
     icon: <MdLogout />,
   },
   profile: {
-    to: '/employees/:id/profile',
+    to: `/employees/${localStorage.getItem('userId') ?? ''}/profile`,
     label: 'Profile',
     icon: <CgProfile />,
   },
