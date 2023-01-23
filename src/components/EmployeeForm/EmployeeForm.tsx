@@ -9,7 +9,10 @@ import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import classes from './EmployeeForm.module.scss';
 
-export const EmployeeForm: FC<{ user: UserInfo }> = ({ user }) => {
+export const EmployeeForm: FC<{ user?: UserInfo, submitBtnText?: string }> = ({
+  user,
+  submitBtnText,
+}) => {
   const {
     register,
     handleSubmit,
@@ -18,12 +21,6 @@ export const EmployeeForm: FC<{ user: UserInfo }> = ({ user }) => {
   } = useForm<Inputs>({
     mode: 'all',
   });
-  const {
-    department,
-    email,
-    position,
-    profile: { firstName, lastName, avatar },
-  } = user;
 
   const submitForm = (data: Inputs): void => {
     reset();
@@ -31,11 +28,11 @@ export const EmployeeForm: FC<{ user: UserInfo }> = ({ user }) => {
 
   const renderInputs = (): ReactNode => {
     const profileInputs = [
-      { ...inputs.firstName, defaultValue: firstName || '' },
-      { ...inputs.lastName, defaultValue: lastName || '' },
-      { ...inputs.email2, defaultValue: email || '' },
-      { ...inputs.department, defaultValue: department ?? '' },
-      { ...inputs.position, defaultValue: position ?? '' },
+      { ...inputs.firstName, defaultValue: user?.profile.firstName ?? '' },
+      { ...inputs.lastName, defaultValue: user?.profile.lastName ?? '' },
+      { ...inputs.email2, defaultValue: user?.email ?? '' },
+      { ...inputs.department, defaultValue: user?.department ?? '' },
+      { ...inputs.position, defaultValue: user?.position ?? '' },
     ];
 
     return profileInputs.map((input) => {
@@ -62,12 +59,16 @@ export const EmployeeForm: FC<{ user: UserInfo }> = ({ user }) => {
       >
         <div className={classes.UserPhoto}>
           <div className={classes.UserLogo}>
-            {avatar ? <img src={avatar} /> : email[0]}
+            {user?.profile.avatar ? (
+              <img src={user?.profile.avatar} />
+            ) : (
+              user?.email[0] ?? ''
+            )}
           </div>
         </div>
         {renderInputs()}
         <div className={classes.FormBtns}>
-          <Button disabled={!isValid}>{'Save changes'}</Button>
+          <Button disabled={!isValid}>{submitBtnText ?? 'Save changes'}</Button>
           <Link to={'/employees'}>
             <Button type="transparent">{'Return'}</Button>
           </Link>

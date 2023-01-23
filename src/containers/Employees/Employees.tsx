@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { EmployeesTable } from '../../components/EmployeesTable/EmployeesTable';
 import { Search } from '../../components/Search/Search';
 import { Button } from '../../components/UI/Button/Button';
@@ -21,7 +23,9 @@ export const Employees: FC<{}> = () => {
           />
         </div>
         <div className={classes.CreateEmployeeBtn}>
-          <Button type="transparentWithBorder">Create employee</Button>
+          <Link to={'/employees/createEmployee'}>
+            <Button type="transparentWithBorder">Create employee</Button>
+          </Link>
         </div>
       </div>
       <EmployeesTable searchValue={searchValue} />

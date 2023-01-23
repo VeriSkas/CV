@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { SlOptionsVertical } from 'react-icons/sl';
+import { useNavigate } from 'react-router-dom';
 
 import { DELETE_USER } from '../../apollo/queries/users';
 import { employeeDropDownOptions } from '../../shared/constants';
@@ -12,6 +13,7 @@ import classes from './TableRow.module.scss';
 export const TableRow: FC<{ user: UserInfo }> = ({ user }) => {
   const { updateUser, removeUser } = employeeDropDownOptions;
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  const navigate = useNavigate();
   const [deleteUser] = useMutation(DELETE_USER, {
     update(cache) {
       cache.modify({
@@ -38,6 +40,11 @@ export const TableRow: FC<{ user: UserInfo }> = ({ user }) => {
           id: user.id,
         },
       });
+    }
+
+    if (label === 'Update employee') {
+      navigate(`/employees/${user.id}`);
+      localStorage.setItem('activeUser', user.id);
     }
   };
 
