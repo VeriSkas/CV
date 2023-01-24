@@ -15,26 +15,29 @@ export const Input: FC<InputProps> = (props) => {
       {props.labelName && (
         <label htmlFor={props.labelName}>{props.labelName}</label>
       )}
-      <input
-        {...props.register(props.label, { ...props.validation })}
-        type={props.type && !toggle ? props.type : InputTypes.text}
-        defaultValue={props.defaultValue ?? ''}
-        id={props.label && props.labelName}
-        placeholder={props.placeholder}
-      />
-      {props.error && <span>{props.error}</span>}
-      {props.type === InputTypes.password && (
-        <div
-          className={classes.Eye}
-          onClick={() => {
-            setToggle((prevToggle) => !prevToggle);
-          }}
-        >
-          <IconContext.Provider value={{ className: classes.Icon }}>
-            {toggle ? <BsEyeSlashFill /> : <BsEyeFill />}
-          </IconContext.Provider>
-        </div>
-      )}
+      <div className={classes.Input_input}>
+        <input
+          {...props.register(props.label, { ...props.validation })}
+          type={props.type && !toggle ? props.type : InputTypes.text}
+          defaultValue={props.defaultValue ?? ''}
+          id={props.label && props.labelName}
+          readOnly={props.readonly ?? false}
+          placeholder={props.placeholder}
+        />
+        {props.error && <span>{props.error}</span>}
+        {props.type === InputTypes.password && (
+          <div
+            className={classes.Eye}
+            onClick={() => {
+              setToggle((prevToggle) => !prevToggle);
+            }}
+          >
+            <IconContext.Provider value={{ className: classes.Icon }}>
+              {toggle ? <BsEyeSlashFill /> : <BsEyeFill />}
+            </IconContext.Provider>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -34,3 +34,8 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+input:read-only {
+  background: $inputReadOnlyBackground;
+  cursor: not-allowed;
+}

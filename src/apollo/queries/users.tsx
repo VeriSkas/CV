@@ -6,13 +6,13 @@ export const GET_USERS = gql`
       id
       email
       profile {
-        firstName: first_name
-        lastName: last_name
-        fullName: full_name
+        first_name
+        last_name
+        full_name
         avatar
       }
-      department: department_name
-      position: position_name
+      department_name
+      position_name
     }
   }
 `;
@@ -23,13 +23,38 @@ export const GET_USER = gql`
       id
       email
       profile {
-        firstName: first_name
-        lastName: last_name
-        fullName: full_name
+        first_name
+        last_name
+        full_name
         avatar
+        skills {
+          skill_name
+          mastery
+        }
+        languages {
+          language_name
+          proficiency
+        }
       }
-      department: department_name
-      position: position_name
+      cvs {
+        id
+      }
+      department {
+        name
+        id
+      }
+      position {
+        name
+        id
+      }
+    }
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation UpdateUser($id: ID!, $user: UpdateUserInput!) {
+    updateUser(id: $id, user: $user) {
+      id
     }
   }
 `;

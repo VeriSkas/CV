@@ -7,8 +7,8 @@ export const InputTypes = {
 export const InputLabels = {
   email: 'email',
   password: 'password',
-  firstName: 'firstName',
-  lastName: 'lastName',
+  firstName: 'first_name',
+  lastName: 'last_name',
   department: 'department',
   position: 'position',
 };

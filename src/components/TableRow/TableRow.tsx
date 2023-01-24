@@ -57,11 +57,11 @@ export const TableRow: FC<{ user: UserInfo }> = ({ user }) => {
           <div className={classes.UserLogo}>{user.email[0] || ' '}</div>
         )}
       </div>
-      <div className={classes.Item}>{user.profile.firstName}</div>
-      <div className={classes.Item}>{user.profile.lastName}</div>
+      <div className={classes.Item}>{user.profile.first_name}</div>
+      <div className={classes.Item}>{user.profile.last_name}</div>
       <div className={classes.Item}>{user.email}</div>
-      <div className={classes.Item}>{user.department}</div>
-      <div className={classes.Item}>{user.position}</div>
+      <div className={classes.Item}>{user.department_name}</div>
+      <div className={classes.Item}>{user.position_name}</div>
       <div className={classes.Item}>
         <div className={classes.Options} onClick={toggleDropDown}>
           <SlOptionsVertical />

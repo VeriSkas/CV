@@ -12,6 +12,7 @@ export interface InputProps {
   labelName?: string;
   defaultValue?: string;
   type: string;
+  readonly?: boolean,
   validation: {
     [key: string]:
       | { value: number | boolean | RegExp, message: string }
@@ -37,6 +38,7 @@ export interface IInput {
   label: string;
   labelName?: string;
   defaultValue?: string;
+  readonly?: boolean;
   validation: {
     [key: string]:
       | { value: number | boolean | RegExp, message: string }
@@ -78,18 +80,49 @@ export interface UserInfo {
   email: string;
   profile: {
     avatar: string | null,
-    firstName: string,
-    lastName: string,
-    fullName: string | null,
+    first_name: string,
+    last_name: string,
+    full_name: string | null,
+    skills?: Array<{
+      skill_name: string,
+      mastery: string,
+    }>,
+    languages?: Array<{
+      language_name: string,
+      proficiency: string,
+    }>,
   };
-  position: string | null;
-  department: string | null;
+  cvs?: Array<{
+    id: string,
+  }>;
+  department_name?: string | null;
+  position_name?: string | null;
+  position: { name: string, id: string } | null;
+  department: { name: string, id: string } | null;
+}
+
+export interface UpdatedUser {
+  profile: {
+    first_name: string;
+    last_name: string;
+    skills: Array<{
+      skill_name: string,
+      mastery: string,
+    }>,
+    languages: Array<{
+      language_name: string,
+      proficiency: string,
+    }>,
+  }
+  cvsIds: string[];
+  departmentId: string;
+  positionId: string;
 }
 
 export interface SortType {
-  department: string;
+  department_name: string;
   email: string;
-  position: string;
-  firstName: string;
-  lastName: string;
+  position_name: string;
+  first_name: string;
+  last_name: string;
 }

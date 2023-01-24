@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 
-import { OperationVariables, useQuery } from '@apollo/client';
+import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 
-import { GET_USER } from '../../apollo/queries/users';
+import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
 import classes from './Profile.module.scss';
-import { UserInfo } from '../../shared/interfaces';
+import { Inputs, UpdatedUser, UserInfo } from '../../shared/interfaces';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
+import { TypeEmployeeForm } from '../../shared/constants';
 
 export const Profile: FC<{}> = () => {
   const { loading, data } = useQuery<{ user: UserInfo }, OperationVariables>(
@@ -16,6 +17,28 @@ export const Profile: FC<{}> = () => {
       },
     }
   );
+  const [updateProfile] = useMutation(UPDATE_USER);
+
+  const updateUser = ({ first_name, last_name }: Inputs, id?: string): void => {
+    const updatedUser: UpdatedUser = {
+      profile: {
+        first_name,
+        last_name,
+        skills: data?.user.profile.skills ?? [],
+        languages: data?.user.profile.languages ?? [],
+      },
+      cvsIds: data?.user.cvs?.reduce((sv) => [...sv], []) ?? [],
+      departmentId: data?.user.department?.id ?? '',
+      positionId: data?.user.position?.id ?? '',
+    };
+
+    void updateProfile({
+      variables: {
+        id,
+        user: updatedUser,
+      },
+    });
+  };
 
   return (
     <div className={classes.Profile}>
@@ -24,7 +47,15 @@ export const Profile: FC<{}> = () => {
       ) : (
         <div className={classes.ProfileContainer}>
           <h2 className={classes.Title}>Profile</h2>
-          {data && <EmployeeForm user={data.user} />}
+          {data && (
+            <EmployeeForm
+              user={data.user}
+              onSubmitForm={(value, id) => {
+                updateUser(value, id);
+              }}
+              type={TypeEmployeeForm.profileType}
+            />
+          )}
         </div>
       )}
     </div>

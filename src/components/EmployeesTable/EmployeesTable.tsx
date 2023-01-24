@@ -30,7 +30,7 @@ export const EmployeesTable: FC<{ searchValue: string }> = (props) => {
     if (props.searchValue) {
       return users
         .filter((user) =>
-          `${user.profile.firstName} ${user.profile.lastName}`
+          `${user.profile.first_name} ${user.profile.last_name}`
             .toLowerCase()
             .includes(props.searchValue.toLowerCase())
         )
@@ -91,10 +91,10 @@ export const EmployeesTable: FC<{ searchValue: string }> = (props) => {
 
   const sortTable = (sortValue: keyof SortType, ascendingSort: boolean): void => {
     const newUsersValue = users?.slice().sort((a: UserInfo, b: UserInfo) => {
-      const valueA = sortValue === 'firstName' || sortValue === 'lastName'
+      const valueA = sortValue === 'first_name' || sortValue === 'last_name'
         ? a.profile[sortValue]?.toLowerCase() ?? ''
         : a[sortValue]?.toLowerCase() ?? '';
-      const valueB = sortValue === 'firstName' || sortValue === 'lastName'
+      const valueB = sortValue === 'first_name' || sortValue === 'last_name'
         ? b.profile[sortValue]?.toLowerCase() ?? ''
         : b[sortValue]?.toLowerCase() ?? '';
 

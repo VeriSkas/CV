@@ -36,6 +36,7 @@ export const inputs: { [key: string]: IInput } = {
   email: {
     type: InputTypes.email,
     label: InputLabels.email,
+    defaultValue: '',
     validation: {
       required: { value: true, message: ErrorMessages.inputRequired },
       minLength: { value: 5, message: ErrorMessages.inputMinLength(5) },
@@ -49,29 +50,32 @@ export const inputs: { [key: string]: IInput } = {
   password: {
     type: InputTypes.password,
     label: InputLabels.password,
+    defaultValue: '',
     validation: {
       required: { value: true, message: ErrorMessages.inputRequired },
       minLength: { value: 6, message: ErrorMessages.inputMinLength(6) },
       maxLength: { value: 32, message: ErrorMessages.inputMaxLength(32) },
     },
   },
-  firstName: {
+  first_name: {
     type: InputTypes.text,
     label: InputLabels.firstName,
     labelName: InputLabelNames.firstName,
+    defaultValue: '',
     validation: {
       required: { value: true, message: ErrorMessages.inputRequired },
-      minLength: { value: 5, message: ErrorMessages.inputMinLength(5) },
+      minLength: { value: 2, message: ErrorMessages.inputMinLength(2) },
       maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
     },
   },
-  lastName: {
+  last_name: {
     type: InputTypes.text,
     label: InputLabels.lastName,
     labelName: InputLabelNames.lastName,
+    defaultValue: '',
     validation: {
       required: { value: true, message: ErrorMessages.inputRequired },
-      minLength: { value: 5, message: ErrorMessages.inputMinLength(5) },
+      minLength: { value: 2, message: ErrorMessages.inputMinLength(2) },
       maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
     },
   },
@@ -79,32 +83,30 @@ export const inputs: { [key: string]: IInput } = {
     type: InputTypes.email,
     label: InputLabels.email,
     labelName: InputLabelNames.email,
-    validation: {
-      required: { value: true, message: ErrorMessages.inputRequired },
-      minLength: { value: 5, message: ErrorMessages.inputMinLength(5) },
-      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
-      pattern: {
-        value: regExpForEmail,
-        message: ErrorMessages.inputEmail,
-      },
-    },
+    defaultValue: '',
+    readonly: true,
+    validation: {},
   },
   department: {
     type: InputTypes.text,
     label: InputLabels.department,
     labelName: InputLabelNames.department,
-    validation: {
-      required: { value: true, message: ErrorMessages.inputRequired },
-    },
+    defaultValue: '',
+    validation: {},
   },
   position: {
     type: InputTypes.text,
     label: InputLabels.position,
     labelName: InputLabelNames.position,
-    validation: {
-      required: { value: true, message: ErrorMessages.inputRequired },
-    },
+    defaultValue: '',
+    validation: {},
   },
+};
+
+export const TypeEmployeeForm = {
+  profileType: 'profile',
+  updateEmployee: 'updateEmployee',
+  createEmployee: 'createEmployee',
 };
 
 export const authFormText = {
@@ -181,11 +183,11 @@ export const links: { [key: string]: ILink } = {
 };
 
 export const employeeTableOptions: { [key: string]: EmployeeTableOption } = {
-  firstName: { name: 'First Name', active: false },
-  lastName: { name: 'Last Name', active: false },
+  first_name: { name: 'First Name', active: false },
+  last_name: { name: 'Last Name', active: false },
   email: { name: 'Email', active: false },
-  department: { name: 'Department', active: false },
-  position: { name: 'Position', active: false },
+  department_name: { name: 'Department', active: false },
+  position_name: { name: 'Position', active: false },
 };
 
 export const employeeDropDownOptions: { [key: string]: DropDownOption } = {
