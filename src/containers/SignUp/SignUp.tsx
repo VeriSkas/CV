@@ -14,7 +14,6 @@ export const SignUp: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
     if (userData) {
       const { token, user } = userData.signup;
 
-      localStorage.setItem('email', user.email);
       localStorage.setItem('token', token);
       localStorage.setItem('userId', user.id);
       props.auth(true);
