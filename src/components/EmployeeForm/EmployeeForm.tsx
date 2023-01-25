@@ -1,21 +1,32 @@
-import React, { FC, ReactNode } from 'react';
+import React, { ChangeEvent, FC, ReactNode, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { IconContext } from 'react-icons';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
-import { inputs, TypeEmployeeForm } from '../../shared/constants';
-import { Inputs, UserInfo } from '../../shared/interfaces';
+import {
+  inputs,
+  MAX_photoSize,
+  TypeEmployeeForm,
+} from '../../shared/constants';
+import { Avatar, EmployeeFormProps, Inputs } from '../../shared/interfaces';
 import { InputLabelNames } from '../../shared/text';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import classes from './EmployeeForm.module.scss';
+import { DELETE_AVATAR, UPLOAD_AVATAR } from '../../apollo/queries/users';
 
-export const EmployeeForm: FC<{
-  user?: UserInfo,
-  submitBtnText?: string,
-  onSubmitForm: (data: Inputs, id?: string) => void,
-  type: string,
-}> = ({ user, submitBtnText, onSubmitForm, type }) => {
+export const EmployeeForm: FC<EmployeeFormProps> = ({
+  user,
+  submitBtnText,
+  onSubmitForm,
+  type,
+}) => {
+  const [image, setImage] = useState<Avatar | null>(null);
+  const [removeAvatar] = useMutation(DELETE_AVATAR);
+  const [uploadAvatar] = useMutation(UPLOAD_AVATAR);
   const {
     register,
     handleSubmit,
@@ -27,8 +38,52 @@ export const EmployeeForm: FC<{
 
   const submitForm = (data: Inputs): void => {
     onSubmitForm(data, user?.id ?? '');
+    addAvatar();
+
     if (!user) {
       reset();
+    }
+  };
+
+  const deleteAvatar = (): void => {
+    setImage(null);
+
+    void removeAvatar({
+      variables: {
+        id: user?.id,
+      },
+    });
+  };
+
+  const addAvatar = (): void => {
+    if (image) {
+      void uploadAvatar({
+        variables: {
+          id: user?.id,
+          avatar: image,
+        },
+      });
+    }
+  };
+
+  const onChangeFileInput = (event: ChangeEvent<HTMLInputElement>): void => {
+    const reader = new FileReader();
+
+    if (event.target.files) {
+      if (event.target.files[0].size <= MAX_photoSize) {
+        reader.onloadend = () => {
+          const image = {
+            base64: reader.result?.toString() ?? '',
+            size: event.target.files ? +event.target.files[0].size : 0,
+            type: event.target.files ? event.target.files[0].type : '',
+          };
+          setImage((prev) => ({ ...prev, ...image }));
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+      } else {
+        console.log('Photo size have to be less');
+      }
     }
   };
 
@@ -95,11 +150,31 @@ export const EmployeeForm: FC<{
         {type !== TypeEmployeeForm.createEmployee && (
           <div className={classes.UserPhoto}>
             <div className={classes.UserLogo}>
-              {user?.profile.avatar ? (
-                <img src={user?.profile.avatar} />
+              {image?.base64 ?? user?.profile.avatar ? (
+                <>
+                  <img src={image?.base64 ?? user?.profile.avatar ?? ''} />
+                  <div
+                    className={classes.BinIcon}
+                    title="Delete avatar"
+                    onClick={deleteAvatar}
+                  >
+                    <IconContext.Provider value={{ className: classes.Icon }}>
+                      <RiDeleteBin6Line />
+                    </IconContext.Provider>
+                  </div>
+                </>
               ) : (
-                user?.email[0] ?? ''
+                <span className={classes.Letter}>{user?.email[0] ?? ''}</span>
               )}
+              <label className={classes.InputFile} title="Add new avatar">
+                <input
+                  type="file"
+                  className={classes.InputFile_input}
+                  onChange={(event) => {
+                    onChangeFileInput(event);
+                  }}
+                />
+              </label>
             </div>
           </div>
         )}

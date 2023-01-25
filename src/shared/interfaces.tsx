@@ -119,10 +119,32 @@ export interface UpdatedUser {
   positionId: string;
 }
 
+export interface EmployeeFormProps {
+  user?: UserInfo,
+  submitBtnText?: string,
+  onSubmitForm: (data: Inputs, id?: string) => void,
+  type: string,
+}
+
 export interface SortType {
   department_name: string;
   email: string;
   position_name: string;
   first_name: string;
   last_name: string;
+}
+
+export interface Avatar {
+  base64: string;
+  size: number;
+  type: string;
+}
+
+export interface UserInfoShort {
+  email: string;
+  profile: {
+    avatar: null | string;
+    first_name: string;
+    last_name: string;
+  }
 }

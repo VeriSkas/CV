@@ -51,6 +51,19 @@ export const GET_USER = gql`
   }
 `;
 
+export const GET_USER_LOGO_INFO = gql`
+  query getUser($id: ID!) {
+    user(id: $id) {
+      email
+      profile {
+        first_name
+        last_name
+        avatar
+      }
+    }
+  }
+`;
+
 export const UPDATE_USER = gql`
   mutation UpdateUser($id: ID!, $user: UpdateUserInput!) {
     updateUser(id: $id, user: $user) {
@@ -64,5 +77,17 @@ export const DELETE_USER = gql`
     deleteUser(id: $id) {
       affected
     }
+  }
+`;
+
+export const UPLOAD_AVATAR = gql`
+  mutation UploadAvatar($id: ID!, $avatar: AvatarInput!) {
+    uploadAvatar(id: $id, avatar: $avatar)
+  }
+`;
+
+export const DELETE_AVATAR = gql`
+  mutation DeleteAvatar($id: ID!) {
+    deleteAvatar(id: $id)
   }
 `;

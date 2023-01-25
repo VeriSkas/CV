@@ -3,21 +3,29 @@ import React, { FC, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
+import { useQuery } from '@apollo/client';
 
 import { Header } from '../../components/UI/Header/Header';
 import { SideBar } from '../../components/SideBar/SideBar';
 import { DropDown } from '../../components/UI/DropDown/DropDown';
 import { links } from '../../shared/constants';
 import classes from './MainPage.module.scss';
+import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
+import { UserInfoShort } from '../../shared/interfaces';
 
 export const MainPage: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
+  const userId = localStorage.getItem('userId') ?? '';
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  const { data: UserInfo } = useQuery<{ user: UserInfoShort }>(
+    GET_USER_LOGO_INFO,
+    {
+      variables: { id: userId },
+    }
+  );
   const navigate = useNavigate();
   const { profile, settings, logout } = links;
   const dropdownOptions = [profile, settings, logout];
-  const email = localStorage.getItem('email') ?? '';
-  const userId = localStorage.getItem('userId') ?? '';
 
   const onClose = (): void => {
     setIsOpenSidebar(false);
@@ -52,9 +60,19 @@ export const MainPage: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
             </IconContext.Provider>
           </div>
           <div className={classes.UserInfo}>
-            <span className={classes.UserEmail}>{email}</span>
+            <span className={classes.UserEmail}>
+              {UserInfo?.user.email ?? ''}
+            </span>
             <div className={classes.UserLogo} onClick={toggleDropDown}>
-              <span className={classes.UserLetter}>{email[0]}</span>
+              <div className={classes.Avatar}>
+                {UserInfo?.user.profile.avatar ? (
+                  <img src="https://res.cloudinary.com/cv-gen-cloud/image/upload/v1674627874/user_avatars/53rMBMN8D6dsqd3PKynbjA.jpg" />
+                ) : (
+                  <span className={classes.UserLetter}>
+                    {UserInfo?.user.email[0] ?? ''}
+                  </span>
+                )}
+              </div>
               {isOpenDropDown && (
                 <DropDown
                   options={dropdownOptions}
