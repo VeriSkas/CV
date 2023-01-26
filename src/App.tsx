@@ -4,11 +4,12 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Auth } from './containers/Auth/Auth';
 import { CreateEmployee } from './containers/CreateEmployee/CreateEmployee';
 import { Employees } from './containers/Employees/Employees';
-import { MainPage } from './containers/MainPage/MainPage';
+import { Layout } from './hoc/Layout/Layout';
 import { Profile } from './containers/Profile/Profile';
 import { SignInAndUp } from './containers/SignInAndUp/SignInAndUp';
 import { SignUp } from './containers/SignUp/SignUp';
 import { UpdateEmployee } from './containers/UpdateEmployee/UpdateEmployee';
+import { EmployeesPage } from './containers/EmployeesPage/EmployeesPage';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState(
@@ -25,21 +26,14 @@ export const App: FC = () => {
   };
 
   const protectedRoutes = (
-    <Route
-      path="/employees"
-      element={
-        <MainPage
-          auth={(isAuth: boolean) => {
-            setAuth(isAuth);
-          }}
-        />
-      }
-    >
-      <Route index element={<Employees />} />
-      <Route path=":id/profile" element={<Profile />} />
-      <Route path=":id" element={<UpdateEmployee />} />
-      <Route path="createEmployee" element={<CreateEmployee />} />
-    </Route>
+    <>
+      <Route path="/employees" element={<EmployeesPage />}>
+        <Route index element={<Employees />} />
+        <Route path=":id/profile" element={<Profile />} />
+        <Route path=":id" element={<UpdateEmployee />} />
+        <Route path="createEmployee" element={<CreateEmployee />} />
+      </Route>
+    </>
   );
   const unProtectedRoutes = (
     <>
@@ -72,10 +66,17 @@ export const App: FC = () => {
 
   return (
     <div className="App">
-      <Routes>
-        {isLoggedIn ? protectedRoutes : unProtectedRoutes}
-        <Route path="*" element={<Navigate to={link} replace />} />
-      </Routes>
+      <Layout
+        login={isLoggedIn}
+        auth={(isAuth: boolean) => {
+          setAuth(isAuth);
+        }}
+      >
+        <Routes>
+          {isLoggedIn ? protectedRoutes : unProtectedRoutes}
+          <Route path="*" element={<Navigate to={link} replace />} />
+        </Routes>
+      </Layout>
     </div>
   );
 };

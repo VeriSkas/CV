@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
 import { useQuery } from '@apollo/client';
@@ -9,11 +9,15 @@ import { Header } from '../../components/UI/Header/Header';
 import { SideBar } from '../../components/SideBar/SideBar';
 import { DropDown } from '../../components/UI/DropDown/DropDown';
 import { links } from '../../shared/constants';
-import classes from './MainPage.module.scss';
+import classes from './Layout.module.scss';
 import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
 import { UserInfoShort } from '../../shared/interfaces';
 
-export const MainPage: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
+export const Layout: FC<{
+  auth: (isAuth: boolean) => void,
+  login: boolean,
+  children: ReactNode,
+}> = (props) => {
   const userId = localStorage.getItem('userId') ?? '';
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
@@ -49,8 +53,8 @@ export const MainPage: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
     }
   };
 
-  return (
-    <div className={classes.MainPage}>
+  return props.login ? (
+    <div className={classes.Layout}>
       <SideBar onClose={onClose} isOpen={isOpenSidebar} />
       <Header>
         <div className={classes.Header}>
@@ -85,9 +89,9 @@ export const MainPage: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
           </div>
         </div>
       </Header>
-      <div className={classes.Container}>
-        <Outlet />
-      </div>
+      <div className={classes.Container}>{props.children}</div>
     </div>
+  ) : (
+    <div>{props.children}</div>
   );
 };
