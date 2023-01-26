@@ -79,6 +79,7 @@ export interface UserInfo {
   id: string;
   email: string;
   profile: {
+    id: string;
     avatar: string | null,
     first_name: string,
     last_name: string,

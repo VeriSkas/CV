@@ -66,7 +66,7 @@ export const MainPage: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
             <div className={classes.UserLogo} onClick={toggleDropDown}>
               <div className={classes.Avatar}>
                 {UserInfo?.user.profile.avatar ? (
-                  <img src="https://res.cloudinary.com/cv-gen-cloud/image/upload/v1674627874/user_avatars/53rMBMN8D6dsqd3PKynbjA.jpg" />
+                  <img src={UserInfo?.user.profile.avatar} />
                 ) : (
                   <span className={classes.UserLetter}>
                     {UserInfo?.user.email[0] ?? ''}

@@ -23,6 +23,7 @@ export const GET_USER = gql`
       id
       email
       profile {
+        id
         first_name
         last_name
         full_name
@@ -52,7 +53,7 @@ export const GET_USER = gql`
 `;
 
 export const GET_USER_LOGO_INFO = gql`
-  query getUser($id: ID!) {
+  query getUserLogoInfo($id: ID!) {
     user(id: $id) {
       email
       profile {
@@ -73,7 +74,7 @@ export const UPDATE_USER = gql`
 `;
 
 export const DELETE_USER = gql`
-  mutation Users($id: ID!) {
+  mutation DeleteUser($id: ID!) {
     deleteUser(id: $id) {
       affected
     }

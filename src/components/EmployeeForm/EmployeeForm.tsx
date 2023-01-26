@@ -11,12 +11,21 @@ import {
   MAX_photoSize,
   TypeEmployeeForm,
 } from '../../shared/constants';
-import { Avatar, EmployeeFormProps, Inputs } from '../../shared/interfaces';
+import {
+  Avatar,
+  EmployeeFormProps,
+  Inputs,
+  UserInfo,
+} from '../../shared/interfaces';
 import { InputLabelNames } from '../../shared/text';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import classes from './EmployeeForm.module.scss';
-import { DELETE_AVATAR, UPLOAD_AVATAR } from '../../apollo/queries/users';
+import {
+  DELETE_AVATAR,
+  GET_USER,
+  UPLOAD_AVATAR,
+} from '../../apollo/queries/users';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -50,7 +59,33 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
 
     void removeAvatar({
       variables: {
-        id: user?.id,
+        id: user?.profile.id,
+      },
+      update(cache) {
+        const data = cache.readQuery<{ user: UserInfo }>({
+          query: GET_USER,
+          variables: {
+            id: user?.id,
+          },
+        });
+
+        cache.writeQuery({
+          query: GET_USER,
+          variables: {
+            id: user?.id,
+          },
+          data: {
+            user: {
+              ...data?.user,
+              profile: {
+                ...data?.user.profile,
+                avatar: null,
+                __typename: 'Profile',
+              },
+              __typename: 'User',
+            },
+          },
+        });
       },
     });
   };
@@ -59,8 +94,34 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     if (image) {
       void uploadAvatar({
         variables: {
-          id: user?.id,
+          id: user?.profile.id,
           avatar: image,
+        },
+        update(cache, { data: { uploadAvatar } }) {
+          const data = cache.readQuery<{ user: UserInfo }>({
+            query: GET_USER,
+            variables: {
+              id: user?.id,
+            },
+          });
+
+          cache.writeQuery({
+            query: GET_USER,
+            variables: {
+              id: user?.id,
+            },
+            data: {
+              user: {
+                ...data?.user,
+                profile: {
+                  ...data?.user.profile,
+                  avatar: uploadAvatar,
+                  __typename: 'Profile',
+                },
+                __typename: 'User',
+              },
+            },
+          });
         },
       });
     }
