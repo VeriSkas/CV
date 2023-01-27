@@ -10,6 +10,10 @@ import { SignInAndUp } from './containers/SignInAndUp/SignInAndUp';
 import { SignUp } from './containers/SignUp/SignUp';
 import { UpdateEmployee } from './containers/UpdateEmployee/UpdateEmployee';
 import { EmployeesPage } from './containers/EmployeesPage/EmployeesPage';
+import { Projects } from './containers/Projects/Projects';
+import { ProjectsPage } from './containers/ProjectsPage/ProjectsPage';
+import { CVsPage } from './containers/CVsPage/CVsPage';
+import { CVs } from './containers/CVs/CVs';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState(
@@ -32,6 +36,12 @@ export const App: FC = () => {
         <Route path=":id/profile" element={<Profile />} />
         <Route path=":id" element={<UpdateEmployee />} />
         <Route path="createEmployee" element={<CreateEmployee />} />
+      </Route>
+      <Route path="/projects" element={<ProjectsPage />}>
+        <Route index element={<Projects />} />
+      </Route>
+      <Route path="/cvs" element={<CVsPage />}>
+        <Route index element={<CVs />} />
       </Route>
     </>
   );

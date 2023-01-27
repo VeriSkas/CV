@@ -58,7 +58,7 @@ export interface ILink {
   icon: JSX.Element;
 }
 
-export interface EmployeeTableOption {
+export interface TableOption {
   name: string;
   active: boolean;
   ascendingSort?: boolean;
@@ -102,6 +102,16 @@ export interface UserInfo {
   department: { name: string, id: string } | null;
 }
 
+export interface TableUser {
+  id: string;
+  email: string;
+  avatar: string | null,
+  first_name: string,
+  last_name: string,
+  department_name: string | null;
+  position_name: string | null;
+}
+
 export interface UpdatedUser {
   profile: {
     first_name: string;
@@ -133,6 +143,12 @@ export interface SortType {
   position_name: string;
   first_name: string;
   last_name: string;
+  name: string;
+  internal_name: string;
+  domain: string;
+  start_date: string;
+  end_date: string;
+  team_size: number;
 }
 
 export interface Avatar {

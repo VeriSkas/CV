@@ -13,12 +13,7 @@ import { FaAddressCard } from 'react-icons/fa';
 import { GrWorkshop } from 'react-icons/gr';
 import { CgProfile } from 'react-icons/cg';
 
-import {
-  DropDownOption,
-  EmployeeTableOption,
-  IInput,
-  ILink,
-} from './interfaces';
+import { DropDownOption, TableOption, IInput, ILink } from './interfaces';
 import {
   BtnText,
   ErrorMessages,
@@ -184,7 +179,7 @@ export const links: { [key: string]: ILink } = {
   },
 };
 
-export const employeeTableOptions: { [key: string]: EmployeeTableOption } = {
+export const employeeTableOptions: { [key: string]: TableOption } = {
   first_name: { name: 'First Name', active: false },
   last_name: { name: 'Last Name', active: false },
   email: { name: 'Email', active: false },
@@ -192,13 +187,45 @@ export const employeeTableOptions: { [key: string]: EmployeeTableOption } = {
   position_name: { name: 'Position', active: false },
 };
 
-export const employeeDropDownOptions: { [key: string]: DropDownOption } = {
+export const projectsTableOptions: { [key: string]: TableOption } = {
+  name: { name: 'Name', active: false },
+  internal_name: { name: 'Internal Name', active: false },
+  domain: { name: 'Domain', active: false },
+  start_date: { name: 'Start Date', active: false },
+  end_date: { name: 'End Date', active: false },
+  team_size: { name: 'Team Size', active: false },
+};
+
+export const cvsTableOptions: { [key: string]: TableOption } = {
+  is_template: { name: 'Template', active: false },
+  name: { name: 'Name', active: false },
+  description: { name: 'Description', active: false },
+  email: { name: 'Employee', active: false },
+};
+
+export const dropDownOptions: { [key: string]: DropDownOption } = {
   updateUser: {
-    to: '/employees',
+    to: `/employees/${localStorage.getItem('activeUser')}`,
     label: 'Update employee',
   },
   removeUser: {
     to: '/employees',
     label: 'Delete employee',
+  },
+  project: {
+    to: `/projects/${localStorage.getItem('activeProject')}`,
+    label: 'Project',
+  },
+  removeProject: {
+    to: '/projects',
+    label: 'Delete project',
+  },
+  cv: {
+    to: `/cvs/${localStorage.getItem('activeCV')}`,
+    label: 'CV',
+  },
+  removeCV: {
+    to: '/cvs',
+    label: 'Delete CV',
   },
 };
