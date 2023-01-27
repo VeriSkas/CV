@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -11,13 +11,10 @@ import { DropDown } from '../../components/UI/DropDown/DropDown';
 import { links } from '../../shared/constants';
 import classes from './Layout.module.scss';
 import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
-import { UserInfoShort } from '../../shared/interfaces';
+import { LayoutProps } from '../../shared/interfaces/propsInterfaces';
+import { UserInfoShort } from '../../shared/interfaces/user';
 
-export const Layout: FC<{
-  auth: (isAuth: boolean) => void,
-  login: boolean,
-  children: ReactNode,
-}> = (props) => {
+export const Layout: FC<LayoutProps> = (props) => {
   const userId = localStorage.getItem('userId') ?? '';
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);

@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 import { IconContext } from 'react-icons';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 
-import { InputProps } from '../../../shared/interfaces';
+import { InputProps } from '../../../shared/interfaces/propsInterfaces';
 import { InputTypes } from '../../../shared/text';
 import classes from './Input.module.scss';
 

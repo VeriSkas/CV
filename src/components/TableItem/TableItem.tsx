@@ -4,15 +4,13 @@ import { SlOptionsVertical } from 'react-icons/sl';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 
-import { DropDownOption } from '../../shared/interfaces';
+import { UsedInTableObjectsType } from '../../shared/interfaces/interfaces';
 import { DropDown } from '../UI/DropDown/DropDown';
 import classes from './TableItem.module.scss';
+import { TableCvItem } from '../../shared/interfaces/cvs';
+import { TableItemProps } from '../../shared/interfaces/propsInterfaces';
 
-export const TableItem: FC<{
-  item: any,
-  dropDownOptions: DropDownOption[],
-  dropDownHandler: (label: string, id: string) => void,
-}> = ({ item, dropDownOptions, dropDownHandler }) => {
+export const TableItem: FC<TableItemProps> = ({ item, dropDownOptions, dropDownHandler }) => {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
 
   const toggleDropDown = (): void => {
@@ -24,15 +22,17 @@ export const TableItem: FC<{
   };
 
   const renderItemRow = (): ReactNode | string => {
-    return Object.keys(item).map((key) => {
+    return Object.keys(item).map((key: string) => {
       if (key === 'avatar' || key === 'id' || key === '__typename') {
         return '';
       }
 
       if (key === 'is_template') {
+        const cv = item as TableCvItem;
+
         return (
           <div className={classes.Item} key={key}>
-            {item[key] ? (
+            {cv[key] ? (
               <IconContext.Provider
                 value={{
                   className: `${classes.IconChecked}`,
@@ -55,7 +55,7 @@ export const TableItem: FC<{
 
       return (
         <div className={classes.Item} key={key}>
-          {item[key]}
+          {item[key as keyof UsedInTableObjectsType]}
         </div>
       );
     });

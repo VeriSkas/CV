@@ -5,8 +5,8 @@ import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 
 import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
 import { dropDownOptions, employeeTableOptions } from '../../shared/constants';
-import { TableUser, UserInfo } from '../../shared/interfaces';
 import { Table } from '../Table/Table';
+import { TableUser, UserInfo } from '../../shared/interfaces/user';
 
 export const EmployeesTable: FC<{ searchValue: string }> = ({
   searchValue,

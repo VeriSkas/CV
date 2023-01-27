@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 import { TypeEmployeeForm } from '../../shared/constants';
-import { Inputs } from '../../shared/interfaces';
+import { Inputs } from '../../shared/interfaces/interfaces';
 import classes from './CreateEmployee.module.scss';
 
 export const CreateEmployee: FC<{}> = () => {

@@ -2,18 +2,23 @@ import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 
-import { DropDownOption, SortType, TableOption } from '../../shared/interfaces';
+import {
+  SortType,
+  UsedInTableObjectsType
+} from '../../shared/interfaces/interfaces';
+import { TableProps } from '../../shared/interfaces/propsInterfaces';
+import { TableUser } from '../../shared/interfaces/user';
 import { TableItem } from '../TableItem/TableItem';
 import classes from './Table.module.scss';
 
-export const Table: FC<{
-  items: any,
-  loading: boolean,
-  headerOptions: { [key: string]: TableOption },
-  dropDownOptions: DropDownOption[],
-  dropDownHandler: (label: string, id: string) => void;
-  searchValue?: string;
-}> = ({ items, loading, headerOptions, searchValue, dropDownOptions, dropDownHandler }) => {
+export const Table: FC<TableProps> = ({
+  items,
+  loading,
+  headerOptions,
+  searchValue,
+  dropDownOptions,
+  dropDownHandler
+}) => {
   const [headerValue, setHeaderValue] = useState(headerOptions);
   const [itemsValue, setItemsValue] = useState(items);
 
@@ -39,16 +44,18 @@ export const Table: FC<{
   };
 
   const sortTable = (sortValue: keyof SortType, ascendingSort: boolean): void => {
-    const newUsersValue = itemsValue?.slice().sort((a: any, b: any) => {
-      const valueA = a[sortValue]?.toString().toLowerCase() ?? '';
-      const valueB = b[sortValue]?.toString().toLowerCase() ?? '';
+    const newUsersValue =
+      itemsValue?.slice()
+        .sort((a: UsedInTableObjectsType, b: UsedInTableObjectsType) => {
+        const valueA = a[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
+        const valueB = b[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
 
-      if (valueB < valueA) { return ascendingSort ? 1 : -1; }
+        if (valueB < valueA) { return ascendingSort ? 1 : -1; }
 
-      if (valueB > valueA) { return ascendingSort ? -1 : 1; }
+        if (valueB > valueA) { return ascendingSort ? -1 : 1; }
 
-      return 0;
-    });
+        return 0;
+      });
 
     if (newUsersValue) { setItemsValue(() => [...newUsersValue]) }
   }
@@ -89,13 +96,15 @@ export const Table: FC<{
     }
 
     if (searchValue) {
-      return itemsValue
-        .filter((user: { first_name: any; last_name: any; }) =>
+      const users = itemsValue as TableUser[];
+
+      return users
+        .filter((user: TableUser) =>
           `${user.first_name} ${user.last_name}`
             .toLowerCase()
             .includes(searchValue.toLowerCase())
         )
-        .map((user: any) => {
+        .map((user: TableUser) => {
           return <TableItem
           key={user.id} item={user}
           dropDownOptions={dropDownOptions}
@@ -104,7 +113,7 @@ export const Table: FC<{
         });
     }
 
-    return itemsValue.map((item: any) => {
+    return itemsValue.map((item: UsedInTableObjectsType) => {
       return <TableItem
         key={item.id} item={item}
         dropDownOptions={dropDownOptions}

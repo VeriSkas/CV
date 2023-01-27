@@ -13,7 +13,12 @@ import { FaAddressCard } from 'react-icons/fa';
 import { GrWorkshop } from 'react-icons/gr';
 import { CgProfile } from 'react-icons/cg';
 
-import { DropDownOption, TableOption, IInput, ILink } from './interfaces';
+import {
+  DropDownOption,
+  TableOption,
+  IInput,
+  ILink,
+} from './interfaces/interfaces';
 import {
   BtnText,
   ErrorMessages,

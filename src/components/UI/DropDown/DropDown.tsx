@@ -3,7 +3,8 @@ import React, { FC, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 
-import { DropDownOption, DropDownProps } from '../../../shared/interfaces';
+import { DropDownOption } from '../../../shared/interfaces/interfaces';
+import { DropDownProps } from '../../../shared/interfaces/propsInterfaces';
 import classes from './DropDown.module.scss';
 
 export const DropDown: FC<DropDownProps> = (props) => {
