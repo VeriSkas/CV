@@ -4,10 +4,10 @@ import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 
 import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
 import classes from './Profile.module.scss';
-import { Inputs } from '../../shared/interfaces/interfaces';
+import { Inputs } from '../../interfaces/interfaces';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
-import { TypeEmployeeForm } from '../../shared/constants';
-import { UpdatedUser, UserInfo } from '../../shared/interfaces/user';
+import { TypeEmployeeForm } from '../../constants/constants';
+import { UpdatedUser, UserInfo } from '../../interfaces/user';
 
 export const Profile: FC<{}> = () => {
   const { loading, data } = useQuery<{ user: UserInfo }, OperationVariables>(

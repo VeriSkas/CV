@@ -4,8 +4,8 @@ import { useQuery } from '@apollo/client';
 
 import { GET_CVS } from '../../apollo/queries/cvs';
 import { Table } from '../../components/Table/Table';
-import { cvsTableOptions, dropDownOptions } from '../../shared/constants';
-import { CvItem, TableCvItem } from '../../shared/interfaces/cvs';
+import { cvsTableOptions, dropDownOptions } from '../../constants/constants';
+import { CvItem, TableCvItem } from '../../interfaces/cvs';
 import classes from './CVs.module.scss';
 
 export const CVs: FC<{}> = () => {

@@ -3,7 +3,7 @@ import React, { ChangeEvent, FC } from 'react';
 import { IconContext } from 'react-icons';
 import { ImSearch } from 'react-icons/im';
 
-import { InputSearchProps } from '../../shared/interfaces/propsInterfaces';
+import { InputSearchProps } from '../../interfaces/propsInterfaces';
 import classes from './Search.module.scss';
 
 export const Search: FC<InputSearchProps> = (props) => {

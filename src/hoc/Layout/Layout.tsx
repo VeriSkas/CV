@@ -8,11 +8,11 @@ import { useQuery } from '@apollo/client';
 import { Header } from '../../components/UI/Header/Header';
 import { SideBar } from '../../components/SideBar/SideBar';
 import { DropDown } from '../../components/UI/DropDown/DropDown';
-import { links } from '../../shared/constants';
+import { links } from '../../constants/constants';
 import classes from './Layout.module.scss';
 import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
-import { LayoutProps } from '../../shared/interfaces/propsInterfaces';
-import { UserInfoShort } from '../../shared/interfaces/user';
+import { LayoutProps } from '../../interfaces/propsInterfaces';
+import { UserInfoShort } from '../../interfaces/user';
 
 export const Layout: FC<LayoutProps> = (props) => {
   const userId = localStorage.getItem('userId') ?? '';

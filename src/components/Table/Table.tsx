@@ -5,9 +5,9 @@ import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 import {
   SortType,
   UsedInTableObjectsType
-} from '../../shared/interfaces/interfaces';
-import { TableProps } from '../../shared/interfaces/propsInterfaces';
-import { TableUser } from '../../shared/interfaces/user';
+} from '../../interfaces/interfaces';
+import { TableProps } from '../../interfaces/propsInterfaces';
+import { TableUser } from '../../interfaces/user';
 import { TableItem } from '../TableItem/TableItem';
 import classes from './Table.module.scss';
 

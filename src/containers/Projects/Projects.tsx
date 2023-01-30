@@ -4,8 +4,11 @@ import { useQuery } from '@apollo/client';
 
 import { GET_PROJECTS } from '../../apollo/queries/projects';
 import { Table } from '../../components/Table/Table';
-import { dropDownOptions, projectsTableOptions } from '../../shared/constants';
-import { ProjectItem } from '../../shared/interfaces/project';
+import {
+  dropDownOptions,
+  projectsTableOptions,
+} from '../../constants/constants';
+import { ProjectItem } from '../../interfaces/project';
 import classes from './Projects.module.scss';
 
 export const Projects: FC<{}> = () => {

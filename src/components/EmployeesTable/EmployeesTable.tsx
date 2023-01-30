@@ -4,9 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 
 import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
-import { dropDownOptions, employeeTableOptions } from '../../shared/constants';
+import {
+  dropDownOptions,
+  employeeTableOptions,
+} from '../../constants/constants';
 import { Table } from '../Table/Table';
-import { TableUser, UserInfo } from '../../shared/interfaces/user';
+import { TableUser, UserInfo } from '../../interfaces/user';
 
 export const EmployeesTable: FC<{ searchValue: string }> = ({
   searchValue,

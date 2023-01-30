@@ -18,7 +18,7 @@ import {
   TableOption,
   IInput,
   ILink,
-} from './interfaces/interfaces';
+} from '../interfaces/interfaces';
 import {
   BtnText,
   ErrorMessages,

@@ -10,9 +10,9 @@ import {
   inputs,
   MAX_photoSize,
   TypeEmployeeForm,
-} from '../../shared/constants';
-import { Inputs } from '../../shared/interfaces/interfaces';
-import { InputLabelNames } from '../../shared/text';
+} from '../../constants/constants';
+import { Inputs } from '../../interfaces/interfaces';
+import { InputLabelNames } from '../../constants/text';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import classes from './EmployeeForm.module.scss';
@@ -21,8 +21,8 @@ import {
   GET_USER,
   UPLOAD_AVATAR,
 } from '../../apollo/queries/users';
-import { EmployeeFormProps } from '../../shared/interfaces/propsInterfaces';
-import { Avatar, UserInfo } from '../../shared/interfaces/user';
+import { EmployeeFormProps } from '../../interfaces/propsInterfaces';
+import { Avatar, UserInfo } from '../../interfaces/user';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,

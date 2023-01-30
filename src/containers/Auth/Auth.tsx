@@ -4,7 +4,7 @@ import { useLazyQuery } from '@apollo/client';
 
 import { AUTH } from '../../apollo/queries/auth';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
-import { authFormText } from '../../shared/constants';
+import { authFormText } from '../../constants/constants';
 
 export const Auth: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
   const [authUser, { data: userData }] = useLazyQuery(AUTH);

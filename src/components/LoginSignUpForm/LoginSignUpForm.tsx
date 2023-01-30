@@ -3,9 +3,9 @@ import React, { FC, ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { inputs } from '../../shared/constants';
-import { Inputs } from '../../shared/interfaces/interfaces';
-import { LoginSignUpFormProps } from '../../shared/interfaces/propsInterfaces';
+import { inputs } from '../../constants/constants';
+import { Inputs } from '../../interfaces/interfaces';
+import { LoginSignUpFormProps } from '../../interfaces/propsInterfaces';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import classes from './LoginSignUpForm.module.scss';

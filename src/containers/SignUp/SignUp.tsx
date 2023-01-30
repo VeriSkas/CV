@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import { SIGN_UP } from '../../apollo/queries/signUp';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
-import { paths, signUpFormText } from '../../shared/constants';
+import { paths, signUpFormText } from '../../constants/constants';
 
 export const SignUp: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
   const [signUp, { data: userData }] = useMutation(SIGN_UP);

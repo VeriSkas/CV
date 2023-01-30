@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { IconContext } from 'react-icons';
 
-import { links } from '../../shared/constants';
+import { links } from '../../constants/constants';
 import classes from './SideBar.module.scss';
 import { Backdrop } from '../UI/Backdrop/Backdrop';
 
