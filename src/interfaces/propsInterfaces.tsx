@@ -52,6 +52,7 @@ export interface EmployeeFormProps {
   user?: UserInfo;
   submitBtnText?: string;
   onSubmitForm: (data: Inputs, id?: string) => void;
+  setError?: (message: string) => void;
   type: string;
 }
 
@@ -73,5 +74,7 @@ export interface TableItemProps {
 export interface LayoutProps {
   auth: (isAuth: boolean) => void;
   login: boolean;
+  errorMessage: string;
+  setErrorMessage: (message: string) => void;
   children: ReactNode;
 }

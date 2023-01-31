@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -13,11 +13,13 @@ import classes from './Layout.module.scss';
 import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
 import { LayoutProps } from '../../interfaces/propsInterfaces';
 import { UserInfoShort } from '../../interfaces/user';
+import { Notification } from '../../components/UI/Notification/Notification';
 
 export const Layout: FC<LayoutProps> = (props) => {
   const userId = localStorage.getItem('userId') ?? '';
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  const [isOpenNotification, setIsOpenNotification] = useState<boolean>(true);
   const { data: UserInfo } = useQuery<{ user: UserInfoShort }>(
     GET_USER_LOGO_INFO,
     {
@@ -27,6 +29,12 @@ export const Layout: FC<LayoutProps> = (props) => {
   const navigate = useNavigate();
   const { profile, settings, logout } = links;
   const dropdownOptions = [profile, settings, logout];
+
+  useEffect(() => {
+    if (props.errorMessage) {
+      setIsOpenNotification(true);
+    }
+  }, [props.errorMessage]);
 
   const onClose = (): void => {
     setIsOpenSidebar(false);
@@ -50,45 +58,62 @@ export const Layout: FC<LayoutProps> = (props) => {
     }
   };
 
-  return props.login ? (
-    <div className={classes.Layout}>
-      <SideBar onClose={onClose} isOpen={isOpenSidebar} />
-      <Header>
-        <div className={classes.Header}>
-          <div className={classes.MenuIcon} onClick={onOpen}>
-            <IconContext.Provider value={{ className: classes.Icon }}>
-              <GiHamburgerMenu />
-            </IconContext.Provider>
-          </div>
-          <div className={classes.UserInfo}>
-            <span className={classes.UserEmail}>
-              {UserInfo?.user.email ?? ''}
-            </span>
-            <div className={classes.UserLogo} onClick={toggleDropDown}>
-              <div className={classes.Avatar}>
-                {UserInfo?.user.profile.avatar ? (
-                  <img src={UserInfo?.user.profile.avatar} />
-                ) : (
-                  <span className={classes.UserLetter}>
-                    {UserInfo?.user.email[0] ?? ''}
-                  </span>
-                )}
+  const onCloseNotification = (status: boolean): void => {
+    setIsOpenNotification(false);
+    props.setErrorMessage('');
+  };
+
+  return (
+    <>
+      {props.login ? (
+        <div className={classes.Layout}>
+          <SideBar onClose={onClose} isOpen={isOpenSidebar} />
+          <Header>
+            <div className={classes.Header}>
+              <div className={classes.MenuIcon} onClick={onOpen}>
+                <IconContext.Provider value={{ className: classes.Icon }}>
+                  <GiHamburgerMenu />
+                </IconContext.Provider>
               </div>
-              {isOpenDropDown && (
-                <DropDown
-                  options={dropdownOptions}
-                  onClose={(label: string) => {
-                    onCloseDropDown(label);
-                  }}
-                />
-              )}
+              <div className={classes.UserInfo}>
+                <span className={classes.UserEmail}>
+                  {UserInfo?.user.email ?? ''}
+                </span>
+                <div className={classes.UserLogo} onClick={toggleDropDown}>
+                  <div className={classes.Avatar}>
+                    {UserInfo?.user.profile.avatar ? (
+                      <img src={UserInfo?.user.profile.avatar} />
+                    ) : (
+                      <span className={classes.UserLetter}>
+                        {UserInfo?.user.email[0] ?? ''}
+                      </span>
+                    )}
+                  </div>
+                  {isOpenDropDown && (
+                    <DropDown
+                      options={dropdownOptions}
+                      onClose={(label: string) => {
+                        onCloseDropDown(label);
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
+          </Header>
+          <div className={classes.Container}>{props.children}</div>
         </div>
-      </Header>
-      <div className={classes.Container}>{props.children}</div>
-    </div>
-  ) : (
-    <div>{props.children}</div>
+      ) : (
+        <div>{props.children}</div>
+      )}
+      {props.errorMessage && isOpenNotification && (
+        <Notification
+          message={props.errorMessage}
+          onCloseHandler={(status: boolean) => {
+            onCloseNotification(status);
+          }}
+        />
+      )}
+    </>
   );
 };

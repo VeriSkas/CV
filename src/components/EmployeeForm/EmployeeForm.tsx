@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, ReactNode, useState } from 'react';
+import React, { ChangeEvent, FC, ReactNode, useEffect, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -28,11 +28,12 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
   submitBtnText,
   onSubmitForm,
+  setError,
   type,
 }) => {
   const [image, setImage] = useState<Avatar | null>(null);
-  const [removeAvatar] = useMutation(DELETE_AVATAR);
-  const [uploadAvatar] = useMutation(UPLOAD_AVATAR);
+  const [removeAvatar, { error: deleteError }] = useMutation(DELETE_AVATAR);
+  const [uploadAvatar, { error: uploadError }] = useMutation(UPLOAD_AVATAR);
   const {
     register,
     handleSubmit,
@@ -41,6 +42,16 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   } = useForm<Inputs>({
     mode: 'all',
   });
+
+  useEffect(() => {
+    if (uploadError && setError) {
+      setError(uploadError.message);
+    }
+
+    if (deleteError && setError) {
+      setError(deleteError.message);
+    }
+  }, [deleteError, uploadError]);
 
   const submitForm = (data: Inputs): void => {
     onSubmitForm(data, user?.id ?? '');
@@ -140,7 +151,9 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
 
         reader.readAsDataURL(event.target.files[0]);
       } else {
-        console.log('Photo size have to be less');
+        if (setError) {
+          setError('Photo size have to be less');
+        }
       }
     }
   };

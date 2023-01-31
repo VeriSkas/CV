@@ -1,0 +1,43 @@
+@import '../../../constants/styles/colors.scss';
+
+.Notification{
+  position: fixed;
+  top: 35px;
+  left: 20px;
+  max-width: 400px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background: $NotificationBackground;
+  display: flex;
+  z-index: 300;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 1px 5px rgba($color: #000000, $alpha: .5);
+
+  & > div {
+    display: flex;
+  }
+
+  .Message {
+    width: 100%;
+    margin: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .Icon {
+    width: 25px;
+    height: 25px;
+
+    &.IconType {
+      path {
+        color: $mainRed;
+      }
+    }
+  }
+
+  .Cross{
+    cursor: pointer;
+  }
+}

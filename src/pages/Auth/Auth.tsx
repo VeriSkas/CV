@@ -6,8 +6,11 @@ import { AUTH } from '../../apollo/queries/auth';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
 import { authFormText } from '../../constants/constants';
 
-export const Auth: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
-  const [authUser, { data: userData }] = useLazyQuery(AUTH);
+export const Auth: FC<{
+  auth: (isAuth: boolean) => void,
+  setError: (error: string) => void,
+}> = (props) => {
+  const [authUser, { data: userData, error }] = useLazyQuery(AUTH);
   const text = authFormText;
 
   useEffect(() => {
@@ -18,7 +21,11 @@ export const Auth: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
       localStorage.setItem('userId', user.id);
       props.auth(true);
     }
-  }, [userData]);
+
+    if (error) {
+      props.setError(error.message);
+    }
+  }, [userData, error]);
 
   const onSubmit = (data: { email: string, password: string }): void => {
     void authUser({

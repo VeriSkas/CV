@@ -16,9 +16,10 @@ import { CVsPage } from './pages/CVsPage/CVsPage';
 import { CVs } from './pages/CVs/CVs';
 
 export const App: FC = () => {
-  const [isLoggedIn, setLoggedIn] = useState(
-    () => !!localStorage.getItem('token') || false
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(
+    () => !!localStorage.getItem('token')
   );
+  const [errorMessage, setErrorMessage] = useState<string>('');
   let link = isLoggedIn ? '/employees' : '/login';
 
   useEffect(() => {
@@ -33,8 +34,26 @@ export const App: FC = () => {
     <>
       <Route path="/employees" element={<EmployeesPage />}>
         <Route index element={<Employees />} />
-        <Route path=":id/profile" element={<Profile />} />
-        <Route path=":id" element={<UpdateEmployee />} />
+        <Route
+          path=":id/profile"
+          element={
+            <Profile
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
+        <Route
+          path=":id"
+          element={
+            <UpdateEmployee
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
         <Route path="createEmployee" element={<CreateEmployee />} />
       </Route>
       <Route path="/projects" element={<ProjectsPage />}>
@@ -55,6 +74,9 @@ export const App: FC = () => {
               auth={(isAuth: boolean) => {
                 setAuth(isAuth);
               }}
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
             />
           }
         />
@@ -66,6 +88,9 @@ export const App: FC = () => {
             <SignUp
               auth={(isAuth: boolean) => {
                 setAuth(isAuth);
+              }}
+              setError={(error: string) => {
+                setErrorMessage(error);
               }}
             />
           }
@@ -80,6 +105,10 @@ export const App: FC = () => {
         login={isLoggedIn}
         auth={(isAuth: boolean) => {
           setAuth(isAuth);
+        }}
+        errorMessage={errorMessage}
+        setErrorMessage={(message: string) => {
+          setErrorMessage(message);
         }}
       >
         <Routes>

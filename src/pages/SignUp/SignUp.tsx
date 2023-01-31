@@ -6,8 +6,11 @@ import { SIGN_UP } from '../../apollo/queries/signUp';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
 import { paths, signUpFormText } from '../../constants/constants';
 
-export const SignUp: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
-  const [signUp, { data: userData }] = useMutation(SIGN_UP);
+export const SignUp: FC<{
+  auth: (isAuth: boolean) => void,
+  setError: (error: string) => void,
+}> = (props) => {
+  const [signUp, { data: userData, error }] = useMutation(SIGN_UP);
   const text = signUpFormText;
 
   useEffect(() => {
@@ -18,7 +21,11 @@ export const SignUp: FC<{ auth: (isAuth: boolean) => void }> = (props) => {
       localStorage.setItem('userId', user.id);
       props.auth(true);
     }
-  }, [userData]);
+
+    if (error) {
+      props.setError(error.message);
+    }
+  }, [userData, error]);
 
   const onSubmit = (data: { email: string, password: string }): void => {
     void signUp({

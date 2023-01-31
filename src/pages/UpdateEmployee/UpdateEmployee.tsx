@@ -9,7 +9,9 @@ import classes from './UpdateEmployee.module.scss';
 import { TypeEmployeeForm } from '../../constants/constants';
 import { UpdatedUser, UserInfo } from '../../interfaces/user';
 
-export const UpdateEmployee: FC<{}> = () => {
+export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
+  setError,
+}) => {
   const { loading, data } = useQuery<{ user: UserInfo }, OperationVariables>(
     GET_USER,
     {
@@ -56,6 +58,9 @@ export const UpdateEmployee: FC<{}> = () => {
               user={data.user}
               onSubmitForm={(data, id) => {
                 updateEmployee(data, id);
+              }}
+              setError={(message: string) => {
+                setError(message);
               }}
               type={TypeEmployeeForm.updateEmployee}
             />

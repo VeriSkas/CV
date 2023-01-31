@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 
@@ -9,7 +9,9 @@ import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 import { TypeEmployeeForm } from '../../constants/constants';
 import { UpdatedUser, UserInfo } from '../../interfaces/user';
 
-export const Profile: FC<{}> = () => {
+export const Profile: FC<{ setError: (message: string) => void }> = ({
+  setError,
+}) => {
   const { loading, data } = useQuery<{ user: UserInfo }, OperationVariables>(
     GET_USER,
     {
@@ -18,7 +20,13 @@ export const Profile: FC<{}> = () => {
       },
     }
   );
-  const [updateProfile] = useMutation(UPDATE_USER);
+  const [updateProfile, { error }] = useMutation(UPDATE_USER);
+
+  useEffect(() => {
+    if (error) {
+      setError(error.message);
+    }
+  }, [error]);
 
   const updateUser = ({ first_name, last_name }: Inputs, id?: string): void => {
     const updatedUser: UpdatedUser = {
@@ -53,6 +61,9 @@ export const Profile: FC<{}> = () => {
               user={data.user}
               onSubmitForm={(value, id) => {
                 updateUser(value, id);
+              }}
+              setError={(message: string) => {
+                setError(message);
               }}
               type={TypeEmployeeForm.profileType}
             />
