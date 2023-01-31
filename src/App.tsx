@@ -1,19 +1,19 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Auth } from './containers/Auth/Auth';
-import { CreateEmployee } from './containers/CreateEmployee/CreateEmployee';
-import { Employees } from './containers/Employees/Employees';
+import { Auth } from './pages/Auth/Auth';
+import { CreateEmployee } from './pages/CreateEmployee/CreateEmployee';
+import { Employees } from './pages/Employees/Employees';
 import { Layout } from './hoc/Layout/Layout';
-import { Profile } from './containers/Profile/Profile';
-import { SignInAndUp } from './containers/SignInAndUp/SignInAndUp';
-import { SignUp } from './containers/SignUp/SignUp';
-import { UpdateEmployee } from './containers/UpdateEmployee/UpdateEmployee';
-import { EmployeesPage } from './containers/EmployeesPage/EmployeesPage';
-import { Projects } from './containers/Projects/Projects';
-import { ProjectsPage } from './containers/ProjectsPage/ProjectsPage';
-import { CVsPage } from './containers/CVsPage/CVsPage';
-import { CVs } from './containers/CVs/CVs';
+import { Profile } from './pages/Profile/Profile';
+import { SignInAndUp } from './pages/SignInAndUp/SignInAndUp';
+import { SignUp } from './pages/SignUp/SignUp';
+import { UpdateEmployee } from './pages/UpdateEmployee/UpdateEmployee';
+import { EmployeesPage } from './pages/EmployeesPage/EmployeesPage';
+import { Projects } from './pages/Projects/Projects';
+import { ProjectsPage } from './pages/ProjectsPage/ProjectsPage';
+import { CVsPage } from './pages/CVsPage/CVsPage';
+import { CVs } from './pages/CVs/CVs';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState(
