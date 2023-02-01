@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { GET_CVS } from '../../apollo/queries/cvs';
@@ -8,10 +9,10 @@ import { cvsTableOptions, dropDownOptions } from '../../constants/constants';
 import { CvItem, TableCvItem } from '../../interfaces/cvs';
 import classes from './CVs.module.scss';
 import { Search } from '../../components/Search/Search';
-import { Link } from 'react-router-dom';
 import { Button } from '../../components/UI/Button/Button';
 
 export const CVs: FC<{}> = () => {
+  const navigate = useNavigate();
   const { loading, data } = useQuery<{ cvs: CvItem[] }>(GET_CVS);
   const [cvs, setCVs] = useState<TableCvItem[] | null>(null);
   const [searchValue, setSearchValue] = useState('');
@@ -31,7 +32,12 @@ export const CVs: FC<{}> = () => {
     }
   }, [data]);
 
-  const dropDownHandler = (label: string, id: string): void => {};
+  const dropDownHandler = (label: string, id: string): void => {
+    if (label === dropDownOptions.cv.label) {
+      localStorage.setItem('activeCV', id);
+      navigate(`/cvs/${id}`);
+    }
+  };
 
   return (
     <div className={classes.CVs}>

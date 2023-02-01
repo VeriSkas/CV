@@ -39,7 +39,7 @@ export const EmployeesTable: FC<{ searchValue: SearchValue }> = ({
   }, [data]);
 
   const dropDownHandler = (label: string, id: string): void => {
-    if (label === 'Delete employee') {
+    if (label === dropDownOptions.removeUser.label) {
       void deleteUser({
         variables: {
           id,
@@ -59,7 +59,7 @@ export const EmployeesTable: FC<{ searchValue: SearchValue }> = ({
       });
     }
 
-    if (label === 'Update employee') {
+    if (label === dropDownOptions.updateUser.label) {
       navigate(`/employees/${id}`);
       localStorage.setItem('activeUser', id);
     }

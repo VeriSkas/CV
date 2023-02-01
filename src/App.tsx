@@ -14,6 +14,7 @@ import { Projects } from './pages/Projects/Projects';
 import { ProjectsPage } from './pages/ProjectsPage/ProjectsPage';
 import { CVsPage } from './pages/CVsPage/CVsPage';
 import { CVs } from './pages/CVs/CVs';
+import { CvDetails } from './pages/CvDetails/CvDetails';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(
@@ -61,6 +62,7 @@ export const App: FC = () => {
       </Route>
       <Route path="/cvs" element={<CVsPage />}>
         <Route index element={<CVs />} />
+        <Route path=":id" element={<CvDetails />} />
       </Route>
     </>
   );
