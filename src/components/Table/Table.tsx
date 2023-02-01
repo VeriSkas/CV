@@ -7,7 +7,7 @@ import {
   UsedInTableObjectsType
 } from '../../interfaces/interfaces';
 import { TableProps } from '../../interfaces/propsInterfaces';
-import { TableUser } from '../../interfaces/user';
+import { search } from '../../utils/search';
 import { TableItem } from '../TableItem/TableItem';
 import classes from './Table.module.scss';
 
@@ -91,29 +91,21 @@ export const Table: FC<TableProps> = ({
   };
 
   const renderTableRows = (): ReactNode => {
-    if (!itemsValue) {
+    let returnedValue = itemsValue;
+
+    if (!returnedValue) {
       return <p>No values</p>;
     }
 
-    if (searchValue) {
-      const users = itemsValue as TableUser[];
+    if (searchValue?.value) {
+      returnedValue = search(returnedValue, searchValue);
 
-      return users
-        .filter((user: TableUser) =>
-          `${user.first_name} ${user.last_name}`
-            .toLowerCase()
-            .includes(searchValue.toLowerCase())
-        )
-        .map((user: TableUser) => {
-          return <TableItem
-          key={user.id} item={user}
-          dropDownOptions={dropDownOptions}
-          dropDownHandler={(label: string, id: string) => { dropDownHandler(label, id) }}
-        />;
-        });
+      if (!returnedValue.length) {
+        return <p>No values</p>;
+      }
     }
 
-    return itemsValue.map((item: UsedInTableObjectsType) => {
+    return returnedValue.map((item: UsedInTableObjectsType) => {
       return <TableItem
         key={item.id} item={item}
         dropDownOptions={dropDownOptions}

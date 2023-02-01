@@ -12,6 +12,7 @@ export const Employees: FC<{}> = () => {
 
   return (
     <div className={classes.Employees}>
+      <h2>Employees</h2>
       <div className={classes.SearchPanel}>
         <div className={classes.Search}>
           <Search
@@ -28,7 +29,12 @@ export const Employees: FC<{}> = () => {
           </Link>
         </div>
       </div>
-      <EmployeesTable searchValue={searchValue} />
+      <EmployeesTable
+        searchValue={{
+          value: searchValue,
+          searchKey: ['first_name', 'last_name'],
+        }}
+      />
     </div>
   );
 };

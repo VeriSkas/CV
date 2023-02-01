@@ -62,7 +62,12 @@ export interface TableProps {
   headerOptions: { [key: string]: TableOption };
   dropDownOptions: DropDownOption[];
   dropDownHandler: (label: string, id: string) => void;
-  searchValue?: string;
+  searchValue?: SearchValue;
+}
+
+export interface SearchValue {
+  value: string;
+  searchKey: string[];
 }
 
 export interface TableItemProps {

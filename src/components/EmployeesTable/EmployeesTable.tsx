@@ -10,8 +10,9 @@ import {
 } from '../../constants/constants';
 import { Table } from '../Table/Table';
 import { TableUser, UserInfo } from '../../interfaces/user';
+import { SearchValue } from '../../interfaces/propsInterfaces';
 
-export const EmployeesTable: FC<{ searchValue: string }> = ({
+export const EmployeesTable: FC<{ searchValue: SearchValue }> = ({
   searchValue,
 }) => {
   const { updateUser, removeUser } = dropDownOptions;

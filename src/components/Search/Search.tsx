@@ -10,6 +10,7 @@ export const Search: FC<InputSearchProps> = (props) => {
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
     props.onChange(event.target.value);
   };
+
   return (
     <div className={classes.Search}>
       <div className={classes.IconSearch}>
