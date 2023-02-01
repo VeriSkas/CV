@@ -53,7 +53,7 @@ export interface UpdatedUser {
   positionId: string;
 }
 
-export interface Avatar {
+export interface AvatarValue {
   base64: string;
   size: number;
   type: string;
