@@ -185,27 +185,27 @@ export const links: { [key: string]: ILink } = {
 };
 
 export const employeeTableOptions: { [key: string]: TableOption } = {
-  first_name: { name: 'First Name', active: false },
-  last_name: { name: 'Last Name', active: false },
-  email: { name: 'Email', active: false },
-  department_name: { name: 'Department', active: false },
-  position_name: { name: 'Position', active: false },
+  first_name: { name: 'First Name', active: false, disabled: false },
+  last_name: { name: 'Last Name', active: false, disabled: false },
+  email: { name: 'Email', active: false, disabled: false },
+  department_name: { name: 'Department', active: false, disabled: false },
+  position_name: { name: 'Position', active: false, disabled: false },
 };
 
 export const projectsTableOptions: { [key: string]: TableOption } = {
-  name: { name: 'Name', active: false },
-  internal_name: { name: 'Internal Name', active: false },
-  domain: { name: 'Domain', active: false },
-  start_date: { name: 'Start Date', active: false },
-  end_date: { name: 'End Date', active: false },
-  team_size: { name: 'Team Size', active: false },
+  name: { name: 'Name', active: false, disabled: false },
+  internal_name: { name: 'Internal Name', active: false, disabled: false },
+  domain: { name: 'Domain', active: false, disabled: false },
+  start_date: { name: 'Start Date', active: false, disabled: false },
+  end_date: { name: 'End Date', active: false, disabled: false },
+  team_size: { name: 'Team Size', active: false, disabled: true },
 };
 
 export const cvsTableOptions: { [key: string]: TableOption } = {
-  is_template: { name: 'Template', active: false },
-  name: { name: 'Name', active: false },
-  description: { name: 'Description', active: false },
-  email: { name: 'Employee', active: false },
+  is_template: { name: 'Template', active: false, disabled: true },
+  name: { name: 'Name', active: false, disabled: false },
+  description: { name: 'Description', active: false, disabled: true },
+  email: { name: 'Employee', active: false, disabled: false },
 };
 
 export const dropDownOptions: { [key: string]: DropDownOption } = {

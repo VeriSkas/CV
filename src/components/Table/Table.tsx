@@ -47,15 +47,15 @@ export const Table: FC<TableProps> = ({
     const newUsersValue =
       itemsValue?.slice()
         .sort((a: UsedInTableObjectsType, b: UsedInTableObjectsType) => {
-        const valueA = a[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
-        const valueB = b[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
+          const valueA = a[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
+          const valueB = b[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
 
-        if (valueB < valueA) { return ascendingSort ? 1 : -1; }
+          if (valueB < valueA) { return ascendingSort ? 1 : -1; }
 
-        if (valueB > valueA) { return ascendingSort ? -1 : 1; }
+          if (valueB > valueA) { return ascendingSort ? -1 : 1; }
 
-        return 0;
-      });
+          return 0;
+        });
 
     if (newUsersValue) { setItemsValue(() => [...newUsersValue]) }
   }
@@ -63,27 +63,31 @@ export const Table: FC<TableProps> = ({
   const renderHeaderOptions = (): ReactNode => {
     return Object.keys(headerOptions).map((key) => {
       const option = headerOptions[key];
+      const activeOptionIcon =
+        <div className={classes.SortArrow}>
+          {option.ascendingSort ? <MdArrowDownward /> : <MdArrowUpward />}
+        </div>;
+      const inactiveOptionIcon =
+        <div className={classes.SortArrowHover}>
+          <MdArrowDownward />
+        </div>;
+      const disabledOption = <h5>{option.name}</h5>;
+      const enabledOption =
+        <>
+          <h5
+            onClick={() => {
+              turnOnSort(key);
+            }}
+          >
+            {option.name}
+          </h5>
+            {option.active ? activeOptionIcon : inactiveOptionIcon}
+        </>
 
       return (
         <div key={option.name} className={classes.HeaderOption}>
           <span className={classes.Option}>
-            <h5
-              onClick={() => {
-                turnOnSort(key);
-              }}
-            >
-              {option.name}
-            </h5>
-            {option.active && (
-              <div className={classes.SortArrow}>
-                {option.ascendingSort ? <MdArrowDownward /> : <MdArrowUpward />}
-              </div>
-            )}
-            {!option.active && (
-              <div className={classes.SortArrowHover}>
-                <MdArrowDownward />
-              </div>
-            )}
+            {option.disabled ? disabledOption : enabledOption}
           </span>
         </div>
       );

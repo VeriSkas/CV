@@ -31,6 +31,7 @@ export interface TableOption {
   name: string;
   active: boolean;
   ascendingSort?: boolean;
+  disabled: boolean;
 }
 
 export interface DropDownOption {
