@@ -14,6 +14,7 @@ import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
 import { LayoutProps } from '../../interfaces/propsInterfaces';
 import { UserInfoShort } from '../../interfaces/user';
 import { Notification } from '../../components/UI/Notification/Notification';
+import { PATH } from '../../constants/paths';
 
 export const Layout: FC<LayoutProps> = (props) => {
   const userId = localStorage.getItem(LSItems.userId) ?? '';
@@ -49,10 +50,10 @@ export const Layout: FC<LayoutProps> = (props) => {
   };
 
   const onCloseDropDown = (label: string): void => {
-    if (label === 'Profile') {
-      navigate(`/employees/${userId}/profile`);
+    if (label === links.profile.label) {
+      navigate(`${PATH.employees}/${userId}${PATH.profile}`);
     }
-    if (label === 'Logout') {
+    if (label === links.logout.label) {
       localStorage.clear();
       props.auth(false);
     }

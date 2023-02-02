@@ -3,6 +3,7 @@ import React, { FC, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { RxCross2 } from 'react-icons/rx';
 import { IconContext } from 'react-icons';
+import { useTranslation } from 'react-i18next';
 
 import { links } from '../../constants/constants';
 import classes from './SideBar.module.scss';
@@ -11,6 +12,7 @@ import { Backdrop } from '../UI/Backdrop/Backdrop';
 export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = (
   props
 ) => {
+  const { t } = useTranslation();
   const {
     employees,
     projects,
@@ -38,7 +40,7 @@ export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = (
             <IconContext.Provider value={{ className: classes.Icon }}>
               {link.icon}
             </IconContext.Provider>
-            <span>{link.label}</span>
+            <span>{t(link.label)}</span>
           </NavLink>
         </li>
       );

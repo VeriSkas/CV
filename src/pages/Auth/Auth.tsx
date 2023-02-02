@@ -5,6 +5,7 @@ import { useLazyQuery } from '@apollo/client';
 import { AUTH } from '../../apollo/queries/auth';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
 import { authFormText, LSItems } from '../../constants/constants';
+import { PATH } from '../../constants/paths';
 
 export const Auth: FC<{
   auth: (isAuth: boolean) => void,
@@ -38,7 +39,7 @@ export const Auth: FC<{
   return (
     <LoginSignUpForm
       text={text}
-      path="/login"
+      path={PATH.login}
       onSubmit={(data: { email: string, password: string }) => {
         onSubmit(data);
       }}

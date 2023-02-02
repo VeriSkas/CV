@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 
 import { useQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 
 import { GET_CV } from '../../apollo/queries/cvs';
 import classes from './CvDetails.module.scss';
@@ -12,9 +13,11 @@ import {
 } from '../../interfaces/cvs';
 import { Inputs } from '../../interfaces/interfaces';
 import { LSItems, TypeForm } from '../../constants/constants';
+import { ContentText, TitleText } from '../../constants/text';
 
 export const CvDetails: FC<{}> = () => {
   const user = localStorage.getItem(LSItems.userId);
+  const { t } = useTranslation();
   const { loading, data } = useQuery<{ cv: CvItemDetails }>(GET_CV, {
     variables: {
       id: localStorage.getItem(LSItems.activeCV),
@@ -33,10 +36,10 @@ export const CvDetails: FC<{}> = () => {
   return (
     <div className={classes.CvDetails}>
       {loading ? (
-        <div>...Loading</div>
+        <div>{t(ContentText.loading)}</div>
       ) : (
         <div className={classes.CvDetailsContainer}>
-          <h2 className={classes.Title}>CV Details</h2>
+          <h2 className={classes.Title}>{t(TitleText.cvDetails)}</h2>
           {data && (
             <CvForm
               cv={data.cv}

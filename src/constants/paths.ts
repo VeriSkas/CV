@@ -1,0 +1,15 @@
+export const PATH = {
+  login: '/login',
+  signUp: '/signup',
+  employees: '/employees',
+  createEmployee: '/employees/createEmployee',
+  createEmployeeAbs: 'createEmployee',
+  profile: '/profile',
+  userProfile: ':id/profile',
+  employee: ':id',
+  cvs: '/cvs',
+  cv: ':cvId',
+  createCV: '/cvs/createCV',
+  createProject: '/projects/createProject',
+  projects: '/projects',
+};

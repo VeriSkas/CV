@@ -39,11 +39,22 @@ export const ErrorMessages = {
   inputMaxLength: (value: number) =>
     `You should enter less then ${value} symbols`,
   inputEmail: 'Enter valid email',
+  avatarSize: 'Photo size have to be less',
+  default: 'Error',
 };
 
 export const TitleText = {
   authTitle: 'Welcome Back',
   signUpTitle: 'Register Now',
+  createEmployee: 'Create Employee',
+  cvDetails: 'CV Details',
+  cvs: 'CVs',
+  employees: 'Employees',
+  profile: 'Profile',
+  projects: 'Projects',
+  login: 'Login',
+  signUp: 'SignUp',
+  updateUser: 'Update User',
 };
 
 export const SubtitleText = {
@@ -51,9 +62,28 @@ export const SubtitleText = {
   signUpSubtitle: 'Welcome! Sign up to continue.',
 };
 
+export const ContentText = {
+  noValues: 'No values',
+  loading: 'Loading...',
+};
+
 export const BtnText = {
   authSubmitBtn: 'Sign in',
   authResetPasswordBtn: 'Reset password',
   signUpSubmitBtn: 'Sign up',
+  saveChanges: 'Save changes',
+  return: 'Return',
   returnBtn: 'I already have an account',
+  createEmployee: 'Create employee',
+  createCV: 'Create new CV',
+  createProject: 'Create project',
+};
+
+export const TooltipText = {
+  deleteAvatar: 'Delete avatar',
+  addAvatar: 'Add new avatar',
+};
+
+export const PlaceholderText = {
+  search: 'Search',
 };

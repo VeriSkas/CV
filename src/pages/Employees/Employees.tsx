@@ -1,22 +1,27 @@
 import React, { FC, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { EmployeesTable } from '../../components/EmployeesTable/EmployeesTable';
 import { Search } from '../../components/Search/Search';
 import { Button } from '../../components/UI/Button/Button';
+import { BtnType, SearchKey } from '../../constants/constants';
+import { PATH } from '../../constants/paths';
+import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
 import classes from './Employees.module.scss';
 
 export const Employees: FC<{}> = () => {
+  const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState('');
 
   return (
     <div className={classes.Employees}>
-      <h2>Employees</h2>
+      <h2>{t(TitleText.employees)}</h2>
       <div className={classes.SearchPanel}>
         <div className={classes.Search}>
           <Search
-            placeholder="Search"
+            placeholder={t(PlaceholderText.search)}
             value={searchValue}
             onChange={(value) => {
               setSearchValue(value);
@@ -24,15 +29,17 @@ export const Employees: FC<{}> = () => {
           />
         </div>
         <div className={classes.CreateEmployeeBtn}>
-          <Link to={'/employees/createEmployee'}>
-            <Button type="transparentWithBorder">Create employee</Button>
+          <Link to={PATH.createEmployee}>
+            <Button type={BtnType.transparentWithBorder}>
+              {t(BtnText.createEmployee)}
+            </Button>
           </Link>
         </div>
       </div>
       <EmployeesTable
         searchValue={{
           value: searchValue,
-          searchKey: ['first_name', 'last_name'],
+          searchKey: [SearchKey.first_name, SearchKey.last_name],
         }}
       />
     </div>

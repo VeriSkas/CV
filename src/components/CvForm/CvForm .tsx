@@ -1,9 +1,12 @@
 import React, { FC, ReactNode, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { TypeForm } from '../../constants/constants';
+import { BtnType, ListCreatorType, TypeForm } from '../../constants/constants';
+import { PATH } from '../../constants/paths';
+import { BtnText } from '../../constants/text';
 import {
   LanguageItem,
   LanguageItemInDB,
@@ -24,6 +27,7 @@ export const CvForm: FC<CvFormProps> = ({
   onSubmitForm,
   type,
 }) => {
+  const { t } = useTranslation();
   const [skills, setSkills] = useState<SkillItemInDB[]>([]);
   const [languages, setLanguages] = useState<LanguageItemInDB[]>([]);
   const {
@@ -47,14 +51,14 @@ export const CvForm: FC<CvFormProps> = ({
     data: SkillItem[] | LanguageItem[],
     type: string
   ): void => {
-    if (type === 'Skills') {
+    if (type === ListCreatorType.skills) {
       const modifiedData: SkillItemInDB[] = data.map((skill) => ({
         skill_name: skill.name,
         mastery: '',
       }));
 
       setSkills(modifiedData);
-    } else if (type === 'Languages') {
+    } else if (type === ListCreatorType.languages) {
       const modifiedData: LanguageItemInDB[] = data.map((language) => ({
         language_name: language.name,
         proficiency: '',
@@ -91,28 +95,28 @@ export const CvForm: FC<CvFormProps> = ({
         {renderInputs()}
         <ListCreator
           data={cv?.skills ?? []}
-          title="Skills"
+          title={ListCreatorType.skills}
           disabled={type !== TypeForm.cvUser}
           changedData={(data) => {
-            changedListHandler(data, 'Skills');
+            changedListHandler(data, ListCreatorType.skills);
           }}
         />
         <ListCreator
           data={cv?.languages ?? []}
-          title="Languages"
+          title={ListCreatorType.languages}
           disabled={type !== TypeForm.cvUser}
           changedData={(data) => {
-            changedListHandler(data, 'Languages');
+            changedListHandler(data, ListCreatorType.languages);
           }}
         />
         <div className={classes.FormBtns}>
           {type === TypeForm.cvUser && (
             <Button disabled={!isValid}>
-              {submitBtnText ?? 'Save changes'}
+              {submitBtnText ?? t(BtnText.saveChanges)}
             </Button>
           )}
-          <Link to={'/cvs'}>
-            <Button type="transparent">{'Return'}</Button>
+          <Link to={PATH.cvs}>
+            <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
           </Link>
         </div>
       </form>

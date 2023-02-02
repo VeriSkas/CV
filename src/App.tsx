@@ -16,16 +16,17 @@ import { CVsPage } from './pages/CVsPage/CVsPage';
 import { CVs } from './pages/CVs/CVs';
 import { CvDetails } from './pages/CvDetails/CvDetails';
 import { LSItems } from './constants/constants';
+import { PATH } from './constants/paths';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(
     () => !!localStorage.getItem(LSItems.token)
   );
   const [errorMessage, setErrorMessage] = useState<string>('');
-  let link = isLoggedIn ? '/employees' : '/login';
+  let link = isLoggedIn ? PATH.employees : PATH.login;
 
   useEffect(() => {
-    link = isLoggedIn ? '/employees' : '/login';
+    link = isLoggedIn ? PATH.employees : PATH.login;
   }, [isLoggedIn]);
 
   const setAuth = (auth: boolean): void => {
@@ -34,10 +35,10 @@ export const App: FC = () => {
 
   const protectedRoutes = (
     <>
-      <Route path="/employees" element={<EmployeesPage />}>
+      <Route path={PATH.employees} element={<EmployeesPage />}>
         <Route index element={<Employees />} />
         <Route
-          path=":id/profile"
+          path={PATH.userProfile}
           element={
             <Profile
               setError={(error: string) => {
@@ -47,7 +48,7 @@ export const App: FC = () => {
           }
         />
         <Route
-          path=":id"
+          path={PATH.employee}
           element={
             <UpdateEmployee
               setError={(error: string) => {
@@ -56,20 +57,20 @@ export const App: FC = () => {
             />
           }
         />
-        <Route path="createEmployee" element={<CreateEmployee />} />
+        <Route path={PATH.createEmployeeAbs} element={<CreateEmployee />} />
       </Route>
-      <Route path="/projects" element={<ProjectsPage />}>
+      <Route path={PATH.projects} element={<ProjectsPage />}>
         <Route index element={<Projects />} />
       </Route>
-      <Route path="/cvs" element={<CVsPage />}>
+      <Route path={PATH.cvs} element={<CVsPage />}>
         <Route index element={<CVs />} />
-        <Route path=":id" element={<CvDetails />} />
+        <Route path={PATH.cv} element={<CvDetails />} />
       </Route>
     </>
   );
   const unProtectedRoutes = (
     <>
-      <Route path="/login" element={<SignInAndUp />}>
+      <Route path={PATH.login} element={<SignInAndUp />}>
         <Route
           index
           element={
@@ -84,7 +85,7 @@ export const App: FC = () => {
           }
         />
       </Route>
-      <Route path="/signup" element={<SignInAndUp />}>
+      <Route path={PATH.signUp} element={<SignInAndUp />}>
         <Route
           index
           element={

@@ -1,15 +1,18 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { RxCross2 } from 'react-icons/rx';
 
+import { ErrorMessages } from '../../../constants/text';
 import classes from './Notification.module.scss';
 
 export const Notification: FC<{
   message?: string,
   onCloseHandler: (status: boolean) => void,
 }> = ({ message, onCloseHandler }) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState<boolean>(true);
 
   useEffect(() => {
@@ -37,7 +40,9 @@ export const Notification: FC<{
               <AiOutlineExclamationCircle />
             </IconContext.Provider>
           </div>
-          <p className={classes.Message}>{message ?? 'Error'}</p>
+          <p className={classes.Message}>
+            {t(message ?? ErrorMessages.default)}
+          </p>
           <div className={classes.Cross} onClick={onClose}>
             <IconContext.Provider value={{ className: classes.Icon }}>
               <RxCross2 />

@@ -12,6 +12,7 @@ import {
 import { Table } from '../Table/Table';
 import { TableUser, UserInfo } from '../../interfaces/user';
 import { SearchValue } from '../../interfaces/propsInterfaces';
+import { PATH } from '../../constants/paths';
 
 export const EmployeesTable: FC<{ searchValue: SearchValue }> = ({
   searchValue,
@@ -61,7 +62,7 @@ export const EmployeesTable: FC<{ searchValue: SearchValue }> = ({
     }
 
     if (label === dropDownOptions.updateUser.label) {
-      navigate(`/employees/${id}`);
+      navigate(`${PATH.employees}/${id}`);
       localStorage.setItem(LSItems.activeUser, id);
     }
   };

@@ -2,12 +2,14 @@ import React, { FC, useState } from 'react';
 
 import { IconContext } from 'react-icons';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
+import { useTranslation } from 'react-i18next';
 
 import { InputProps } from '../../../interfaces/propsInterfaces';
 import { InputTypes } from '../../../constants/text';
 import classes from './Input.module.scss';
 
 export const Input: FC<InputProps> = (props) => {
+  const { t } = useTranslation();
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -22,9 +24,9 @@ export const Input: FC<InputProps> = (props) => {
           defaultValue={props.defaultValue ?? ''}
           id={props.label && props.labelName}
           readOnly={props.readonly ?? false}
-          placeholder={props.placeholder}
+          placeholder={t(props.placeholder ?? '')}
         />
-        {props.error && <span>{props.error}</span>}
+        {props.error && <span>{t(props.error)}</span>}
         {props.type === InputTypes.password && (
           <div
             className={classes.Eye}

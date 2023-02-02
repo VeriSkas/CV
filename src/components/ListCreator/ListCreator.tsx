@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, ReactNode, useEffect, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import { GoPlus } from 'react-icons/go';
 import { RxCross2 } from 'react-icons/rx';
@@ -13,6 +14,7 @@ export const ListCreator: FC<{
   disabled: boolean,
   changedData: (data: SkillItem[] | LanguageItem[]) => void,
 }> = ({ data, title, disabled, changedData }) => {
+  const { t } = useTranslation();
   const [inputValue, setInputValue] = useState('');
   const [dataArray, setDataArray] = useState(data);
 
@@ -37,7 +39,7 @@ export const ListCreator: FC<{
     return dataArray.map((item, i) => {
       return (
         <li key={item.name} className={classes.ListItem}>
-          {item.name}
+          {t(item.name)}
           {!disabled && (
             <div
               className={classes.IconRemove}
@@ -57,14 +59,14 @@ export const ListCreator: FC<{
 
   return (
     <div className={classes.ListCreator}>
-      <h3>{title}</h3>
+      <h3>{t(title)}</h3>
       <div className={classes.Input}>
         {!disabled && (
           <>
             <input
               value={inputValue}
               onChange={onChangeHandler}
-              placeholder={title.toLowerCase()}
+              placeholder={t(title.toLowerCase())}
             />
             <div className={classes.IconAdd} onClick={addItem}>
               <IconContext.Provider value={{ className: classes.Icon }}>

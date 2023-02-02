@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { OperationVariables, useMutation, useQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 
 import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
@@ -8,10 +9,12 @@ import { Inputs } from '../../interfaces/interfaces';
 import classes from './UpdateEmployee.module.scss';
 import { LSItems, TypeForm } from '../../constants/constants';
 import { UpdatedUser, UserInfo } from '../../interfaces/user';
+import { ContentText, TitleText } from '../../constants/text';
 
 export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   setError,
 }) => {
+  const { t } = useTranslation();
   const { loading, data } = useQuery<{ user: UserInfo }, OperationVariables>(
     GET_USER,
     {
@@ -49,10 +52,10 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   return (
     <div className={classes.UpdateEmployee}>
       {loading ? (
-        'Loading...'
+        t(ContentText.loading)
       ) : (
         <div className={classes.Container}>
-          <h2 className={classes.Title}>Update User</h2>
+          <h2 className={classes.Title}>{t(TitleText.updateUser)}</h2>
           {data && (
             <EmployeeForm
               user={data.user}

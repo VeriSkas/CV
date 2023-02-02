@@ -9,8 +9,13 @@ import { DropDown } from '../UI/DropDown/DropDown';
 import classes from './TableItem.module.scss';
 import { TableCvItem } from '../../interfaces/cvs';
 import { TableItemProps } from '../../interfaces/propsInterfaces';
+import { objectKeysInTable } from '../../constants/constants';
 
-export const TableItem: FC<TableItemProps> = ({ item, dropDownOptions, dropDownHandler }) => {
+export const TableItem: FC<TableItemProps> = ({
+  item,
+  dropDownOptions,
+  dropDownHandler
+}) => {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
 
   const toggleDropDown = (): void => {
@@ -22,17 +27,19 @@ export const TableItem: FC<TableItemProps> = ({ item, dropDownOptions, dropDownH
   };
 
   const renderItemRow = (): ReactNode | string => {
+    const { avatar, id, __typename, is_template } = objectKeysInTable;
+
     return Object.keys(item).map((key: string) => {
-      if (key === 'avatar' || key === 'id' || key === '__typename') {
+      if (key === avatar || key === id || key === __typename) {
         return '';
       }
 
-      if (key === 'is_template') {
+      if (key === is_template) {
         const cv = item as TableCvItem;
 
         return (
           <div className={classes.Item} key={key}>
-            {cv[key] ? (
+            {cv[key as keyof TableCvItem] ? (
               <IconContext.Provider
                 value={{
                   className: `${classes.IconChecked}`,

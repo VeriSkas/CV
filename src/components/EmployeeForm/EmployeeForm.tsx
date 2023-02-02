@@ -2,15 +2,17 @@ import React, { FC, ReactNode } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import { inputs, TypeForm } from '../../constants/constants';
+import { BtnType, inputs, TypeForm } from '../../constants/constants';
 import { Inputs } from '../../interfaces/interfaces';
-import { InputLabelNames } from '../../constants/text';
+import { BtnText, InputLabelNames } from '../../constants/text';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import classes from './EmployeeForm.module.scss';
 import { EmployeeFormProps } from '../../interfaces/propsInterfaces';
 import { Avatar } from '../Avatar/Avatar';
+import { PATH } from '../../constants/paths';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -19,6 +21,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   setError,
   type,
 }) => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -112,9 +115,11 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         )}
         {renderInputs()}
         <div className={classes.FormBtns}>
-          <Button disabled={!isValid}>{submitBtnText ?? 'Save changes'}</Button>
-          <Link to={'/employees'}>
-            <Button type="transparent">{'Return'}</Button>
+          <Button disabled={!isValid}>
+            {submitBtnText ?? t(BtnText.saveChanges)}
+          </Button>
+          <Link to={PATH.employees}>
+            <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
           </Link>
         </div>
       </form>

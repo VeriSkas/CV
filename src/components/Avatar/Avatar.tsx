@@ -1,13 +1,17 @@
-import { useMutation } from '@apollo/client';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+
+import { useMutation } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+
 import {
   DELETE_AVATAR,
   GET_USER,
   UPLOAD_AVATAR,
 } from '../../apollo/queries/users';
-import { MAX_photoSize } from '../../constants/constants';
+import { InputType, MAX_photoSize } from '../../constants/constants';
+import { ErrorMessages, TooltipText } from '../../constants/text';
 import { AvatarValue, UserInfo } from '../../interfaces/user';
 import classes from './Avatar.module.scss';
 
@@ -15,6 +19,7 @@ export const Avatar: FC<{
   setError: (message: string) => void,
   user?: UserInfo,
 }> = ({ setError, user }) => {
+  const { t } = useTranslation();
   const [image, setImage] = useState<AvatarValue | null>(null);
   const [removeAvatar, { error: deleteError }] = useMutation(DELETE_AVATAR);
   const [uploadAvatar, { error: uploadError }] = useMutation(UPLOAD_AVATAR);
@@ -89,7 +94,7 @@ export const Avatar: FC<{
         reader.readAsDataURL(event.target.files[0]);
       } else {
         if (setError) {
-          setError('Photo size have to be less');
+          setError(t(ErrorMessages.avatarSize));
         }
       }
     }
@@ -139,7 +144,7 @@ export const Avatar: FC<{
             <img src={image?.base64 ?? user?.profile.avatar ?? ''} />
             <div
               className={classes.BinIcon}
-              title="Delete avatar"
+              title={t(TooltipText.deleteAvatar)}
               onClick={deleteAvatar}
             >
               <IconContext.Provider value={{ className: classes.Icon }}>
@@ -150,9 +155,9 @@ export const Avatar: FC<{
         ) : (
           <span className={classes.Letter}>{user?.email[0] ?? ''}</span>
         )}
-        <label className={classes.InputFile} title="Add new avatar">
+        <label className={classes.InputFile} title={t(TooltipText.addAvatar)}>
           <input
-            type="file"
+            type={InputType.file}
             className={classes.InputFile_input}
             onChange={(event) => {
               onChangeFileInput(event);

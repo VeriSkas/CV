@@ -1,7 +1,9 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 
+import { ContentText } from '../../constants/text';
 import {
   SortType,
   UsedInTableObjectsType
@@ -19,6 +21,7 @@ export const Table: FC<TableProps> = ({
   dropDownOptions,
   dropDownHandler
 }) => {
+  const { t } = useTranslation();
   const [headerValue, setHeaderValue] = useState(headerOptions);
   const [itemsValue, setItemsValue] = useState(items);
 
@@ -47,8 +50,10 @@ export const Table: FC<TableProps> = ({
     const newUsersValue =
       itemsValue?.slice()
         .sort((a: UsedInTableObjectsType, b: UsedInTableObjectsType) => {
-          const valueA = a[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
-          const valueB = b[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
+          const valueA =
+            a[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
+          const valueB =
+            b[sortValue as keyof UsedInTableObjectsType]?.toString().toLowerCase() ?? '';
 
           if (valueB < valueA) { return ascendingSort ? 1 : -1; }
 
@@ -71,7 +76,7 @@ export const Table: FC<TableProps> = ({
         <div className={classes.SortArrowHover}>
           <MdArrowDownward />
         </div>;
-      const disabledOption = <h5>{option.name}</h5>;
+      const disabledOption = <h5>{t(option.name)}</h5>;
       const enabledOption =
         <>
           <h5
@@ -79,7 +84,7 @@ export const Table: FC<TableProps> = ({
               turnOnSort(key);
             }}
           >
-            {option.name}
+            {t(option.name)}
           </h5>
             {option.active ? activeOptionIcon : inactiveOptionIcon}
         </>
@@ -98,14 +103,14 @@ export const Table: FC<TableProps> = ({
     let returnedValue = itemsValue;
 
     if (!returnedValue) {
-      return <p>No values</p>;
+      return <p>{t(ContentText.noValues)}</p>;
     }
 
     if (searchValue?.value) {
       returnedValue = search(returnedValue, searchValue);
 
       if (!returnedValue.length) {
-        return <p>No values</p>;
+        return <p>{t(ContentText.noValues)}</p>;
       }
     }
 
@@ -126,7 +131,7 @@ export const Table: FC<TableProps> = ({
         <div></div>
       </div>
       {loading ? (
-        <p>Loading...</p>
+        <p>{t(ContentText.loading)}</p>
       ) : (
         <div className={classes.TableBody}>{renderTableRows()}</div>
       )}
