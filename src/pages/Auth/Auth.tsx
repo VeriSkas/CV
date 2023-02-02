@@ -4,7 +4,7 @@ import { useLazyQuery } from '@apollo/client';
 
 import { AUTH } from '../../apollo/queries/auth';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
-import { authFormText } from '../../constants/constants';
+import { authFormText, LSItems } from '../../constants/constants';
 
 export const Auth: FC<{
   auth: (isAuth: boolean) => void,
@@ -17,8 +17,8 @@ export const Auth: FC<{
     if (userData) {
       const { token, user } = userData.login;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('userId', user.id);
+      localStorage.setItem(LSItems.token, token);
+      localStorage.setItem(LSItems.userId, user.id);
       props.auth(true);
     }
 

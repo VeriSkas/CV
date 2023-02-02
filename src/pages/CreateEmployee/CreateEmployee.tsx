@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
-import { TypeEmployeeForm } from '../../constants/constants';
+import { TypeForm } from '../../constants/constants';
 import { Inputs } from '../../interfaces/interfaces';
 import classes from './CreateEmployee.module.scss';
 
@@ -17,7 +17,7 @@ export const CreateEmployee: FC<{}> = () => {
           onSubmitForm={(data) => {
             createEmployee(data);
           }}
-          type={TypeEmployeeForm.createEmployee}
+          type={TypeForm.createEmployee}
         />
       </div>
     </div>

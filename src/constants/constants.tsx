@@ -29,6 +29,14 @@ import {
   TitleText,
 } from './text';
 
+export const LSItems = {
+  token: 'token',
+  userId: 'userId',
+  activeUser: 'activeUser',
+  activeProject: 'activeProject',
+  activeCV: 'activeCV',
+};
+
 export const MAX_photoSize = 500000;
 
 const regExpForEmail =
@@ -81,6 +89,13 @@ export const inputs: { [key: string]: IInput } = {
       maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
     },
   },
+  full_name: {
+    type: InputTypes.text,
+    label: InputLabels.fullName,
+    labelName: InputLabelNames.fullName,
+    defaultValue: '',
+    validation: {},
+  },
   email2: {
     type: InputTypes.email,
     label: InputLabels.email,
@@ -103,12 +118,64 @@ export const inputs: { [key: string]: IInput } = {
     defaultValue: '',
     validation: {},
   },
+  name: {
+    type: InputTypes.text,
+    label: InputLabels.name,
+    labelName: InputLabelNames.name,
+    defaultValue: '',
+    validation: {},
+  },
+  name2: {
+    type: InputTypes.text,
+    label: InputLabels.name,
+    labelName: InputLabelNames.name,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 3, message: ErrorMessages.inputMinLength(3) },
+      maxLength: { value: 32, message: ErrorMessages.inputMaxLength(32) },
+    },
+  },
+  description: {
+    type: InputTypes.text,
+    label: InputLabels.description,
+    labelName: InputLabelNames.description,
+    defaultValue: '',
+    validation: {},
+  },
+  description2: {
+    type: InputTypes.text,
+    label: InputLabels.description,
+    labelName: InputLabelNames.description,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 3, message: ErrorMessages.inputMinLength(3) },
+      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
+    },
+  },
+  skill: {
+    type: InputTypes.text,
+    label: InputLabels.skill,
+    labelName: InputLabelNames.skill,
+    defaultValue: '',
+    validation: {},
+  },
+  language: {
+    type: InputTypes.text,
+    label: InputLabels.language,
+    labelName: InputLabelNames.language,
+    defaultValue: '',
+    validation: {},
+  },
 };
 
-export const TypeEmployeeForm = {
+export const TypeForm = {
   profileType: 'profile',
   updateEmployee: 'updateEmployee',
   createEmployee: 'createEmployee',
+  cvUser: 'cvUser',
+  cvDetails: 'cvDetails',
 };
 
 export const authFormText = {
@@ -173,7 +240,7 @@ export const links: { [key: string]: ILink } = {
     icon: <MdLogout />,
   },
   profile: {
-    to: `/employees/${localStorage.getItem('userId') ?? ''}/profile`,
+    to: `/employees/${localStorage.getItem(LSItems.userId) ?? ''}/profile`,
     label: 'Profile',
     icon: <CgProfile />,
   },
@@ -210,7 +277,7 @@ export const cvsTableOptions: { [key: string]: TableOption } = {
 
 export const dropDownOptions: { [key: string]: DropDownOption } = {
   updateUser: {
-    to: `/employees/${localStorage.getItem('activeUser')}`,
+    to: `/employees/${localStorage.getItem(LSItems.activeUser)}`,
     label: 'Update employee',
   },
   removeUser: {
@@ -218,7 +285,7 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
     label: 'Delete employee',
   },
   project: {
-    to: `/projects/${localStorage.getItem('activeProject')}`,
+    to: `/projects/${localStorage.getItem(LSItems.activeProject)}`,
     label: 'Project',
   },
   removeProject: {
@@ -226,7 +293,7 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
     label: 'Delete project',
   },
   cv: {
-    to: `/cvs/${localStorage.getItem('activeCV')}`,
+    to: `/cvs/${localStorage.getItem(LSItems.activeCV)}`,
     label: 'CV',
   },
   removeCV: {

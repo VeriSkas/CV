@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import { SIGN_UP } from '../../apollo/queries/signUp';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
-import { paths, signUpFormText } from '../../constants/constants';
+import { LSItems, paths, signUpFormText } from '../../constants/constants';
 
 export const SignUp: FC<{
   auth: (isAuth: boolean) => void,
@@ -17,8 +17,8 @@ export const SignUp: FC<{
     if (userData) {
       const { token, user } = userData.signup;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('userId', user.id);
+      localStorage.setItem(LSItems.token, token);
+      localStorage.setItem(LSItems.userId, user.id);
       props.auth(true);
     }
 

@@ -5,7 +5,11 @@ import { useQuery } from '@apollo/client';
 
 import { GET_CVS } from '../../apollo/queries/cvs';
 import { Table } from '../../components/Table/Table';
-import { cvsTableOptions, dropDownOptions } from '../../constants/constants';
+import {
+  cvsTableOptions,
+  dropDownOptions,
+  LSItems,
+} from '../../constants/constants';
 import { CvItem, TableCvItem } from '../../interfaces/cvs';
 import classes from './CVs.module.scss';
 import { Search } from '../../components/Search/Search';
@@ -34,7 +38,7 @@ export const CVs: FC<{}> = () => {
 
   const dropDownHandler = (label: string, id: string): void => {
     if (label === dropDownOptions.cv.label) {
-      localStorage.setItem('activeCV', id);
+      localStorage.setItem(LSItems.activeCV, id);
       navigate(`/cvs/${id}`);
     }
   };

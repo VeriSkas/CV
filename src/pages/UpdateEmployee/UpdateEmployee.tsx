@@ -6,7 +6,7 @@ import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 import { Inputs } from '../../interfaces/interfaces';
 import classes from './UpdateEmployee.module.scss';
-import { TypeEmployeeForm } from '../../constants/constants';
+import { LSItems, TypeForm } from '../../constants/constants';
 import { UpdatedUser, UserInfo } from '../../interfaces/user';
 
 export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
@@ -16,7 +16,7 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
     GET_USER,
     {
       variables: {
-        id: localStorage.getItem('activeUser') ?? '',
+        id: localStorage.getItem(LSItems.activeUser) ?? '',
       },
     }
   );
@@ -62,7 +62,7 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
               setError={(message: string) => {
                 setError(message);
               }}
-              type={TypeEmployeeForm.updateEmployee}
+              type={TypeForm.updateEmployee}
             />
           )}
         </div>

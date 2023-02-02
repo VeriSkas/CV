@@ -15,10 +15,11 @@ import { ProjectsPage } from './pages/ProjectsPage/ProjectsPage';
 import { CVsPage } from './pages/CVsPage/CVsPage';
 import { CVs } from './pages/CVs/CVs';
 import { CvDetails } from './pages/CvDetails/CvDetails';
+import { LSItems } from './constants/constants';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(
-    () => !!localStorage.getItem('token')
+    () => !!localStorage.getItem(LSItems.token)
   );
   const [errorMessage, setErrorMessage] = useState<string>('');
   let link = isLoggedIn ? '/employees' : '/login';

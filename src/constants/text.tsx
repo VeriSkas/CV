@@ -9,8 +9,13 @@ export const InputLabels = {
   password: 'password',
   firstName: 'first_name',
   lastName: 'last_name',
+  fullName: 'full_name',
   department: 'department',
   position: 'position',
+  description: 'description',
+  name: 'name',
+  skill: 'skill',
+  language: 'language',
 };
 
 export const InputLabelNames = {
@@ -18,8 +23,13 @@ export const InputLabelNames = {
   password: 'Password',
   firstName: 'First Name',
   lastName: 'Last Name',
+  fullName: 'User Full Name',
   department: 'Department',
   position: 'Position',
+  description: 'Description',
+  name: 'CV name',
+  skill: 'Skill',
+  language: 'Language',
 };
 
 export const ErrorMessages = {

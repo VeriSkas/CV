@@ -7,6 +7,7 @@ import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
 import {
   dropDownOptions,
   employeeTableOptions,
+  LSItems,
 } from '../../constants/constants';
 import { Table } from '../Table/Table';
 import { TableUser, UserInfo } from '../../interfaces/user';
@@ -61,7 +62,7 @@ export const EmployeesTable: FC<{ searchValue: SearchValue }> = ({
 
     if (label === dropDownOptions.updateUser.label) {
       navigate(`/employees/${id}`);
-      localStorage.setItem('activeUser', id);
+      localStorage.setItem(LSItems.activeUser, id);
     }
   };
 

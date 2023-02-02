@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/client';
 import { Header } from '../../components/UI/Header/Header';
 import { SideBar } from '../../components/SideBar/SideBar';
 import { DropDown } from '../../components/UI/DropDown/DropDown';
-import { links } from '../../constants/constants';
+import { links, LSItems } from '../../constants/constants';
 import classes from './Layout.module.scss';
 import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
 import { LayoutProps } from '../../interfaces/propsInterfaces';
@@ -16,7 +16,7 @@ import { UserInfoShort } from '../../interfaces/user';
 import { Notification } from '../../components/UI/Notification/Notification';
 
 export const Layout: FC<LayoutProps> = (props) => {
-  const userId = localStorage.getItem('userId') ?? '';
+  const userId = localStorage.getItem(LSItems.userId) ?? '';
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
   const [isOpenNotification, setIsOpenNotification] = useState<boolean>(true);

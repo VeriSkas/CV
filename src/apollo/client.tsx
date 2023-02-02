@@ -3,6 +3,8 @@ import { ApolloClient, from, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
+import { LSItems } from '../constants/constants';
+
 const URI = 'https://cv-project-js.inno.ws/api/graphql';
 
 const httpLink = createHttpLink({
@@ -10,7 +12,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem(LSItems.token);
 
   return {
     headers: {

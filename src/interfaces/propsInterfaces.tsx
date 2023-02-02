@@ -1,5 +1,8 @@
 import { ReactNode } from 'react';
+
 import { UseFormRegister } from 'react-hook-form';
+
+import { CvItemDetails, LanguageItemInDB, SkillItemInDB } from './cvs';
 import {
   DropDownOption,
   Inputs,
@@ -53,6 +56,18 @@ export interface EmployeeFormProps {
   submitBtnText?: string;
   onSubmitForm: (data: Inputs, id?: string) => void;
   setError?: (message: string) => void;
+  type: string;
+}
+
+export interface CvFormProps {
+  cv?: CvItemDetails;
+  submitBtnText?: string;
+  onSubmitForm: (
+    data: Inputs,
+    skills: SkillItemInDB[],
+    languages: LanguageItemInDB[],
+    id?: string
+  ) => void;
   type: string;
 }
 

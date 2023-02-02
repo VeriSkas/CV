@@ -3,7 +3,7 @@ import React, { FC, ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import { inputs, TypeEmployeeForm } from '../../constants/constants';
+import { inputs, TypeForm } from '../../constants/constants';
 import { Inputs } from '../../interfaces/interfaces';
 import { InputLabelNames } from '../../constants/text';
 import { Button } from '../UI/Button/Button';
@@ -45,7 +45,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   const renderInputs = (): ReactNode => {
     let profileInputs;
 
-    if (type === TypeEmployeeForm.updateEmployee) {
+    if (type === TypeForm.updateEmployee) {
       profileInputs = [
         { ...inputs.first_name, defaultValue: user?.profile.first_name ?? '' },
         { ...inputs.last_name, defaultValue: user?.profile.last_name ?? '' },
@@ -53,7 +53,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         { ...inputs.department, defaultValue: user?.department?.name ?? '' },
         { ...inputs.position, defaultValue: user?.position?.name ?? '' },
       ];
-    } else if (type === TypeEmployeeForm.profileType) {
+    } else if (type === TypeForm.profileType) {
       profileInputs = [
         { ...inputs.first_name, defaultValue: user?.profile.first_name ?? '' },
         { ...inputs.last_name, defaultValue: user?.profile.last_name ?? '' },
@@ -69,7 +69,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
           defaultValue: user?.position?.name ?? '',
         },
       ];
-    } else if (type === TypeEmployeeForm.createEmployee) {
+    } else if (type === TypeForm.createEmployee) {
       profileInputs = [
         { ...inputs.first_name },
         { ...inputs.last_name },
@@ -102,7 +102,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         onSubmit={handleSubmit(submitForm)}
         className={classes.EmployeeForm_form}
       >
-        {type !== TypeEmployeeForm.createEmployee && (
+        {type !== TypeForm.createEmployee && (
           <Avatar
             setError={(message: string) => {
               setErrorHandler(message);
