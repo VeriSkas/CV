@@ -105,14 +105,14 @@ export const inputs: { [key: string]: IInput } = {
     validation: {},
   },
   department: {
-    type: InputTypes.text,
+    type: InputTypes.select,
     label: InputLabels.department,
     labelName: InputLabelNames.department,
     defaultValue: '',
     validation: {},
   },
   position: {
-    type: InputTypes.text,
+    type: InputTypes.select,
     label: InputLabels.position,
     labelName: InputLabelNames.position,
     defaultValue: '',

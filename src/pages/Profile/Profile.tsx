@@ -31,7 +31,10 @@ export const Profile: FC<{ setError: (message: string) => void }> = ({
     }
   }, [error]);
 
-  const updateUser = ({ first_name, last_name }: Inputs, id?: string): void => {
+  const updateUser = (
+    { first_name, last_name, departmentId, positionId }: Inputs,
+    id?: string
+  ): void => {
     const updatedUser: UpdatedUser = {
       profile: {
         first_name,
@@ -40,8 +43,8 @@ export const Profile: FC<{ setError: (message: string) => void }> = ({
         languages: data?.user.profile.languages ?? [],
       },
       cvsIds: data?.user.cvs?.reduce((sv) => [...sv], []) ?? [],
-      departmentId: data?.user.department?.id ?? '',
-      positionId: data?.user.position?.id ?? '',
+      departmentId,
+      positionId,
     };
 
     void updateProfile({

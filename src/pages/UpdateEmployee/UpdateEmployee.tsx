@@ -26,7 +26,7 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   const [updateUser] = useMutation(UPDATE_USER);
 
   const updateEmployee = (
-    { first_name, last_name }: Inputs,
+    { first_name, last_name, departmentId, positionId }: Inputs,
     id?: string
   ): void => {
     const updatedUser: UpdatedUser = {
@@ -37,8 +37,8 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
         languages: data?.user.profile.languages ?? [],
       },
       cvsIds: data?.user.cvs?.reduce((sv) => [...sv], []) ?? [],
-      departmentId: data?.user.department?.id ?? '',
-      positionId: data?.user.position?.id ?? '',
+      departmentId,
+      positionId,
     };
 
     void updateUser({

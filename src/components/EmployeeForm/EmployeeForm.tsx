@@ -1,18 +1,28 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 
-import { BtnType, inputs, TypeForm } from '../../constants/constants';
+import { BtnType, TypeForm } from '../../constants/constants';
 import { Inputs } from '../../interfaces/interfaces';
-import { BtnText, InputLabelNames } from '../../constants/text';
+import { BtnText, InputLabels, InputTypes } from '../../constants/text';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import classes from './EmployeeForm.module.scss';
-import { EmployeeFormProps } from '../../interfaces/propsInterfaces';
+import {
+  EmployeeFormProps,
+  OptionsType,
+} from '../../interfaces/propsInterfaces';
 import { Avatar } from '../Avatar/Avatar';
 import { PATH } from '../../constants/paths';
+import { Select } from '../UI/Select/Select';
+import { makeEmployeeInputsList } from '../../utils/formCreator';
+import { GET_DEPARTMENTS } from '../../apollo/queries/departments';
+import { Department } from '../../interfaces/departments';
+import { GET_POSITIONS } from '../../apollo/queries/positions';
+import { Position } from '../../interfaces/positions';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -22,14 +32,51 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   type,
 }) => {
   const { t } = useTranslation();
+  const { data: departments } = useQuery<{ departments: Department[] }>(
+    GET_DEPARTMENTS
+  );
+  const { data: positions } = useQuery<{ positions: Position[] }>(
+    GET_POSITIONS
+  );
   const {
     register,
     handleSubmit,
+    setValue,
     reset,
     formState: { errors, isValid },
   } = useForm<Inputs>({
     mode: 'all',
   });
+  const [departmentsValue, setDepartmentsValue] = useState<
+    OptionsType[] | null
+  >(null);
+  const [positionsValue, setPositionsValue] = useState<OptionsType[] | null>(
+    null
+  );
+
+  useEffect(() => {
+    if (departments) {
+      const departmentsOptions: OptionsType[] = departments.departments.map(
+        (department) => ({
+          id: department.id,
+          value: department.name,
+        })
+      );
+      setDepartmentsValue(departmentsOptions);
+    }
+  }, [departments]);
+
+  useEffect(() => {
+    if (positions) {
+      const positionsOptions: OptionsType[] = positions.positions.map(
+        (position) => ({
+          id: position.id,
+          value: position.name,
+        })
+      );
+      setPositionsValue(positionsOptions);
+    }
+  }, [positions]);
 
   const setErrorHandler = (message: string): void => {
     if (setError) {
@@ -38,6 +85,18 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   };
 
   const submitForm = (data: Inputs): void => {
+    if (data?.departmentId) {
+      data.departmentId =
+        departmentsValue?.find((item) => item.value === data?.departmentId)
+          ?.id ?? '';
+    }
+
+    if (data?.positionId) {
+      data.positionId =
+        positionsValue?.find((item) => item.value === data?.positionId)?.id ??
+        '';
+    }
+
     onSubmitForm(data, user?.id ?? '');
 
     if (!user) {
@@ -46,43 +105,25 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   };
 
   const renderInputs = (): ReactNode => {
-    let profileInputs;
-
-    if (type === TypeForm.updateEmployee) {
-      profileInputs = [
-        { ...inputs.first_name, defaultValue: user?.profile.first_name ?? '' },
-        { ...inputs.last_name, defaultValue: user?.profile.last_name ?? '' },
-        { ...inputs.email2, defaultValue: user?.email ?? '' },
-        { ...inputs.department, defaultValue: user?.department?.name ?? '' },
-        { ...inputs.position, defaultValue: user?.position?.name ?? '' },
-      ];
-    } else if (type === TypeForm.profileType) {
-      profileInputs = [
-        { ...inputs.first_name, defaultValue: user?.profile.first_name ?? '' },
-        { ...inputs.last_name, defaultValue: user?.profile.last_name ?? '' },
-        { ...inputs.email2, defaultValue: user?.email ?? '' },
-        {
-          ...inputs.department,
-          readonly: true,
-          defaultValue: user?.department?.name ?? '',
-        },
-        {
-          ...inputs.position,
-          readonly: true,
-          defaultValue: user?.position?.name ?? '',
-        },
-      ];
-    } else if (type === TypeForm.createEmployee) {
-      profileInputs = [
-        { ...inputs.first_name },
-        { ...inputs.last_name },
-        { ...inputs.email, labelName: InputLabelNames.email },
-        { ...inputs.password, labelName: InputLabelNames.password },
-      ];
-    }
+    const profileInputs = makeEmployeeInputsList(type, user);
 
     return profileInputs?.map((input) => {
-      return (
+      const options =
+        input.label === InputLabels.department
+          ? departmentsValue
+          : positionsValue;
+
+      return input.type === InputTypes.select ? (
+        <Select
+          key={input.label}
+          onChangeHandler={selectChange}
+          label={input.label}
+          defaultValue={input.defaultValue ?? ''}
+          options={options ?? []}
+          labelName={input.labelName ?? ''}
+          register={register}
+        />
+      ) : (
         <Input
           key={input.label}
           type={input.type}
@@ -97,6 +138,10 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         />
       );
     });
+  };
+
+  const selectChange = (value: string, key: string): void => {
+    setValue(key, value);
   };
 
   return (

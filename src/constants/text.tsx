@@ -2,6 +2,7 @@ export const InputTypes = {
   text: 'text',
   email: 'email',
   password: 'password',
+  select: 'select',
 };
 
 export const InputLabels = {
@@ -10,8 +11,8 @@ export const InputLabels = {
   firstName: 'first_name',
   lastName: 'last_name',
   fullName: 'full_name',
-  department: 'department',
-  position: 'position',
+  department: 'departmentId',
+  position: 'positionId',
   description: 'description',
   name: 'name',
   skill: 'skill',

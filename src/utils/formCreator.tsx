@@ -1,6 +1,8 @@
 import { inputs, TypeForm } from '../constants/constants';
+import { InputLabelNames } from '../constants/text';
 import { CvItemDetails } from '../interfaces/cvs';
 import { IInput } from '../interfaces/interfaces';
+import { UserInfo } from '../interfaces/user';
 
 export const makeCvInputsList = (
   type: string,
@@ -42,6 +44,46 @@ export const makeCvInputsList = (
         defaultValue: cv?.user?.position.name ?? '',
         readonly: true,
       },
+    ];
+  }
+
+  return [];
+};
+
+export const makeEmployeeInputsList = (
+  type: string,
+  user?: UserInfo
+): IInput[] => {
+  if (type === TypeForm.updateEmployee) {
+    return [
+      { ...inputs.first_name, defaultValue: user?.profile.first_name ?? '' },
+      { ...inputs.last_name, defaultValue: user?.profile.last_name ?? '' },
+      { ...inputs.email2, defaultValue: user?.email ?? '' },
+      { ...inputs.department, defaultValue: user?.department?.name ?? '' },
+      { ...inputs.position, defaultValue: user?.position?.name ?? '' },
+    ];
+  } else if (type === TypeForm.profileType) {
+    return [
+      { ...inputs.first_name, defaultValue: user?.profile.first_name ?? '' },
+      { ...inputs.last_name, defaultValue: user?.profile.last_name ?? '' },
+      { ...inputs.email2, defaultValue: user?.email ?? '' },
+      {
+        ...inputs.department,
+        readonly: true,
+        defaultValue: user?.department?.name ?? '',
+      },
+      {
+        ...inputs.position,
+        readonly: true,
+        defaultValue: user?.position?.name ?? '',
+      },
+    ];
+  } else if (type === TypeForm.createEmployee) {
+    return [
+      { ...inputs.first_name },
+      { ...inputs.last_name },
+      { ...inputs.email, labelName: InputLabelNames.email },
+      { ...inputs.password, labelName: InputLabelNames.password },
     ];
   }
 

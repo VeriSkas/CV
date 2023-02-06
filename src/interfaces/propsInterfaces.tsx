@@ -98,3 +98,17 @@ export interface LayoutProps {
   setErrorMessage: (message: string) => void;
   children: ReactNode;
 }
+
+export interface SelectProps {
+  onChangeHandler: (id: string, value: string, key: string) => void;
+  label: string;
+  defaultValue: string | '';
+  options: OptionsType[] | [];
+  labelName: string | '';
+  register: UseFormRegister<Inputs>;
+}
+
+export interface OptionsType {
+  value: string;
+  id: string;
+}
