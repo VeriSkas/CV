@@ -183,6 +183,7 @@ export const TypeForm = {
   createEmployee: 'createEmployee',
   cvUser: 'cvUser',
   cvDetails: 'cvDetails',
+  createCV: 'createCV',
 };
 
 export const InputType = {

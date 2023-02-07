@@ -41,8 +41,16 @@ export const makeCvInputsList = (
       },
       {
         ...inputs.position,
-        defaultValue: cv?.user?.position.name ?? '',
+        defaultValue: cv?.user?.position?.name ?? '',
         readonly: true,
+      },
+    ];
+  } else if (type === TypeForm.createCV) {
+    return [
+      { ...inputs.name2, defaultValue: cv?.name ?? '' },
+      {
+        ...inputs.description2,
+        defaultValue: cv?.description ?? '',
       },
     ];
   }

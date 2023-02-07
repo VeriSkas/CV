@@ -1,4 +1,7 @@
 .FormContainer {
+  width: 100%;
+  height: calc(100% - 80px);
+
   .Container {
     display: flex;
     flex-direction: column;

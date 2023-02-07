@@ -20,6 +20,16 @@ export interface CvItemDetails {
   languages: LanguageItem[];
 }
 
+export interface NewCV {
+  name: string;
+  description: string;
+  userId?: string;
+  projectsIds: string[];
+  skills: SkillItemInDB[];
+  languages: LanguageItemInDB[];
+  is_template: boolean;
+}
+
 export interface SkillItem {
   name: string;
 }

@@ -19,7 +19,6 @@ import { makeCvInputsList } from '../../utils/formCreator';
 import { ListCreator } from '../ListCreator/ListCreator';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
-import classes from './CvForm.module.scss';
 
 export const CvForm: FC<CvFormProps> = ({
   cv,
@@ -90,36 +89,34 @@ export const CvForm: FC<CvFormProps> = ({
   };
 
   return (
-    <div className={classes.CvForm}>
-      <form onSubmit={handleSubmit(submitForm)}>
-        {renderInputs()}
-        <ListCreator
-          data={cv?.skills ?? []}
-          title={ListCreatorType.skills}
-          disabled={type !== TypeForm.cvUser}
-          changedData={(data) => {
-            changedListHandler(data, ListCreatorType.skills);
-          }}
-        />
-        <ListCreator
-          data={cv?.languages ?? []}
-          title={ListCreatorType.languages}
-          disabled={type !== TypeForm.cvUser}
-          changedData={(data) => {
-            changedListHandler(data, ListCreatorType.languages);
-          }}
-        />
-        <div className={classes.FormBtns}>
-          {type === TypeForm.cvUser && (
-            <Button disabled={!isValid}>
-              {submitBtnText ?? t(BtnText.saveChanges)}
-            </Button>
-          )}
-          <Link to={PATH.cvs}>
-            <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
-          </Link>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(submitForm)}>
+      {renderInputs()}
+      <ListCreator
+        data={cv?.skills ?? []}
+        title={ListCreatorType.skills}
+        disabled={type !== TypeForm.cvUser}
+        changedData={(data) => {
+          changedListHandler(data, ListCreatorType.skills);
+        }}
+      />
+      <ListCreator
+        data={cv?.languages ?? []}
+        title={ListCreatorType.languages}
+        disabled={type !== TypeForm.cvUser}
+        changedData={(data) => {
+          changedListHandler(data, ListCreatorType.languages);
+        }}
+      />
+      <div>
+        {type === TypeForm.cvUser && (
+          <Button disabled={!isValid}>
+            {submitBtnText ?? t(BtnText.saveChanges)}
+          </Button>
+        )}
+        <Link to={PATH.cvs}>
+          <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
+        </Link>
+      </div>
+    </form>
   );
 };
