@@ -42,7 +42,7 @@ export const Profile: FC<{ setError: (message: string) => void }> = ({
         skills: data?.user.profile.skills ?? [],
         languages: data?.user.profile.languages ?? [],
       },
-      cvsIds: data?.user.cvs?.reduce((sv) => [...sv], []) ?? [],
+      cvsIds: data?.user.cvs?.reduce((cv) => [...cv], []) ?? [],
       departmentId,
       positionId,
     };

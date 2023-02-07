@@ -140,7 +140,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     });
   };
 
-  const selectChange = (value: string, key: string): void => {
+  const selectChange = (id: string, value: string, key: string): void => {
     setValue(key, value);
   };
 
