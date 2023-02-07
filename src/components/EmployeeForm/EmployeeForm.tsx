@@ -145,29 +145,27 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   };
 
   return (
-    <div className={classes.EmployeeForm}>
-      <form
-        onSubmit={handleSubmit(submitForm)}
-        className={classes.EmployeeForm_form}
-      >
-        {type !== TypeForm.createEmployee && (
-          <Avatar
-            setError={(message: string) => {
-              setErrorHandler(message);
-            }}
-            user={user}
-          />
-        )}
-        {renderInputs()}
-        <div className={classes.FormBtns}>
-          <Button disabled={!isValid}>
-            {submitBtnText ?? t(BtnText.saveChanges)}
-          </Button>
-          <Link to={PATH.employees}>
-            <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
-          </Link>
-        </div>
-      </form>
-    </div>
+    <form
+      onSubmit={handleSubmit(submitForm)}
+      className={classes.EmployeeForm_form}
+    >
+      {type !== TypeForm.createEmployee && (
+        <Avatar
+          setError={(message: string) => {
+            setErrorHandler(message);
+          }}
+          user={user}
+        />
+      )}
+      {renderInputs()}
+      <div className={classes.FormBtns}>
+        <Button disabled={!isValid}>
+          {submitBtnText ?? t(BtnText.saveChanges)}
+        </Button>
+        <Link to={PATH.employees}>
+          <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
+        </Link>
+      </div>
+    </form>
   );
 };

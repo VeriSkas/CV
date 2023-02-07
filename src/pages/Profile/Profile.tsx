@@ -4,12 +4,12 @@ import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
 import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
-import classes from './Profile.module.scss';
 import { Inputs } from '../../interfaces/interfaces';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 import { LSItems, TypeForm } from '../../constants/constants';
 import { UpdatedUser, UserInfo } from '../../interfaces/user';
 import { ContentText, TitleText } from '../../constants/text';
+import { FormContainer } from '../../components/FormContainer/FormContainer';
 
 export const Profile: FC<{ setError: (message: string) => void }> = ({
   setError,
@@ -56,26 +56,22 @@ export const Profile: FC<{ setError: (message: string) => void }> = ({
   };
 
   return (
-    <div className={classes.Profile}>
-      {loading ? (
-        t(ContentText.loading)
-      ) : (
-        <div className={classes.ProfileContainer}>
-          <h2 className={classes.Title}>{t(TitleText.profile)}</h2>
-          {data && (
-            <EmployeeForm
-              user={data.user}
-              onSubmitForm={(value, id) => {
-                updateUser(value, id);
-              }}
-              setError={(message: string) => {
-                setError(message);
-              }}
-              type={TypeForm.profileType}
-            />
-          )}
-        </div>
-      )}
-    </div>
+    <FormContainer title={t(TitleText.profile)}>
+      <>
+        {loading && t(ContentText.loading)}
+        {data && (
+          <EmployeeForm
+            user={data.user}
+            onSubmitForm={(value, id) => {
+              updateUser(value, id);
+            }}
+            setError={(message: string) => {
+              setError(message);
+            }}
+            type={TypeForm.profileType}
+          />
+        )}
+      </>
+    </FormContainer>
   );
 };

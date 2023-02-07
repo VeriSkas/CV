@@ -6,10 +6,10 @@ import { useTranslation } from 'react-i18next';
 import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 import { Inputs } from '../../interfaces/interfaces';
-import classes from './UpdateEmployee.module.scss';
 import { LSItems, TypeForm } from '../../constants/constants';
 import { UpdatedUser, UserInfo } from '../../interfaces/user';
 import { ContentText, TitleText } from '../../constants/text';
+import { FormContainer } from '../../components/FormContainer/FormContainer';
 
 export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   setError,
@@ -50,26 +50,22 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   };
 
   return (
-    <div className={classes.UpdateEmployee}>
-      {loading ? (
-        t(ContentText.loading)
-      ) : (
-        <div className={classes.Container}>
-          <h2 className={classes.Title}>{t(TitleText.updateUser)}</h2>
-          {data && (
-            <EmployeeForm
-              user={data.user}
-              onSubmitForm={(data, id) => {
-                updateEmployee(data, id);
-              }}
-              setError={(message: string) => {
-                setError(message);
-              }}
-              type={TypeForm.updateEmployee}
-            />
-          )}
-        </div>
-      )}
-    </div>
+    <FormContainer title={t(TitleText.updateUser)}>
+      <>
+        {loading && t(ContentText.loading)}
+        {data && (
+          <EmployeeForm
+            user={data.user}
+            onSubmitForm={(data, id) => {
+              updateEmployee(data, id);
+            }}
+            setError={(message: string) => {
+              setError(message);
+            }}
+            type={TypeForm.updateEmployee}
+          />
+        )}
+      </>
+    </FormContainer>
   );
 };

@@ -4,7 +4,6 @@ import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
 import { GET_CV } from '../../apollo/queries/cvs';
-import classes from './CvDetails.module.scss';
 import { CvForm } from '../../components/CvForm/CvForm ';
 import {
   CvItemDetails,
@@ -14,6 +13,7 @@ import {
 import { Inputs } from '../../interfaces/interfaces';
 import { LSItems, TypeForm } from '../../constants/constants';
 import { ContentText, TitleText } from '../../constants/text';
+import { FormContainer } from '../../components/FormContainer/FormContainer';
 
 export const CvDetails: FC<{}> = () => {
   const user = localStorage.getItem(LSItems.userId);
@@ -34,30 +34,26 @@ export const CvDetails: FC<{}> = () => {
   ): void => {};
 
   return (
-    <div className={classes.CvDetails}>
-      {loading ? (
-        <div>{t(ContentText.loading)}</div>
-      ) : (
-        <div className={classes.CvDetailsContainer}>
-          <h2 className={classes.Title}>{t(TitleText.cvDetails)}</h2>
-          {data && (
-            <CvForm
-              cv={data.cv}
-              onSubmitForm={(
-                data: Inputs,
-                skills: SkillItemInDB[],
-                languages: LanguageItemInDB[],
-                id?: string
-              ) => {
-                submitFormHandler(data, skills, languages, id);
-              }}
-              type={
-                user === data.cv.user?.id ? TypeForm.cvUser : TypeForm.cvDetails
-              }
-            />
-          )}
-        </div>
-      )}
-    </div>
+    <FormContainer title={t(TitleText.cvDetails)}>
+      <>
+        {loading && <div>{t(ContentText.loading)}</div>}
+        {data && (
+          <CvForm
+            cv={data.cv}
+            onSubmitForm={(
+              data: Inputs,
+              skills: SkillItemInDB[],
+              languages: LanguageItemInDB[],
+              id?: string
+            ) => {
+              submitFormHandler(data, skills, languages, id);
+            }}
+            type={
+              user === data.cv.user?.id ? TypeForm.cvUser : TypeForm.cvDetails
+            }
+          />
+        )}
+      </>
+    </FormContainer>
   );
 };

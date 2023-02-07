@@ -50,6 +50,7 @@ export const TitleText = {
   createEmployee: 'Create Employee',
   cvDetails: 'CV Details',
   cvs: 'CVs',
+  createCV: 'Create new CV',
   employees: 'Employees',
   profile: 'Profile',
   projects: 'Projects',

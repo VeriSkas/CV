@@ -17,6 +17,7 @@ import { CVs } from './pages/CVs/CVs';
 import { CvDetails } from './pages/CvDetails/CvDetails';
 import { LSItems } from './constants/constants';
 import { PATH } from './constants/paths';
+import { CreateCV } from './pages/CreateCV/CreateCV';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(
@@ -65,6 +66,7 @@ export const App: FC = () => {
       <Route path={PATH.cvs} element={<CVsPage />}>
         <Route index element={<CVs />} />
         <Route path={PATH.cv} element={<CvDetails />} />
+        <Route path={PATH.createCV} element={<CreateCV />} />
       </Route>
     </>
   );

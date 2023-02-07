@@ -1,4 +1,4 @@
-.CreateEmployee {
+.FormContainer {
   .Container {
     display: flex;
     flex-direction: column;
@@ -9,6 +9,14 @@
       color: #fff;
       font-size: 30px;
       margin-bottom: 20px;
+    }
+
+    .Form {
+      max-width: 720px;
+      width: 100%;
+      box-shadow: 2px 2px 10px rgba($color: #000000, $alpha: .5);
+      padding: 20px;
+      border-radius: 5px;
     }
   }
 }
