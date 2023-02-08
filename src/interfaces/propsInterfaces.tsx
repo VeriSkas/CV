@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { UseFormRegister } from 'react-hook-form';
+import { Control, UseFormRegister } from 'react-hook-form';
 
 import { CvItemDetails, LanguageItemInDB, SkillItemInDB } from './cvs';
 import {
@@ -29,9 +29,26 @@ export interface InputProps {
       | { value: number | boolean | RegExp, message: string }
       | ((value: string) => boolean | string),
   };
-  register: UseFormRegister<Inputs>;
+  register: UseFormRegister<any>;
   error: string | undefined;
   placeholder?: string;
+}
+
+export interface FieldArrayProps {
+  register: UseFormRegister<any>;
+  control: Control<any, any>;
+  label: string;
+  labelName?: string;
+  radioInputs: IRadioInputs;
+}
+
+export interface IRadioInputs {
+  name: string;
+  inputValueName: string;
+  options: Array<{
+    value: string,
+    label: string,
+  }>;
 }
 
 export interface InputSearchProps {

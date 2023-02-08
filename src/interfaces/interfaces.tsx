@@ -1,11 +1,19 @@
 import { TableCvItem } from './cvs';
 import { ProjectItem } from './project';
+import { IRadioInputs } from './propsInterfaces';
 import { TableUser } from './user';
 
 export type UsedInTableObjectsType = TableCvItem | ProjectItem | TableUser;
 
 export interface Inputs {
   [key: string]: string;
+}
+
+export interface NewCvForm {
+  name: string;
+  description: string;
+  skills: Array<{ skill_name: string, mastery: string }>;
+  languages: Array<{ language_name: string, proficiency: string }>;
 }
 
 export interface IInput {
@@ -52,4 +60,10 @@ export interface SortType {
   start_date: string;
   end_date: string;
   team_size: number;
+}
+
+export interface IFieldArray {
+  label: string;
+  labelName: string;
+  radioInputs: IRadioInputs;
 }

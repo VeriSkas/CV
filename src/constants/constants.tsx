@@ -18,6 +18,7 @@ import {
   TableOption,
   IInput,
   ILink,
+  IFieldArray,
 } from '../interfaces/interfaces';
 import {
   BtnText,
@@ -28,6 +29,7 @@ import {
   SubtitleText,
   TitleText,
 } from './text';
+import { IRadioInputs } from '../interfaces/propsInterfaces';
 
 export const LSItems = {
   token: 'token',
@@ -330,5 +332,65 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
   removeCV: {
     to: '/cvs',
     label: 'Delete CV',
+  },
+};
+
+export const OptionsForFieldArrays: { [key: string]: IRadioInputs } = {
+  skills: {
+    inputValueName: 'skill_name',
+    name: 'mastery',
+    options: [
+      {
+        value: 'notice',
+        label: 'Novice',
+      },
+      {
+        value: 'advanced',
+        label: 'Advanced',
+      },
+      {
+        value: 'competent',
+        label: 'Competent',
+      },
+      {
+        value: 'proficient',
+        label: 'Proficient',
+      },
+      {
+        value: 'expert',
+        label: 'Expert',
+      },
+    ],
+  },
+  languages: {
+    inputValueName: 'language_name',
+    name: 'proficiency',
+    options: [
+      {
+        value: 'beginner',
+        label: 'A1-A2',
+      },
+      {
+        value: 'intermediate',
+        label: 'B1-B2',
+      },
+      {
+        value: 'advanced',
+        label: 'C1-C2',
+      },
+    ],
+  },
+};
+
+export const FieldArrays: { [key: string]: IFieldArray } = {
+  skills: {
+    label: InputLabels.skills,
+    labelName: InputLabelNames.skills,
+    radioInputs: OptionsForFieldArrays.skills,
+  },
+  languages: {
+    label: InputLabels.languages,
+    labelName: InputLabelNames.languages,
+    radioInputs: OptionsForFieldArrays.languages,
   },
 };

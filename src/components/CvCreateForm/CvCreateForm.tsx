@@ -1,66 +1,40 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { BtnType, ListCreatorType, TypeForm } from '../../constants/constants';
+import {
+  BtnType,
+  FieldArrays,
+  TypeForm,
+} from '../../constants/constants';
 import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
-import {
-  LanguageItem,
-  LanguageItemInDB,
-  SkillItem,
-  SkillItemInDB,
-} from '../../interfaces/cvs';
-import { Inputs } from '../../interfaces/interfaces';
+import { NewCvForm } from '../../interfaces/interfaces';
 import { makeCvInputsList } from '../../utils/formCreator';
-import { ListCreator } from '../ListCreator/ListCreator';
+import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 
 export const CvCreateForm: FC<{
   onSubmitForm: (
-    data: Inputs,
-    skills: SkillItemInDB[],
-    languages: LanguageItemInDB[]
+    data: NewCvForm,
   ) => void,
 }> = ({ onSubmitForm }) => {
   const { t } = useTranslation();
-  const [skills, setSkills] = useState<SkillItemInDB[]>([]);
-  const [languages, setLanguages] = useState<LanguageItemInDB[]>([]);
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm<Inputs>({
+  } = useForm<NewCvForm>({
     mode: 'all',
   });
 
-  const changedListHandler = (
-    data: SkillItem[] | LanguageItem[],
-    type: string
-  ): void => {
-    if (type === ListCreatorType.skills) {
-      const modifiedData: SkillItemInDB[] = data.map((skill) => ({
-        skill_name: skill.name,
-        mastery: '',
-      }));
-
-      setSkills(modifiedData);
-    } else if (type === ListCreatorType.languages) {
-      const modifiedData: LanguageItemInDB[] = data.map((language) => ({
-        language_name: language.name,
-        proficiency: '',
-      }));
-
-      setLanguages(modifiedData);
-    }
-  };
-
-  const submitForm = (data: Inputs): void => {
-    onSubmitForm(data, skills, languages);
+  const submitForm = (data: NewCvForm): void => {
+    onSubmitForm(data);
     reset();
   };
 
@@ -79,7 +53,24 @@ export const CvCreateForm: FC<{
           validation={input.validation}
           readonly={input.readonly}
           register={register}
-          error={errors[input.label]?.message}
+          error={errors[input.label as keyof NewCvForm]?.message}
+        />
+      );
+    });
+  };
+
+  const renderFieldArrays = (): ReactNode => {
+    const { skills, languages } = FieldArrays;
+
+    return [skills, languages].map((item) => {
+      return (
+        <FieldArray
+          key={item.label}
+          register={register}
+          control={control}
+          label={item.label}
+          labelName={item.labelName}
+          radioInputs={item.radioInputs}
         />
       );
     });
@@ -88,22 +79,7 @@ export const CvCreateForm: FC<{
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       {renderInputs()}
-      <ListCreator
-        data={[]}
-        title={ListCreatorType.skills}
-        disabled={false}
-        changedData={(data) => {
-          changedListHandler(data, ListCreatorType.skills);
-        }}
-      />
-      <ListCreator
-        data={[]}
-        title={ListCreatorType.languages}
-        disabled={false}
-        changedData={(data) => {
-          changedListHandler(data, ListCreatorType.languages);
-        }}
-      />
+      {renderFieldArrays()}
       <div>
         <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>
         <Link to={PATH.cvs}>

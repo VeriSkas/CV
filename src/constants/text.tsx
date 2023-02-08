@@ -3,6 +3,7 @@ export const InputTypes = {
   email: 'email',
   password: 'password',
   select: 'select',
+  radio: 'radio',
 };
 
 export const InputLabels = {
@@ -16,7 +17,9 @@ export const InputLabels = {
   description: 'description',
   name: 'name',
   skill: 'skill',
+  skills: 'skills',
   language: 'language',
+  languages: 'languages',
 };
 
 export const InputLabelNames = {
@@ -30,7 +33,9 @@ export const InputLabelNames = {
   description: 'Description',
   name: 'CV name',
   skill: 'Skill',
+  skills: 'Skills',
   language: 'Language',
+  languages: 'Languages',
 };
 
 export const ErrorMessages = {
