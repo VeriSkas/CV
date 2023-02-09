@@ -6,18 +6,14 @@ import { useTranslation } from 'react-i18next';
 import { GET_PROJECTS } from '../../apollo/queries/projects';
 import { Table } from '../../components/Table/Table';
 import {
-  BtnType,
   dropDownOptions,
   projectsTableOptions,
   SearchKey,
 } from '../../constants/constants';
 import { ProjectItem } from '../../interfaces/project';
-import classes from './Projects.module.scss';
-import { Search } from '../../components/Search/Search';
-import { Button } from '../../components/UI/Button/Button';
-import { Link } from 'react-router-dom';
 import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
 import { PATH } from '../../constants/paths';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
 
 export const Projects: FC<{}> = () => {
   const { t } = useTranslation();
@@ -35,26 +31,15 @@ export const Projects: FC<{}> = () => {
   const dropDownHandler = (label: string, id: string): void => {};
 
   return (
-    <div className={classes.Projects}>
-      <h2>{t(TitleText.projects)}</h2>
-      <div className={classes.SearchPanel}>
-        <div className={classes.Search}>
-          <Search
-            placeholder={t(PlaceholderText.search)}
-            value={searchValue}
-            onChange={(value) => {
-              setSearchValue(value);
-            }}
-          />
-        </div>
-        <div>
-          <Link to={PATH.createProject}>
-            <Button type={BtnType.transparentWithBorder}>
-              {t(BtnText.createProject)}
-            </Button>
-          </Link>
-        </div>
-      </div>
+    <SearchBar
+      linkTo={PATH.createProject}
+      btnText={t(BtnText.createProject)}
+      title={t(TitleText.projects)}
+      placeholder={t(PlaceholderText.search)}
+      onChangeSearch={(value) => {
+        setSearchValue(value);
+      }}
+    >
       <Table
         items={projects}
         loading={loading}
@@ -68,6 +53,6 @@ export const Projects: FC<{}> = () => {
           searchKey: [SearchKey.name, SearchKey.internal_name],
         }}
       />
-    </div>
+    </SearchBar>
   );
 };

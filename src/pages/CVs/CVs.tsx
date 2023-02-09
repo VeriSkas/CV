@@ -1,24 +1,21 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
 import { GET_CVS } from '../../apollo/queries/cvs';
 import { Table } from '../../components/Table/Table';
 import {
-  BtnType,
   cvsTableOptions,
   dropDownOptions,
   LSItems,
   SearchKey,
 } from '../../constants/constants';
 import { CvItem, TableCvItem } from '../../interfaces/cvs';
-import classes from './CVs.module.scss';
-import { Search } from '../../components/Search/Search';
-import { Button } from '../../components/UI/Button/Button';
 import { PATH } from '../../constants/paths';
 import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
 
 export const CVs: FC<{}> = () => {
   const { t } = useTranslation();
@@ -50,26 +47,15 @@ export const CVs: FC<{}> = () => {
   };
 
   return (
-    <div className={classes.CVs}>
-      <h2>{t(TitleText.cvs)}</h2>
-      <div className={classes.SearchPanel}>
-        <div className={classes.Search}>
-          <Search
-            placeholder={t(PlaceholderText.search)}
-            value={searchValue}
-            onChange={(value) => {
-              setSearchValue(value);
-            }}
-          />
-        </div>
-        <div>
-          <Link to={PATH.createCV}>
-            <Button type={BtnType.transparentWithBorder}>
-              {t(BtnText.createCV)}
-            </Button>
-          </Link>
-        </div>
-      </div>
+    <SearchBar
+      linkTo={PATH.createCV}
+      btnText={t(BtnText.createCV)}
+      title={t(TitleText.cvs)}
+      placeholder={t(PlaceholderText.search)}
+      onChangeSearch={(value) => {
+        setSearchValue(value);
+      }}
+    >
       <Table
         items={cvs}
         loading={loading}
@@ -83,6 +69,6 @@ export const CVs: FC<{}> = () => {
           searchKey: [SearchKey.name],
         }}
       />
-    </div>
+    </SearchBar>
   );
 };

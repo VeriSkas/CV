@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { Control, UseFormRegister } from 'react-hook-form';
 
@@ -128,4 +128,13 @@ export interface SelectProps {
 export interface OptionsType {
   value: string;
   id: string;
+}
+
+export interface SearchBarProps {
+  linkTo: string;
+  btnText: string;
+  title: string;
+  placeholder?: string;
+  onChangeSearch: (value: string) => void;
+  children: ReactElement;
 }
