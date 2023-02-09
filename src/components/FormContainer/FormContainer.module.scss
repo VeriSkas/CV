@@ -1,6 +1,10 @@
+@import '../../constants/styles/sizes.scss';
+
 .FormContainer {
   width: 100%;
-  height: calc(100% - 80px);
+  height: calc(100% - 2 * $containerPaddingHeight);
+  overflow: auto;
+  padding: $containerPaddingHeight 0;
 
   .Container {
     display: flex;
