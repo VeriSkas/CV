@@ -22,7 +22,7 @@ export const TableItem: FC<TableItemProps> = ({
     setIsOpenDropDown((prev) => !prev);
   };
 
-  const onCloseDropDown = (label: string): void => {
+  const onClickDropDown = (label: string): void => {
     dropDownHandler(label, item.id);
   };
 
@@ -85,8 +85,8 @@ export const TableItem: FC<TableItemProps> = ({
           {isOpenDropDown && (
             <DropDown
               options={dropDownOptions}
-              onClose={(label: string) => {
-                onCloseDropDown(label);
+              onClick={(label: string) => {
+                onClickDropDown(label);
               }}
             />
           )}

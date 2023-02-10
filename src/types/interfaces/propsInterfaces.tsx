@@ -65,7 +65,7 @@ export interface LoginSignUpFormProps {
 
 export interface DropDownProps {
   options: DropDownOption[];
-  onClose: (label: string) => void;
+  onClick: (label: string) => void;
 }
 
 export interface EmployeeFormProps {

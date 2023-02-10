@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 
 import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons';
@@ -10,6 +10,11 @@ import classes from './DropDown.module.scss';
 
 export const DropDown: FC<DropDownProps> = (props) => {
   const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(true);
+
+  const onClose = (): void => {
+    setIsOpen(false);
+  };
 
   const renderOptions = (): ReactNode => {
     return props.options.map((option: DropDownOption) => {
@@ -17,7 +22,7 @@ export const DropDown: FC<DropDownProps> = (props) => {
         <li
           key={option.label}
           onClick={() => {
-            props.onClose(option.label);
+            props.onClick(option.label);
           }}
         >
           {option.to && (
@@ -35,9 +40,19 @@ export const DropDown: FC<DropDownProps> = (props) => {
     });
   };
 
-  return (
-    <div className={classes.DropDown}>
-      <ul>{renderOptions()}</ul>
-    </div>
+  return isOpen ? (
+    <>
+      <div className={classes.DropDown}>
+        <ul>{renderOptions()}</ul>
+      </div>
+      <div
+        className={classes.BackDrop}
+        onClick={() => {
+          onClose();
+        }}
+      ></div>
+    </>
+  ) : (
+    <></>
   );
 };

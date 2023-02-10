@@ -94,7 +94,7 @@ export const Layout: FC<LayoutProps> = (props) => {
                   {isOpenDropDown && (
                     <DropDown
                       options={dropdownOptions}
-                      onClose={(label: string) => {
+                      onClick={(label: string) => {
                         onCloseDropDown(label);
                       }}
                     />

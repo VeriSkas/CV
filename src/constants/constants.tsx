@@ -104,21 +104,27 @@ export const cvsTableOptions: { [key: string]: TableOption } = {
 
 export const dropDownOptions: { [key: string]: DropDownOption } = {
   updateUser: {
+    to: `${PATH.employees}/${localStorage.getItem(LSItems.activeUser)}`,
     label: 'Update employee',
   },
   removeUser: {
+    to: PATH.employees,
     label: 'Delete employee',
   },
   project: {
+    to: `${PATH.projects}/${localStorage.getItem(LSItems.activeProject)}`,
     label: 'Project',
   },
   removeProject: {
+    to: PATH.projects,
     label: 'Delete project',
   },
   cv: {
+    to: `${PATH.cvs}/${localStorage.getItem(LSItems.activeCV)}`,
     label: 'CV',
   },
   removeCV: {
+    to: PATH.cvs,
     label: 'Delete CV',
   },
 };
