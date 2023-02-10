@@ -4,7 +4,9 @@ import { useMutation } from '@apollo/client';
 
 import { SIGN_UP } from '../../apollo/queries/signUp';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
-import { LSItems, paths, signUpFormText } from '../../constants/constants';
+import { PATH } from '../../constants/paths';
+import { signUpFormText } from '../../constants/text';
+import { LSItems } from '../../constants/variables';
 
 export const SignUp: FC<{
   auth: (isAuth: boolean) => void,
@@ -36,7 +38,7 @@ export const SignUp: FC<{
   return (
     <LoginSignUpForm
       text={text}
-      path={paths.login}
+      path={PATH.login}
       onSubmit={(data: { email: string, password: string }) => {
         onSubmit(data);
       }}

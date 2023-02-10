@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
 
-import { BtnType, TypeForm } from '../../constants/constants';
-import { Inputs } from '../../interfaces/interfaces';
+import { Inputs } from '../../types/interfaces/interfaces';
 import { BtnText, InputLabels, InputTypes } from '../../constants/text';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
@@ -14,15 +13,16 @@ import classes from './EmployeeForm.module.scss';
 import {
   EmployeeFormProps,
   OptionsType,
-} from '../../interfaces/propsInterfaces';
+} from '../../types/interfaces/propsInterfaces';
 import { Avatar } from '../Avatar/Avatar';
 import { PATH } from '../../constants/paths';
 import { Select } from '../UI/Select/Select';
 import { makeEmployeeInputsList } from '../../utils/formCreator';
 import { GET_DEPARTMENTS } from '../../apollo/queries/departments';
-import { Department } from '../../interfaces/departments';
+import { Department } from '../../types/interfaces/departments';
 import { GET_POSITIONS } from '../../apollo/queries/positions';
-import { Position } from '../../interfaces/positions';
+import { Position } from '../../types/interfaces/positions';
+import { BtnType, TypeForm } from '../../constants/variables';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,

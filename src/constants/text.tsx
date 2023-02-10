@@ -49,6 +49,10 @@ export const ErrorMessages = {
   default: 'Error',
 };
 
+export const BAErrorMessages = {
+  unauthorized: 'Unauthorized',
+};
+
 export const TitleText = {
   authTitle: 'Welcome Back',
   signUpTitle: 'Register Now',
@@ -93,4 +97,18 @@ export const TooltipText = {
 
 export const PlaceholderText = {
   search: 'Search',
+};
+
+export const authFormText = {
+  title: TitleText.authTitle,
+  subtitle: SubtitleText.authSubtitle,
+  submitBtn: BtnText.authSubmitBtn,
+  btn: BtnText.authResetPasswordBtn,
+};
+
+export const signUpFormText = {
+  title: TitleText.signUpTitle,
+  subtitle: SubtitleText.signUpSubtitle,
+  submitBtn: BtnText.signUpSubmitBtn,
+  btn: BtnText.returnBtn,
 };

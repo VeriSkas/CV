@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { TypeForm } from '../../constants/constants';
 import { BtnText, TitleText } from '../../constants/text';
-import { Inputs } from '../../interfaces/interfaces';
+import { TypeForm } from '../../constants/variables';
+import { Inputs } from '../../types/interfaces/interfaces';
 
 export const CreateEmployee: FC<{}> = () => {
   const { t } = useTranslation();

@@ -4,17 +4,17 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { BtnType, ListCreatorType, TypeForm } from '../../constants/constants';
 import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
+import { BtnType, ListCreatorType, TypeForm } from '../../constants/variables';
 import {
   LanguageItem,
   LanguageItemInDB,
   SkillItem,
   SkillItemInDB,
-} from '../../interfaces/cvs';
-import { Inputs } from '../../interfaces/interfaces';
-import { CvFormProps } from '../../interfaces/propsInterfaces';
+} from '../../types/interfaces/cvs';
+import { Inputs } from '../../types/interfaces/interfaces';
+import { CvFormProps } from '../../types/interfaces/propsInterfaces';
 import { makeCvInputsList } from '../../utils/formCreator';
 import { ListCreator } from '../ListCreator/ListCreator';
 import { Button } from '../UI/Button/Button';

@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 
 import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
-import { Inputs } from '../../interfaces/interfaces';
-import { LSItems, TypeForm } from '../../constants/constants';
-import { UpdatedUser, UserInfo } from '../../interfaces/user';
+import { Inputs } from '../../types/interfaces/interfaces';
+import { UpdatedUser, UserInfo } from '../../types/interfaces/user';
 import { ContentText, TitleText } from '../../constants/text';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
+import { LSItems, TypeForm } from '../../constants/variables';
 
 export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   setError,

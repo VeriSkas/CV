@@ -10,10 +10,11 @@ import {
   GET_USER,
   UPLOAD_AVATAR,
 } from '../../apollo/queries/users';
-import { InputType, MAX_photoSize } from '../../constants/constants';
+import { MAX_photoSize } from '../../constants/constants';
 import { ErrorMessages, TooltipText } from '../../constants/text';
-import { AvatarValue, UserInfo } from '../../interfaces/user';
+import { AvatarValue, UserInfo } from '../../types/interfaces/user';
 import classes from './Avatar.module.scss';
+import { InputType } from '../../constants/variables';
 
 export const Avatar: FC<{
   setError: (message: string) => void,

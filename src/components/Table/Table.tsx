@@ -7,8 +7,8 @@ import { ContentText } from '../../constants/text';
 import {
   SortType,
   UsedInTableObjectsType
-} from '../../interfaces/interfaces';
-import { TableProps } from '../../interfaces/propsInterfaces';
+} from '../../types/interfaces/interfaces';
+import { TableProps } from '../../types/interfaces/propsInterfaces';
 import { search } from '../../utils/search';
 import { TableItem } from '../TableItem/TableItem';
 import classes from './Table.module.scss';

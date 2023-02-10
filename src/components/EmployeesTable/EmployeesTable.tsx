@@ -7,12 +7,12 @@ import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
 import {
   dropDownOptions,
   employeeTableOptions,
-  LSItems,
 } from '../../constants/constants';
 import { Table } from '../Table/Table';
-import { TableUser, UserInfo } from '../../interfaces/user';
-import { SearchValue } from '../../interfaces/propsInterfaces';
+import { TableUser, UserInfo } from '../../types/interfaces/user';
+import { SearchValue } from '../../types/interfaces/propsInterfaces';
 import { PATH } from '../../constants/paths';
+import { LSItems } from '../../constants/variables';
 
 export const EmployeesTable: FC<{ searchValue: SearchValue }> = ({
   searchValue,

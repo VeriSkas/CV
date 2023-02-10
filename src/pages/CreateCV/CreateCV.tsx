@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { CvCreateForm } from '../../components/CvCreateForm/CvCreateForm';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TitleText } from '../../constants/text';
-import { NewCV } from '../../interfaces/cvs';
-import { NewCvForm } from '../../interfaces/interfaces';
+import { NewCV } from '../../types/interfaces/cvs';
+import { NewCvForm } from '../../types/interfaces/interfaces';
 
 export const CreateCV: FC<{}> = () => {
   const { t } = useTranslation();

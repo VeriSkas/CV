@@ -4,12 +4,12 @@ import { SlOptionsVertical } from 'react-icons/sl';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 
-import { UsedInTableObjectsType } from '../../interfaces/interfaces';
+import { UsedInTableObjectsType } from '../../types/interfaces/interfaces';
 import { DropDown } from '../UI/DropDown/DropDown';
 import classes from './TableItem.module.scss';
-import { TableCvItem } from '../../interfaces/cvs';
-import { TableItemProps } from '../../interfaces/propsInterfaces';
-import { objectKeysInTable } from '../../constants/constants';
+import { TableCvItem } from '../../types/interfaces/cvs';
+import { TableItemProps } from '../../types/interfaces/propsInterfaces';
+import { objectKeysInTable } from '../../constants/variables';
 
 export const TableItem: FC<TableItemProps> = ({
   item,

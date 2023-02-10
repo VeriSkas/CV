@@ -1,4 +1,5 @@
 export const PATH = {
+  main: '/',
   login: '/login',
   signUp: '/signup',
   employees: '/employees',
@@ -12,4 +13,9 @@ export const PATH = {
   createCV: '/cvs/createCV',
   createProject: '/projects/createProject',
   projects: '/projects',
+  departments: '/departments',
+  positions: '/positions',
+  skills: '/skills',
+  languages: '/languages',
+  settings: '/settings',
 };

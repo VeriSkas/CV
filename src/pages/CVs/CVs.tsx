@@ -6,16 +6,12 @@ import { useTranslation } from 'react-i18next';
 
 import { GET_CVS } from '../../apollo/queries/cvs';
 import { Table } from '../../components/Table/Table';
-import {
-  cvsTableOptions,
-  dropDownOptions,
-  LSItems,
-  SearchKey,
-} from '../../constants/constants';
-import { CvItem, TableCvItem } from '../../interfaces/cvs';
+import { cvsTableOptions, dropDownOptions } from '../../constants/constants';
+import { CvItem, TableCvItem } from '../../types/interfaces/cvs';
 import { PATH } from '../../constants/paths';
 import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { LSItems, SearchKey } from '../../constants/variables';
 
 export const CVs: FC<{}> = () => {
   const { t } = useTranslation();

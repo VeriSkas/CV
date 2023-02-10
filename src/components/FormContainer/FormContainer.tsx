@@ -1,5 +1,7 @@
 import React, { FC, ReactElement } from 'react';
+
 import { useTranslation } from 'react-i18next';
+
 import classes from './FormContainer.module.scss';
 
 export const FormContainer: FC<{ title: string, children: ReactElement }> = ({

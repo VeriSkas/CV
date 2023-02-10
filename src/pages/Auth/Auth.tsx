@@ -4,8 +4,9 @@ import { useLazyQuery } from '@apollo/client';
 
 import { AUTH } from '../../apollo/queries/auth';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
-import { authFormText, LSItems } from '../../constants/constants';
 import { PATH } from '../../constants/paths';
+import { authFormText } from '../../constants/text';
+import { LSItems } from '../../constants/variables';
 
 export const Auth: FC<{
   auth: (isAuth: boolean) => void,

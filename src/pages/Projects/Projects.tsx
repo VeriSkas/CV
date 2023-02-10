@@ -8,12 +8,12 @@ import { Table } from '../../components/Table/Table';
 import {
   dropDownOptions,
   projectsTableOptions,
-  SearchKey,
 } from '../../constants/constants';
-import { ProjectItem } from '../../interfaces/project';
+import { ProjectItem } from '../../types/interfaces/project';
 import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
 import { PATH } from '../../constants/paths';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { SearchKey } from '../../constants/variables';
 
 export const Projects: FC<{}> = () => {
   const { t } = useTranslation();

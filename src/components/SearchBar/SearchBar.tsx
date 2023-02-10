@@ -2,9 +2,9 @@ import React, { FC, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { BtnType } from '../../constants/variables';
 
-import { BtnType } from '../../constants/constants';
-import { SearchBarProps } from '../../interfaces/propsInterfaces';
+import { SearchBarProps } from '../../types/interfaces/propsInterfaces';
 import { Search } from '../Search/Search';
 import { Button } from '../UI/Button/Button';
 import classes from './SearchBar.module.scss';

@@ -4,7 +4,7 @@ import { IconContext } from 'react-icons';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useTranslation } from 'react-i18next';
 
-import { InputProps } from '../../../interfaces/propsInterfaces';
+import { InputProps } from '../../../types/interfaces/propsInterfaces';
 import { InputTypes } from '../../../constants/text';
 import classes from './Input.module.scss';
 

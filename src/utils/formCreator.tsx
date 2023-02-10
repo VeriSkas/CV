@@ -1,8 +1,9 @@
-import { inputs, TypeForm } from '../constants/constants';
+import { inputs } from '../constants/inputsSettings';
 import { InputLabelNames } from '../constants/text';
-import { CvItemDetails } from '../interfaces/cvs';
-import { IInput } from '../interfaces/interfaces';
-import { UserInfo } from '../interfaces/user';
+import { TypeForm } from '../constants/variables';
+import { CvItemDetails } from '../types/interfaces/cvs';
+import { IInput } from '../types/interfaces/interfaces';
+import { UserInfo } from '../types/interfaces/user';
 
 export const makeCvInputsList = (
   type: string,

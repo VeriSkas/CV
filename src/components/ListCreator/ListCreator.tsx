@@ -5,7 +5,7 @@ import { IconContext } from 'react-icons';
 import { GoPlus } from 'react-icons/go';
 import { RxCross2 } from 'react-icons/rx';
 
-import { LanguageItem, SkillItem } from '../../interfaces/cvs';
+import { LanguageItem, SkillItem } from '../../types/interfaces/cvs';
 import classes from './ListCreator.module.scss';
 
 export const ListCreator: FC<{

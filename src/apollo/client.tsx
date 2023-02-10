@@ -3,7 +3,8 @@ import { ApolloClient, from, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
-import { LSItems } from '../constants/constants';
+import { BAErrorMessages } from '../constants/text';
+import { LSItems } from '../constants/variables';
 
 const URI = 'https://cv-project-js.inno.ws/api/graphql';
 
@@ -25,7 +26,7 @@ const authLink = setContext((_, { headers }) => {
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
-      if (message === 'Unauthorized') {
+      if (message === BAErrorMessages.unauthorized) {
         localStorage.clear();
       }
     });

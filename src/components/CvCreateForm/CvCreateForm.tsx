@@ -4,14 +4,11 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import {
-  BtnType,
-  FieldArrays,
-  TypeForm,
-} from '../../constants/constants';
+import { FieldArrays } from '../../constants/fieldArrayVars';
 import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
-import { NewCvForm } from '../../interfaces/interfaces';
+import { BtnType, TypeForm } from '../../constants/variables';
+import { NewCvForm } from '../../types/interfaces/interfaces';
 import { makeCvInputsList } from '../../utils/formCreator';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';

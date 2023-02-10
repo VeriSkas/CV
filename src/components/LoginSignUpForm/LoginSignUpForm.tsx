@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { BtnType, inputs } from '../../constants/constants';
-import { Inputs } from '../../interfaces/interfaces';
-import { LoginSignUpFormProps } from '../../interfaces/propsInterfaces';
+import { inputs } from '../../constants/inputsSettings';
+import { BtnType } from '../../constants/variables';
+import { Inputs } from '../../types/interfaces/interfaces';
+import { LoginSignUpFormProps } from '../../types/interfaces/propsInterfaces';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import classes from './LoginSignUpForm.module.scss';

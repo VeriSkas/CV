@@ -6,7 +6,7 @@ import { RxCross2 } from 'react-icons/rx';
 import { FaPlus } from 'react-icons/fa';
 
 import { InputTypes } from '../../constants/text';
-import { FieldArrayProps } from '../../interfaces/propsInterfaces';
+import { FieldArrayProps } from '../../types/interfaces/propsInterfaces';
 import classes from './FieldArray.module.scss';
 
 export const FieldArray: FC<FieldArrayProps> = ({

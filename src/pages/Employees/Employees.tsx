@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { EmployeesTable } from '../../components/EmployeesTable/EmployeesTable';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
-import { SearchKey } from '../../constants/constants';
 import { PATH } from '../../constants/paths';
 import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
+import { SearchKey } from '../../constants/variables';
 
 export const Employees: FC<{}> = () => {
   const { t } = useTranslation();

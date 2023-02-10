@@ -9,11 +9,11 @@ import {
   CvItemDetails,
   LanguageItemInDB,
   SkillItemInDB,
-} from '../../interfaces/cvs';
-import { Inputs } from '../../interfaces/interfaces';
-import { LSItems, TypeForm } from '../../constants/constants';
+} from '../../types/interfaces/cvs';
+import { Inputs } from '../../types/interfaces/interfaces';
 import { ContentText, TitleText } from '../../constants/text';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
+import { LSItems, TypeForm } from '../../constants/variables';
 
 export const CvDetails: FC<{}> = () => {
   const user = localStorage.getItem(LSItems.userId);

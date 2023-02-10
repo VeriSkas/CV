@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { ButtonProps } from '../../../interfaces/propsInterfaces';
+import { ButtonProps } from '../../../types/interfaces/propsInterfaces';
 import classes from './Button.module.scss';
 
 export const Button: FC<ButtonProps> = (props) => {

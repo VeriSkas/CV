@@ -5,16 +5,17 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
 import { useQuery } from '@apollo/client';
 
-import { Header } from '../../components/UI/Header/Header';
-import { SideBar } from '../../components/SideBar/SideBar';
-import { DropDown } from '../../components/UI/DropDown/DropDown';
-import { links, LSItems } from '../../constants/constants';
+import { Header } from '../UI/Header/Header';
+import { SideBar } from '../SideBar/SideBar';
+import { DropDown } from '../UI/DropDown/DropDown';
+import { links } from '../../constants/constants';
 import classes from './Layout.module.scss';
 import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
-import { LayoutProps } from '../../interfaces/propsInterfaces';
-import { UserInfoShort } from '../../interfaces/user';
-import { Notification } from '../../components/UI/Notification/Notification';
+import { LayoutProps } from '../../types/interfaces/propsInterfaces';
+import { UserInfoShort } from '../../types/interfaces/user';
+import { Notification } from '../UI/Notification/Notification';
 import { PATH } from '../../constants/paths';
+import { LSItems } from '../../constants/variables';
 
 export const Layout: FC<LayoutProps> = (props) => {
   const userId = localStorage.getItem(LSItems.userId) ?? '';

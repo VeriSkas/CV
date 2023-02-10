@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Auth } from './pages/Auth/Auth';
 import { CreateEmployee } from './pages/CreateEmployee/CreateEmployee';
 import { Employees } from './pages/Employees/Employees';
-import { Layout } from './hoc/Layout/Layout';
+import { Layout } from './components/Layout/Layout';
 import { Profile } from './pages/Profile/Profile';
 import { SignInAndUp } from './pages/SignInAndUp/SignInAndUp';
 import { SignUp } from './pages/SignUp/SignUp';
@@ -15,9 +15,9 @@ import { ProjectsPage } from './pages/ProjectsPage/ProjectsPage';
 import { CVsPage } from './pages/CVsPage/CVsPage';
 import { CVs } from './pages/CVs/CVs';
 import { CvDetails } from './pages/CvDetails/CvDetails';
-import { LSItems } from './constants/constants';
 import { PATH } from './constants/paths';
 import { CreateCV } from './pages/CreateCV/CreateCV';
+import { LSItems } from './constants/variables';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(
