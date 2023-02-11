@@ -1,4 +1,4 @@
-import { TableCvItem } from './cvs';
+import { LanguageItemInDB, SkillItemInDB, TableCvItem } from './cvs';
 import { ProjectItem } from './project';
 import { IRadioInputs } from './propsInterfaces';
 import { TableUser } from './user';
@@ -12,8 +12,17 @@ export interface Inputs {
 export interface NewCvForm {
   name: string;
   description: string;
-  skills: Array<{ skill_name: string, mastery: string }>;
-  languages: Array<{ language_name: string, proficiency: string }>;
+  skills: SkillItemInDB[];
+  languages: LanguageItemInDB[];
+}
+
+export interface CvDetailForm {
+  name: string;
+  description: string;
+  full_name: string;
+  positionId: string;
+  skills: SkillItemInDB[];
+  languages: LanguageItemInDB[];
 }
 
 export interface IInput {

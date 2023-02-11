@@ -2,8 +2,9 @@ import { ReactElement, ReactNode } from 'react';
 
 import { Control, UseFormRegister } from 'react-hook-form';
 
-import { CvItemDetails, LanguageItemInDB, SkillItemInDB } from './cvs';
+import { CvItemDetails } from './cvs';
 import {
+  CvDetailForm,
   DropDownOption,
   Inputs,
   TableOption,
@@ -40,6 +41,7 @@ export interface FieldArrayProps {
   label: string;
   labelName?: string;
   radioInputs: IRadioInputs;
+  disabled?: boolean;
 }
 
 export interface IRadioInputs {
@@ -79,12 +81,7 @@ export interface EmployeeFormProps {
 export interface CvFormProps {
   cv?: CvItemDetails;
   submitBtnText?: string;
-  onSubmitForm: (
-    data: Inputs,
-    skills: SkillItemInDB[],
-    languages: LanguageItemInDB[],
-    id?: string
-  ) => void;
+  onSubmitForm: (data: CvDetailForm, id?: string) => void;
   type: string;
 }
 

@@ -27,11 +27,6 @@ export const InputType = {
   text: 'text',
 };
 
-export const ListCreatorType = {
-  languages: 'Languages',
-  skills: 'Skills',
-};
-
 export const BtnType = {
   transparent: 'transparent',
   transparentWithBorder: 'transparentWithBorder',

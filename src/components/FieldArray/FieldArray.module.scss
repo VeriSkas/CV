@@ -86,6 +86,11 @@
       &:checked + label {
         color: $mainRed;
       }
+
+      &:disabled + label:hover {
+        border-bottom: none;
+        cursor: auto;
+      }
     }
   }
 

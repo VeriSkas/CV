@@ -32,11 +32,21 @@ export const GET_CV = gql`
         }
       }
       skills {
-        name: skill_name
+        skill_name
+        mastery
       }
       languages {
-        name: language_name
+        language_name
+        proficiency
       }
+    }
+  }
+`;
+
+export const CREATE_CV = gql`
+  mutation CreateCV($cv: CvInput!) {
+    createCv(cv: $cv) {
+      id
     }
   }
 `;

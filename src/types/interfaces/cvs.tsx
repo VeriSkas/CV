@@ -16,8 +16,8 @@ export interface CvItemDetails {
     email: string;
     profile: { full_name: string };
     position: { name: string } } | null;
-  skills: SkillItem[];
-  languages: LanguageItem[];
+  skills: SkillItemInDB[];
+  languages: LanguageItemInDB[];
 }
 
 export interface NewCV {

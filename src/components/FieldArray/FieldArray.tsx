@@ -15,6 +15,7 @@ export const FieldArray: FC<FieldArrayProps> = ({
   label,
   labelName,
   radioInputs,
+  disabled,
 }) => {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -31,6 +32,7 @@ export const FieldArray: FC<FieldArrayProps> = ({
             id={`${option.value} ${index}`}
             type={InputTypes.radio}
             value={option.value}
+            disabled={disabled}
           />
           <label htmlFor={`${option.value} ${index}`}>{option.label}</label>
         </React.Fragment>
@@ -50,17 +52,20 @@ export const FieldArray: FC<FieldArrayProps> = ({
                   {...register(`${label}.${index}.${inputValueName}`, {
                     required: true,
                   })}
+                  disabled={disabled}
                 />
-                <div
-                  className={classes.Icon}
-                  onClick={() => {
-                    remove(index);
-                  }}
-                >
-                  <IconContext.Provider value={{ className: classes.Remove }}>
-                    <RxCross2 />
-                  </IconContext.Provider>
-                </div>
+                {!disabled && (
+                  <div
+                    className={classes.Icon}
+                    onClick={() => {
+                      remove(index);
+                    }}
+                  >
+                    <IconContext.Provider value={{ className: classes.Remove }}>
+                      <RxCross2 />
+                    </IconContext.Provider>
+                  </div>
+                )}
               </div>
 
               <div className={classes.RadioInputs}>
@@ -69,21 +74,23 @@ export const FieldArray: FC<FieldArrayProps> = ({
             </li>
           );
         })}
-        <div className={classes.AddField}>
-          <div
-            className={classes.AddBtn}
-            onClick={() => {
-              append({ [name]: options[0].value || '' });
-            }}
-          >
-            <div className={classes.Icon}>
-              <IconContext.Provider value={{ className: classes.Add }}>
-                <FaPlus />
-              </IconContext.Provider>
+        {!disabled && (
+          <div className={classes.AddField}>
+            <div
+              className={classes.AddBtn}
+              onClick={() => {
+                append({ [name]: options[0].value || '' });
+              }}
+            >
+              <div className={classes.Icon}>
+                <IconContext.Provider value={{ className: classes.Add }}>
+                  <FaPlus />
+                </IconContext.Provider>
+              </div>
+              <span className={classes.AddFieldText}>Add new...</span>
             </div>
-            <span className={classes.AddFieldText}>Add new...</span>
           </div>
-        </div>
+        )}
       </ul>
     </div>
   );

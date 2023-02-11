@@ -34,16 +34,32 @@ export const OptionsForFieldArrays: { [key: string]: IRadioInputs } = {
     name: 'proficiency',
     options: [
       {
-        value: 'beginner',
-        label: 'A1-A2',
+        value: 'a1',
+        label: 'A1',
       },
       {
-        value: 'intermediate',
-        label: 'B1-B2',
+        value: 'a2',
+        label: 'A2',
       },
       {
-        value: 'advanced',
-        label: 'C1-C2',
+        value: 'b1',
+        label: 'B1',
+      },
+      {
+        value: 'b2',
+        label: 'B2',
+      },
+      {
+        value: 'c1',
+        label: 'C1',
+      },
+      {
+        value: 'c2',
+        label: 'C2',
+      },
+      {
+        value: 'native',
+        label: 'Native',
       },
     ],
   },
