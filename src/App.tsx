@@ -22,6 +22,8 @@ import { DepartmentsPage } from './pages/DepartmentsPage/DepartmentsPage';
 import { Departments } from './pages/Departments/Departments';
 import { PositionPage } from './pages/PositionPage/PositionPage';
 import { Positions } from './pages/Positions/Positions';
+import { SkillsPage } from './pages/SkillsPage/SkillsPage';
+import { Skills } from './pages/Skills/Skills';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(
@@ -107,6 +109,18 @@ export const App: FC = () => {
           index
           element={
             <Positions
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
+      </Route>
+      <Route path={PATH.skills} element={<SkillsPage />}>
+        <Route
+          index
+          element={
+            <Skills
               setError={(error: string) => {
                 setErrorMessage(error);
               }}

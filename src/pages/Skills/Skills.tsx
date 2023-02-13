@@ -1,34 +1,29 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 
-import { GET_DEPARTMENTS } from '../../apollo/queries/departments';
+import { GET_SKILLS } from '../../apollo/queries/skills';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Table } from '../../components/Table/Table';
-import {
-  departmentsTableOptions,
-  dropDownOptions,
-} from '../../constants/constants';
+import { dropDownOptions, skillsTableOptions } from '../../constants/constants';
 import { PATH } from '../../constants/paths';
 import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
 import { SearchKey } from '../../constants/variables';
-import { Department } from '../../types/interfaces/departments';
+import { Skill } from '../../types/interfaces/skills';
 
-export const Departments: FC<{ setError: (error: string) => void }> = ({
+export const Skills: FC<{ setError: (error: string) => void }> = ({
   setError,
 }) => {
   const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState('');
-  const [departments, setDepartments] = useState<Department[] | null>(null);
-  const { data, error, loading } = useQuery<{ departments: Department[] }>(
-    GET_DEPARTMENTS
-  );
-  const { removeDepartment, department } = dropDownOptions;
+  const [positions, setPositions] = useState<Skill[] | null>(null);
+  const { data, error, loading } = useQuery<{ skills: Skill[] }>(GET_SKILLS);
+  const { removeSkill, skill } = dropDownOptions;
 
   useEffect(() => {
     if (data) {
-      setDepartments(data.departments);
+      setPositions(data.skills);
     }
   }, [data]);
 
@@ -44,19 +39,19 @@ export const Departments: FC<{ setError: (error: string) => void }> = ({
 
   return (
     <SearchBar
-      linkTo={PATH.createDepartment}
-      btnText={t(BtnText.createDepartment)}
-      title={t(TitleText.departments)}
+      linkTo={PATH.createSkill}
+      btnText={t(BtnText.createSkill)}
+      title={t(TitleText.skills)}
       placeholder={t(PlaceholderText.search)}
       onChangeSearch={(value) => {
         setSearchValue(value);
       }}
     >
       <Table
-        items={departments}
+        items={positions}
         loading={loading}
-        headerOptions={departmentsTableOptions}
-        dropDownOptions={[department, removeDepartment]}
+        headerOptions={skillsTableOptions}
+        dropDownOptions={[skill, removeSkill]}
         dropDownHandler={(label: string, id: string) => {
           dropDownHandler(label, id);
         }}

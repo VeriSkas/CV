@@ -20,6 +20,8 @@ export const PATH = {
   position: ':positionId',
   createPosition: '/positions/createPosition',
   skills: '/skills',
+  skill: ':skillId',
+  createSkill: '/skills/createSkill',
   languages: '/languages',
   settings: '/settings',
 };
