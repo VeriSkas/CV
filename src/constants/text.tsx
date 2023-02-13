@@ -69,6 +69,7 @@ export const TitleText = {
   departments: 'Departments',
   positions: 'Positions',
   skills: 'Skills',
+  languages: 'Languages',
 };
 
 export const SubtitleText = {
@@ -94,6 +95,7 @@ export const BtnText = {
   createDepartment: 'Create department',
   createPosition: 'Create position',
   createSkill: 'Create skill',
+  createLanguage: 'Create language',
 };
 
 export const TooltipText = {

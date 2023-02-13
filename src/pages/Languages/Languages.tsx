@@ -1,29 +1,34 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 
-import { GET_SKILLS } from '../../apollo/queries/skills';
+import { GET_LANGUAGES } from '../../apollo/queries/languages';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Table } from '../../components/Table/Table';
-import { dropDownOptions, skillsTableOptions } from '../../constants/constants';
+import {
+  dropDownOptions,
+  languagesTableOptions,
+} from '../../constants/constants';
 import { PATH } from '../../constants/paths';
 import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
 import { SearchKey } from '../../constants/variables';
-import { Skill } from '../../types/interfaces/skills';
+import { Language } from '../../types/interfaces/languages';
 
-export const Skills: FC<{ setError: (error: string) => void }> = ({
+export const Languages: FC<{ setError: (error: string) => void }> = ({
   setError,
 }) => {
   const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState('');
-  const [skills, setSkills] = useState<Skill[] | null>(null);
-  const { data, error, loading } = useQuery<{ skills: Skill[] }>(GET_SKILLS);
-  const { removeSkill, skill } = dropDownOptions;
+  const [languages, setLanguages] = useState<Language[] | null>(null);
+  const { data, error, loading } = useQuery<{ languages: Language[] }>(
+    GET_LANGUAGES
+  );
+  const { removeLanguage, language } = dropDownOptions;
 
   useEffect(() => {
     if (data) {
-      setSkills(data.skills);
+      setLanguages(data.languages);
     }
   }, [data]);
 
@@ -39,19 +44,19 @@ export const Skills: FC<{ setError: (error: string) => void }> = ({
 
   return (
     <SearchBar
-      linkTo={PATH.createSkill}
-      btnText={t(BtnText.createSkill)}
-      title={t(TitleText.skills)}
+      linkTo={PATH.createLanguage}
+      btnText={t(BtnText.createLanguage)}
+      title={t(TitleText.languages)}
       placeholder={t(PlaceholderText.search)}
       onChangeSearch={(value) => {
         setSearchValue(value);
       }}
     >
       <Table
-        items={skills}
+        items={languages}
         loading={loading}
-        headerOptions={skillsTableOptions}
-        dropDownOptions={[skill, removeSkill]}
+        headerOptions={languagesTableOptions}
+        dropDownOptions={[language, removeLanguage]}
         dropDownHandler={(label: string, id: string) => {
           dropDownHandler(label, id);
         }}

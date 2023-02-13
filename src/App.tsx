@@ -24,6 +24,8 @@ import { PositionPage } from './pages/PositionPage/PositionPage';
 import { Positions } from './pages/Positions/Positions';
 import { SkillsPage } from './pages/SkillsPage/SkillsPage';
 import { Skills } from './pages/Skills/Skills';
+import { LanguagesPage } from './pages/LanguagesPage/LanguagesPage';
+import { Languages } from './pages/Languages/Languages';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(
@@ -121,6 +123,18 @@ export const App: FC = () => {
           index
           element={
             <Skills
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
+      </Route>
+      <Route path={PATH.languages} element={<LanguagesPage />}>
+        <Route
+          index
+          element={
+            <Languages
               setError={(error: string) => {
                 setErrorMessage(error);
               }}

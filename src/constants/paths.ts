@@ -23,5 +23,7 @@ export const PATH = {
   skill: ':skillId',
   createSkill: '/skills/createSkill',
   languages: '/languages',
+  language: ':languageId',
+  createLanguage: '/languages/createLanguage',
   settings: '/settings',
 };

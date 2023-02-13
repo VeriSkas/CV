@@ -114,6 +114,11 @@ export const skillsTableOptions: { [key: string]: TableOption } = {
   name: { name: 'Skill name', active: false, disabled: false },
 };
 
+export const languagesTableOptions: { [key: string]: TableOption } = {
+  iso2: { name: 'Iso2 code', active: false, disabled: false },
+  name: { name: 'Language', active: false, disabled: false },
+};
+
 export const dropDownOptions: { [key: string]: DropDownOption } = {
   updateUser: {
     to: `${PATH.employees}/${localStorage.getItem(LSItems.activeUser)}`,
@@ -162,5 +167,13 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
   skill: {
     to: PATH.skill,
     label: 'Update skill',
+  },
+  removeLanguage: {
+    to: PATH.languages,
+    label: 'Delete language',
+  },
+  language: {
+    to: PATH.language,
+    label: 'Update language',
   },
 };
