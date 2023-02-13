@@ -102,6 +102,10 @@ export const cvsTableOptions: { [key: string]: TableOption } = {
   email: { name: 'Employee', active: false, disabled: false },
 };
 
+export const departmentsTableOptions: { [key: string]: TableOption } = {
+  name: { name: 'Department name', active: false, disabled: false },
+};
+
 export const dropDownOptions: { [key: string]: DropDownOption } = {
   updateUser: {
     to: `${PATH.employees}/${localStorage.getItem(LSItems.activeUser)}`,
@@ -126,5 +130,13 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
   removeCV: {
     to: PATH.cvs,
     label: 'Delete CV',
+  },
+  removeDepartment: {
+    to: PATH.departments,
+    label: 'Delete department',
+  },
+  department: {
+    to: PATH.department,
+    label: 'Update department',
   },
 };

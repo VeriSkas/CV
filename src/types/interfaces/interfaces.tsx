@@ -1,9 +1,14 @@
 import { LanguageItemInDB, SkillItemInDB, TableCvItem } from './cvs';
+import { Department } from './departments';
 import { ProjectItem } from './project';
 import { IRadioInputs } from './propsInterfaces';
 import { TableUser } from './user';
 
-export type UsedInTableObjectsType = TableCvItem | ProjectItem | TableUser;
+export type UsedInTableObjectsType =
+  | TableCvItem
+  | ProjectItem
+  | TableUser
+  | Department;
 
 export interface Inputs {
   [key: string]: string;

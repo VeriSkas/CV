@@ -8,7 +8,9 @@ import { PATH } from '../../constants/paths';
 import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
 import { SearchKey } from '../../constants/variables';
 
-export const Employees: FC<{}> = () => {
+export const Employees: FC<{ setError: (error: string) => void }> = ({
+  setError,
+}) => {
   const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState('');
 
@@ -26,6 +28,9 @@ export const Employees: FC<{}> = () => {
         searchValue={{
           value: searchValue,
           searchKey: [SearchKey.first_name, SearchKey.last_name],
+        }}
+        setError={(error) => {
+          setError(error);
         }}
       />
     </SearchBar>

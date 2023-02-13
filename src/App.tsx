@@ -18,6 +18,8 @@ import { CvDetails } from './pages/CvDetails/CvDetails';
 import { PATH } from './constants/paths';
 import { CreateCV } from './pages/CreateCV/CreateCV';
 import { LSItems } from './constants/variables';
+import { DepartmentsPage } from './pages/DepartmentsPage/DepartmentsPage';
+import { Departments } from './pages/Departments/Departments';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(
@@ -37,7 +39,16 @@ export const App: FC = () => {
   const protectedRoutes = (
     <>
       <Route path={PATH.employees} element={<EmployeesPage />}>
-        <Route index element={<Employees />} />
+        <Route
+          index
+          element={
+            <Employees
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
         <Route
           path={PATH.userProfile}
           element={
@@ -70,6 +81,18 @@ export const App: FC = () => {
           path={PATH.createCV}
           element={
             <CreateCV
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
+      </Route>
+      <Route path={PATH.departments} element={<DepartmentsPage />}>
+        <Route
+          index
+          element={
+            <Departments
               setError={(error: string) => {
                 setErrorMessage(error);
               }}

@@ -14,6 +14,8 @@ export const PATH = {
   createProject: '/projects/createProject',
   projects: '/projects',
   departments: '/departments',
+  department: ':departmentId',
+  createDepartment: '/departments/createDepartment',
   positions: '/positions',
   skills: '/skills',
   languages: '/languages',

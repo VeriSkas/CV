@@ -14,15 +14,17 @@ import { SearchValue } from '../../types/interfaces/propsInterfaces';
 import { PATH } from '../../constants/paths';
 import { LSItems } from '../../constants/variables';
 
-export const EmployeesTable: FC<{ searchValue: SearchValue }> = ({
-  searchValue,
-}) => {
+export const EmployeesTable: FC<{
+  searchValue: SearchValue,
+  setError: (error: string) => void,
+}> = ({ searchValue, setError }) => {
   const { updateUser, removeUser } = dropDownOptions;
   const navigate = useNavigate();
   const [users, setUsers] = useState<TableUser[] | null>(null);
-  const { loading, data } = useQuery<{ users: UserInfo[] }, OperationVariables>(
-    GET_USERS
-  );
+  const { loading, data, error } = useQuery<
+    { users: UserInfo[] },
+    OperationVariables
+  >(GET_USERS);
   const [deleteUser] = useMutation(DELETE_USER);
 
   useEffect(() => {
@@ -39,6 +41,12 @@ export const EmployeesTable: FC<{ searchValue: SearchValue }> = ({
       setUsers(newUsers);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      setError(error.message);
+    }
+  }, [error]);
 
   const dropDownHandler = (label: string, id: string): void => {
     if (label === dropDownOptions.removeUser.label) {
