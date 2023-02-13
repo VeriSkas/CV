@@ -20,6 +20,8 @@ import { CreateCV } from './pages/CreateCV/CreateCV';
 import { LSItems } from './constants/variables';
 import { DepartmentsPage } from './pages/DepartmentsPage/DepartmentsPage';
 import { Departments } from './pages/Departments/Departments';
+import { PositionPage } from './pages/PositionPage/PositionPage';
+import { Positions } from './pages/Positions/Positions';
 
 export const App: FC = () => {
   const [isLoggedIn, setLoggedIn] = useState<boolean>(
@@ -93,6 +95,18 @@ export const App: FC = () => {
           index
           element={
             <Departments
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
+      </Route>
+      <Route path={PATH.positions} element={<PositionPage />}>
+        <Route
+          index
+          element={
+            <Positions
               setError={(error: string) => {
                 setErrorMessage(error);
               }}

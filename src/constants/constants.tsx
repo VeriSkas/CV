@@ -106,6 +106,10 @@ export const departmentsTableOptions: { [key: string]: TableOption } = {
   name: { name: 'Department name', active: false, disabled: false },
 };
 
+export const positionsTableOptions: { [key: string]: TableOption } = {
+  name: { name: 'Position name', active: false, disabled: false },
+};
+
 export const dropDownOptions: { [key: string]: DropDownOption } = {
   updateUser: {
     to: `${PATH.employees}/${localStorage.getItem(LSItems.activeUser)}`,
@@ -138,5 +142,13 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
   department: {
     to: PATH.department,
     label: 'Update department',
+  },
+  removePosition: {
+    to: PATH.positions,
+    label: 'Delete position',
+  },
+  position: {
+    to: PATH.position,
+    label: 'Update position',
   },
 };

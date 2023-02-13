@@ -17,6 +17,8 @@ export const PATH = {
   department: ':departmentId',
   createDepartment: '/departments/createDepartment',
   positions: '/positions',
+  position: ':positionId',
+  createPosition: '/positions/createPosition',
   skills: '/skills',
   languages: '/languages',
   settings: '/settings',
