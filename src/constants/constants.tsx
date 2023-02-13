@@ -115,7 +115,7 @@ export const skillsTableOptions: { [key: string]: TableOption } = {
 };
 
 export const languagesTableOptions: { [key: string]: TableOption } = {
-  iso2: { name: 'Iso2 code', active: false, disabled: false },
+  iso2: { name: 'Iso2 code', active: false, disabled: true },
   name: { name: 'Language', active: false, disabled: false },
 };
 

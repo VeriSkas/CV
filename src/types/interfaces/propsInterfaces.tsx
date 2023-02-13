@@ -6,6 +6,7 @@ import { CvItemDetails } from './cvs';
 import {
   CvDetailForm,
   DropDownOption,
+  IMainPagesInfo,
   Inputs,
   TableOption,
   UsedInTableObjectsType,
@@ -134,4 +135,11 @@ export interface SearchBarProps {
   placeholder?: string;
   onChangeSearch: (value: string) => void;
   children: ReactElement;
+}
+
+export interface TablePageContainerProps {
+  mainPagesInfo: IMainPagesInfo;
+  tableItems: UsedInTableObjectsType[] | null;
+  loading: boolean;
+  dropDownHandler: (label: string, id: string) => void;
 }

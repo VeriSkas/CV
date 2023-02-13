@@ -2,24 +2,19 @@ import React, { FC, useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { useTranslation } from 'react-i18next';
 
 import { GET_CVS } from '../../apollo/queries/cvs';
-import { Table } from '../../components/Table/Table';
-import { cvsTableOptions, dropDownOptions } from '../../constants/constants';
+import { dropDownOptions } from '../../constants/constants';
 import { CvItem, TableCvItem } from '../../types/interfaces/cvs';
 import { PATH } from '../../constants/paths';
-import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
-import { SearchBar } from '../../components/SearchBar/SearchBar';
-import { LSItems, SearchKey } from '../../constants/variables';
+import { LSItems } from '../../constants/variables';
+import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
+import { MainPagesInfo } from '../../constants/mainPagesInfo';
 
 export const CVs: FC<{}> = () => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const { loading, data } = useQuery<{ cvs: CvItem[] }>(GET_CVS);
   const [cvs, setCVs] = useState<TableCvItem[] | null>(null);
-  const [searchValue, setSearchValue] = useState('');
-  const { cv, removeCV } = dropDownOptions;
 
   useEffect(() => {
     if (data) {
@@ -43,28 +38,11 @@ export const CVs: FC<{}> = () => {
   };
 
   return (
-    <SearchBar
-      linkTo={PATH.createCV}
-      btnText={t(BtnText.createCV)}
-      title={t(TitleText.cvs)}
-      placeholder={t(PlaceholderText.search)}
-      onChangeSearch={(value) => {
-        setSearchValue(value);
-      }}
-    >
-      <Table
-        items={cvs}
-        loading={loading}
-        headerOptions={cvsTableOptions}
-        dropDownOptions={[cv, removeCV]}
-        dropDownHandler={(label: string, id: string) => {
-          dropDownHandler(label, id);
-        }}
-        searchValue={{
-          value: searchValue,
-          searchKey: [SearchKey.name],
-        }}
-      />
-    </SearchBar>
+    <TablePageContainer
+      mainPagesInfo={MainPagesInfo.cvsPage}
+      tableItems={cvs}
+      loading={loading}
+      dropDownHandler={dropDownHandler}
+    />
   );
 };

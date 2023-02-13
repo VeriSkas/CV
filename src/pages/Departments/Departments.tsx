@@ -1,30 +1,19 @@
 import React, { FC, useEffect, useState } from 'react';
 
 import { useQuery } from '@apollo/client';
-import { useTranslation } from 'react-i18next';
 
 import { GET_DEPARTMENTS } from '../../apollo/queries/departments';
-import { SearchBar } from '../../components/SearchBar/SearchBar';
-import { Table } from '../../components/Table/Table';
-import {
-  departmentsTableOptions,
-  dropDownOptions,
-} from '../../constants/constants';
-import { PATH } from '../../constants/paths';
-import { BtnText, PlaceholderText, TitleText } from '../../constants/text';
-import { SearchKey } from '../../constants/variables';
 import { Department } from '../../types/interfaces/departments';
+import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
+import { MainPagesInfo } from '../../constants/mainPagesInfo';
 
 export const Departments: FC<{ setError: (error: string) => void }> = ({
   setError,
 }) => {
-  const { t } = useTranslation();
-  const [searchValue, setSearchValue] = useState('');
   const [departments, setDepartments] = useState<Department[] | null>(null);
   const { data, error, loading } = useQuery<{ departments: Department[] }>(
     GET_DEPARTMENTS
   );
-  const { removeDepartment, department } = dropDownOptions;
 
   useEffect(() => {
     if (data) {
@@ -43,28 +32,11 @@ export const Departments: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <SearchBar
-      linkTo={PATH.createDepartment}
-      btnText={t(BtnText.createDepartment)}
-      title={t(TitleText.departments)}
-      placeholder={t(PlaceholderText.search)}
-      onChangeSearch={(value) => {
-        setSearchValue(value);
-      }}
-    >
-      <Table
-        items={departments}
-        loading={loading}
-        headerOptions={departmentsTableOptions}
-        dropDownOptions={[department, removeDepartment]}
-        dropDownHandler={(label: string, id: string) => {
-          dropDownHandler(label, id);
-        }}
-        searchValue={{
-          value: searchValue,
-          searchKey: [SearchKey.name],
-        }}
-      />
-    </SearchBar>
+    <TablePageContainer
+      mainPagesInfo={MainPagesInfo.departmentsPage}
+      tableItems={departments}
+      loading={loading}
+      dropDownHandler={dropDownHandler}
+    />
   );
 };

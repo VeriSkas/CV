@@ -1,0 +1,96 @@
+import {
+  cvsTableOptions,
+  departmentsTableOptions,
+  dropDownOptions,
+  employeeTableOptions,
+  languagesTableOptions,
+  positionsTableOptions,
+  projectsTableOptions,
+  skillsTableOptions,
+} from './constants';
+import { PATH } from './paths';
+import { BtnText, PlaceholderText, TitleText } from './text';
+import { SearchKey } from './variables';
+
+const {
+  updateUser,
+  removeUser,
+  project,
+  removeProject,
+  cv,
+  removeCV,
+  department,
+  removeDepartment,
+  skill,
+  removeSkill,
+  removeLanguage,
+  language,
+  position,
+  removePosition,
+} = dropDownOptions;
+
+export const MainPagesInfo = {
+  languagesPage: {
+    linkTo: PATH.createLanguage,
+    btnText: BtnText.createLanguage,
+    title: TitleText.languages,
+    placeholder: PlaceholderText.search,
+    headerOptions: languagesTableOptions,
+    dropDownOptions: [language, removeLanguage],
+    searchKey: [SearchKey.name],
+  },
+  positionsPage: {
+    linkTo: PATH.createPosition,
+    btnText: BtnText.createPosition,
+    title: TitleText.positions,
+    placeholder: PlaceholderText.search,
+    headerOptions: positionsTableOptions,
+    dropDownOptions: [position, removePosition],
+    searchKey: [SearchKey.name],
+  },
+  skillsPage: {
+    linkTo: PATH.createSkill,
+    btnText: BtnText.createSkill,
+    title: TitleText.skills,
+    placeholder: PlaceholderText.search,
+    headerOptions: skillsTableOptions,
+    dropDownOptions: [skill, removeSkill],
+    searchKey: [SearchKey.name],
+  },
+  departmentsPage: {
+    linkTo: PATH.createDepartment,
+    btnText: BtnText.createDepartment,
+    title: TitleText.departments,
+    placeholder: PlaceholderText.search,
+    headerOptions: departmentsTableOptions,
+    dropDownOptions: [department, removeDepartment],
+    searchKey: [SearchKey.name],
+  },
+  cvsPage: {
+    linkTo: PATH.createCV,
+    btnText: BtnText.createCV,
+    title: TitleText.cvs,
+    placeholder: PlaceholderText.search,
+    headerOptions: cvsTableOptions,
+    dropDownOptions: [cv, removeCV],
+    searchKey: [SearchKey.name],
+  },
+  projectsPage: {
+    linkTo: PATH.createProject,
+    btnText: BtnText.createProject,
+    title: TitleText.projects,
+    placeholder: PlaceholderText.search,
+    headerOptions: projectsTableOptions,
+    dropDownOptions: [project, removeProject],
+    searchKey: [SearchKey.name, SearchKey.internal_name],
+  },
+  employeesPage: {
+    linkTo: PATH.createEmployee,
+    btnText: BtnText.createEmployee,
+    title: TitleText.employees,
+    placeholder: PlaceholderText.search,
+    headerOptions: employeeTableOptions,
+    dropDownOptions: [updateUser, removeUser],
+    searchKey: [SearchKey.first_name, SearchKey.last_name],
+  },
+};

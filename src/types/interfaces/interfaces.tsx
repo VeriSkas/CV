@@ -81,3 +81,13 @@ export interface IFieldArray {
   labelName: string;
   radioInputs: IRadioInputs;
 }
+
+export interface IMainPagesInfo {
+  linkTo: string;
+  btnText: string;
+  title: string;
+  placeholder: string;
+  headerOptions: { [key: string]: TableOption };
+  dropDownOptions: DropDownOption[];
+  searchKey: string[];
+}
