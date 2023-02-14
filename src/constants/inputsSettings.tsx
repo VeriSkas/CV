@@ -61,14 +61,6 @@ export const inputs: { [key: string]: IInput } = {
     defaultValue: '',
     validation: {},
   },
-  email2: {
-    type: InputTypes.email,
-    label: InputLabels.email,
-    labelName: InputLabelNames.email,
-    defaultValue: '',
-    readonly: true,
-    validation: {},
-  },
   department: {
     type: InputTypes.select,
     label: InputLabels.department,
@@ -88,13 +80,6 @@ export const inputs: { [key: string]: IInput } = {
     label: InputLabels.name,
     labelName: InputLabelNames.name,
     defaultValue: '',
-    validation: {},
-  },
-  name2: {
-    type: InputTypes.text,
-    label: InputLabels.name,
-    labelName: InputLabelNames.name,
-    defaultValue: '',
     validation: {
       required: { value: true, message: ErrorMessages.inputRequired },
       minLength: { value: 3, message: ErrorMessages.inputMinLength(3) },
@@ -102,13 +87,6 @@ export const inputs: { [key: string]: IInput } = {
     },
   },
   description: {
-    type: InputTypes.text,
-    label: InputLabels.description,
-    labelName: InputLabelNames.description,
-    defaultValue: '',
-    validation: {},
-  },
-  description2: {
     type: InputTypes.text,
     label: InputLabels.description,
     labelName: InputLabelNames.description,
@@ -130,6 +108,13 @@ export const inputs: { [key: string]: IInput } = {
     type: InputTypes.text,
     label: InputLabels.language,
     labelName: InputLabelNames.language,
+    defaultValue: '',
+    validation: {},
+  },
+  role: {
+    type: InputTypes.select,
+    label: InputLabels.role,
+    labelName: InputLabelNames.role,
     defaultValue: '',
     validation: {},
   },

@@ -29,6 +29,10 @@
       &:hover {
         border: 1px solid rgba($color: #000000, $alpha: 1);
       }
+
+      &:read-only {
+        background: #fff;
+      }
     }
 
     .Icon {

@@ -21,6 +21,30 @@ export interface NewCvForm {
   languages: LanguageItemInDB[];
 }
 
+export interface NewEmployeeForm {
+  email: string;
+  password: string;
+  first_name?: string;
+  last_name?: string;
+  skills: SkillItemInDB[];
+  languages: LanguageItemInDB[];
+  cvsIds: string[];
+  departmentId?: string;
+  positionId?: string;
+  role: string;
+}
+
+export interface IEmployeeForm {
+  first_name: string;
+  last_name: string;
+  skills: SkillItemInDB[];
+  email: string;
+  languages: LanguageItemInDB[];
+  cvsIds: string[];
+  departmentId: string;
+  positionId: string;
+}
+
 export interface CvDetailForm {
   name: string;
   description: string;

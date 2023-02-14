@@ -20,6 +20,7 @@ export const InputLabels = {
   skills: 'skills',
   language: 'language',
   languages: 'languages',
+  role: 'role',
 };
 
 export const InputLabelNames = {
@@ -36,6 +37,7 @@ export const InputLabelNames = {
   skills: 'Skills',
   language: 'Language',
   languages: 'Languages',
+  role: 'Role',
 };
 
 export const ErrorMessages = {

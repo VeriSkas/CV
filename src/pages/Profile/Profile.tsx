@@ -4,7 +4,7 @@ import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
 import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
-import { Inputs } from '../../types/interfaces/interfaces';
+import { IEmployeeForm } from '../../types/interfaces/interfaces';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 import { UpdatedUser, UserInfo } from '../../types/interfaces/user';
 import { ContentText, TitleText } from '../../constants/text';
@@ -32,7 +32,7 @@ export const Profile: FC<{ setError: (message: string) => void }> = ({
   }, [error]);
 
   const updateUser = (
-    { first_name, last_name, departmentId, positionId }: Inputs,
+    { first_name, last_name, departmentId, positionId }: IEmployeeForm,
     id?: string
   ): void => {
     const updatedUser: UpdatedUser = {

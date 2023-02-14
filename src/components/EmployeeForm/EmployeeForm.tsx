@@ -1,28 +1,23 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from '@apollo/client';
 
-import { Inputs } from '../../types/interfaces/interfaces';
-import { BtnText, InputLabels, InputTypes } from '../../constants/text';
+import { IEmployeeForm } from '../../types/interfaces/interfaces';
+import { BtnText, InputTypes } from '../../constants/text';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
-import classes from './EmployeeForm.module.scss';
-import {
-  EmployeeFormProps,
-  OptionsType,
-} from '../../types/interfaces/propsInterfaces';
+import { EmployeeFormProps } from '../../types/interfaces/propsInterfaces';
 import { Avatar } from '../Avatar/Avatar';
 import { PATH } from '../../constants/paths';
 import { Select } from '../UI/Select/Select';
 import { makeEmployeeInputsList } from '../../utils/formCreator';
-import { GET_DEPARTMENTS } from '../../apollo/queries/departments';
-import { Department } from '../../types/interfaces/departments';
-import { GET_POSITIONS } from '../../apollo/queries/positions';
-import { Position } from '../../types/interfaces/positions';
-import { BtnType, TypeForm } from '../../constants/variables';
+import { BtnType } from '../../constants/variables';
+import classes from './EmployeeForm.module.scss';
+import { FieldArray } from '../FieldArray/FieldArray';
+import { FieldArrays } from '../../constants/fieldArrayVars';
+import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -31,52 +26,32 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   setError,
   type,
 }) => {
+  const skills = user?.profile?.skills?.reduce<SkillItemInDB[]>((acc, skill): SkillItemInDB[] => {
+    return [...acc, { skill_name: skill.skill_name, mastery: skill.mastery }]
+  }, []);
+  const languages = user?.profile?.languages?.reduce<LanguageItemInDB[]>((acc, language): LanguageItemInDB[] => {
+    return [...acc, { language_name: language.language_name, proficiency: language.proficiency }]
+  }, []);
   const { t } = useTranslation();
-  const { data: departments } = useQuery<{ departments: Department[] }>(
-    GET_DEPARTMENTS
-  );
-  const { data: positions } = useQuery<{ positions: Position[] }>(
-    GET_POSITIONS
-  );
   const {
     register,
     handleSubmit,
     setValue,
     reset,
+    control,
     formState: { errors, isValid },
-  } = useForm<Inputs>({
+  } = useForm<IEmployeeForm>({
     mode: 'all',
+    defaultValues: {
+      first_name: user?.profile.first_name ?? '',
+      last_name: user?.profile.last_name ?? '',
+      email: user?.email ?? '',
+      departmentId: user?.department?.id ?? '',
+      positionId: user?.position?.id ?? '',
+      skills,
+      languages,
+    },
   });
-  const [departmentsValue, setDepartmentsValue] = useState<
-    OptionsType[] | null
-  >(null);
-  const [positionsValue, setPositionsValue] = useState<OptionsType[] | null>(
-    null
-  );
-
-  useEffect(() => {
-    if (departments) {
-      const departmentsOptions: OptionsType[] = departments.departments.map(
-        (department) => ({
-          id: department.id,
-          value: department.name,
-        })
-      );
-      setDepartmentsValue(departmentsOptions);
-    }
-  }, [departments]);
-
-  useEffect(() => {
-    if (positions) {
-      const positionsOptions: OptionsType[] = positions.positions.map(
-        (position) => ({
-          id: position.id,
-          value: position.name,
-        })
-      );
-      setPositionsValue(positionsOptions);
-    }
-  }, [positions]);
 
   const setErrorHandler = (message: string): void => {
     if (setError) {
@@ -84,19 +59,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     }
   };
 
-  const submitForm = (data: Inputs): void => {
-    if (data?.departmentId) {
-      data.departmentId =
-        departmentsValue?.find((item) => item.value === data?.departmentId)
-          ?.id ?? '';
-    }
-
-    if (data?.positionId) {
-      data.positionId =
-        positionsValue?.find((item) => item.value === data?.positionId)?.id ??
-        '';
-    }
-
+  const submitForm = (data: IEmployeeForm): void => {
     onSubmitForm(data, user?.id ?? '');
 
     if (!user) {
@@ -108,18 +71,12 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     const profileInputs = makeEmployeeInputsList(type, user);
 
     return profileInputs?.map((input) => {
-      const options =
-        input.label === InputLabels.department
-          ? departmentsValue
-          : positionsValue;
-
       return input.type === InputTypes.select ? (
         <Select
           key={input.label}
           onChangeHandler={selectChange}
           label={input.label}
           defaultValue={input.defaultValue ?? ''}
-          options={options ?? []}
           labelName={input.labelName ?? ''}
           register={register}
         />
@@ -134,14 +91,31 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
           validation={input.validation}
           readonly={input.readonly}
           register={register}
-          error={errors[input.label]?.message}
+          error={errors[input.label as keyof IEmployeeForm]?.message}
+        />
+      );
+    });
+  };
+
+  const renderFieldArrays = (): ReactNode => {
+    const { skills, languages } = FieldArrays;
+
+    return [skills, languages].map((item) => {
+      return (
+        <FieldArray
+          key={item.label}
+          register={register}
+          control={control}
+          label={item.label}
+          labelName={item.labelName}
+          radioInputs={item.radioInputs}
         />
       );
     });
   };
 
   const selectChange = (id: string, value: string, key: string): void => {
-    setValue(key, value);
+    setValue(key as keyof IEmployeeForm, id);
   };
 
   return (
@@ -149,15 +123,14 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
       onSubmit={handleSubmit(submitForm)}
       className={classes.EmployeeForm_form}
     >
-      {type !== TypeForm.createEmployee && (
-        <Avatar
-          setError={(message: string) => {
-            setErrorHandler(message);
-          }}
-          user={user}
-        />
-      )}
+      <Avatar
+        setError={(message: string) => {
+          setErrorHandler(message);
+        }}
+        user={user}
+      />
       {renderInputs()}
+      {renderFieldArrays()}
       <div className={classes.FormBtns}>
         <Button disabled={!isValid}>
           {submitBtnText ?? t(BtnText.saveChanges)}

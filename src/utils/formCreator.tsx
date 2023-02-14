@@ -11,9 +11,15 @@ export const makeCvInputsList = (
 ): IInput[] => {
   if (type === TypeForm.cvDetails) {
     return [
-      { ...inputs.name, defaultValue: cv?.name ?? '', readonly: true },
+      {
+        ...inputs.name,
+        validation: {},
+        defaultValue: cv?.name ?? '',
+        readonly: true,
+      },
       {
         ...inputs.description,
+        validation: {},
         defaultValue: cv?.description ?? '',
         readonly: true,
       },
@@ -30,9 +36,9 @@ export const makeCvInputsList = (
     ];
   } else if (type === TypeForm.cvUser) {
     return [
-      { ...inputs.name2, defaultValue: cv?.name ?? '' },
+      { ...inputs.name, defaultValue: cv?.name ?? '' },
       {
-        ...inputs.description2,
+        ...inputs.description,
         defaultValue: cv?.description ?? '',
       },
       {
@@ -48,9 +54,9 @@ export const makeCvInputsList = (
     ];
   } else if (type === TypeForm.createCV) {
     return [
-      { ...inputs.name2, defaultValue: cv?.name ?? '' },
+      { ...inputs.name, defaultValue: cv?.name ?? '' },
       {
-        ...inputs.description2,
+        ...inputs.description,
         defaultValue: cv?.description ?? '',
       },
     ];
@@ -65,17 +71,27 @@ export const makeEmployeeInputsList = (
 ): IInput[] => {
   if (type === TypeForm.updateEmployee) {
     return [
-      { ...inputs.first_name, defaultValue: user?.profile.first_name ?? '' },
-      { ...inputs.last_name, defaultValue: user?.profile.last_name ?? '' },
-      { ...inputs.email2, defaultValue: user?.email ?? '' },
+      { ...inputs.first_name },
+      { ...inputs.last_name },
+      {
+        ...inputs.email,
+        labelName: InputLabelNames.email,
+        validation: {},
+        readonly: true,
+      },
       { ...inputs.department, defaultValue: user?.department?.name ?? '' },
       { ...inputs.position, defaultValue: user?.position?.name ?? '' },
     ];
   } else if (type === TypeForm.profileType) {
     return [
-      { ...inputs.first_name, defaultValue: user?.profile.first_name ?? '' },
-      { ...inputs.last_name, defaultValue: user?.profile.last_name ?? '' },
-      { ...inputs.email2, defaultValue: user?.email ?? '' },
+      { ...inputs.first_name },
+      { ...inputs.last_name },
+      {
+        ...inputs.email,
+        labelName: InputLabelNames.email,
+        validation: {},
+        readonly: true,
+      },
       {
         ...inputs.department,
         readonly: true,
@@ -89,10 +105,13 @@ export const makeEmployeeInputsList = (
     ];
   } else if (type === TypeForm.createEmployee) {
     return [
-      { ...inputs.first_name },
-      { ...inputs.last_name },
+      { ...inputs.first_name, validation: {} },
+      { ...inputs.last_name, validation: {} },
       { ...inputs.email, labelName: InputLabelNames.email },
       { ...inputs.password, labelName: InputLabelNames.password },
+      { ...inputs.department },
+      { ...inputs.position },
+      { ...inputs.role },
     ];
   }
 

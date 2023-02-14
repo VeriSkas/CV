@@ -8,3 +8,12 @@ export const GET_POSITIONS = gql`
     }
   }
 `;
+
+export const GET_POSITIONS_AS_OPTIONS = gql`
+  query getPositions {
+    positions {
+      id
+      value: name
+    }
+  }
+`;

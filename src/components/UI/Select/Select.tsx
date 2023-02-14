@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
+import { useOptions } from '../../../hooks/useOptions';
+
 import {
   OptionsType,
   SelectProps,
@@ -14,13 +16,13 @@ export const Select: FC<SelectProps> = ({
   onChangeHandler,
   label,
   defaultValue,
-  options,
   labelName,
   register,
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [activeValue, setActiveValue] = useState(() => defaultValue);
+  const options: OptionsType[] | null = useOptions(label);
 
   const changeActiveOption = (id: string, optionValue: string): void => {
     setIsOpen(false);
@@ -60,8 +62,8 @@ export const Select: FC<SelectProps> = ({
         <div className={classes.Input}>
           <input
             readOnly
-            defaultValue={defaultValue ?? ''}
             placeholder={defaultValue ?? ''}
+            value={activeValue}
             onClick={toggleOptions}
             {...register(label)}
           />

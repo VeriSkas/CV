@@ -23,6 +23,17 @@ import { LSItems } from './variables';
 
 export const MAX_photoSize = 500000;
 
+export const Roles = [
+  {
+    value: 'Admin',
+    id: 'admin',
+  },
+  {
+    value: 'Employee',
+    id: 'employee',
+  },
+];
+
 export const links: { [key: string]: ILink } = {
   employees: {
     to: PATH.employees,

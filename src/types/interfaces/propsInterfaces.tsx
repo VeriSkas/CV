@@ -6,8 +6,8 @@ import { CvItemDetails } from './cvs';
 import {
   CvDetailForm,
   DropDownOption,
+  IEmployeeForm,
   IMainPagesInfo,
-  Inputs,
   TableOption,
   UsedInTableObjectsType,
 } from './interfaces';
@@ -74,7 +74,7 @@ export interface DropDownProps {
 export interface EmployeeFormProps {
   user?: UserInfo;
   submitBtnText?: string;
-  onSubmitForm: (data: Inputs, id?: string) => void;
+  onSubmitForm: (data: IEmployeeForm, id?: string) => void;
   setError?: (message: string) => void;
   type: string;
 }
@@ -118,9 +118,8 @@ export interface SelectProps {
   onChangeHandler: (id: string, value: string, key: string) => void;
   label: string;
   defaultValue: string | '';
-  options: OptionsType[] | [];
   labelName: string | '';
-  register: UseFormRegister<Inputs>;
+  register: UseFormRegister<any>;
 }
 
 export interface OptionsType {
