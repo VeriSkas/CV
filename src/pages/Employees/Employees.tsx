@@ -11,6 +11,7 @@ import { dropDownOptions } from '../../constants/constants';
 import { MainPagesInfo } from '../../constants/mainPagesInfo';
 import { PATH } from '../../constants/paths';
 import { TableUser, UserInfo } from '../../types/interfaces/user';
+import { LSItems } from '../../constants/variables';
 
 export const Employees: FC<{
   setError: (error: string) => void,
@@ -67,6 +68,7 @@ export const Employees: FC<{
 
     if (label === dropDownOptions.updateUser.label) {
       navigate(`${PATH.employees}/${id}`);
+      localStorage.setItem(LSItems.activeUser, id);
       ACTIVE_USER_ID(id);
     }
   };

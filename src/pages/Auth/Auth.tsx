@@ -7,6 +7,7 @@ import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpFor
 import { PATH } from '../../constants/paths';
 import { authFormText } from '../../constants/text';
 import { MAIN_ROLE, USER_ID, USER_TOKEN } from '../../apollo/state';
+import { LSItems } from '../../constants/variables';
 
 export const Auth: FC<{
   auth: (isAuth: boolean) => void,
@@ -19,6 +20,9 @@ export const Auth: FC<{
     if (userData) {
       const { token, user } = userData.login;
 
+      localStorage.setItem(LSItems.token, token);
+      localStorage.setItem(LSItems.role, user.role);
+      localStorage.setItem(LSItems.userId, user.id);
       MAIN_ROLE(user.role);
       USER_TOKEN(token);
       USER_ID(user.id);

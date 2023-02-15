@@ -12,6 +12,7 @@ import { CvItemDetails, NewCV } from '../../types/interfaces/cvs';
 import { NewCvForm } from '../../types/interfaces/interfaces';
 import { PATH } from '../../constants/paths';
 import { ACTIVE_CV_ID, USER_ID } from '../../apollo/state';
+import { LSItems } from '../../constants/variables';
 
 export const CreateCV: FC<{ setError: (message: string) => void }> = ({
   setError,
@@ -26,6 +27,7 @@ export const CreateCV: FC<{ setError: (message: string) => void }> = ({
   useEffect(() => {
     if (data) {
       const { id } = data.createCv;
+      localStorage.setItem(LSItems.activeCV, id);
       ACTIVE_CV_ID(id);
       navigate(`${PATH.cvs}/${id} `);
     }

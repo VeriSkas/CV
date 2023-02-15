@@ -25,6 +25,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
       if (message === BAErrorMessages.unauthorized) {
+        localStorage.clear();
         USER_TOKEN('');
       }
     });
