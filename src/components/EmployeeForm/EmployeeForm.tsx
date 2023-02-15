@@ -13,7 +13,7 @@ import { Avatar } from '../Avatar/Avatar';
 import { PATH } from '../../constants/paths';
 import { Select } from '../UI/Select/Select';
 import { makeEmployeeInputsList } from '../../utils/formCreator';
-import { BtnType } from '../../constants/variables';
+import { BtnType, TypeForm } from '../../constants/variables';
 import classes from './EmployeeForm.module.scss';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { FieldArrays } from '../../constants/fieldArrayVars';
@@ -52,6 +52,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
       languages,
     },
   });
+  const isProfileType = type === TypeForm.employeeProfile;
 
   const setErrorHandler = (message: string): void => {
     if (setError) {
@@ -79,6 +80,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
           defaultValue={input.defaultValue ?? ''}
           labelName={input.labelName ?? ''}
           register={register}
+          disabled={isProfileType}
         />
       ) : (
         <Input
@@ -109,6 +111,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
           label={item.label}
           labelName={item.labelName}
           radioInputs={item.radioInputs}
+          disabled={isProfileType}
         />
       );
     });
@@ -128,13 +131,14 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
           setErrorHandler(message);
         }}
         user={user}
+        disabled={isProfileType}
       />
       {renderInputs()}
       {renderFieldArrays()}
       <div className={classes.FormBtns}>
-        <Button disabled={!isValid}>
+        {!isProfileType && <Button disabled={!isValid}>
           {submitBtnText ?? t(BtnText.saveChanges)}
-        </Button>
+        </Button>}
         <Link to={PATH.employees}>
           <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
         </Link>

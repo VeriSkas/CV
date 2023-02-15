@@ -15,7 +15,8 @@ import { UpdatedUser, UserInfo } from '../../types/interfaces/user';
 import { ContentText, TitleText } from '../../constants/text';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
-import { ACTIVE_USER_ID } from '../../apollo/state';
+import { ACTIVE_USER_ID, MAIN_ROLE } from '../../apollo/state';
+import { Roles } from '../../constants/constants';
 
 export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   setError,
@@ -31,6 +32,7 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
     }
   );
   const [updateUser] = useMutation(UPDATE_USER);
+  const role = useReactiveVar(MAIN_ROLE);
 
   const updateEmployee = (
     {
@@ -76,7 +78,11 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
             setError={(message: string) => {
               setError(message);
             }}
-            type={TypeForm.updateEmployee}
+            type={
+              role === Roles.admin.id
+                ? TypeForm.updateEmployee
+                : TypeForm.employeeProfile
+            }
           />
         )}
       </>

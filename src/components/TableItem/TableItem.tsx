@@ -3,6 +3,7 @@ import React, { FC, ReactNode, useState } from 'react';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
 import { IconContext } from 'react-icons';
+import { useReactiveVar } from '@apollo/client';
 
 import { UsedInTableObjectsType } from '../../types/interfaces/interfaces';
 import { DropDown } from '../UI/DropDown/DropDown';
@@ -10,13 +11,18 @@ import classes from './TableItem.module.scss';
 import { TableCvItem } from '../../types/interfaces/cvs';
 import { TableItemProps } from '../../types/interfaces/propsInterfaces';
 import { objectKeysInTable } from '../../constants/variables';
+import { MAIN_ROLE } from '../../apollo/state';
+import { Roles } from '../../constants/constants';
 
 export const TableItem: FC<TableItemProps> = ({
   item,
   dropDownOptions,
-  dropDownHandler
+  dropDownHandler,
+  settingsView,
+  avatar,
 }) => {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  const role = useReactiveVar(MAIN_ROLE);
 
   const toggleDropDown = (): void => {
     setIsOpenDropDown((prev) => !prev);
@@ -70,16 +76,16 @@ export const TableItem: FC<TableItemProps> = ({
 
   return (
     <div className={classes.TableItem}>
-      <div className={classes.Item}>
+      {avatar && <div className={classes.Item}>
         {'avatar' in item && item.avatar && (
           <img src={item.avatar} className={classes.UserAvatar} />
         )}
         {'avatar' in item && !item.avatar && (
           <div className={classes.UserLogo}>{item.email[0] || ' '}</div>
         )}
-      </div>
+      </div>}
       {renderItemRow()}
-      <div className={classes.Item}>
+      {(role === Roles.admin.id || settingsView) && <div className={classes.Item}>
         <div className={classes.Options} onClick={toggleDropDown}>
           <SlOptionsVertical />
           {isOpenDropDown && (
@@ -91,7 +97,7 @@ export const TableItem: FC<TableItemProps> = ({
             />
           )}
         </div>
-      </div>
+      </div>}
     </div>
   );
 };

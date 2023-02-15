@@ -1,8 +1,11 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 
+import { useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 
+import { MAIN_ROLE } from '../../apollo/state';
+import { Roles } from '../../constants/constants';
 import { ContentText } from '../../constants/text';
 import {
   SortType,
@@ -19,11 +22,14 @@ export const Table: FC<TableProps> = ({
   headerOptions,
   searchValue,
   dropDownOptions,
-  dropDownHandler
+  dropDownHandler,
+  avatar,
+  settingsBtnViewForUser,
 }) => {
   const { t } = useTranslation();
   const [headerValue, setHeaderValue] = useState(headerOptions);
   const [itemsValue, setItemsValue] = useState(items);
+  const role = useReactiveVar(MAIN_ROLE);
 
   useEffect(() => {
     if (items) {
@@ -119,6 +125,8 @@ export const Table: FC<TableProps> = ({
         key={item.id} item={item}
         dropDownOptions={dropDownOptions}
         dropDownHandler={(label: string, id: string) => { dropDownHandler(label, id) }}
+        settingsView={settingsBtnViewForUser}
+        avatar={avatar}
       />;
     });
   };
@@ -126,9 +134,9 @@ export const Table: FC<TableProps> = ({
   return (
     <div className={classes.Table}>
       <div className={classes.TableHeader}>
-        <div></div>
+        {avatar && <div></div>}
         {renderHeaderOptions()}
-        <div></div>
+        {(role === Roles.admin.id || settingsBtnViewForUser) && <div></div>}
       </div>
       {loading ? (
         <p>{t(ContentText.loading)}</p>

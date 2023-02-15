@@ -18,6 +18,7 @@ export const Select: FC<SelectProps> = ({
   defaultValue,
   labelName,
   register,
+  disabled,
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -59,23 +60,33 @@ export const Select: FC<SelectProps> = ({
     <>
       <div className={classes.Select}>
         <label>{labelName}</label>
-        <div className={classes.Input}>
-          <input
-            readOnly
-            placeholder={defaultValue ?? ''}
-            value={activeValue}
-            onClick={toggleOptions}
-            {...register(label)}
-          />
-          <div className={classes.Icon} onClick={toggleOptions}>
-            <IconContext.Provider value={{ className: classes.Arrow }}>
-              {isOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
-            </IconContext.Provider>
+        {!disabled ? (
+          <div className={classes.Input}>
+            <input
+              readOnly
+              placeholder={defaultValue ?? ''}
+              value={activeValue}
+              onClick={toggleOptions}
+              {...register(label)}
+            />
+            <div className={classes.Icon} onClick={toggleOptions}>
+              <IconContext.Provider value={{ className: classes.Arrow }}>
+                {isOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+              </IconContext.Provider>
+            </div>
+            {isOpen && (
+              <ul className={classes.Options}>{renderOptions(options)}</ul>
+            )}
           </div>
-          {isOpen && (
-            <ul className={classes.Options}>{renderOptions(options)}</ul>
-          )}
-        </div>
+        ) : (
+          <div className={classes.Input}>
+            <input
+              readOnly
+              placeholder={defaultValue ?? ''}
+              value={activeValue}
+            />
+          </div>
+        )}
       </div>
       {isOpen && <div className={classes.Aria} onClick={toggleOptions}></div>}
     </>

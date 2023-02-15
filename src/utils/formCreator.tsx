@@ -113,6 +113,27 @@ export const makeEmployeeInputsList = (
       { ...inputs.position },
       { ...inputs.role },
     ];
+  } else if (type === TypeForm.employeeProfile) {
+    return [
+      { ...inputs.first_name, readonly: true },
+      { ...inputs.last_name, readonly: true },
+      {
+        ...inputs.email,
+        labelName: InputLabelNames.email,
+        validation: {},
+        readonly: true,
+      },
+      {
+        ...inputs.department,
+        readonly: true,
+        defaultValue: user?.department?.name ?? '',
+      },
+      {
+        ...inputs.position,
+        readonly: true,
+        defaultValue: user?.position?.name ?? '',
+      },
+    ];
   }
 
   return [];

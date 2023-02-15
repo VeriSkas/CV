@@ -22,6 +22,9 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
     headerOptions,
     dropDownOptions,
     searchKey,
+    createBtnViewForUser,
+    settingsBtnViewForUser,
+    avatar,
   } = mainPagesInfo;
 
   return (
@@ -33,6 +36,7 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
       onChangeSearch={(value) => {
         setSearchValue(value);
       }}
+      createBtnViewForUser={createBtnViewForUser}
     >
       <Table
         items={tableItems}
@@ -46,6 +50,8 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
           value: searchValue,
           searchKey,
         }}
+        settingsBtnViewForUser={settingsBtnViewForUser}
+        avatar={avatar}
       />
     </SearchBar>
   );

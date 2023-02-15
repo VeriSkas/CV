@@ -19,7 +19,8 @@ import { InputType } from '../../constants/variables';
 export const Avatar: FC<{
   setError: (message: string) => void,
   user?: UserInfo,
-}> = ({ setError, user }) => {
+  disabled: boolean,
+}> = ({ setError, user, disabled }) => {
   const { t } = useTranslation();
   const [image, setImage] = useState<AvatarValue | null>(null);
   const [removeAvatar, { error: deleteError }] = useMutation(DELETE_AVATAR);
@@ -143,26 +144,32 @@ export const Avatar: FC<{
         {image?.base64 ?? user?.profile.avatar ? (
           <>
             <img src={image?.base64 ?? user?.profile.avatar ?? ''} />
-            <div
-              className={classes.BinIcon}
-              title={t(TooltipText.deleteAvatar)}
-              onClick={deleteAvatar}
-            >
-              <IconContext.Provider value={{ className: classes.Icon }}>
-                <RiDeleteBin6Line />
-              </IconContext.Provider>
-            </div>
+            {!disabled && (
+              <div
+                className={classes.BinIcon}
+                title={t(TooltipText.deleteAvatar)}
+                onClick={deleteAvatar}
+              >
+                <IconContext.Provider value={{ className: classes.Icon }}>
+                  <RiDeleteBin6Line />
+                </IconContext.Provider>
+              </div>
+            )}
           </>
         ) : (
           <span className={classes.Letter}>{user?.email[0] ?? ''}</span>
         )}
-        <label className={classes.InputFile} title={t(TooltipText.addAvatar)}>
+        <label
+          className={classes.InputFile}
+          title={!disabled ? t(TooltipText.addAvatar) : ''}
+        >
           <input
             type={InputType.file}
             className={classes.InputFile_input}
             onChange={(event) => {
               onChangeFileInput(event);
             }}
+            disabled={disabled}
           />
         </label>
       </div>

@@ -14,6 +14,7 @@ import { SearchKey } from './variables';
 
 const {
   updateUser,
+  userProfile,
   removeUser,
   project,
   removeProject,
@@ -38,6 +39,9 @@ export const MainPagesInfo = {
     headerOptions: languagesTableOptions,
     dropDownOptions: [language, removeLanguage],
     searchKey: [SearchKey.name],
+    createBtnViewForUser: false,
+    settingsBtnViewForUser: false,
+    avatar: false,
   },
   positionsPage: {
     linkTo: PATH.createPosition,
@@ -47,6 +51,9 @@ export const MainPagesInfo = {
     headerOptions: positionsTableOptions,
     dropDownOptions: [position, removePosition],
     searchKey: [SearchKey.name],
+    createBtnViewForUser: false,
+    settingsBtnViewForUser: false,
+    avatar: false,
   },
   skillsPage: {
     linkTo: PATH.createSkill,
@@ -56,6 +63,9 @@ export const MainPagesInfo = {
     headerOptions: skillsTableOptions,
     dropDownOptions: [skill, removeSkill],
     searchKey: [SearchKey.name],
+    createBtnViewForUser: false,
+    settingsBtnViewForUser: false,
+    avatar: false,
   },
   departmentsPage: {
     linkTo: PATH.createDepartment,
@@ -65,6 +75,9 @@ export const MainPagesInfo = {
     headerOptions: departmentsTableOptions,
     dropDownOptions: [department, removeDepartment],
     searchKey: [SearchKey.name],
+    createBtnViewForUser: false,
+    settingsBtnViewForUser: false,
+    avatar: false,
   },
   cvsPage: {
     linkTo: PATH.createCV,
@@ -74,6 +87,9 @@ export const MainPagesInfo = {
     headerOptions: cvsTableOptions,
     dropDownOptions: [cv, removeCV],
     searchKey: [SearchKey.name],
+    createBtnViewForUser: true,
+    settingsBtnViewForUser: true,
+    avatar: false,
   },
   projectsPage: {
     linkTo: PATH.createProject,
@@ -83,6 +99,9 @@ export const MainPagesInfo = {
     headerOptions: projectsTableOptions,
     dropDownOptions: [project, removeProject],
     searchKey: [SearchKey.name, SearchKey.internal_name],
+    createBtnViewForUser: false,
+    settingsBtnViewForUser: false,
+    avatar: false,
   },
   employeesPage: {
     linkTo: PATH.createEmployee,
@@ -92,5 +111,20 @@ export const MainPagesInfo = {
     headerOptions: employeeTableOptions,
     dropDownOptions: [updateUser, removeUser],
     searchKey: [SearchKey.first_name, SearchKey.last_name],
+    createBtnViewForUser: false,
+    settingsBtnViewForUser: true,
+    avatar: true,
+  },
+  employeesPageUser: {
+    linkTo: PATH.createEmployee,
+    btnText: BtnText.createEmployee,
+    title: TitleText.employees,
+    placeholder: PlaceholderText.search,
+    headerOptions: employeeTableOptions,
+    dropDownOptions: [userProfile],
+    searchKey: [SearchKey.first_name, SearchKey.last_name],
+    createBtnViewForUser: false,
+    settingsBtnViewForUser: true,
+    avatar: true,
   },
 };

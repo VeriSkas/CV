@@ -138,6 +138,10 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
     to: `${PATH.employees}/${ACTIVE_USER_ID()}`,
     label: 'Update employee',
   },
+  userProfile: {
+    to: `${PATH.employees}/${ACTIVE_USER_ID()}`,
+    label: 'Profile',
+  },
   removeUser: {
     to: PATH.employees,
     label: 'Delete employee',

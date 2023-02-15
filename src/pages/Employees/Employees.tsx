@@ -1,13 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { OperationVariables, useMutation, useQuery } from '@apollo/client';
+import {
+  OperationVariables,
+  useMutation,
+  useQuery,
+  useReactiveVar,
+} from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
 import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
-import { ACTIVE_USER_ID } from '../../apollo/state';
+import { ACTIVE_USER_ID, MAIN_ROLE } from '../../apollo/state';
 
 import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
-import { dropDownOptions } from '../../constants/constants';
+import { dropDownOptions, Roles } from '../../constants/constants';
 import { MainPagesInfo } from '../../constants/mainPagesInfo';
 import { PATH } from '../../constants/paths';
 import { TableUser, UserInfo } from '../../types/interfaces/user';
@@ -23,6 +28,11 @@ export const Employees: FC<{
     OperationVariables
   >(GET_USERS);
   const [deleteUser] = useMutation(DELETE_USER);
+  const role = useReactiveVar(MAIN_ROLE);
+  const mainPagesInfo =
+    role === Roles.admin.id
+      ? MainPagesInfo.employeesPage
+      : MainPagesInfo.employeesPageUser;
 
   useEffect(() => {
     if (data?.users) {
@@ -66,7 +76,10 @@ export const Employees: FC<{
       });
     }
 
-    if (label === dropDownOptions.updateUser.label) {
+    if (
+      label === dropDownOptions.updateUser.label ||
+      label === dropDownOptions.userProfile.label
+    ) {
       navigate(`${PATH.employees}/${id}`);
       localStorage.setItem(LSItems.activeUser, id);
       ACTIVE_USER_ID(id);
@@ -75,7 +88,7 @@ export const Employees: FC<{
 
   return (
     <TablePageContainer
-      mainPagesInfo={MainPagesInfo.employeesPage}
+      mainPagesInfo={mainPagesInfo}
       tableItems={users}
       loading={loading}
       dropDownHandler={dropDownHandler}

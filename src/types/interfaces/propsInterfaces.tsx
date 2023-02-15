@@ -93,6 +93,8 @@ export interface TableProps {
   dropDownOptions: DropDownOption[];
   dropDownHandler: (label: string, id: string) => void;
   searchValue?: SearchValue;
+  settingsBtnViewForUser: boolean;
+  avatar: boolean;
 }
 
 export interface SearchValue {
@@ -104,6 +106,8 @@ export interface TableItemProps {
   item: UsedInTableObjectsType;
   dropDownOptions: DropDownOption[];
   dropDownHandler: (label: string, id: string) => void;
+  settingsView: boolean;
+  avatar: boolean;
 }
 
 export interface LayoutProps {
@@ -120,6 +124,7 @@ export interface SelectProps {
   defaultValue: string | '';
   labelName: string | '';
   register: UseFormRegister<any>;
+  disabled?: boolean;
 }
 
 export interface OptionsType {
@@ -133,6 +138,7 @@ export interface SearchBarProps {
   title: string;
   placeholder?: string;
   onChangeSearch: (value: string) => void;
+  createBtnViewForUser: boolean;
   children: ReactElement;
 }
 

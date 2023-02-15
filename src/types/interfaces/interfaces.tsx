@@ -114,4 +114,7 @@ export interface IMainPagesInfo {
   headerOptions: { [key: string]: TableOption };
   dropDownOptions: DropDownOption[];
   searchKey: string[];
+  createBtnViewForUser: boolean;
+  settingsBtnViewForUser: boolean;
+  avatar: boolean;
 }

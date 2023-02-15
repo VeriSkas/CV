@@ -61,6 +61,7 @@ export const Layout: FC<LayoutProps> = ({
       navigate(`${PATH.employees}/${userId}${PATH.profile}`);
     }
     if (label === links.logout.label) {
+      localStorage.clear();
       USER_TOKEN('');
       auth(false);
     }

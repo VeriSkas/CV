@@ -16,6 +16,7 @@ export const objectKeysInTable = {
 
 export const TypeForm = {
   profileType: 'profile',
+  employeeProfile: 'employeeProfile',
   updateEmployee: 'updateEmployee',
   createEmployee: 'createEmployee',
   cvUser: 'cvUser',

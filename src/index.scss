@@ -41,6 +41,6 @@ body {
 }
 
 input:read-only {
-  background: $inputReadOnlyBackground;
-  cursor: not-allowed;
+  background: #fff;
+  cursor: auto;
 }
