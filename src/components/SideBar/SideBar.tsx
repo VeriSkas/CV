@@ -9,9 +9,10 @@ import { links } from '../../constants/constants';
 import classes from './SideBar.module.scss';
 import { Backdrop } from '../UI/Backdrop/Backdrop';
 
-export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = (
-  props
-) => {
+export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = ({
+  onClose,
+  isOpen,
+}) => {
   const { t } = useTranslation();
   const {
     employees,
@@ -36,7 +37,7 @@ export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = (
     return navLinks.map((link) => {
       return (
         <li key={link.label}>
-          <NavLink to={link.to} onClick={props.onClose}>
+          <NavLink to={link.to} onClick={onClose}>
             <IconContext.Provider value={{ className: classes.Icon }}>
               {link.icon}
             </IconContext.Provider>
@@ -51,11 +52,11 @@ export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = (
     <>
       <nav
         className={
-          props.isOpen ? classes.SideBar : `${classes.SideBar} ${classes.close}`
+          isOpen ? classes.SideBar : `${classes.SideBar} ${classes.close}`
         }
       >
         <div className={classes.NavHeader}>
-          <span onClick={props.onClose}>
+          <span onClick={onClose}>
             <IconContext.Provider value={{ className: classes.Cross }}>
               <RxCross2 />
             </IconContext.Provider>
@@ -63,7 +64,7 @@ export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = (
         </div>
         <ul>{renderLinks()}</ul>
       </nav>
-      {props.isOpen && <Backdrop onClick={props.onClose} />}
+      {isOpen && <Backdrop onClick={onClose} />}
     </>
   );
 };

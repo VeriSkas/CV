@@ -41,7 +41,7 @@ export const useOptions = (label: string): OptionsType[] => {
       options = positionsValue;
       break;
     case InputLabels.role:
-      options = Roles;
+      options = [...Object.values(Roles)];
       break;
 
     default:

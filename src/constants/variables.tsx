@@ -1,6 +1,7 @@
 export const LSItems = {
   token: 'token',
   userId: 'userId',
+  role: 'role',
   activeUser: 'activeUser',
   activeProject: 'activeProject',
   activeCV: 'activeCV',

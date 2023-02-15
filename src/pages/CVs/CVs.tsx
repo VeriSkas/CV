@@ -7,9 +7,9 @@ import { GET_CVS } from '../../apollo/queries/cvs';
 import { dropDownOptions } from '../../constants/constants';
 import { CvItem, TableCvItem } from '../../types/interfaces/cvs';
 import { PATH } from '../../constants/paths';
-import { LSItems } from '../../constants/variables';
 import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
 import { MainPagesInfo } from '../../constants/mainPagesInfo';
+import { ACTIVE_CV_ID } from '../../apollo/state';
 
 export const CVs: FC<{}> = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export const CVs: FC<{}> = () => {
 
   const dropDownHandler = (label: string, id: string): void => {
     if (label === dropDownOptions.cv.label) {
-      localStorage.setItem(LSItems.activeCV, id);
+      ACTIVE_CV_ID(id);
       navigate(`${PATH.cvs}/${id}`);
     }
   };

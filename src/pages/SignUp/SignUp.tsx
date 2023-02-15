@@ -6,12 +6,12 @@ import { SIGN_UP } from '../../apollo/queries/signUp';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
 import { PATH } from '../../constants/paths';
 import { signUpFormText } from '../../constants/text';
-import { LSItems } from '../../constants/variables';
+import { MAIN_ROLE, USER_ID, USER_TOKEN } from '../../apollo/state';
 
 export const SignUp: FC<{
   auth: (isAuth: boolean) => void,
   setError: (error: string) => void,
-}> = (props) => {
+}> = ({ auth, setError }) => {
   const [signUp, { data: userData, error }] = useMutation(SIGN_UP);
   const text = signUpFormText;
 
@@ -19,13 +19,14 @@ export const SignUp: FC<{
     if (userData) {
       const { token, user } = userData.signup;
 
-      localStorage.setItem(LSItems.token, token);
-      localStorage.setItem(LSItems.userId, user.id);
-      props.auth(true);
+      MAIN_ROLE(user.role);
+      USER_TOKEN(token);
+      USER_ID(user.id);
+      auth(true);
     }
 
     if (error) {
-      props.setError(error.message);
+      setError(error.message);
     }
   }, [userData, error]);
 

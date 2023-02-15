@@ -28,7 +28,7 @@ export const inputs: { [key: string]: IInput } = {
     defaultValue: '',
     validation: {
       required: { value: true, message: ErrorMessages.inputRequired },
-      minLength: { value: 6, message: ErrorMessages.inputMinLength(6) },
+      minLength: { value: 5, message: ErrorMessages.inputMinLength(5) },
       maxLength: { value: 32, message: ErrorMessages.inputMaxLength(32) },
     },
   },

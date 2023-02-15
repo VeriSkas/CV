@@ -8,26 +8,34 @@ import { InputProps } from '../../../types/interfaces/propsInterfaces';
 import { InputTypes } from '../../../constants/text';
 import classes from './Input.module.scss';
 
-export const Input: FC<InputProps> = (props) => {
+export const Input: FC<InputProps> = ({
+  label,
+  labelName,
+  defaultValue,
+  type,
+  readonly,
+  validation,
+  register,
+  error,
+  placeholder,
+}) => {
   const { t } = useTranslation();
   const [toggle, setToggle] = useState(false);
 
   return (
     <div className={classes.Input}>
-      {props.labelName && (
-        <label htmlFor={props.labelName}>{props.labelName}</label>
-      )}
+      {labelName && <label htmlFor={labelName}>{labelName}</label>}
       <div className={classes.Input_input}>
         <input
-          {...props.register(props.label, { ...props.validation })}
-          type={props.type && !toggle ? props.type : InputTypes.text}
-          defaultValue={props.defaultValue ?? ''}
-          id={props.label && props.labelName}
-          readOnly={props.readonly ?? false}
-          placeholder={t(props.placeholder ?? '')}
+          {...register(label, { ...validation })}
+          type={type && !toggle ? type : InputTypes.text}
+          defaultValue={defaultValue ?? ''}
+          id={label && labelName}
+          readOnly={readonly ?? false}
+          placeholder={t(placeholder ?? '')}
         />
-        {props.error && <span>{t(props.error)}</span>}
-        {props.type === InputTypes.password && (
+        {error && <span>{t(error)}</span>}
+        {type === InputTypes.password && (
           <div
             className={classes.Eye}
             onClick={() => {

@@ -8,7 +8,7 @@ import { DropDownOption } from '../../../types/interfaces/interfaces';
 import { DropDownProps } from '../../../types/interfaces/propsInterfaces';
 import classes from './DropDown.module.scss';
 
-export const DropDown: FC<DropDownProps> = (props) => {
+export const DropDown: FC<DropDownProps> = ({ options, onClick }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(true);
 
@@ -17,12 +17,12 @@ export const DropDown: FC<DropDownProps> = (props) => {
   };
 
   const renderOptions = (): ReactNode => {
-    return props.options.map((option: DropDownOption) => {
+    return options.map((option: DropDownOption) => {
       return (
         <li
           key={option.label}
           onClick={() => {
-            props.onClick(option.label);
+            onClick(option.label);
           }}
         >
           {option.to && (

@@ -12,7 +12,11 @@ import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import classes from './LoginSignUpForm.module.scss';
 
-export const LoginSignUpForm: FC<LoginSignUpFormProps> = (props) => {
+export const LoginSignUpForm: FC<LoginSignUpFormProps> = ({
+  text,
+  path,
+  onSubmit,
+}) => {
   const { t } = useTranslation();
   const {
     register,
@@ -27,7 +31,7 @@ export const LoginSignUpForm: FC<LoginSignUpFormProps> = (props) => {
     const email = data.email;
     const password = data.password;
 
-    props.onSubmit({ email, password });
+    onSubmit({ email, password });
     reset();
   };
 
@@ -55,13 +59,13 @@ export const LoginSignUpForm: FC<LoginSignUpFormProps> = (props) => {
         onSubmit={handleSubmit(submitForm)}
         className={classes.LoginSignUpForm_form}
       >
-        <h1>{t(props.text.title)}</h1>
-        <h3>{t(props.text.subtitle)}</h3>
+        <h1>{t(text.title)}</h1>
+        <h3>{t(text.subtitle)}</h3>
         {renderInputs()}
         <div className={classes.FormBtns}>
-          <Button disabled={!isValid}>{t(props.text.submitBtn)}</Button>
-          <Link to={props.path}>
-            <Button type={BtnType.transparent}>{t(props.text.btn)}</Button>
+          <Button disabled={!isValid}>{t(text.submitBtn)}</Button>
+          <Link to={path}>
+            <Button type={BtnType.transparent}>{t(text.btn)}</Button>
           </Link>
         </div>
       </form>

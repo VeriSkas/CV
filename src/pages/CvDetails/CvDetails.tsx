@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 
-import { useQuery } from '@apollo/client';
+import { useQuery, useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
 import { GET_CV } from '../../apollo/queries/cvs';
@@ -9,14 +9,16 @@ import { CvItemDetails } from '../../types/interfaces/cvs';
 import { Inputs } from '../../types/interfaces/interfaces';
 import { ContentText, TitleText } from '../../constants/text';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { LSItems, TypeForm } from '../../constants/variables';
+import { TypeForm } from '../../constants/variables';
+import { ACTIVE_CV_ID, USER_ID } from '../../apollo/state';
 
 export const CvDetails: FC<{}> = () => {
-  const user = localStorage.getItem(LSItems.userId);
+  const userID = useReactiveVar(USER_ID);
+  const activeCV = useReactiveVar(ACTIVE_CV_ID);
   const { t } = useTranslation();
   const { loading, data } = useQuery<{ cv: CvItemDetails }>(GET_CV, {
     variables: {
-      id: localStorage.getItem(LSItems.activeCV),
+      id: activeCV,
     },
   });
 
@@ -35,7 +37,7 @@ export const CvDetails: FC<{}> = () => {
               submitFormHandler(data, id);
             }}
             type={
-              user === data.cv.user?.id ? TypeForm.cvUser : TypeForm.cvDetails
+              userID === data.cv.user?.id ? TypeForm.cvUser : TypeForm.cvDetails
             }
           />
         )}

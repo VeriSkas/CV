@@ -1,3 +1,5 @@
+export type Role = 'admin' | 'employee';
+
 export interface UserInfo {
   id: string;
   email: string;

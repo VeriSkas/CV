@@ -4,7 +4,7 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
 import { BAErrorMessages } from '../constants/text';
-import { LSItems } from '../constants/variables';
+import { USER_TOKEN } from './state';
 
 const URI = 'https://cv-project-js.inno.ws/api/graphql';
 
@@ -13,12 +13,10 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem(LSItems.token);
-
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: USER_TOKEN() ? `Bearer ${USER_TOKEN()}` : '',
     },
   };
 });
@@ -27,7 +25,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
       if (message === BAErrorMessages.unauthorized) {
-        localStorage.clear();
+        USER_TOKEN('');
       }
     });
   }

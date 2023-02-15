@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
-import { useQuery } from '@apollo/client';
+import { useQuery, useReactiveVar } from '@apollo/client';
 
 import { Header } from '../UI/Header/Header';
 import { SideBar } from '../SideBar/SideBar';
@@ -15,10 +15,16 @@ import { LayoutProps } from '../../types/interfaces/propsInterfaces';
 import { UserInfoShort } from '../../types/interfaces/user';
 import { Notification } from '../UI/Notification/Notification';
 import { PATH } from '../../constants/paths';
-import { LSItems } from '../../constants/variables';
+import { USER_ID, USER_TOKEN } from '../../apollo/state';
 
-export const Layout: FC<LayoutProps> = (props) => {
-  const userId = localStorage.getItem(LSItems.userId) ?? '';
+export const Layout: FC<LayoutProps> = ({
+  auth,
+  login,
+  errorMessage,
+  setErrorMessage,
+  children,
+}) => {
+  const userId = useReactiveVar(USER_ID);
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
   const [isOpenNotification, setIsOpenNotification] = useState<boolean>(true);
@@ -33,10 +39,10 @@ export const Layout: FC<LayoutProps> = (props) => {
   const dropdownOptions = [profile, settings, logout];
 
   useEffect(() => {
-    if (props.errorMessage) {
+    if (errorMessage) {
       setIsOpenNotification(true);
     }
-  }, [props.errorMessage]);
+  }, [errorMessage]);
 
   const onClose = (): void => {
     setIsOpenSidebar(false);
@@ -55,19 +61,19 @@ export const Layout: FC<LayoutProps> = (props) => {
       navigate(`${PATH.employees}/${userId}${PATH.profile}`);
     }
     if (label === links.logout.label) {
-      localStorage.clear();
-      props.auth(false);
+      USER_TOKEN('');
+      auth(false);
     }
   };
 
   const onCloseNotification = (status: boolean): void => {
     setIsOpenNotification(false);
-    props.setErrorMessage('');
+    setErrorMessage('');
   };
 
   return (
     <>
-      {props.login ? (
+      {login ? (
         <div className={classes.Layout}>
           <SideBar onClose={onClose} isOpen={isOpenSidebar} />
           <Header>
@@ -103,14 +109,14 @@ export const Layout: FC<LayoutProps> = (props) => {
               </div>
             </div>
           </Header>
-          <div className={classes.Container}>{props.children}</div>
+          <div className={classes.Container}>{children}</div>
         </div>
       ) : (
-        <div>{props.children}</div>
+        <div>{children}</div>
       )}
-      {props.errorMessage && isOpenNotification && (
+      {errorMessage && isOpenNotification && (
         <Notification
-          message={props.errorMessage}
+          message={errorMessage}
           onCloseHandler={(status: boolean) => {
             onCloseNotification(status);
           }}

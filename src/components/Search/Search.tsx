@@ -8,11 +8,15 @@ import { InputType } from '../../constants/variables';
 import { InputSearchProps } from '../../types/interfaces/propsInterfaces';
 import classes from './Search.module.scss';
 
-export const Search: FC<InputSearchProps> = (props) => {
+export const Search: FC<InputSearchProps> = ({
+  placeholder,
+  value,
+  onChange,
+}) => {
   const { t } = useTranslation();
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    props.onChange(event.target.value);
+    onChange(event.target.value);
   };
 
   return (
@@ -24,8 +28,8 @@ export const Search: FC<InputSearchProps> = (props) => {
       </div>
       <input
         type={InputType.text}
-        placeholder={t(props.placeholder ?? '')}
-        value={props.value}
+        placeholder={t(placeholder ?? '')}
+        value={value}
         onChange={onChangeHandler}
       />
     </div>

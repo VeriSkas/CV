@@ -19,20 +19,25 @@ import {
   ILink,
 } from '../types/interfaces/interfaces';
 import { PATH } from './paths';
-import { LSItems } from './variables';
+import {
+  ACTIVE_CV_ID,
+  ACTIVE_PROJECT_ID,
+  ACTIVE_USER_ID,
+  USER_ID,
+} from '../apollo/state';
 
 export const MAX_photoSize = 500000;
 
-export const Roles = [
-  {
+export const Roles = {
+  admin: {
     value: 'Admin',
     id: 'admin',
   },
-  {
+  employee: {
     value: 'Employee',
     id: 'employee',
   },
-];
+};
 
 export const links: { [key: string]: ILink } = {
   employees: {
@@ -76,9 +81,7 @@ export const links: { [key: string]: ILink } = {
     icon: <MdLogout />,
   },
   profile: {
-    to: `${PATH.employees}/${localStorage.getItem(LSItems.userId) ?? ''}${
-      PATH.profile
-    }`,
+    to: `${PATH.employees}/${USER_ID()}${PATH.profile}`,
     label: 'Profile',
     icon: <CgProfile />,
   },
@@ -132,7 +135,7 @@ export const languagesTableOptions: { [key: string]: TableOption } = {
 
 export const dropDownOptions: { [key: string]: DropDownOption } = {
   updateUser: {
-    to: `${PATH.employees}/${localStorage.getItem(LSItems.activeUser)}`,
+    to: `${PATH.employees}/${ACTIVE_USER_ID()}`,
     label: 'Update employee',
   },
   removeUser: {
@@ -140,7 +143,7 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
     label: 'Delete employee',
   },
   project: {
-    to: `${PATH.projects}/${localStorage.getItem(LSItems.activeProject)}`,
+    to: `${PATH.projects}/${ACTIVE_PROJECT_ID()}`,
     label: 'Project',
   },
   removeProject: {
@@ -148,7 +151,7 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
     label: 'Delete project',
   },
   cv: {
-    to: `${PATH.cvs}/${localStorage.getItem(LSItems.activeCV)}`,
+    to: `${PATH.cvs}/${ACTIVE_CV_ID()}`,
     label: 'CV',
   },
   removeCV: {

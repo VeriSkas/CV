@@ -6,12 +6,12 @@ import { AUTH } from '../../apollo/queries/auth';
 import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
 import { PATH } from '../../constants/paths';
 import { authFormText } from '../../constants/text';
-import { LSItems } from '../../constants/variables';
+import { MAIN_ROLE, USER_ID, USER_TOKEN } from '../../apollo/state';
 
 export const Auth: FC<{
   auth: (isAuth: boolean) => void,
   setError: (error: string) => void,
-}> = (props) => {
+}> = ({ auth, setError }) => {
   const [authUser, { data: userData, error }] = useLazyQuery(AUTH);
   const text = authFormText;
 
@@ -19,13 +19,14 @@ export const Auth: FC<{
     if (userData) {
       const { token, user } = userData.login;
 
-      localStorage.setItem(LSItems.token, token);
-      localStorage.setItem(LSItems.userId, user.id);
-      props.auth(true);
+      MAIN_ROLE(user.role);
+      USER_TOKEN(token);
+      USER_ID(user.id);
+      auth(true);
     }
 
     if (error) {
-      props.setError(error.message);
+      setError(error.message);
     }
   }, [userData, error]);
 

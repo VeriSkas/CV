@@ -1,19 +1,20 @@
-import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 import React, { FC, useEffect, useState } from 'react';
 
+import { OperationVariables, useMutation, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+
 import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
+import { ACTIVE_USER_ID } from '../../apollo/state';
 
 import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
 import { dropDownOptions } from '../../constants/constants';
 import { MainPagesInfo } from '../../constants/mainPagesInfo';
 import { PATH } from '../../constants/paths';
-import { LSItems } from '../../constants/variables';
 import { TableUser, UserInfo } from '../../types/interfaces/user';
 
-export const Employees: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const Employees: FC<{
+  setError: (error: string) => void,
+}> = ({ setError }) => {
   const navigate = useNavigate();
   const [users, setUsers] = useState<TableUser[] | null>(null);
   const { loading, data, error } = useQuery<
@@ -66,7 +67,7 @@ export const Employees: FC<{ setError: (error: string) => void }> = ({
 
     if (label === dropDownOptions.updateUser.label) {
       navigate(`${PATH.employees}/${id}`);
-      localStorage.setItem(LSItems.activeUser, id);
+      ACTIVE_USER_ID(id);
     }
   };
 

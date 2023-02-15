@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
+
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useReactiveVar } from '@apollo/client';
 
 import { Auth } from './pages/Auth/Auth';
 import { CreateEmployee } from './pages/CreateEmployee/CreateEmployee';
@@ -17,7 +19,6 @@ import { CVs } from './pages/CVs/CVs';
 import { CvDetails } from './pages/CvDetails/CvDetails';
 import { PATH } from './constants/paths';
 import { CreateCV } from './pages/CreateCV/CreateCV';
-import { LSItems } from './constants/variables';
 import { DepartmentsPage } from './pages/DepartmentsPage/DepartmentsPage';
 import { Departments } from './pages/Departments/Departments';
 import { PositionPage } from './pages/PositionPage/PositionPage';
@@ -26,11 +27,11 @@ import { SkillsPage } from './pages/SkillsPage/SkillsPage';
 import { Skills } from './pages/Skills/Skills';
 import { LanguagesPage } from './pages/LanguagesPage/LanguagesPage';
 import { Languages } from './pages/Languages/Languages';
+import { USER_TOKEN } from './apollo/state';
 
 export const App: FC = () => {
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(
-    () => !!localStorage.getItem(LSItems.token)
-  );
+  const token = useReactiveVar(USER_TOKEN);
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(() => !!token);
   const [errorMessage, setErrorMessage] = useState<string>('');
   let link = isLoggedIn ? PATH.employees : PATH.login;
 
