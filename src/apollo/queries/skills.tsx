@@ -8,3 +8,12 @@ export const GET_SKILLS = gql`
     }
   }
 `;
+
+export const GET_SKILLS_AS_OPTIONS = gql`
+  query getSkills {
+    skills {
+      id
+      value: name
+    }
+  }
+`;

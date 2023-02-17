@@ -27,10 +27,12 @@ export const CreateCV: FC<{ setError: (message: string) => void }> = ({
   useEffect(() => {
     if (data) {
       const { id } = data.createCv;
+
       localStorage.setItem(LSItems.activeCV, id);
       ACTIVE_CV_ID(id);
       navigate(`${PATH.cvs}/${id} `);
     }
+
     if (error) {
       setError(error.message);
     }
@@ -40,7 +42,7 @@ export const CreateCV: FC<{ setError: (message: string) => void }> = ({
     const newCV: NewCV = {
       ...data,
       userId: userID, //temporary
-      is_template: true, //temporary
+      is_template: false, //temporary
       projectsIds: ['1'], //temporary
     };
 

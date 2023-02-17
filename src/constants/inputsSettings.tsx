@@ -75,10 +75,61 @@ export const inputs: { [key: string]: IInput } = {
     defaultValue: '',
     validation: {},
   },
+  domain: {
+    type: InputTypes.text,
+    label: InputLabels.domain,
+    labelName: InputLabelNames.domain,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 3, message: ErrorMessages.inputMinLength(3) },
+      maxLength: { value: 32, message: ErrorMessages.inputMaxLength(32) },
+    },
+  },
+  team_size: {
+    type: InputTypes.number,
+    label: InputLabels.teamSize,
+    labelName: InputLabelNames.teamSize,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      min: { value: 1, message: ErrorMessages.inputMinNumber(1) },
+      max: { value: 100, message: ErrorMessages.inputMaxNumber(100) },
+    },
+  },
+  start_date: {
+    type: InputTypes.date,
+    label: InputLabels.startDate,
+    labelName: InputLabelNames.startDate,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+    },
+  },
+  end_date: {
+    type: InputTypes.date,
+    label: InputLabels.endDate,
+    labelName: InputLabelNames.endDate,
+    defaultValue: '',
+    validation: {
+      required: { value: false, message: ErrorMessages.inputRequired },
+    },
+  },
   name: {
     type: InputTypes.text,
     label: InputLabels.name,
     labelName: InputLabelNames.name,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 3, message: ErrorMessages.inputMinLength(3) },
+      maxLength: { value: 32, message: ErrorMessages.inputMaxLength(32) },
+    },
+  },
+  internal_name: {
+    type: InputTypes.text,
+    label: InputLabels.internalName,
+    labelName: InputLabelNames.internalName,
     defaultValue: '',
     validation: {
       required: { value: true, message: ErrorMessages.inputRequired },

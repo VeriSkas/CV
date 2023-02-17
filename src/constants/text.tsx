@@ -4,6 +4,8 @@ export const InputTypes = {
   password: 'password',
   select: 'select',
   radio: 'radio',
+  number: 'number',
+  date: 'date',
 };
 
 export const InputLabels = {
@@ -16,11 +18,17 @@ export const InputLabels = {
   position: 'positionId',
   description: 'description',
   name: 'name',
+  internalName: 'internal_name',
+  domain: 'domain',
   skill: 'skill',
   skills: 'skills',
+  skillsIds: 'skillsIds',
   language: 'language',
   languages: 'languages',
   role: 'role',
+  teamSize: 'team_size',
+  startDate: 'start_date',
+  endDate: 'end_date',
 };
 
 export const InputLabelNames = {
@@ -32,16 +40,23 @@ export const InputLabelNames = {
   department: 'Department',
   position: 'Position',
   description: 'Description',
-  name: 'CV name',
+  name: 'Name',
+  internalName: 'Internal name',
   skill: 'Skill',
   skills: 'Skills',
   language: 'Language',
   languages: 'Languages',
   role: 'Role',
+  domain: 'Domain',
+  teamSize: 'Team size',
+  startDate: 'Start date',
+  endDate: 'End date',
 };
 
 export const ErrorMessages = {
   inputRequired: 'You should enter something',
+  inputMinNumber: (value: number) => `Value can't be less than ${value}`,
+  inputMaxNumber: (value: number) => `Value can't be more than ${value}`,
   inputMinLength: (value: number) =>
     `You should enter ${value} symbols or more`,
   inputMaxLength: (value: number) =>
@@ -65,6 +80,7 @@ export const TitleText = {
   employees: 'Employees',
   profile: 'Profile',
   projects: 'Projects',
+  createProject: 'Create project',
   login: 'Login',
   signUp: 'SignUp',
   updateUser: 'Update User',

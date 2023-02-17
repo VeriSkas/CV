@@ -28,6 +28,7 @@ import { Skills } from './pages/Skills/Skills';
 import { LanguagesPage } from './pages/LanguagesPage/LanguagesPage';
 import { Languages } from './pages/Languages/Languages';
 import { USER_TOKEN } from './apollo/state';
+import { CreateProject } from './pages/CreateProject/CreateProject';
 
 export const App: FC = () => {
   const token = useReactiveVar(USER_TOKEN);
@@ -80,6 +81,16 @@ export const App: FC = () => {
       </Route>
       <Route path={PATH.projects} element={<ProjectsPage />}>
         <Route index element={<Projects />} />
+        <Route
+          path={PATH.createProject}
+          element={
+            <CreateProject
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
       </Route>
       <Route path={PATH.cvs} element={<CVsPage />}>
         <Route index element={<CVs />} />

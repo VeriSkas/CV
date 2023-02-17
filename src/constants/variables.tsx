@@ -22,6 +22,7 @@ export const TypeForm = {
   cvUser: 'cvUser',
   cvDetails: 'cvDetails',
   createCV: 'createCV',
+  createProject: 'createProject',
 };
 
 export const InputType = {

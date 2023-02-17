@@ -1,8 +1,9 @@
 import { inputs } from '../constants/inputsSettings';
+import { SelectSettings } from '../constants/SelectsSettings';
 import { InputLabelNames } from '../constants/text';
 import { TypeForm } from '../constants/variables';
 import { CvItemDetails } from '../types/interfaces/cvs';
-import { IInput } from '../types/interfaces/interfaces';
+import { IInput, IMySelect } from '../types/interfaces/interfaces';
 import { UserInfo } from '../types/interfaces/user';
 
 export const makeCvInputsList = (
@@ -136,5 +137,30 @@ export const makeEmployeeInputsList = (
     ];
   }
 
+  return [];
+};
+
+export const makeProjectInputsList = (
+  type: string,
+  user?: UserInfo
+): IInput[] => {
+  if (type === TypeForm.createProject) {
+    return [
+      { ...inputs.name },
+      { ...inputs.internal_name },
+      { ...inputs.description },
+      { ...inputs.domain },
+      { ...inputs.team_size },
+      { ...inputs.start_date },
+      { ...inputs.end_date },
+    ];
+  }
+  return [];
+};
+
+export const makeProjectSelectsList = (type: string): IMySelect[] => {
+  if (type === TypeForm.createProject) {
+    return [{ ...SelectSettings.skillsIds }];
+  }
   return [];
 };

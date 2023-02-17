@@ -36,6 +36,15 @@ export interface InputProps {
   placeholder?: string;
 }
 
+export interface MySelectProps {
+  label: string;
+  multi: boolean;
+  defaultValue: string | string[];
+  disabled: boolean;
+  labelName: string;
+  control: Control<any, any>;
+}
+
 export interface FieldArrayProps {
   register: UseFormRegister<any>;
   control: Control<any, any>;

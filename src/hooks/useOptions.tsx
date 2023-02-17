@@ -9,6 +9,8 @@ import { InputLabels } from '../constants/text';
 import { DepartmentOption } from '../types/interfaces/departments';
 import { PositionOption } from '../types/interfaces/positions';
 import { OptionsType } from '../types/interfaces/propsInterfaces';
+import { GET_SKILLS_AS_OPTIONS } from '../apollo/queries/skills';
+import { SkillOption } from '../types/interfaces/skills';
 
 export const useOptions = (label: string): OptionsType[] => {
   const { data: departments } = useQuery<{ departments: DepartmentOption[] }>(
@@ -17,8 +19,12 @@ export const useOptions = (label: string): OptionsType[] => {
   const { data: positions } = useQuery<{ positions: PositionOption[] }>(
     GET_POSITIONS_AS_OPTIONS
   );
+  const { data: skills } = useQuery<{ skills: SkillOption[] }>(
+    GET_SKILLS_AS_OPTIONS
+  );
   const [departmentsValue, setDepartmentsValue] = useState<OptionsType[]>([]);
   const [positionsValue, setPositionsValue] = useState<OptionsType[]>([]);
+  const [skillsValue, setSkillsValue] = useState<OptionsType[]>([]);
   let options: OptionsType[] = [];
 
   useEffect(() => {
@@ -33,6 +39,12 @@ export const useOptions = (label: string): OptionsType[] => {
     }
   }, [positions]);
 
+  useEffect(() => {
+    if (skills) {
+      setSkillsValue(skills.skills);
+    }
+  }, [skills]);
+
   switch (label) {
     case InputLabels.department:
       options = departmentsValue;
@@ -42,6 +54,9 @@ export const useOptions = (label: string): OptionsType[] => {
       break;
     case InputLabels.role:
       options = [...Object.values(Roles)];
+      break;
+    case InputLabels.skillsIds:
+      options = skillsValue;
       break;
 
     default:

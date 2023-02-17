@@ -14,6 +14,17 @@ export interface Inputs {
   [key: string]: string;
 }
 
+export interface NewProjectForm {
+  name: string;
+  internal_name: string;
+  description: string;
+  domain: string;
+  start_date: string;
+  end_date?: string;
+  team_size: number;
+  skillsIds: Array<{ value: string, label: string }>;
+}
+
 export interface NewCvForm {
   name: string;
   description: string;
@@ -65,6 +76,14 @@ export interface IInput {
       | { value: number | boolean | RegExp, message: string }
       | ((value: string) => boolean | string),
   };
+}
+
+export interface IMySelect {
+  label: string;
+  labelName: string;
+  defaultValue: string;
+  disabled: boolean;
+  multi: boolean;
 }
 
 export interface ILink {
