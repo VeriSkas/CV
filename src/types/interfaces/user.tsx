@@ -69,3 +69,8 @@ export interface UserInfoShort {
     last_name: string;
   }
 }
+
+export interface IRole {
+  label: string;
+  value: string;
+}

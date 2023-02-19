@@ -1,8 +1,9 @@
 import { LanguageItemInDB, SkillItemInDB, TableCvItem } from './cvs';
-import { Department } from './departments';
+import { Department, DepartmentOption } from './departments';
+import { PositionOption } from './positions';
 import { ProjectItem } from './project';
 import { IRadioInputs } from './propsInterfaces';
-import { TableUser } from './user';
+import { IRole, TableUser } from './user';
 
 export type UsedInTableObjectsType =
   | TableCvItem
@@ -40,9 +41,9 @@ export interface NewEmployeeForm {
   skills: SkillItemInDB[];
   languages: LanguageItemInDB[];
   cvsIds: string[];
-  departmentId?: string;
-  positionId?: string;
-  role: string;
+  departmentId?: DepartmentOption;
+  positionId?: PositionOption;
+  role: IRole;
 }
 
 export interface IEmployeeForm {
@@ -54,6 +55,7 @@ export interface IEmployeeForm {
   cvsIds: string[];
   departmentId: string;
   positionId: string;
+  role: string;
 }
 
 export interface CvDetailForm {

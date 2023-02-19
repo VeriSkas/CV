@@ -85,7 +85,7 @@ export const TableItem: FC<TableItemProps> = ({
         )}
       </div>}
       {renderItemRow()}
-      {(role === Roles.admin.id || settingsView) && <div className={classes.Item}>
+      {(role === Roles.admin.value || settingsView) && <div className={classes.Item}>
         <div className={classes.Options} onClick={toggleDropDown}>
           <SlOptionsVertical />
           {isOpenDropDown && (

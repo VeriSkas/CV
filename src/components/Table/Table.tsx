@@ -136,7 +136,7 @@ export const Table: FC<TableProps> = ({
       <div className={classes.TableHeader}>
         {avatar && <div></div>}
         {renderHeaderOptions()}
-        {(role === Roles.admin.id || settingsBtnViewForUser) && <div></div>}
+        {(role === Roles.admin.value || settingsBtnViewForUser) && <div></div>}
       </div>
       {loading ? (
         <p>{t(ContentText.loading)}</p>

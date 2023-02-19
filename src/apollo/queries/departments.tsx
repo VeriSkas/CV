@@ -12,8 +12,8 @@ export const GET_DEPARTMENTS = gql`
 export const GET_DEPARTMENTS_AS_OPTIONS = gql`
   query getDepartments {
     departments {
-      id
-      value: name
+      value: id
+      label: name
     }
   }
 `;

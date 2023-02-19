@@ -8,7 +8,7 @@ import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { NewProjectForm } from '../../types/interfaces/interfaces';
-import { makeProjectInputsList, makeProjectSelectsList } from '../../utils/formCreator';
+import { makeProjectInputsList, makeSelectsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import { MySelect } from '../UI/MySelect/MySelect';
@@ -24,6 +24,7 @@ export const ProjectCreateForm: FC<{
     handleSubmit,
     reset,
     control,
+    setValue,
     formState: { errors, isValid },
   } = useForm<NewProjectForm>({
     mode: 'all',
@@ -40,7 +41,7 @@ export const ProjectCreateForm: FC<{
           labelName={input.labelName}
           label={input.label}
           defaultValue={input.defaultValue}
-          placeholder={input.label}
+          placeholder={input.labelName}
           validation={input.validation}
           readonly={input.readonly}
           register={register}
@@ -51,13 +52,14 @@ export const ProjectCreateForm: FC<{
   };
 
   const renderSelects = (): ReactNode => {
-    const selects = makeProjectSelectsList(TypeForm.createProject);
+    const selects = makeSelectsList(TypeForm.createProject);
 
     return selects?.map((select) => {
       return (
         <MySelect
           key={select.label}
           control={control}
+          setFormValue={setValue}
           label={select.label}
           multi={select.multi}
           defaultValue={select.defaultValue}

@@ -77,7 +77,16 @@ export const App: FC = () => {
             />
           }
         />
-        <Route path={PATH.createEmployeeAbs} element={<CreateEmployee />} />
+        <Route
+          path={PATH.createEmployeeAbs}
+          element={
+            <CreateEmployee
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
       </Route>
       <Route path={PATH.projects} element={<ProjectsPage />}>
         <Route index element={<Projects />} />

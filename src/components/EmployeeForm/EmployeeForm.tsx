@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { IEmployeeForm } from '../../types/interfaces/interfaces';
-import { BtnText, InputTypes } from '../../constants/text';
+import { BtnText } from '../../constants/text';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
 import { EmployeeFormProps } from '../../types/interfaces/propsInterfaces';
 import { Avatar } from '../Avatar/Avatar';
 import { PATH } from '../../constants/paths';
-import { Select } from '../UI/Select/Select';
-import { makeEmployeeInputsList } from '../../utils/formCreator';
+import { makeEmployeeInputsList, makeSelectsList } from '../../utils/formCreator';
 import { BtnType, TypeForm } from '../../constants/variables';
 import classes from './EmployeeForm.module.scss';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { FieldArrays } from '../../constants/fieldArrayVars';
 import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
+import { MySelect } from '../UI/MySelect/MySelect';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -37,6 +37,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     register,
     handleSubmit,
     setValue,
+    getValues,
     reset,
     control,
     formState: { errors, isValid },
@@ -72,24 +73,14 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     const profileInputs = makeEmployeeInputsList(type, user);
 
     return profileInputs?.map((input) => {
-      return input.type === InputTypes.select ? (
-        <Select
-          key={input.label}
-          onChangeHandler={selectChange}
-          label={input.label}
-          defaultValue={input.defaultValue ?? ''}
-          labelName={input.labelName ?? ''}
-          register={register}
-          disabled={isProfileType}
-        />
-      ) : (
+      return (
         <Input
           key={input.label}
           type={input.type}
           labelName={input.labelName}
           label={input.label}
           defaultValue={input.defaultValue}
-          placeholder={input.label}
+          placeholder={input.labelName}
           validation={input.validation}
           readonly={input.readonly}
           register={register}
@@ -117,9 +108,24 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     });
   };
 
-  const selectChange = (id: string, value: string, key: string): void => {
-    setValue(key as keyof IEmployeeForm, id);
-  };
+  const renderSelects = (): ReactNode => {
+    const selects = makeSelectsList(type);
+
+    return selects?.map((select) => {
+      return (
+        <MySelect
+          key={select.label}
+          control={control}
+          setFormValue={setValue}
+          label={select.label}
+          multi={select.multi}
+          defaultValue={getValues(select.label as keyof IEmployeeForm) as string ?? select.defaultValue}
+          disabled={select.disabled}
+          labelName={select.labelName}
+        />
+      )
+    })
+  }
 
   return (
     <form
@@ -134,6 +140,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         disabled={isProfileType}
       />
       {renderInputs()}
+      {renderSelects()}
       {renderFieldArrays()}
       <div className={classes.FormBtns}>
         {!isProfileType && <Button disabled={!isValid}>

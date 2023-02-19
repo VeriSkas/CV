@@ -1,25 +1,45 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { Controller } from 'react-hook-form';
 import Select from 'react-select';
 
-import { MySelectProps } from '../../../types/interfaces/propsInterfaces';
+import { useOptions } from '../../../hooks/useOptions';
+import {
+  MySelectProps,
+  OptionsType,
+} from '../../../types/interfaces/propsInterfaces';
 import classes from './MySelect.module.scss';
 
 export const MySelect: FC<MySelectProps> = ({
   control,
+  setFormValue,
   label,
   defaultValue,
   disabled,
   labelName,
   multi,
 }) => {
-  // const options: OptionsType[] | null = useOptions(label);
-  const options = [
-    { value: '1', label: 'Chocolate' },
-    { value: '2', label: 'Strawberry' },
-    { value: '3', label: 'Vanilla' },
-  ];
+  const [value, setValue] = useState<OptionsType>();
+  const options: OptionsType[] | null = useOptions(label);
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(options.find((c) => c.value === defaultValue));
+    }
+  }, [options]);
+
+  const onChangeHandler = (value: any): void => {
+    if (multi) {
+      setFormValue(
+        label,
+        value.map((item: OptionsType) => item.value)
+      );
+    } else {
+      setValue(value);
+      setFormValue(label, value.value);
+    }
+  };
+
   return (
     <div className={classes.MySelect}>
       <label>{labelName}</label>
@@ -32,10 +52,10 @@ export const MySelect: FC<MySelectProps> = ({
               className={classes.Select}
               placeholder={label}
               options={options}
-              defaultValue={defaultValue}
               isDisabled={disabled}
               isMulti={multi}
-              {...field}
+              value={value}
+              onChange={onChangeHandler}
             />
           );
         }}

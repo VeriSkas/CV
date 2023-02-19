@@ -63,5 +63,6 @@ export const useOptions = (label: string): OptionsType[] => {
       options = [];
       break;
   }
+
   return options;
 };

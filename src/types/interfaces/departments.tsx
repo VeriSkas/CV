@@ -4,6 +4,6 @@ export interface Department {
 }
 
 export interface DepartmentOption {
-  id: string;
+  label: string;
   value: string;
 }

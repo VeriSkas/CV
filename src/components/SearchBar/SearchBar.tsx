@@ -43,7 +43,7 @@ export const SearchBar: FC<SearchBarProps> = ({
             }}
           />
         </div>
-        {(role === Roles.admin.id || createBtnViewForUser) && (
+        {(role === Roles.admin.value || createBtnViewForUser) && (
           <div className={classes.CreateEmployeeBtn}>
             <Link to={linkTo}>
               <Button type={BtnType.transparentWithBorder}>{t(btnText)}</Button>

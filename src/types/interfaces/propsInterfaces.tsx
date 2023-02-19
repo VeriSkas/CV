@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from 'react';
 
-import { Control, UseFormRegister } from 'react-hook-form';
+import { Control, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 import { CvItemDetails } from './cvs';
 import {
@@ -39,10 +39,11 @@ export interface InputProps {
 export interface MySelectProps {
   label: string;
   multi: boolean;
-  defaultValue: string | string[];
+  defaultValue: string;
   disabled: boolean;
   labelName: string;
   control: Control<any, any>;
+  setFormValue: UseFormSetValue<any>;
 }
 
 export interface FieldArrayProps {
@@ -138,7 +139,7 @@ export interface SelectProps {
 
 export interface OptionsType {
   value: string;
-  id: string;
+  label: string;
 }
 
 export interface SearchBarProps {

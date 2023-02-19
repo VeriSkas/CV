@@ -79,7 +79,7 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
               setError(message);
             }}
             type={
-              role === Roles.admin.id
+              role === Roles.admin.value
                 ? TypeForm.updateEmployee
                 : TypeForm.employeeProfile
             }

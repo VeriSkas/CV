@@ -80,8 +80,6 @@ export const makeEmployeeInputsList = (
         validation: {},
         readonly: true,
       },
-      { ...inputs.department, defaultValue: user?.department?.name ?? '' },
-      { ...inputs.position, defaultValue: user?.position?.name ?? '' },
     ];
   } else if (type === TypeForm.profileType) {
     return [
@@ -93,16 +91,6 @@ export const makeEmployeeInputsList = (
         validation: {},
         readonly: true,
       },
-      {
-        ...inputs.department,
-        readonly: true,
-        defaultValue: user?.department?.name ?? '',
-      },
-      {
-        ...inputs.position,
-        readonly: true,
-        defaultValue: user?.position?.name ?? '',
-      },
     ];
   } else if (type === TypeForm.createEmployee) {
     return [
@@ -110,9 +98,6 @@ export const makeEmployeeInputsList = (
       { ...inputs.last_name, validation: {} },
       { ...inputs.email, labelName: InputLabelNames.email },
       { ...inputs.password, labelName: InputLabelNames.password },
-      { ...inputs.department },
-      { ...inputs.position },
-      { ...inputs.role },
     ];
   } else if (type === TypeForm.employeeProfile) {
     return [
@@ -123,16 +108,6 @@ export const makeEmployeeInputsList = (
         labelName: InputLabelNames.email,
         validation: {},
         readonly: true,
-      },
-      {
-        ...inputs.department,
-        readonly: true,
-        defaultValue: user?.department?.name ?? '',
-      },
-      {
-        ...inputs.position,
-        readonly: true,
-        defaultValue: user?.position?.name ?? '',
       },
     ];
   }
@@ -158,9 +133,25 @@ export const makeProjectInputsList = (
   return [];
 };
 
-export const makeProjectSelectsList = (type: string): IMySelect[] => {
+export const makeSelectsList = (type: string): IMySelect[] => {
   if (type === TypeForm.createProject) {
     return [{ ...SelectSettings.skillsIds }];
+  } else if (type === TypeForm.createEmployee) {
+    return [
+      { ...SelectSettings.department },
+      { ...SelectSettings.position },
+      { ...SelectSettings.role },
+    ];
+  } else if (type === TypeForm.updateEmployee) {
+    return [{ ...SelectSettings.department }, { ...SelectSettings.position }];
+  } else if (type === TypeForm.profileType) {
+    return [{ ...SelectSettings.department }, { ...SelectSettings.position }];
+  } else if (type === TypeForm.employeeProfile) {
+    return [
+      { ...SelectSettings.department, disabled: true },
+      { ...SelectSettings.position, disabled: true },
+    ];
   }
+
   return [];
 };

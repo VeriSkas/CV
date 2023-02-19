@@ -4,6 +4,6 @@ export interface Position {
 }
 
 export interface PositionOption {
-  id: string;
+  label: string;
   value: string;
 }

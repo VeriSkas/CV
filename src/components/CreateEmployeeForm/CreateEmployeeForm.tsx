@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 
 import { FieldArrays } from '../../constants/fieldArrayVars';
 import { PATH } from '../../constants/paths';
-import { BtnText, InputTypes } from '../../constants/text';
+import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { NewEmployeeForm } from '../../types/interfaces/interfaces';
-import { makeEmployeeInputsList } from '../../utils/formCreator';
+import { makeEmployeeInputsList, makeSelectsList } from '../../utils/formCreator';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
-import { Select } from '../UI/Select/Select';
+import { MySelect } from '../UI/MySelect/MySelect';
 
 export const CreateEmployeeForm: FC<{
   onSubmitForm: (data: NewEmployeeForm) => void
@@ -23,8 +23,8 @@ export const CreateEmployeeForm: FC<{
     register,
     control,
     handleSubmit,
-    setValue,
     reset,
+    setValue,
     formState: { errors, isValid },
   } = useForm<NewEmployeeForm>({
     mode: 'all',
@@ -39,23 +39,14 @@ export const CreateEmployeeForm: FC<{
     const inputs = makeEmployeeInputsList(TypeForm.createEmployee);
 
     return inputs?.map((input) => {
-      return input.type === InputTypes.select ? (
-        <Select
-          key={input.label}
-          onChangeHandler={selectChange}
-          label={input.label}
-          defaultValue={input.defaultValue ?? ''}
-          labelName={input.labelName ?? ''}
-          register={register}
-        />
-      ) : (
+      return (
         <Input
           key={input.label}
           type={input.type}
           labelName={input.labelName}
           label={input.label}
           defaultValue={input.defaultValue}
-          placeholder={input.label}
+          placeholder={input.labelName}
           validation={input.validation}
           readonly={input.readonly}
           register={register}
@@ -65,9 +56,24 @@ export const CreateEmployeeForm: FC<{
     });
   };
 
-  const selectChange = (id: string, value: string, key: string): void => {
-    setValue(key as keyof NewEmployeeForm, id);
-  };
+  const renderSelects = (): ReactNode => {
+    const selects = makeSelectsList(TypeForm.createEmployee);
+
+    return selects?.map((select) => {
+      return (
+        <MySelect
+          key={select.label}
+          control={control}
+          setFormValue={setValue}
+          label={select.label}
+          multi={select.multi}
+          defaultValue={select.defaultValue}
+          disabled={select.disabled}
+          labelName={select.labelName}
+        />
+      )
+    })
+  }
 
   const renderFieldArrays = (): ReactNode => {
     const { skills, languages } = FieldArrays;
@@ -89,6 +95,7 @@ export const CreateEmployeeForm: FC<{
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       {renderInputs()}
+      {renderSelects()}
       {renderFieldArrays()}
       <div>
         <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>

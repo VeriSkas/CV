@@ -65,6 +65,23 @@ export const GET_USER_LOGO_INFO = gql`
   }
 `;
 
+export const CREATE_USER = gql`
+  mutation CreateUser($user: CreateUserInput!) {
+    createUser(user: $user) {
+      id
+      email
+      profile {
+        full_name
+        last_name
+        full_name
+        avatar
+      }
+      department_name
+      position_name
+    }
+  }
+`;
+
 export const UPDATE_USER = gql`
   mutation UpdateUser($id: ID!, $user: UpdateUserInput!) {
     updateUser(id: $id, user: $user) {

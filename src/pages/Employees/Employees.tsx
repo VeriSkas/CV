@@ -1,11 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import {
-  OperationVariables,
-  useMutation,
-  useQuery,
-  useReactiveVar,
-} from '@apollo/client';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
 import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
@@ -23,14 +18,11 @@ export const Employees: FC<{
 }> = ({ setError }) => {
   const navigate = useNavigate();
   const [users, setUsers] = useState<TableUser[] | null>(null);
-  const { loading, data, error } = useQuery<
-    { users: UserInfo[] },
-    OperationVariables
-  >(GET_USERS);
+  const { loading, data, error } = useQuery<{ users: UserInfo[] }>(GET_USERS);
   const [deleteUser] = useMutation(DELETE_USER);
   const role = useReactiveVar(MAIN_ROLE);
   const mainPagesInfo =
-    role === Roles.admin.id
+    role === Roles.admin.value
       ? MainPagesInfo.employeesPage
       : MainPagesInfo.employeesPageUser;
 
@@ -55,23 +47,27 @@ export const Employees: FC<{
     }
   }, [error]);
 
-  const dropDownHandler = (label: string, id: string): void => {
+  const dropDownHandler = async (label: string, id: string): Promise<void> => {
     if (label === dropDownOptions.removeUser.label) {
-      void deleteUser({
+      await deleteUser({
         variables: {
           id,
         },
         update(cache) {
-          cache.modify({
-            fields: {
-              getUsers(users = []) {
-                return users.filter(
-                  (userItem: { __ref: string }) =>
-                    userItem.__ref !== `User: ${id}`
-                );
+          const usersData = cache
+            .readQuery<{ users: UserInfo[] }>({
+              query: GET_USERS,
+            })
+            ?.users.filter((user) => user.id !== id);
+
+          if (usersData) {
+            cache.writeQuery({
+              query: GET_USERS,
+              data: {
+                users: [...usersData],
               },
-            },
-          });
+            });
+          }
         },
       });
     }

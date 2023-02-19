@@ -25,17 +25,18 @@ import {
   ACTIVE_USER_ID,
   USER_ID,
 } from '../apollo/state';
+import { IRole } from '../types/interfaces/user';
 
 export const MAX_photoSize = 500000;
 
-export const Roles = {
+export const Roles: { [key: string]: IRole } = {
   admin: {
-    value: 'Admin',
-    id: 'admin',
+    label: 'Admin',
+    value: 'admin',
   },
   employee: {
-    value: 'Employee',
-    id: 'employee',
+    label: 'Employee',
+    value: 'employee',
   },
 };
 

@@ -25,28 +25,28 @@ export const Select: FC<SelectProps> = ({
   const [activeValue, setActiveValue] = useState(() => defaultValue);
   const options: OptionsType[] | null = useOptions(label);
 
-  const changeActiveOption = (id: string, optionValue: string): void => {
+  const changeActiveOption = (value: string, optionLabel: string): void => {
     setIsOpen(false);
-    onChangeHandler(id, optionValue, label);
-    setActiveValue(optionValue);
+    onChangeHandler(value, optionLabel, label);
+    setActiveValue(optionLabel);
   };
 
   const renderOptions = (options: OptionsType[] | []): ReactNode => {
     return options.map((option) => {
       const cls =
-        option.value === activeValue
+        option.label === activeValue
           ? `${classes.Option} ${classes.active}`
           : `${classes.Option}`;
 
       return (
         <li
-          key={option.id}
+          key={option.value}
           onClick={() => {
-            changeActiveOption(option.id, option.value);
+            changeActiveOption(option.value, option.label);
           }}
           className={cls}
         >
-          {t(option.value)}
+          {t(option.label)}
         </li>
       );
     });

@@ -46,7 +46,7 @@ export const CvCreateForm: FC<{
           labelName={input.labelName}
           label={input.label}
           defaultValue={input.defaultValue}
-          placeholder={input.label}
+          placeholder={input.labelName}
           validation={input.validation}
           readonly={input.readonly}
           register={register}

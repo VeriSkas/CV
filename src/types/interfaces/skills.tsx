@@ -4,6 +4,6 @@ export interface Skill {
 }
 
 export interface SkillOption {
-  id: string;
+  label: string;
   value: string;
 }
