@@ -1,15 +1,26 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { useQuery } from '@apollo/client';
+import { useQuery, useReactiveVar } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 
 import { GET_PROJECTS } from '../../apollo/queries/projects';
 import { ProjectItem } from '../../types/interfaces/project';
 import { MainPagesInfo } from '../../constants/mainPagesInfo';
 import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
+import { dropDownOptions, Roles } from '../../constants/constants';
+import { PATH } from '../../constants/paths';
+import { LSItems } from '../../constants/variables';
+import { ACTIVE_PROJECT_ID, MAIN_ROLE } from '../../apollo/state';
 
 export const Projects: FC<{}> = () => {
+  const navigate = useNavigate();
   const { loading, data } = useQuery<{ projects: ProjectItem[] }>(GET_PROJECTS);
   const [projects, setProjects] = useState<ProjectItem[] | null>(null);
+  const role = useReactiveVar(MAIN_ROLE);
+  const pagesInfo =
+    role === Roles.admin.value
+      ? MainPagesInfo.projectsPage
+      : MainPagesInfo.projectsPageUser;
 
   useEffect(() => {
     if (data) {
@@ -17,11 +28,17 @@ export const Projects: FC<{}> = () => {
     }
   }, [data]);
 
-  const dropDownHandler = (label: string, id: string): void => {};
+  const dropDownHandler = (label: string, id: string): void => {
+    if (label === dropDownOptions.project.label) {
+      navigate(`${PATH.projects}/${id}`);
+      localStorage.setItem(LSItems.activeProject, id);
+      ACTIVE_PROJECT_ID(id);
+    }
+  };
 
   return (
     <TablePageContainer
-      mainPagesInfo={MainPagesInfo.projectsPage}
+      mainPagesInfo={pagesInfo}
       tableItems={projects}
       loading={loading}
       dropDownHandler={dropDownHandler}

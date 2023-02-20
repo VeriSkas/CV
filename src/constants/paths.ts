@@ -13,6 +13,7 @@ export const PATH = {
   createCV: '/cvs/createCV',
   createProject: '/projects/createProject',
   projects: '/projects',
+  project: ':projectId',
   departments: '/departments',
   department: ':departmentId',
   createDepartment: '/departments/createDepartment',

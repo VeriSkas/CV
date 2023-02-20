@@ -8,7 +8,7 @@ import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { ProjectCreateForm } from '../../components/ProjectCreateForm/ProjectCreateForm';
 import { TitleText } from '../../constants/text';
 import { NewProjectForm } from '../../types/interfaces/interfaces';
-import { LSItems } from '../../constants/variables';
+import { LSItems, TypeForm } from '../../constants/variables';
 import { useNavigate } from 'react-router-dom';
 import { ACTIVE_PROJECT_ID } from '../../apollo/state';
 import { PATH } from '../../constants/paths';
@@ -36,7 +36,7 @@ export const CreateProject: FC<{ setError: (message: string) => void }> = ({
     }
   }, [error, data]);
 
-  const submitFormHandler = (data: NewProjectForm): void => {
+  const submitFormHandler = async (data: NewProjectForm): Promise<void> => {
     const project = {
       ...data,
       end_date: data.end_date ? data.end_date : new Date().toISOString(),
@@ -55,7 +55,10 @@ export const CreateProject: FC<{ setError: (message: string) => void }> = ({
 
   return (
     <FormContainer title={t(TitleText.createProject)}>
-      <ProjectCreateForm onSubmitForm={submitFormHandler} />
+      <ProjectCreateForm
+        onSubmitForm={submitFormHandler}
+        type={TypeForm.createProject}
+      />
     </FormContainer>
   );
 };

@@ -8,6 +8,7 @@ import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { NewProjectForm } from '../../types/interfaces/interfaces';
+import { ProjectItem } from '../../types/interfaces/project';
 import { makeProjectInputsList, makeSelectsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
@@ -16,8 +17,10 @@ import { MySelect } from '../UI/MySelect/MySelect';
 export const ProjectCreateForm: FC<{
   onSubmitForm: (
     data: NewProjectForm,
-  ) => void,
- }> = ({ onSubmitForm }) => {
+  ) => void;
+  project?: ProjectItem;
+  type: string;
+ }> = ({ onSubmitForm, project, type }) => {
   const { t } = useTranslation();
   const {
     register,
@@ -28,10 +31,20 @@ export const ProjectCreateForm: FC<{
     formState: { errors, isValid },
   } = useForm<NewProjectForm>({
     mode: 'all',
+    defaultValues: {
+      name: project?.name ?? '',
+      internal_name: project?.internal_name ?? '',
+      description: project?.description ?? '',
+      domain: project?.domain ?? '',
+      start_date: project?.start_date ?? '',
+      end_date: project?.end_date ?? '',
+      team_size: project?.team_size ?? 0,
+      skillsIds: [],
+    }
   });
 
   const renderInputs = (): ReactNode => {
-    const inputs = makeProjectInputsList(TypeForm.createProject);
+    const inputs = makeProjectInputsList(type);
 
     return inputs?.map((input) => {
       return (
@@ -52,7 +65,7 @@ export const ProjectCreateForm: FC<{
   };
 
   const renderSelects = (): ReactNode => {
-    const selects = makeSelectsList(TypeForm.createProject);
+    const selects = makeSelectsList(type);
 
     return selects?.map((select) => {
       return (
@@ -80,7 +93,7 @@ export const ProjectCreateForm: FC<{
       {renderInputs()}
       {renderSelects()}
       <div>
-        <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>
+        {type !== TypeForm.projectDetails && <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>}
         <Link to={PATH.projects}>
           <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
         </Link>

@@ -119,7 +119,7 @@ export const makeProjectInputsList = (
   type: string,
   user?: UserInfo
 ): IInput[] => {
-  if (type === TypeForm.createProject) {
+  if (type === TypeForm.createProject || type === TypeForm.updateProject) {
     return [
       { ...inputs.name },
       { ...inputs.internal_name },
@@ -130,12 +130,25 @@ export const makeProjectInputsList = (
       { ...inputs.end_date },
     ];
   }
+  if (type === TypeForm.projectDetails) {
+    return [
+      { ...inputs.name, readonly: true, validation: {} },
+      { ...inputs.internal_name, readonly: true, validation: {} },
+      { ...inputs.description, readonly: true, validation: {} },
+      { ...inputs.domain, readonly: true, validation: {} },
+      { ...inputs.team_size, readonly: true, validation: {} },
+      { ...inputs.start_date, readonly: true, validation: {} },
+      { ...inputs.end_date, readonly: true, validation: {} },
+    ];
+  }
   return [];
 };
 
 export const makeSelectsList = (type: string): IMySelect[] => {
-  if (type === TypeForm.createProject) {
+  if (type === TypeForm.createProject || type === TypeForm.updateProject) {
     return [{ ...SelectSettings.skillsIds }];
+  } else if (type === TypeForm.projectDetails) {
+    return [{ ...SelectSettings.skillsIds, disabled: true }];
   } else if (type === TypeForm.createEmployee) {
     return [
       { ...SelectSettings.department },

@@ -80,6 +80,7 @@ export const TitleText = {
   employees: 'Employees',
   profile: 'Profile',
   projects: 'Projects',
+  projectDetails: 'Project details',
   createProject: 'Create project',
   login: 'Login',
   signUp: 'SignUp',
