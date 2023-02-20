@@ -8,3 +8,8 @@ export interface ProjectItem {
   end_date: string | null;
   team_size: number;
 }
+
+export interface ProjectOption {
+  label: string;
+  value: string;
+}

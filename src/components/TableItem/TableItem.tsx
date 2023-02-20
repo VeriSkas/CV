@@ -18,6 +18,7 @@ export const TableItem: FC<TableItemProps> = ({
   item,
   dropDownOptions,
   dropDownHandler,
+  toggleTemplateCv,
   settingsView,
   avatar,
 }) => {
@@ -44,7 +45,7 @@ export const TableItem: FC<TableItemProps> = ({
         const cv = item as TableCvItem;
 
         return (
-          <div className={classes.Item} key={key}>
+          <div className={classes.Item} key={key} onClick={toggleTemplate}>
             {cv[key as keyof TableCvItem] ? (
               <IconContext.Provider
                 value={{
@@ -73,6 +74,12 @@ export const TableItem: FC<TableItemProps> = ({
       );
     });
   };
+
+  const toggleTemplate = (): void => {
+    if (toggleTemplateCv) {
+      toggleTemplateCv(item.id)
+    }
+  }
 
   return (
     <div className={classes.TableItem}>

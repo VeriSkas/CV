@@ -149,6 +149,8 @@ export const makeSelectsList = (type: string): IMySelect[] => {
     return [{ ...SelectSettings.skillsIds }];
   } else if (type === TypeForm.projectDetails) {
     return [{ ...SelectSettings.skillsIds, disabled: true }];
+  } else if (type === TypeForm.createCV) {
+    return [{ ...SelectSettings.projectsIds }];
   } else if (type === TypeForm.createEmployee) {
     return [
       { ...SelectSettings.department },

@@ -113,7 +113,16 @@ export const App: FC = () => {
         />
       </Route>
       <Route path={PATH.cvs} element={<CVsPage />}>
-        <Route index element={<CVs />} />
+        <Route
+          index
+          element={
+            <CVs
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
         <Route path={PATH.cv} element={<CvDetails />} />
         <Route
           path={PATH.createCV}

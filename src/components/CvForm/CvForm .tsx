@@ -1,9 +1,12 @@
 import React, { FC, ReactNode } from 'react';
 
+import { useReactiveVar } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
+import { MAIN_ROLE } from '../../apollo/state';
+import { Roles } from '../../constants/constants';
 import { FieldArrays } from '../../constants/fieldArrayVars';
 import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
@@ -29,6 +32,7 @@ export const CvForm: FC<CvFormProps> = ({
     return [...acc, { language_name: language.language_name, proficiency: language.proficiency }]
   }, []);
   const { t } = useTranslation();
+  const role = useReactiveVar(MAIN_ROLE);
   const {
     register,
     handleSubmit,
@@ -99,7 +103,7 @@ export const CvForm: FC<CvFormProps> = ({
       {renderInputs()}
       {renderFieldArrays()}
       <div>
-        {type === TypeForm.cvUser && (
+        {(type === TypeForm.cvUser || role === Roles.admin.value) && (
           <Button disabled={!isValid}>
             {submitBtnText ?? t(BtnText.saveChanges)}
           </Button>

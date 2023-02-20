@@ -14,6 +14,15 @@ export const GET_PROJECTS = gql`
   }
 `;
 
+export const GET_PROJECTS_OPTIONS = gql`
+  query Projects {
+    projects {
+      value: id
+      label: name
+    }
+  }
+`;
+
 export const GET_PROJECT = gql`
   query Project($id: ID!) {
     project(id: $id) {

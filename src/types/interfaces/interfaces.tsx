@@ -31,6 +31,7 @@ export interface NewCvForm {
   description: string;
   skills: SkillItemInDB[];
   languages: LanguageItemInDB[];
+  projectsIds: string[];
 }
 
 export interface NewEmployeeForm {

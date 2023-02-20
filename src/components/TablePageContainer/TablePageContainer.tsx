@@ -11,6 +11,7 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
   tableItems,
   loading,
   dropDownHandler,
+  toggleTemplateCv,
 }) => {
   const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState('');
@@ -26,6 +27,12 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
     settingsBtnViewForUser,
     avatar,
   } = mainPagesInfo;
+
+  const toggleTemplate = (id: string): void => {
+    if (toggleTemplateCv) {
+      toggleTemplateCv(id);
+    }
+  };
 
   return (
     <SearchBar
@@ -52,6 +59,7 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
         }}
         settingsBtnViewForUser={settingsBtnViewForUser}
         avatar={avatar}
+        toggleTemplateCv={toggleTemplate}
       />
     </SearchBar>
   );

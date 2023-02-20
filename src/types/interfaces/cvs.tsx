@@ -3,7 +3,10 @@ export interface CvItem {
   is_template: boolean;
   name: string
   description: string;
-  user: { email: string; } | null;
+  user: { email: string; id: string } | null;
+  projects: Array<{ id: string }>;
+  skills: SkillItemInDB[];
+  languages: LanguageItemInDB[];
 }
 
 export interface CvItemDetails {

@@ -9,10 +9,11 @@ import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { NewCvForm } from '../../types/interfaces/interfaces';
-import { makeCvInputsList } from '../../utils/formCreator';
+import { makeCvInputsList, makeSelectsList } from '../../utils/formCreator';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
+import { MySelect } from '../UI/MySelect/MySelect';
 
 export const CvCreateForm: FC<{
   onSubmitForm: (
@@ -24,6 +25,7 @@ export const CvCreateForm: FC<{
     register,
     control,
     handleSubmit,
+    setValue,
     reset,
     formState: { errors, isValid },
   } = useForm<NewCvForm>({
@@ -56,6 +58,25 @@ export const CvCreateForm: FC<{
     });
   };
 
+  const renderSelects = (): ReactNode => {
+    const selects = makeSelectsList(TypeForm.createCV);
+
+    return selects?.map((select) => {
+      return (
+        <MySelect
+          key={select.label}
+          control={control}
+          setFormValue={setValue}
+          label={select.label}
+          multi={select.multi}
+          defaultValue={select.defaultValue}
+          disabled={select.disabled}
+          labelName={select.labelName}
+        />
+      )
+    })
+  }
+
   const renderFieldArrays = (): ReactNode => {
     const { skills, languages } = FieldArrays;
 
@@ -76,6 +97,7 @@ export const CvCreateForm: FC<{
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       {renderInputs()}
+      {renderSelects()}
       {renderFieldArrays()}
       <div>
         <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>

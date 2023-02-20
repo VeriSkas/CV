@@ -91,6 +91,18 @@ export const MainPagesInfo = {
     settingsBtnViewForUser: true,
     avatar: false,
   },
+  cvsPageWithoutDeletingCV: {
+    linkTo: PATH.createCV,
+    btnText: BtnText.createCV,
+    title: TitleText.cvs,
+    placeholder: PlaceholderText.search,
+    headerOptions: cvsTableOptions,
+    dropDownOptions: [cv],
+    searchKey: [SearchKey.name],
+    createBtnViewForUser: true,
+    settingsBtnViewForUser: true,
+    avatar: false,
+  },
   projectsPage: {
     linkTo: PATH.createProject,
     btnText: BtnText.createProject,

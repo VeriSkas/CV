@@ -9,6 +9,13 @@ export const SelectSettings: { [key: string]: IMySelect } = {
     disabled: false,
     multi: true,
   },
+  projectsIds: {
+    label: InputLabels.projectsIds,
+    labelName: InputLabelNames.projects,
+    defaultValue: '',
+    disabled: false,
+    multi: true,
+  },
   department: {
     label: InputLabels.department,
     labelName: InputLabelNames.department,

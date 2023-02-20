@@ -23,6 +23,7 @@ export const Table: FC<TableProps> = ({
   searchValue,
   dropDownOptions,
   dropDownHandler,
+  toggleTemplateCv,
   avatar,
   settingsBtnViewForUser,
 }) => {
@@ -105,6 +106,12 @@ export const Table: FC<TableProps> = ({
     });
   };
 
+  const toggleTemplate = (id: string): void => {
+    if (toggleTemplateCv) {
+      toggleTemplateCv(id)
+    }
+  }
+
   const renderTableRows = (): ReactNode => {
     let returnedValue = itemsValue;
 
@@ -122,9 +129,11 @@ export const Table: FC<TableProps> = ({
 
     return returnedValue.map((item: UsedInTableObjectsType) => {
       return <TableItem
-        key={item.id} item={item}
+        key={item.id}
+        item={item}
         dropDownOptions={dropDownOptions}
         dropDownHandler={(label: string, id: string) => { dropDownHandler(label, id) }}
+        toggleTemplateCv={toggleTemplate}
         settingsView={settingsBtnViewForUser}
         avatar={avatar}
       />;

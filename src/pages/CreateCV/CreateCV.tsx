@@ -4,11 +4,11 @@ import { useMutation, useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { CREATE_CV } from '../../apollo/queries/cvs';
+import { CREATE_CV, GET_CVS } from '../../apollo/queries/cvs';
 import { CvCreateForm } from '../../components/CvCreateForm/CvCreateForm';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TitleText } from '../../constants/text';
-import { CvItemDetails, NewCV } from '../../types/interfaces/cvs';
+import { CvItem, CvItemDetails, NewCV } from '../../types/interfaces/cvs';
 import { NewCvForm } from '../../types/interfaces/interfaces';
 import { PATH } from '../../constants/paths';
 import { ACTIVE_CV_ID, USER_ID } from '../../apollo/state';
@@ -41,14 +41,27 @@ export const CreateCV: FC<{ setError: (message: string) => void }> = ({
   const submitFormHandler = (data: NewCvForm): void => {
     const newCV: NewCV = {
       ...data,
-      userId: userID, //temporary
-      is_template: false, //temporary
-      projectsIds: ['1'], //temporary
+      userId: userID,
+      is_template: false,
     };
 
     void createCV({
       variables: {
         cv: newCV,
+      },
+      update(cache, { data: newCv }) {
+        const cvsData = cache.readQuery<{ cvs: CvItem[] }>({
+          query: GET_CVS,
+        });
+
+        if (cvsData) {
+          cache.writeQuery({
+            query: GET_CVS,
+            data: {
+              cvs: [newCv?.createCv, ...cvsData.cvs],
+            },
+          });
+        }
       },
     });
   };
