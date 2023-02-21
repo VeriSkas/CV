@@ -123,7 +123,16 @@ export const App: FC = () => {
             />
           }
         />
-        <Route path={PATH.cv} element={<CvDetails />} />
+        <Route
+          path={PATH.cv}
+          element={
+            <CvDetails
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
         <Route
           path={PATH.createCV}
           element={

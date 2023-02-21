@@ -18,18 +18,31 @@ export const MySelect: FC<MySelectProps> = ({
   disabled,
   labelName,
   multi,
+  getValues,
 }) => {
-  const [value, setValue] = useState<OptionsType>();
+  const [value, setValue] = useState<OptionsType | OptionsType[]>();
   const options: OptionsType[] | null = useOptions(label);
 
   useEffect(() => {
-    if (defaultValue) {
+    if (getValues) {
+      if (Array.isArray(getValues(label))) {
+        const optionsValue = getValues(label)
+          .map((id: string) => options.find(option => option.value === id) as OptionsType);
+
+        setValue(optionsValue);
+      }
+    }
+  }, [getValues, options]);
+
+  useEffect(() => {
+    if (defaultValue && typeof defaultValue === 'string') {
       setValue(options.find((c) => c.value === defaultValue));
     }
-  }, [options]);
+  }, [defaultValue, options])
 
   const onChangeHandler = (value: any): void => {
     if (multi) {
+      setValue(value);
       setFormValue(
         label,
         value.map((item: OptionsType) => item.value)

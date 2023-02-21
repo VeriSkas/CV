@@ -43,6 +43,9 @@ export const GET_CV = gql`
           name
         }
       }
+      projects {
+        id
+      }
       skills {
         skill_name
         mastery

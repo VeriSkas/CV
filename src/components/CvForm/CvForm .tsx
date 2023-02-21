@@ -14,10 +14,11 @@ import { BtnType, TypeForm } from '../../constants/variables';
 import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
 import { CvDetailForm } from '../../types/interfaces/interfaces';
 import { CvFormProps } from '../../types/interfaces/propsInterfaces';
-import { makeCvInputsList } from '../../utils/formCreator';
+import { makeCvInputsList, makeSelectsList } from '../../utils/formCreator';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
 import { Input } from '../UI/Input/Input';
+import { MySelect } from '../UI/MySelect/MySelect';
 
 export const CvForm: FC<CvFormProps> = ({
   cv,
@@ -31,6 +32,7 @@ export const CvForm: FC<CvFormProps> = ({
   const languages = cv?.languages?.reduce<LanguageItemInDB[]>((acc, language): LanguageItemInDB[] => {
     return [...acc, { language_name: language.language_name, proficiency: language.proficiency }]
   }, []);
+  const projectsIds = cv?.projects?.map((project: { id: string }) => project.id);
   const { t } = useTranslation();
   const role = useReactiveVar(MAIN_ROLE);
   const {
@@ -38,14 +40,18 @@ export const CvForm: FC<CvFormProps> = ({
     handleSubmit,
     reset,
     control,
+    setValue,
+    getValues,
     formState: { errors, isValid },
   } = useForm<CvDetailForm>({
     mode: 'all',
     defaultValues: {
+      is_template: cv?.is_template,
       name: cv?.name,
       description: cv?.description,
       full_name: cv?.user?.profile?.full_name,
       positionId: cv?.user?.position?.name,
+      projectsIds,
       skills,
       languages,
     },
@@ -80,6 +86,26 @@ export const CvForm: FC<CvFormProps> = ({
     });
   };
 
+  const renderSelects = (): ReactNode => {
+    const selects = makeSelectsList(type);
+
+    return selects?.map((select) => {
+      return (
+        <MySelect
+          key={select.label}
+          control={control}
+          setFormValue={setValue}
+          label={select.label}
+          multi={select.multi}
+          defaultValue={select.defaultValue}
+          disabled={select.disabled}
+          labelName={select.labelName}
+          getValues={getValues}
+        />
+      )
+    })
+  }
+
   const renderFieldArrays = (): ReactNode => {
     const { skills, languages } = FieldArrays;
 
@@ -101,6 +127,7 @@ export const CvForm: FC<CvFormProps> = ({
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       {renderInputs()}
+      {renderSelects()}
       {renderFieldArrays()}
       <div>
         {(type === TypeForm.cvUser || role === Roles.admin.value) && (

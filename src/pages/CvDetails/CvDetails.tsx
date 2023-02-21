@@ -1,30 +1,67 @@
 import React, { FC, useEffect } from 'react';
 
-import { useQuery, useReactiveVar } from '@apollo/client';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
-import { GET_CV } from '../../apollo/queries/cvs';
+import { GET_CV, UPDATE_CV } from '../../apollo/queries/cvs';
 import { CvForm } from '../../components/CvForm/CvForm ';
 import { CvItemDetails } from '../../types/interfaces/cvs';
-import { Inputs } from '../../types/interfaces/interfaces';
+import { CvDetailForm } from '../../types/interfaces/interfaces';
 import { ContentText, TitleText } from '../../constants/text';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
-import { ACTIVE_CV_ID, USER_ID } from '../../apollo/state';
+import { ACTIVE_CV_ID, MAIN_ROLE, USER_ID } from '../../apollo/state';
+import { Roles } from '../../constants/constants';
+import { PATH } from '../../constants/paths';
 
-export const CvDetails: FC<{}> = () => {
-  const userID = useReactiveVar(USER_ID);
+export const CvDetails: FC<{ setError: (error: string) => void }> = ({
+  setError,
+}) => {
+  const userId = useReactiveVar(USER_ID);
   const activeCV = useReactiveVar(ACTIVE_CV_ID);
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { loading, data } = useQuery<{ cv: CvItemDetails }>(GET_CV, {
     variables: {
       id: activeCV,
     },
   });
+  const [updateCv, { data: updatedCvData, error }] = useMutation(UPDATE_CV);
+  const role = useReactiveVar(MAIN_ROLE);
 
-  useEffect(() => {}, [data]);
+  useEffect(() => {
+    if (error) {
+      setError(error.message);
+    }
+  }, [error]);
 
-  const submitFormHandler = (data: Inputs, id?: string): void => {};
+  useEffect(() => {
+    if (updatedCvData) {
+      navigate(PATH.cvs);
+    }
+  }, [updatedCvData]);
+
+  const submitFormHandler = async (
+    data: CvDetailForm,
+    id?: string
+  ): Promise<void> => {
+    const { description, is_template, languages, name, projectsIds, skills } =
+      data;
+    const cv = {
+      description,
+      userId,
+      is_template,
+      languages,
+      name,
+      projectsIds,
+      skills,
+    };
+
+    await updateCv({
+      variables: { id, cv },
+    });
+  };
 
   return (
     <FormContainer title={t(TitleText.cvDetails)}>
@@ -33,11 +70,13 @@ export const CvDetails: FC<{}> = () => {
         {data && (
           <CvForm
             cv={data.cv}
-            onSubmitForm={(data: any, id?: string) => {
-              submitFormHandler(data, id);
+            onSubmitForm={async (data: CvDetailForm, id?: string) => {
+              await submitFormHandler(data, id);
             }}
             type={
-              userID === data.cv.user?.id ? TypeForm.cvUser : TypeForm.cvDetails
+              role === Roles.admin.value || userId === data?.cv.user?.id
+                ? TypeForm.cvUser
+                : TypeForm.cvDetails
             }
           />
         )}

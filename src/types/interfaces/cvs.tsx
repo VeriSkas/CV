@@ -14,6 +14,9 @@ export interface CvItemDetails {
   is_template: boolean;
   name: string
   description: string;
+  projects: Array<{
+    id: string;
+  }>;
   user: {
     id: string;
     email: string;

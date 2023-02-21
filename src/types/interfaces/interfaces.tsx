@@ -64,8 +64,10 @@ export interface CvDetailForm {
   description: string;
   full_name: string;
   positionId: string;
+  projectsIds: string[];
   skills: SkillItemInDB[];
   languages: LanguageItemInDB[];
+  is_template: boolean;
 }
 
 export interface IInput {
