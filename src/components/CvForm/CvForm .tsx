@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 
 import { useReactiveVar } from '@apollo/client';
 import { Control, useForm, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
@@ -15,10 +15,10 @@ import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
 import { CvDetailForm, FormTypes } from '../../types/interfaces/interfaces';
 import { CvFormProps } from '../../types/interfaces/propsInterfaces';
 import { makeCvInputsList, makeSelectsList } from '../../utils/formCreator';
-import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
+import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
 
 export const CvForm: FC<CvFormProps> = ({
   cv,
@@ -56,6 +56,7 @@ export const CvForm: FC<CvFormProps> = ({
       languages,
     },
   });
+  const { skills: skillFields, languages: languageFields } = FieldArrays;
 
   const submitForm = (data: CvDetailForm): void => {
     onSubmitForm(data, cv?.id ?? '');
@@ -63,24 +64,6 @@ export const CvForm: FC<CvFormProps> = ({
     if (!cv) {
       reset();
     }
-  };
-
-  const renderFieldArrays = (): ReactNode => {
-    const { skills, languages } = FieldArrays;
-
-    return [skills, languages].map((item) => {
-      return (
-        <FieldArray
-          key={item.label}
-          register={register}
-          control={control}
-          label={item.label}
-          labelName={item.labelName}
-          radioInputs={item.radioInputs}
-          disabled={type !== TypeForm.cvUser}
-        />
-      );
-    });
   };
 
   return (
@@ -96,7 +79,12 @@ export const CvForm: FC<CvFormProps> = ({
         setValue={setValue as UseFormSetValue<FormTypes>}
         getValues={getValues as UseFormGetValues<FormTypes>}
       />
-      {renderFieldArrays()}
+      <FieldsArrayFromArray
+        fieldsArray={[skillFields, languageFields]}
+        register={register as UseFormRegister<FormTypes>}
+        control={control as Control<FormTypes, any>}
+        disabled={type !== TypeForm.cvUser}
+      />
       <div>
         {(type === TypeForm.cvUser || role === Roles.admin.value) && (
           <Button disabled={!isValid}>

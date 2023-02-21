@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 
 import { Control, useForm, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -12,12 +12,12 @@ import { Avatar } from '../Avatar/Avatar';
 import { PATH } from '../../constants/paths';
 import { makeEmployeeInputsList, makeSelectsList } from '../../utils/formCreator';
 import { BtnType, TypeForm } from '../../constants/variables';
-import classes from './EmployeeForm.module.scss';
-import { FieldArray } from '../FieldArray/FieldArray';
 import { FieldArrays } from '../../constants/fieldArrayVars';
 import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
+import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
+import classes from './EmployeeForm.module.scss';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -54,6 +54,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     },
   });
   const isProfileType = type === TypeForm.employeeProfile;
+  const { skills: skillFields, languages: languageFields } = FieldArrays;
 
   const setErrorHandler = (message: string): void => {
     if (setError) {
@@ -67,24 +68,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     if (!user) {
       reset();
     }
-  };
-
-  const renderFieldArrays = (): ReactNode => {
-    const { skills, languages } = FieldArrays;
-
-    return [skills, languages].map((item) => {
-      return (
-        <FieldArray
-          key={item.label}
-          register={register}
-          control={control}
-          label={item.label}
-          labelName={item.labelName}
-          radioInputs={item.radioInputs}
-          disabled={isProfileType}
-        />
-      );
-    });
   };
 
   return (
@@ -110,7 +93,12 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         setValue={setValue as UseFormSetValue<FormTypes>}
         getValues={getValues as UseFormGetValues<FormTypes>}
       />
-      {renderFieldArrays()}
+      <FieldsArrayFromArray
+        fieldsArray={[skillFields, languageFields]}
+        register={register as UseFormRegister<FormTypes>}
+        control={control as Control<FormTypes, any>}
+        disabled={isProfileType}
+      />
       <div className={classes.FormBtns}>
         {!isProfileType && <Button disabled={!isValid}>
           {submitBtnText ?? t(BtnText.saveChanges)}
