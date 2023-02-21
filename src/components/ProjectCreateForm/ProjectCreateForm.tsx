@@ -1,6 +1,6 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 
-import { FieldErrorsImpl, useForm, UseFormRegister } from 'react-hook-form';
+import { Control, FieldErrorsImpl, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ import { ProjectItem } from '../../types/interfaces/project';
 import { makeProjectInputsList, makeSelectsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
-import { MySelect } from '../UI/MySelect/MySelect';
+import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
 
 export const ProjectCreateForm: FC<{
   onSubmitForm: (
@@ -43,25 +43,6 @@ export const ProjectCreateForm: FC<{
     }
   });
 
-  const renderSelects = (): ReactNode => {
-    const selects = makeSelectsList(type);
-
-    return selects?.map((select) => {
-      return (
-        <MySelect
-          key={select.label}
-          control={control}
-          setFormValue={setValue}
-          label={select.label}
-          multi={select.multi}
-          defaultValue={select.defaultValue}
-          disabled={select.disabled}
-          labelName={select.labelName}
-          />
-      )
-    })
-  }
-
   const submitForm = (data: NewProjectForm): void => {
     onSubmitForm(data);
     reset();
@@ -74,7 +55,11 @@ export const ProjectCreateForm: FC<{
         inputsArray={makeProjectInputsList(type)}
         errors={errors as Partial<FieldErrorsImpl<FormTypes>>}
       />
-      {renderSelects()}
+      <SelectsFromArray
+        selectsArray={makeSelectsList(type)}
+        control={control as Control<FormTypes, any>}
+        setValue={setValue as UseFormSetValue<FormTypes>}
+      />
       <div>
         {type !== TypeForm.projectDetails && <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>}
         <Link to={PATH.projects}>

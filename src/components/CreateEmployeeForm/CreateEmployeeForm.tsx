@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-import { useForm, UseFormRegister } from 'react-hook-form';
+import { Control, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ import {
 import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
-import { MySelect } from '../UI/MySelect/MySelect';
+import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
 
 export const CreateEmployeeForm: FC<{
   onSubmitForm: (data: NewEmployeeForm) => void,
@@ -36,25 +36,6 @@ export const CreateEmployeeForm: FC<{
   const submitForm = (data: NewEmployeeForm): void => {
     onSubmitForm(data);
     reset();
-  };
-
-  const renderSelects = (): ReactNode => {
-    const selects = makeSelectsList(TypeForm.createEmployee);
-
-    return selects?.map((select) => {
-      return (
-        <MySelect
-          key={select.label}
-          control={control}
-          setFormValue={setValue}
-          label={select.label}
-          multi={select.multi}
-          defaultValue={select.defaultValue}
-          disabled={select.disabled}
-          labelName={select.labelName}
-        />
-      );
-    });
   };
 
   const renderFieldArrays = (): ReactNode => {
@@ -81,7 +62,11 @@ export const CreateEmployeeForm: FC<{
         inputsArray={makeEmployeeInputsList(TypeForm.createEmployee)}
         errors={errors}
       />
-      {renderSelects()}
+      <SelectsFromArray
+        selectsArray={makeSelectsList(TypeForm.createEmployee)}
+        control={control as Control<FormTypes, any>}
+        setValue={setValue as UseFormSetValue<FormTypes>}
+      />
       {renderFieldArrays()}
       <div>
         <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>

@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 
 import { useReactiveVar } from '@apollo/client';
-import { useForm, UseFormRegister } from 'react-hook-form';
+import { Control, useForm, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -17,8 +17,8 @@ import { CvFormProps } from '../../types/interfaces/propsInterfaces';
 import { makeCvInputsList, makeSelectsList } from '../../utils/formCreator';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
-import { MySelect } from '../UI/MySelect/MySelect';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
+import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
 
 export const CvForm: FC<CvFormProps> = ({
   cv,
@@ -65,26 +65,6 @@ export const CvForm: FC<CvFormProps> = ({
     }
   };
 
-  const renderSelects = (): ReactNode => {
-    const selects = makeSelectsList(type);
-
-    return selects?.map((select) => {
-      return (
-        <MySelect
-          key={select.label}
-          control={control}
-          setFormValue={setValue}
-          label={select.label}
-          multi={select.multi}
-          defaultValue={select.defaultValue}
-          disabled={select.disabled}
-          labelName={select.labelName}
-          getValues={getValues}
-        />
-      )
-    })
-  }
-
   const renderFieldArrays = (): ReactNode => {
     const { skills, languages } = FieldArrays;
 
@@ -110,7 +90,12 @@ export const CvForm: FC<CvFormProps> = ({
         inputsArray={makeCvInputsList(type, cv)}
         errors={errors}
       />
-      {renderSelects()}
+      <SelectsFromArray
+        selectsArray={makeSelectsList(type)}
+        control={control as Control<FormTypes, any>}
+        setValue={setValue as UseFormSetValue<FormTypes>}
+        getValues={getValues as UseFormGetValues<FormTypes>}
+      />
       {renderFieldArrays()}
       <div>
         {(type === TypeForm.cvUser || role === Roles.admin.value) && (

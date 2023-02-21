@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-import { useForm, UseFormRegister } from 'react-hook-form';
+import { Control, useForm, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -16,8 +16,8 @@ import classes from './EmployeeForm.module.scss';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { FieldArrays } from '../../constants/fieldArrayVars';
 import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
-import { MySelect } from '../UI/MySelect/MySelect';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
+import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -87,25 +87,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     });
   };
 
-  const renderSelects = (): ReactNode => {
-    const selects = makeSelectsList(type);
-
-    return selects?.map((select) => {
-      return (
-        <MySelect
-          key={select.label}
-          control={control}
-          setFormValue={setValue}
-          label={select.label}
-          multi={select.multi}
-          defaultValue={getValues(select.label as keyof IEmployeeForm) as string ?? select.defaultValue}
-          disabled={select.disabled}
-          labelName={select.labelName}
-        />
-      )
-    })
-  }
-
   return (
     <form
       onSubmit={handleSubmit(submitForm)}
@@ -123,7 +104,12 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         inputsArray={makeEmployeeInputsList(type, user)}
         errors={errors}
       />
-      {renderSelects()}
+      <SelectsFromArray
+        selectsArray={makeSelectsList(type)}
+        control={control as Control<FormTypes, any>}
+        setValue={setValue as UseFormSetValue<FormTypes>}
+        getValues={getValues as UseFormGetValues<FormTypes>}
+      />
       {renderFieldArrays()}
       <div className={classes.FormBtns}>
         {!isProfileType && <Button disabled={!isValid}>
