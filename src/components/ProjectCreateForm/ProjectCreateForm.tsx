@@ -1,17 +1,17 @@
 import React, { FC, ReactNode } from 'react';
 
-import { useForm } from 'react-hook-form';
+import { FieldErrorsImpl, useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
-import { NewProjectForm } from '../../types/interfaces/interfaces';
+import { FormTypes, NewProjectForm } from '../../types/interfaces/interfaces';
 import { ProjectItem } from '../../types/interfaces/project';
 import { makeProjectInputsList, makeSelectsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
-import { Input } from '../UI/Input/Input';
+import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { MySelect } from '../UI/MySelect/MySelect';
 
 export const ProjectCreateForm: FC<{
@@ -43,27 +43,6 @@ export const ProjectCreateForm: FC<{
     }
   });
 
-  const renderInputs = (): ReactNode => {
-    const inputs = makeProjectInputsList(type);
-
-    return inputs?.map((input) => {
-      return (
-        <Input
-          key={input.label}
-          type={input.type}
-          labelName={input.labelName}
-          label={input.label}
-          defaultValue={input.defaultValue}
-          placeholder={input.labelName}
-          validation={input.validation}
-          readonly={input.readonly}
-          register={register}
-          error={errors[input.label as keyof NewProjectForm]?.message}
-        />
-      );
-    });
-  };
-
   const renderSelects = (): ReactNode => {
     const selects = makeSelectsList(type);
 
@@ -90,7 +69,11 @@ export const ProjectCreateForm: FC<{
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      {renderInputs()}
+      <InputsFromArray
+        register={register as UseFormRegister<FormTypes>}
+        inputsArray={makeProjectInputsList(type)}
+        errors={errors as Partial<FieldErrorsImpl<FormTypes>>}
+      />
       {renderSelects()}
       <div>
         {type !== TypeForm.projectDetails && <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>}

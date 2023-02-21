@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -8,17 +8,15 @@ import { FieldArrays } from '../../constants/fieldArrayVars';
 import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
-import { NewCvForm } from '../../types/interfaces/interfaces';
+import { FormTypes, NewCvForm } from '../../types/interfaces/interfaces';
 import { makeCvInputsList, makeSelectsList } from '../../utils/formCreator';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
-import { Input } from '../UI/Input/Input';
+import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { MySelect } from '../UI/MySelect/MySelect';
 
 export const CvCreateForm: FC<{
-  onSubmitForm: (
-    data: NewCvForm,
-  ) => void,
+  onSubmitForm: (data: NewCvForm) => void,
 }> = ({ onSubmitForm }) => {
   const { t } = useTranslation();
   const {
@@ -37,27 +35,6 @@ export const CvCreateForm: FC<{
     reset();
   };
 
-  const renderInputs = (): ReactNode => {
-    const inputs = makeCvInputsList(TypeForm.createCV);
-
-    return inputs?.map((input) => {
-      return (
-        <Input
-          key={input.label}
-          type={input.type}
-          labelName={input.labelName}
-          label={input.label}
-          defaultValue={input.defaultValue}
-          placeholder={input.labelName}
-          validation={input.validation}
-          readonly={input.readonly}
-          register={register}
-          error={errors[input.label as keyof NewCvForm]?.message}
-        />
-      );
-    });
-  };
-
   const renderSelects = (): ReactNode => {
     const selects = makeSelectsList(TypeForm.createCV);
 
@@ -73,9 +50,9 @@ export const CvCreateForm: FC<{
           disabled={select.disabled}
           labelName={select.labelName}
         />
-      )
-    })
-  }
+      );
+    });
+  };
 
   const renderFieldArrays = (): ReactNode => {
     const { skills, languages } = FieldArrays;
@@ -96,7 +73,11 @@ export const CvCreateForm: FC<{
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      {renderInputs()}
+      <InputsFromArray
+        register={register as UseFormRegister<FormTypes>}
+        inputsArray={makeCvInputsList(TypeForm.createCV)}
+        errors={errors}
+      />
       {renderSelects()}
       {renderFieldArrays()}
       <div>

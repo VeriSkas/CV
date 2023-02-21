@@ -11,6 +11,14 @@ export type UsedInTableObjectsType =
   | TableUser
   | Department;
 
+export type FormTypes =
+  | NewCvForm
+  | NewProjectForm
+  | NewEmployeeForm
+  | CvDetailForm
+  | Inputs
+  | IEmployeeForm;
+
 export interface Inputs {
   [key: string]: string;
 }

@@ -1,15 +1,15 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { inputs } from '../../constants/inputsSettings';
 import { BtnType } from '../../constants/variables';
-import { Inputs } from '../../types/interfaces/interfaces';
+import { FormTypes, Inputs } from '../../types/interfaces/interfaces';
 import { LoginSignUpFormProps } from '../../types/interfaces/propsInterfaces';
 import { Button } from '../UI/Button/Button';
-import { Input } from '../UI/Input/Input';
+import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import classes from './LoginSignUpForm.module.scss';
 
 export const LoginSignUpForm: FC<LoginSignUpFormProps> = ({
@@ -26,6 +26,7 @@ export const LoginSignUpForm: FC<LoginSignUpFormProps> = ({
   } = useForm<Inputs>({
     mode: 'all',
   });
+  const authInputs = [{ ...inputs.email }, { ...inputs.password }];
 
   const submitForm = (data: Inputs): void => {
     const email = data.email;
@@ -33,24 +34,6 @@ export const LoginSignUpForm: FC<LoginSignUpFormProps> = ({
 
     onSubmit({ email, password });
     reset();
-  };
-
-  const renderInputs = (): ReactNode => {
-    const authInputs = [{ ...inputs.email }, { ...inputs.password }];
-
-    return authInputs.map((input) => {
-      return (
-        <Input
-          key={input.label}
-          type={input.type}
-          label={input.label}
-          placeholder={input.labelName}
-          validation={input.validation}
-          register={register}
-          error={errors[input.label]?.message}
-        />
-      );
-    });
   };
 
   return (
@@ -61,7 +44,11 @@ export const LoginSignUpForm: FC<LoginSignUpFormProps> = ({
       >
         <h1>{t(text.title)}</h1>
         <h3>{t(text.subtitle)}</h3>
-        {renderInputs()}
+        <InputsFromArray
+          register={register as UseFormRegister<FormTypes>}
+          inputsArray={authInputs}
+          errors={errors}
+        />
         <div className={classes.FormBtns}>
           <Button disabled={!isValid}>{t(text.submitBtn)}</Button>
           <Link to={path}>

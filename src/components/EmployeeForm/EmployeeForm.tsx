@@ -1,13 +1,12 @@
 import React, { FC, ReactNode } from 'react';
 
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormRegister } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { IEmployeeForm } from '../../types/interfaces/interfaces';
+import { FormTypes, IEmployeeForm } from '../../types/interfaces/interfaces';
 import { BtnText } from '../../constants/text';
 import { Button } from '../UI/Button/Button';
-import { Input } from '../UI/Input/Input';
 import { EmployeeFormProps } from '../../types/interfaces/propsInterfaces';
 import { Avatar } from '../Avatar/Avatar';
 import { PATH } from '../../constants/paths';
@@ -18,6 +17,7 @@ import { FieldArray } from '../FieldArray/FieldArray';
 import { FieldArrays } from '../../constants/fieldArrayVars';
 import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
 import { MySelect } from '../UI/MySelect/MySelect';
+import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -69,27 +69,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     }
   };
 
-  const renderInputs = (): ReactNode => {
-    const profileInputs = makeEmployeeInputsList(type, user);
-
-    return profileInputs?.map((input) => {
-      return (
-        <Input
-          key={input.label}
-          type={input.type}
-          labelName={input.labelName}
-          label={input.label}
-          defaultValue={input.defaultValue}
-          placeholder={input.labelName}
-          validation={input.validation}
-          readonly={input.readonly}
-          register={register}
-          error={errors[input.label as keyof IEmployeeForm]?.message}
-        />
-      );
-    });
-  };
-
   const renderFieldArrays = (): ReactNode => {
     const { skills, languages } = FieldArrays;
 
@@ -139,7 +118,11 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         user={user}
         disabled={isProfileType}
       />
-      {renderInputs()}
+      <InputsFromArray
+        register={register as UseFormRegister<FormTypes>}
+        inputsArray={makeEmployeeInputsList(type, user)}
+        errors={errors}
+      />
       {renderSelects()}
       {renderFieldArrays()}
       <div className={classes.FormBtns}>

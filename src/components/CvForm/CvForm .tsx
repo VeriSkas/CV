@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 
 import { useReactiveVar } from '@apollo/client';
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -12,13 +12,13 @@ import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
-import { CvDetailForm } from '../../types/interfaces/interfaces';
+import { CvDetailForm, FormTypes } from '../../types/interfaces/interfaces';
 import { CvFormProps } from '../../types/interfaces/propsInterfaces';
 import { makeCvInputsList, makeSelectsList } from '../../utils/formCreator';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
-import { Input } from '../UI/Input/Input';
 import { MySelect } from '../UI/MySelect/MySelect';
+import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 
 export const CvForm: FC<CvFormProps> = ({
   cv,
@@ -65,27 +65,6 @@ export const CvForm: FC<CvFormProps> = ({
     }
   };
 
-  const renderInputs = (): ReactNode => {
-    const inputs = makeCvInputsList(type, cv);
-
-    return inputs?.map((input) => {
-      return (
-        <Input
-          key={input.label}
-          type={input.type}
-          labelName={input.labelName}
-          label={input.label}
-          defaultValue={input.defaultValue}
-          placeholder={input.labelName}
-          validation={input.validation}
-          readonly={input.readonly}
-          register={register}
-          error={errors[input.label as keyof CvDetailForm]?.message}
-        />
-      );
-    });
-  };
-
   const renderSelects = (): ReactNode => {
     const selects = makeSelectsList(type);
 
@@ -126,7 +105,11 @@ export const CvForm: FC<CvFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      {renderInputs()}
+      <InputsFromArray
+        register={register as UseFormRegister<FormTypes>}
+        inputsArray={makeCvInputsList(type, cv)}
+        errors={errors}
+      />
       {renderSelects()}
       {renderFieldArrays()}
       <div>

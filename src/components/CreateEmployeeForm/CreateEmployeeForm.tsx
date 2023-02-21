@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -8,15 +8,18 @@ import { FieldArrays } from '../../constants/fieldArrayVars';
 import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
-import { NewEmployeeForm } from '../../types/interfaces/interfaces';
-import { makeEmployeeInputsList, makeSelectsList } from '../../utils/formCreator';
+import { FormTypes, NewEmployeeForm } from '../../types/interfaces/interfaces';
+import {
+  makeEmployeeInputsList,
+  makeSelectsList,
+} from '../../utils/formCreator';
 import { FieldArray } from '../FieldArray/FieldArray';
 import { Button } from '../UI/Button/Button';
-import { Input } from '../UI/Input/Input';
+import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { MySelect } from '../UI/MySelect/MySelect';
 
 export const CreateEmployeeForm: FC<{
-  onSubmitForm: (data: NewEmployeeForm) => void
+  onSubmitForm: (data: NewEmployeeForm) => void,
 }> = ({ onSubmitForm }) => {
   const { t } = useTranslation();
   const {
@@ -35,27 +38,6 @@ export const CreateEmployeeForm: FC<{
     reset();
   };
 
-  const renderInputs = (): ReactNode => {
-    const inputs = makeEmployeeInputsList(TypeForm.createEmployee);
-
-    return inputs?.map((input) => {
-      return (
-        <Input
-          key={input.label}
-          type={input.type}
-          labelName={input.labelName}
-          label={input.label}
-          defaultValue={input.defaultValue}
-          placeholder={input.labelName}
-          validation={input.validation}
-          readonly={input.readonly}
-          register={register}
-          error={errors[input.label as keyof NewEmployeeForm]?.message}
-        />
-      );
-    });
-  };
-
   const renderSelects = (): ReactNode => {
     const selects = makeSelectsList(TypeForm.createEmployee);
 
@@ -71,9 +53,9 @@ export const CreateEmployeeForm: FC<{
           disabled={select.disabled}
           labelName={select.labelName}
         />
-      )
-    })
-  }
+      );
+    });
+  };
 
   const renderFieldArrays = (): ReactNode => {
     const { skills, languages } = FieldArrays;
@@ -94,7 +76,11 @@ export const CreateEmployeeForm: FC<{
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      {renderInputs()}
+      <InputsFromArray
+        register={register as UseFormRegister<FormTypes>}
+        inputsArray={makeEmployeeInputsList(TypeForm.createEmployee)}
+        errors={errors}
+      />
       {renderSelects()}
       {renderFieldArrays()}
       <div>
@@ -105,4 +91,4 @@ export const CreateEmployeeForm: FC<{
       </div>
     </form>
   );
-}
+};
