@@ -1,0 +1,57 @@
+@import '../../../constants/styles/colors.scss';
+
+.Breadcrumbs {
+  display: flex;
+  margin: 5px 0;
+
+  a {
+    display: flex;
+    align-items: flex-end;
+    max-width: 120px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0 5px 0 0;
+
+    .LinkText {
+      color: #00000099;
+      font-size: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .Icon {
+      min-width: 20px;
+      width: 20px;
+      height: 20px;
+      margin: 0 5px 0 0;
+
+      path {
+        color: #00000099;
+      }
+    }
+
+    &.Active {
+      color: $mainBlack;
+      cursor: default;
+
+      &.Red {
+        .LinkText {
+          color: $mainRed;
+        }
+      }
+
+      .Icon {
+        path {
+          color: $mainBlack;
+        }
+
+        &.Red {
+          path {
+            color: $mainRed;
+          }
+        }
+      }
+    }
+  }
+}

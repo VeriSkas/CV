@@ -28,3 +28,17 @@ export const PATH = {
   createLanguage: '/languages/createLanguage',
   settings: '/settings',
 };
+
+export interface IParams {
+  [key: string]: string;
+}
+
+export const PARAMS: IParams = {
+  employees: 'employee',
+  cvs: 'cv',
+  projects: 'project',
+  skills: 'skill',
+  languages: 'language',
+  positions: 'position',
+  departments: 'department',
+};

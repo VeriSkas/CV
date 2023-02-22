@@ -32,7 +32,6 @@ export const SearchBar: FC<SearchBarProps> = ({
 
   return (
     <div className={classes.SearchBar}>
-      <h2>{t(title)}</h2>
       <div className={classes.SearchPanel}>
         <div className={classes.Search}>
           <Search

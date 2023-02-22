@@ -2,8 +2,7 @@
 
 .SearchBar {
   width: 100%;
-  height: calc(100% - 2 * $containerPaddingHeight);
-  padding: $containerPaddingHeight 0;
+  height: calc(100% - 2 * $containerPaddingHeight - $breadcrumbsHeight);
 
   .SearchPanel {
     display: flex;

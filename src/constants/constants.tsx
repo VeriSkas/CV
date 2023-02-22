@@ -8,6 +8,9 @@ import {
   MdHomeWork,
   MdSettings,
   MdLogout,
+  MdOutlineHouse,
+  MdPersonOutline,
+  MdCardTravel,
 } from 'react-icons/md';
 import { FaAddressCard } from 'react-icons/fa';
 import { GrWorkshop } from 'react-icons/gr';
@@ -41,19 +44,39 @@ export const Roles: { [key: string]: IRole } = {
 };
 
 export const links: { [key: string]: ILink } = {
+  home: {
+    to: PATH.main,
+    label: 'Home',
+    icon: <MdOutlineHouse />,
+  },
   employees: {
     to: PATH.employees,
     label: 'Employees',
     icon: <MdPeopleAlt />,
+  },
+  employee: {
+    to: `${PATH.employees}/${ACTIVE_USER_ID()}`,
+    label: 'Person',
+    icon: <MdPersonOutline />,
   },
   projects: {
     to: PATH.projects,
     label: 'Projects',
     icon: <GrWorkshop />,
   },
+  project: {
+    to: `${PATH.projects}/${ACTIVE_PROJECT_ID()}`,
+    label: 'Project',
+    icon: <MdCardTravel />,
+  },
   cvs: {
     to: PATH.cvs,
     label: 'CVs',
+    icon: <FaAddressCard />,
+  },
+  cv: {
+    to: `${PATH.cvs}/${ACTIVE_CV_ID()}`,
+    label: 'CV',
     icon: <FaAddressCard />,
   },
   departments: {
@@ -61,8 +84,18 @@ export const links: { [key: string]: ILink } = {
     label: 'Departments',
     icon: <MdHomeWork />,
   },
+  department: {
+    to: `${PATH.departments}/${PATH.department}`,
+    label: 'Department',
+    icon: <MdHomeWork />,
+  },
   positions: {
     to: PATH.positions,
+    label: 'Positions',
+    icon: <MdHomeRepairService />,
+  },
+  position: {
+    to: `${PATH.positions}/${PATH.position}`,
     label: 'Positions',
     icon: <MdHomeRepairService />,
   },
@@ -71,8 +104,18 @@ export const links: { [key: string]: ILink } = {
     label: 'Skills',
     icon: <MdHardware />,
   },
+  skill: {
+    to: `${PATH.skills}/${PATH.skill}`,
+    label: 'Skill',
+    icon: <MdHardware />,
+  },
   languages: {
     to: PATH.languages,
+    label: 'Languages',
+    icon: <MdLanguage />,
+  },
+  language: {
+    to: `${PATH.languages}/${PATH.language}`,
     label: 'Languages',
     icon: <MdLanguage />,
   },
