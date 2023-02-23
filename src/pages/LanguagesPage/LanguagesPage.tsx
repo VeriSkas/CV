@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/UI/Breadcrumbs/Breadcrumbs';
 
-export const LanguagesPage: FC<{}> = () => {
+const LanguagesPage: FC<{}> = () => {
   return (
     <>
       <Breadcrumbs />
@@ -10,3 +10,5 @@ export const LanguagesPage: FC<{}> = () => {
     </>
   );
 };
+
+export default LanguagesPage;

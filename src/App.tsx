@@ -8,28 +8,44 @@ import { CreateEmployee } from './pages/CreateEmployee/CreateEmployee';
 import { Employees } from './pages/Employees/Employees';
 import { Layout } from './components/Layout/Layout';
 import { Profile } from './pages/Profile/Profile';
-import { SignInAndUp } from './pages/SignInAndUp/SignInAndUp';
 import { SignUp } from './pages/SignUp/SignUp';
 import { UpdateEmployee } from './pages/UpdateEmployee/UpdateEmployee';
-import { EmployeesPage } from './pages/EmployeesPage/EmployeesPage';
 import { Projects } from './pages/Projects/Projects';
-import { ProjectsPage } from './pages/ProjectsPage/ProjectsPage';
-import { CVsPage } from './pages/CVsPage/CVsPage';
 import { CVs } from './pages/CVs/CVs';
 import { CvDetails } from './pages/CvDetails/CvDetails';
 import { PATH } from './constants/paths';
 import { CreateCV } from './pages/CreateCV/CreateCV';
-import { DepartmentsPage } from './pages/DepartmentsPage/DepartmentsPage';
 import { Departments } from './pages/Departments/Departments';
-import { PositionPage } from './pages/PositionPage/PositionPage';
 import { Positions } from './pages/Positions/Positions';
-import { SkillsPage } from './pages/SkillsPage/SkillsPage';
 import { Skills } from './pages/Skills/Skills';
-import { LanguagesPage } from './pages/LanguagesPage/LanguagesPage';
 import { Languages } from './pages/Languages/Languages';
 import { USER_TOKEN } from './apollo/state';
 import { CreateProject } from './pages/CreateProject/CreateProject';
 import { ProjectDetailPage } from './pages/ProjectDetailPage/ProjectDetailPage';
+import { ContentText } from './constants/text';
+
+const ProjectsPage = React.lazy(
+  async () => await import('./pages/ProjectsPage/ProjectsPage')
+);
+const EmployeesPage = React.lazy(
+  async () => await import('./pages/EmployeesPage/EmployeesPage')
+);
+const DepartmentsPage = React.lazy(
+  async () => await import('./pages/DepartmentsPage/DepartmentsPage')
+);
+const PositionPage = React.lazy(
+  async () => await import('./pages/PositionPage/PositionPage')
+);
+const SkillsPage = React.lazy(
+  async () => await import('./pages/SkillsPage/SkillsPage')
+);
+const LanguagesPage = React.lazy(
+  async () => await import('./pages/LanguagesPage/LanguagesPage')
+);
+const SignInAndUp = React.lazy(
+  async () => await import('./pages/SignInAndUp/SignInAndUp')
+);
+const CVsPage = React.lazy(async () => await import('./pages/CVsPage/CVsPage'));
 
 export const App: FC = () => {
   const token = useReactiveVar(USER_TOKEN);
@@ -47,7 +63,14 @@ export const App: FC = () => {
 
   const protectedRoutes = (
     <>
-      <Route path={PATH.employees} element={<EmployeesPage />}>
+      <Route
+        path={PATH.employees}
+        element={
+          <React.Suspense fallback={ContentText.loading}>
+            <EmployeesPage />
+          </React.Suspense>
+        }
+      >
         <Route
           index
           element={
@@ -89,7 +112,14 @@ export const App: FC = () => {
           }
         />
       </Route>
-      <Route path={PATH.projects} element={<ProjectsPage />}>
+      <Route
+        path={PATH.projects}
+        element={
+          <React.Suspense fallback={ContentText.loading}>
+            <ProjectsPage />
+          </React.Suspense>
+        }
+      >
         <Route index element={<Projects />} />
         <Route
           path={PATH.createProject}
@@ -112,7 +142,14 @@ export const App: FC = () => {
           }
         />
       </Route>
-      <Route path={PATH.cvs} element={<CVsPage />}>
+      <Route
+        path={PATH.cvs}
+        element={
+          <React.Suspense fallback={ContentText.loading}>
+            <CVsPage />
+          </React.Suspense>
+        }
+      >
         <Route
           index
           element={
@@ -144,7 +181,14 @@ export const App: FC = () => {
           }
         />
       </Route>
-      <Route path={PATH.departments} element={<DepartmentsPage />}>
+      <Route
+        path={PATH.departments}
+        element={
+          <React.Suspense fallback={ContentText.loading}>
+            <DepartmentsPage />
+          </React.Suspense>
+        }
+      >
         <Route
           index
           element={
@@ -156,7 +200,14 @@ export const App: FC = () => {
           }
         />
       </Route>
-      <Route path={PATH.positions} element={<PositionPage />}>
+      <Route
+        path={PATH.positions}
+        element={
+          <React.Suspense fallback={ContentText.loading}>
+            <PositionPage />
+          </React.Suspense>
+        }
+      >
         <Route
           index
           element={
@@ -168,7 +219,14 @@ export const App: FC = () => {
           }
         />
       </Route>
-      <Route path={PATH.skills} element={<SkillsPage />}>
+      <Route
+        path={PATH.skills}
+        element={
+          <React.Suspense fallback={ContentText.loading}>
+            <SkillsPage />
+          </React.Suspense>
+        }
+      >
         <Route
           index
           element={
@@ -180,7 +238,14 @@ export const App: FC = () => {
           }
         />
       </Route>
-      <Route path={PATH.languages} element={<LanguagesPage />}>
+      <Route
+        path={PATH.languages}
+        element={
+          <React.Suspense fallback={ContentText.loading}>
+            <LanguagesPage />
+          </React.Suspense>
+        }
+      >
         <Route
           index
           element={
@@ -196,7 +261,14 @@ export const App: FC = () => {
   );
   const unProtectedRoutes = (
     <>
-      <Route path={PATH.login} element={<SignInAndUp />}>
+      <Route
+        path={PATH.login}
+        element={
+          <React.Suspense fallback={ContentText.loading}>
+            <SignInAndUp />
+          </React.Suspense>
+        }
+      >
         <Route
           index
           element={
@@ -211,7 +283,14 @@ export const App: FC = () => {
           }
         />
       </Route>
-      <Route path={PATH.signUp} element={<SignInAndUp />}>
+      <Route
+        path={PATH.signUp}
+        element={
+          <React.Suspense fallback={ContentText.loading}>
+            <SignInAndUp />
+          </React.Suspense>
+        }
+      >
         <Route
           index
           element={

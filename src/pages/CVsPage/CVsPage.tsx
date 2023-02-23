@@ -8,7 +8,7 @@ import { ACTIVE_CV_ID } from '../../apollo/state';
 import { Breadcrumbs } from '../../components/UI/Breadcrumbs/Breadcrumbs';
 import { CvItemDetails } from '../../types/interfaces/cvs';
 
-export const CVsPage: FC<{}> = () => {
+const CVsPage: FC<{}> = () => {
   const activeCV = useReactiveVar(ACTIVE_CV_ID);
   const { data } = useQuery<{ cv: CvItemDetails }>(GET_CV, {
     variables: {
@@ -22,3 +22,5 @@ export const CVsPage: FC<{}> = () => {
     </>
   );
 };
+
+export default CVsPage;

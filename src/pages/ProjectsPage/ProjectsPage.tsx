@@ -8,7 +8,7 @@ import { ACTIVE_PROJECT_ID } from '../../apollo/state';
 import { Breadcrumbs } from '../../components/UI/Breadcrumbs/Breadcrumbs';
 import { ProjectItem } from '../../types/interfaces/project';
 
-export const ProjectsPage: FC<{}> = () => {
+const ProjectsPage: FC<{}> = () => {
   const activeProjectID = useReactiveVar(ACTIVE_PROJECT_ID);
   const { data } = useQuery<{ project: ProjectItem }>(GET_PROJECT, {
     variables: {
@@ -23,3 +23,5 @@ export const ProjectsPage: FC<{}> = () => {
     </>
   );
 };
+
+export default ProjectsPage;

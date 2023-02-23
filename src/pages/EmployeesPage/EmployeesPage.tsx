@@ -8,7 +8,7 @@ import { ACTIVE_USER_ID } from '../../apollo/state';
 import { Breadcrumbs } from '../../components/UI/Breadcrumbs/Breadcrumbs';
 import { UserInfo } from '../../types/interfaces/user';
 
-export const EmployeesPage: FC<{}> = () => {
+const EmployeesPage: FC<{}> = () => {
   const activeUserID = useReactiveVar(ACTIVE_USER_ID);
   const { data } = useQuery<{ user: UserInfo }>(GET_USER, {
     variables: {
@@ -24,3 +24,5 @@ export const EmployeesPage: FC<{}> = () => {
     </>
   );
 };
+
+export default EmployeesPage;

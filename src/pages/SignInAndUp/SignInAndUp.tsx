@@ -8,7 +8,7 @@ import { PATH } from '../../constants/paths';
 import { TitleText } from '../../constants/text';
 import classes from './SignInAndUp.module.scss';
 
-export const SignInAndUp: FC = () => {
+const SignInAndUp: FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -35,3 +35,5 @@ export const SignInAndUp: FC = () => {
     </>
   );
 };
+
+export default SignInAndUp;
