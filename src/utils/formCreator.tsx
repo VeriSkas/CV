@@ -144,6 +144,16 @@ export const makeProjectInputsList = (
   return [];
 };
 
+export const makeInputsList = (type: string): IInput[] => {
+  if (
+    type === TypeForm.createDepartment ||
+    type === TypeForm.updateDepartment
+  ) {
+    return [{ ...inputs.departmentName }];
+  }
+  return [];
+};
+
 export const makeSelectsList = (type: string): IMySelect[] => {
   if (type === TypeForm.createProject || type === TypeForm.updateProject) {
     return [{ ...SelectSettings.skillsIds }];

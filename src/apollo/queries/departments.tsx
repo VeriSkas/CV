@@ -17,3 +17,29 @@ export const GET_DEPARTMENTS_AS_OPTIONS = gql`
     }
   }
 `;
+
+export const CREATE_DEPARTMENT = gql`
+  mutation createDepartment($department: DepartmentInput!) {
+    createDepartment(department: $department) {
+      id
+      name
+    }
+  }
+`;
+
+export const UPDATE_DEPARTMENT = gql`
+  mutation updateDepartment($id: ID!, $department: DepartmentInput!) {
+    updateDepartment(id: $id, department: $department) {
+      id
+      name
+    }
+  }
+`;
+
+export const DELETE_DEPARTMENT = gql`
+  mutation deleteDepartment($id: ID!) {
+    deleteDepartment(id: $id) {
+      affected
+    }
+  }
+`;

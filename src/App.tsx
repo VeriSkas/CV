@@ -23,6 +23,8 @@ import { USER_TOKEN } from './apollo/state';
 import { CreateProject } from './pages/CreateProject/CreateProject';
 import { ProjectDetailPage } from './pages/ProjectDetailPage/ProjectDetailPage';
 import { ContentText } from './constants/text';
+import { CreateDepartment } from './pages/CreateDepartment/CreateDepartment';
+import { DepartmentDetail } from './pages/DepartmentDetail/DepartmentDetail';
 
 const ProjectsPage = React.lazy(
   async () => await import('./pages/ProjectsPage/ProjectsPage')
@@ -193,6 +195,26 @@ export const App: FC = () => {
           index
           element={
             <Departments
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
+        <Route
+          path={PATH.createDepartment}
+          element={
+            <CreateDepartment
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
+        <Route
+          path={PATH.department}
+          element={
+            <DepartmentDetail
               setError={(error: string) => {
                 setErrorMessage(error);
               }}

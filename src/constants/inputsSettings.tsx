@@ -68,6 +68,17 @@ export const inputs: { [key: string]: IInput } = {
     defaultValue: '',
     validation: {},
   },
+  departmentName: {
+    type: InputTypes.text,
+    label: InputLabels.name,
+    labelName: InputLabelNames.department,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 2, message: ErrorMessages.inputMinLength(2) },
+      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
+    },
+  },
   position: {
     type: InputTypes.select,
     label: InputLabels.position,

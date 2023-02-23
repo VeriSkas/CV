@@ -5,6 +5,8 @@ export const LSItems = {
   activeUser: 'activeUser',
   activeProject: 'activeProject',
   activeCV: 'activeCV',
+  activeDepartment: 'activeDepartment',
+  activePosition: 'activePosition',
 };
 
 export const objectKeysInTable = {
@@ -25,6 +27,8 @@ export const TypeForm = {
   createProject: 'createProject',
   updateProject: 'updateProject',
   projectDetails: 'projectDetails',
+  createDepartment: 'createDepartment',
+  updateDepartment: 'updateDepartment',
 };
 
 export const InputType = {

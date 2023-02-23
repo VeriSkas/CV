@@ -19,3 +19,11 @@ export const ACTIVE_PROJECT_ID = makeVar(
 export const ACTIVE_CV_ID = makeVar(
   localStorage.getItem(LSItems.activeCV) ?? ''
 );
+
+export const ACTIVE_DEPARTMENT_ID = makeVar(
+  localStorage.getItem(LSItems.activeDepartment) ?? ''
+);
+
+export const ACTIVE_POSITION_ID = makeVar(
+  localStorage.getItem(LSItems.activePosition) ?? ''
+);

@@ -88,6 +88,8 @@ export const TitleText = {
   signUp: 'SignUp',
   updateUser: 'Update User',
   departments: 'Departments',
+  createDepartment: 'Create department',
+  updateDepartment: 'Update department',
   positions: 'Positions',
   skills: 'Skills',
   languages: 'Languages',
