@@ -91,6 +91,8 @@ export const TitleText = {
   createDepartment: 'Create department',
   updateDepartment: 'Update department',
   positions: 'Positions',
+  createPosition: 'Create position',
+  updatePosition: 'Update position',
   skills: 'Skills',
   languages: 'Languages',
 };

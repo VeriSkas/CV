@@ -57,7 +57,7 @@ export const CreateEmployee: FC<{ setError: (error: string) => void }> = ({
           cache.writeQuery({
             query: GET_USERS,
             data: {
-              users: [newUser.createUser, ...usersData.users],
+              users: [...usersData.users, newUser.createUser],
             },
           });
         }

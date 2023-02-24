@@ -25,6 +25,8 @@ import { ProjectDetailPage } from './pages/ProjectDetailPage/ProjectDetailPage';
 import { ContentText } from './constants/text';
 import { CreateDepartment } from './pages/CreateDepartment/CreateDepartment';
 import { DepartmentDetail } from './pages/DepartmentDetail/DepartmentDetail';
+import { PositionDetail } from './pages/PositionDetail/PositionDetail';
+import { CreatePosition } from './pages/CreatePosition/CreatePosition';
 
 const ProjectsPage = React.lazy(
   async () => await import('./pages/ProjectsPage/ProjectsPage')
@@ -234,6 +236,26 @@ export const App: FC = () => {
           index
           element={
             <Positions
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
+        <Route
+          path={PATH.position}
+          element={
+            <PositionDetail
+              setError={(error: string) => {
+                setErrorMessage(error);
+              }}
+            />
+          }
+        />
+        <Route
+          path={PATH.createPosition}
+          element={
+            <CreatePosition
               setError={(error: string) => {
                 setErrorMessage(error);
               }}

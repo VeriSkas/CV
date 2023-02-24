@@ -29,6 +29,8 @@ export const TypeForm = {
   projectDetails: 'projectDetails',
   createDepartment: 'createDepartment',
   updateDepartment: 'updateDepartment',
+  createPosition: 'createPosition',
+  updatePosition: 'updatePosition',
 };
 
 export const InputType = {

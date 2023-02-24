@@ -58,7 +58,7 @@ export const CreateCV: FC<{ setError: (message: string) => void }> = ({
           cache.writeQuery({
             query: GET_CVS,
             data: {
-              cvs: [newCv?.createCv, ...cvsData.cvs],
+              cvs: [...cvsData.cvs, newCv?.createCv],
             },
           });
         }

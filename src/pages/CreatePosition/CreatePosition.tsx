@@ -3,22 +3,18 @@ import React, { FC, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
-import {
-  CREATE_DEPARTMENT,
-  GET_DEPARTMENTS,
-} from '../../apollo/queries/departments';
-
+import { CREATE_POSITION, GET_POSITIONS } from '../../apollo/queries/positions';
 import { DepartmentAndPositionForm } from '../../components/DepartmentAndPositionForm/DepartmentAndPositionForm';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
-import { Department } from '../../types/interfaces/departments';
+import { Position } from '../../types/interfaces/positions';
 
-export const CreateDepartment: FC<{ setError: (error: string) => void }> = ({
+export const CreatePosition: FC<{ setError: (error: string) => void }> = ({
   setError,
 }) => {
   const { t } = useTranslation();
-  const [createDepartment, { error }] = useMutation(CREATE_DEPARTMENT);
+  const [createPosition, { error }] = useMutation(CREATE_POSITION);
 
   useEffect(() => {
     if (error) {
@@ -26,25 +22,25 @@ export const CreateDepartment: FC<{ setError: (error: string) => void }> = ({
     }
   }, [error]);
 
-  const submitFormHandler = async (department: {
+  const submitFormHandler = async (position: {
     name: string,
   }): Promise<void> => {
-    await createDepartment({
+    await createPosition({
       variables: {
-        department,
+        position,
       },
-      update(cache, { data: newDepartment }) {
-        const departmentsData = cache.readQuery<{ departments: Department[] }>({
-          query: GET_DEPARTMENTS,
+      update(cache, { data: newPosition }) {
+        const positionsData = cache.readQuery<{ positions: Position[] }>({
+          query: GET_POSITIONS,
         });
 
-        if (departmentsData) {
+        if (positionsData) {
           cache.writeQuery({
-            query: GET_DEPARTMENTS,
+            query: GET_POSITIONS,
             data: {
-              departments: [
-                ...departmentsData.departments,
-                newDepartment?.createDepartment,
+              positions: [
+                ...positionsData.positions,
+                newPosition?.createPosition,
               ],
             },
           });
@@ -54,10 +50,10 @@ export const CreateDepartment: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.createDepartment)}>
+    <FormContainer title={t(TitleText.createPosition)}>
       <DepartmentAndPositionForm
         onSubmitForm={submitFormHandler}
-        type={TypeForm.createDepartment}
+        type={TypeForm.createPosition}
       />
     </FormContainer>
   );

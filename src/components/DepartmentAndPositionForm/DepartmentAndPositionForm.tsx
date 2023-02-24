@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
-import { BtnType } from '../../constants/variables';
+import { BtnType, TypeForm } from '../../constants/variables';
 import { Department } from '../../types/interfaces/departments';
 import { FormTypes } from '../../types/interfaces/interfaces';
 import { Position } from '../../types/interfaces/positions';
@@ -49,7 +49,9 @@ export const DepartmentAndPositionForm: FC<{
         />
         <div>
           <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>
-          <Link to={PATH.departments}>
+          <Link to={type === TypeForm.updatePosition || type === TypeForm.createPosition
+            ? PATH.positions : PATH.departments}
+          >
             <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
           </Link>
         </div>

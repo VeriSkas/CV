@@ -147,7 +147,9 @@ export const makeProjectInputsList = (
 export const makeInputsList = (type: string): IInput[] => {
   if (
     type === TypeForm.createDepartment ||
-    type === TypeForm.updateDepartment
+    type === TypeForm.updateDepartment ||
+    type === TypeForm.updatePosition ||
+    type === TypeForm.createPosition
   ) {
     return [{ ...inputs.departmentName }];
   }
