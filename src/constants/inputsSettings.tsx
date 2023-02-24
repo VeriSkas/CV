@@ -195,6 +195,35 @@ export const inputs: { [key: string]: IInput } = {
     defaultValue: '',
     validation: {},
   },
+  languageName: {
+    type: InputTypes.text,
+    label: InputLabels.name,
+    labelName: InputLabelNames.language,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 2, message: ErrorMessages.inputMinLength(2) },
+      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
+    },
+  },
+  nativeName: {
+    type: InputTypes.text,
+    label: InputLabels.nativeName,
+    labelName: InputLabelNames.nativeName,
+    defaultValue: '',
+    validation: {},
+  },
+  iso2: {
+    type: InputTypes.text,
+    label: InputLabels.iso2,
+    labelName: InputLabelNames.iso2,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 2, message: ErrorMessages.inputMinLength(2) },
+      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
+    },
+  },
   role: {
     type: InputTypes.select,
     label: InputLabels.role,

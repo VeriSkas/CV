@@ -17,6 +17,7 @@ export type FormTypes =
   | NewEmployeeForm
   | CvDetailForm
   | Inputs
+  | ILanguageForm
   | IEmployeeForm;
 
 export interface Inputs {
@@ -65,6 +66,12 @@ export interface IEmployeeForm {
   departmentId: string;
   positionId: string;
   role: string;
+}
+
+export interface ILanguageForm {
+  name: string;
+  iso2: string;
+  native_name: string;
 }
 
 export interface CvDetailForm {

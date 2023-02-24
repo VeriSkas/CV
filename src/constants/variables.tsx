@@ -35,6 +35,8 @@ export const TypeForm = {
   updatePosition: 'updatePosition',
   createSkill: 'createSkill',
   updateSkill: 'updateSkill',
+  createLanguage: 'createLanguage',
+  updateLanguage: 'updateLanguage',
 };
 
 export const InputType = {

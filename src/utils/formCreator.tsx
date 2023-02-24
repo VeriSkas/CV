@@ -157,6 +157,15 @@ export const makeInputsList = (type: string): IInput[] => {
     return [{ ...inputs.positionName }];
   } else if (type === TypeForm.updateSkill || type === TypeForm.createSkill) {
     return [{ ...inputs.skillName }];
+  } else if (
+    type === TypeForm.updateLanguage ||
+    type === TypeForm.createLanguage
+  ) {
+    return [
+      { ...inputs.languageName },
+      { ...inputs.iso2 },
+      { ...inputs.nativeName },
+    ];
   }
   return [];
 };

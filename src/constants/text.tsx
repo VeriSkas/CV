@@ -26,6 +26,8 @@ export const InputLabels = {
   projectsIds: 'projectsIds',
   language: 'language',
   languages: 'languages',
+  nativeName: 'native_name',
+  iso2: 'iso2',
   role: 'role',
   teamSize: 'team_size',
   startDate: 'start_date',
@@ -48,6 +50,8 @@ export const InputLabelNames = {
   skills: 'Skills',
   language: 'Language',
   languages: 'Languages',
+  nativeName: 'Native name',
+  iso2: 'Iso2 code',
   role: 'Role',
   domain: 'Domain',
   teamSize: 'Team size',
@@ -97,6 +101,8 @@ export const TitleText = {
   createSkill: 'Create skill',
   updateSkill: 'Update skill',
   languages: 'Languages',
+  createLanguage: 'Create language',
+  updateLanguage: 'Update language',
 };
 
 export const SubtitleText = {
