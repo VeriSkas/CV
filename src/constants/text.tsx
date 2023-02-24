@@ -94,6 +94,8 @@ export const TitleText = {
   createPosition: 'Create position',
   updatePosition: 'Update position',
   skills: 'Skills',
+  createSkill: 'Create skill',
+  updateSkill: 'Update skill',
   languages: 'Languages',
 };
 

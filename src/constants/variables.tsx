@@ -7,6 +7,8 @@ export const LSItems = {
   activeCV: 'activeCV',
   activeDepartment: 'activeDepartment',
   activePosition: 'activePosition',
+  activeSkill: 'activeSkill',
+  activeLanguage: 'activeLanguage',
 };
 
 export const objectKeysInTable = {
@@ -31,6 +33,8 @@ export const TypeForm = {
   updateDepartment: 'updateDepartment',
   createPosition: 'createPosition',
   updatePosition: 'updatePosition',
+  createSkill: 'createSkill',
+  updateSkill: 'updateSkill',
 };
 
 export const InputType = {

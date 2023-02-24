@@ -4,11 +4,12 @@ import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
 import { CREATE_POSITION, GET_POSITIONS } from '../../apollo/queries/positions';
-import { DepartmentAndPositionForm } from '../../components/DepartmentAndPositionForm/DepartmentAndPositionForm';
+import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { Position } from '../../types/interfaces/positions';
+import { PATH } from '../../constants/paths';
 
 export const CreatePosition: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -51,9 +52,10 @@ export const CreatePosition: FC<{ setError: (error: string) => void }> = ({
 
   return (
     <FormContainer title={t(TitleText.createPosition)}>
-      <DepartmentAndPositionForm
+      <FormWithOnlyName
         onSubmitForm={submitFormHandler}
         type={TypeForm.createPosition}
+        returnPath={PATH.positions}
       />
     </FormContainer>
   );

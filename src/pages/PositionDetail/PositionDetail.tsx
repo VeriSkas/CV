@@ -8,7 +8,7 @@ import {
   GET_POSITIONS,
   UPDATE_POSITION,
 } from '../../apollo/queries/positions';
-import { DepartmentAndPositionForm } from '../../components/DepartmentAndPositionForm/DepartmentAndPositionForm';
+import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { PATH } from '../../constants/paths';
 import { ContentText, TitleText } from '../../constants/text';
@@ -70,9 +70,10 @@ export const PositionDetail: FC<{ setError: (error: string) => void }> = ({
       <>
         {loading && t(ContentText.loading)}
         {position && (
-          <DepartmentAndPositionForm
+          <FormWithOnlyName
             onSubmitForm={submitFormHandler}
             type={TypeForm.updatePosition}
+            returnPath={PATH.positions}
             item={position ?? undefined}
           />
         )}

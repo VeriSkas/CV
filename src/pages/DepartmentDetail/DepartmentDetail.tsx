@@ -7,7 +7,6 @@ import {
   GET_DEPARTMENTS,
   UPDATE_DEPARTMENT,
 } from '../../apollo/queries/departments';
-import { DepartmentAndPositionForm } from '../../components/DepartmentAndPositionForm/DepartmentAndPositionForm';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { ContentText, TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
@@ -15,6 +14,7 @@ import { ACTIVE_DEPARTMENT_ID } from '../../apollo/state';
 import { Department } from '../../types/interfaces/departments';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../constants/paths';
+import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 
 export const DepartmentDetail: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -67,9 +67,10 @@ export const DepartmentDetail: FC<{ setError: (error: string) => void }> = ({
       <>
         {loading && t(ContentText.loading)}
         {department && (
-        <DepartmentAndPositionForm
+        <FormWithOnlyName
           onSubmitForm={submitFormHandler}
           type={TypeForm.updateDepartment}
+          returnPath={PATH.departments}
           item={department ?? undefined}
         />
         )}

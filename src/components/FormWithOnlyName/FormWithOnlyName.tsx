@@ -4,24 +4,25 @@ import { FieldErrorsImpl, useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
-import { BtnType, TypeForm } from '../../constants/variables';
+import { BtnType } from '../../constants/variables';
 import { Department } from '../../types/interfaces/departments';
 import { FormTypes } from '../../types/interfaces/interfaces';
 import { Position } from '../../types/interfaces/positions';
+import { Skill } from '../../types/interfaces/skills';
 import { makeInputsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 
-export const DepartmentAndPositionForm: FC<{
+export const FormWithOnlyName: FC<{
     onSubmitForm: (
         data: { name: string },
         id?: string
       ) => void;
-    item?: Department | Position;
+    item?: Department | Position | Skill;
+    returnPath: string;
     type: string;
-  }> = ({ onSubmitForm, item, type }) => {
+  }> = ({ onSubmitForm, item, type, returnPath }) => {
     const { t } = useTranslation();
     const {
       register,
@@ -49,9 +50,7 @@ export const DepartmentAndPositionForm: FC<{
         />
         <div>
           <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>
-          <Link to={type === TypeForm.updatePosition || type === TypeForm.createPosition
-            ? PATH.positions : PATH.departments}
-          >
+          <Link to={returnPath}>
             <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
           </Link>
         </div>

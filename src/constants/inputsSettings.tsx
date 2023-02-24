@@ -86,6 +86,17 @@ export const inputs: { [key: string]: IInput } = {
     defaultValue: '',
     validation: {},
   },
+  positionName: {
+    type: InputTypes.text,
+    label: InputLabels.name,
+    labelName: InputLabelNames.position,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 2, message: ErrorMessages.inputMinLength(2) },
+      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
+    },
+  },
   domain: {
     type: InputTypes.text,
     label: InputLabels.domain,
@@ -165,6 +176,17 @@ export const inputs: { [key: string]: IInput } = {
     labelName: InputLabelNames.skill,
     defaultValue: '',
     validation: {},
+  },
+  skillName: {
+    type: InputTypes.text,
+    label: InputLabels.name,
+    labelName: InputLabelNames.skill,
+    defaultValue: '',
+    validation: {
+      required: { value: true, message: ErrorMessages.inputRequired },
+      minLength: { value: 2, message: ErrorMessages.inputMinLength(2) },
+      maxLength: { value: 100, message: ErrorMessages.inputMaxLength(100) },
+    },
   },
   language: {
     type: InputTypes.text,

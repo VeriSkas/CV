@@ -27,3 +27,11 @@ export const ACTIVE_DEPARTMENT_ID = makeVar(
 export const ACTIVE_POSITION_ID = makeVar(
   localStorage.getItem(LSItems.activePosition) ?? ''
 );
+
+export const ACTIVE_SKILL_ID = makeVar(
+  localStorage.getItem(LSItems.activeSkill) ?? ''
+);
+
+export const ACTIVE_LANGUAGE_ID = makeVar(
+  localStorage.getItem(LSItems.activeLanguage) ?? ''
+);
