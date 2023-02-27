@@ -8,6 +8,7 @@ import { FaPlus } from 'react-icons/fa';
 import { InputTypes } from '../../constants/text';
 import { FieldArrayProps } from '../../types/interfaces/propsInterfaces';
 import classes from './FieldArray.module.scss';
+import { MySelect } from '../UI/MySelect/MySelect';
 
 export const FieldArray: FC<FieldArrayProps> = ({
   register,
@@ -16,6 +17,8 @@ export const FieldArray: FC<FieldArrayProps> = ({
   labelName,
   radioInputs,
   disabled,
+  required,
+  setValue,
 }) => {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -48,11 +51,15 @@ export const FieldArray: FC<FieldArrayProps> = ({
           return (
             <li key={item.id}>
               <div className={classes.Input}>
-                <input
-                  {...register(`${label}.${index}.${inputValueName}`, {
-                    required: true,
-                  })}
-                  disabled={disabled}
+                <MySelect
+                  control={control}
+                  setFormValue={setValue}
+                  label={label}
+                  disabled={disabled ?? false}
+                  labelName={''}
+                  multi={false}
+                  controlName={`${label}.${index}.${inputValueName}`}
+                  required={required}
                 />
                 {!disabled && (
                   <div

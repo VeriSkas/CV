@@ -8,7 +8,7 @@ export const OptionsForFieldArrays: { [key: string]: IRadioInputs } = {
     name: 'mastery',
     options: [
       {
-        value: 'notice',
+        value: 'novice',
         label: 'Novice',
       },
       {

@@ -19,6 +19,8 @@ export const MySelect: FC<MySelectProps> = ({
   labelName,
   multi,
   getValues,
+  controlName,
+  required,
 }) => {
   const [value, setValue] = useState<OptionsType | OptionsType[]>();
   const options: OptionsType[] | null = useOptions(label);
@@ -35,21 +37,22 @@ export const MySelect: FC<MySelectProps> = ({
   }, [getValues, options]);
 
   useEffect(() => {
-    if (defaultValue && typeof defaultValue === 'string') {
-      setValue(options.find((c) => c.value === defaultValue));
+    if (options && defaultValue && typeof defaultValue === 'string') {
+      const option = options.find((c) => c.value === defaultValue) ?? options[0];
+
+      setValue(option);
     }
-  }, [defaultValue, options])
+  }, [defaultValue, options]);
 
   const onChangeHandler = (value: any): void => {
     if (multi) {
       setValue(value);
-      setFormValue(
-        label,
+      setFormValue(label,
         value.map((item: OptionsType) => item.value)
       );
     } else {
       setValue(value);
-      setFormValue(label, value.value);
+      setFormValue(controlName ?? label, controlName ? value.label : value.value);
     }
   };
 
@@ -57,17 +60,23 @@ export const MySelect: FC<MySelectProps> = ({
     <div className={classes.MySelect}>
       <label>{labelName}</label>
       <Controller
-        name={label}
+        name={controlName ?? label}
         control={control}
+        rules={{ required }}
         render={({ field }) => {
+          const selectValue = multi
+            ? value
+            : options
+              .find((c) => c.value === field.value) ?? { value: field.value, label: field.value };
+
           return (
             <Select
               className={classes.Select}
-              placeholder={label}
+              placeholder={labelName}
               options={options}
               isDisabled={disabled}
               isMulti={multi}
-              value={value}
+              value={selectValue}
               onChange={onChangeHandler}
             />
           );

@@ -98,6 +98,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         register={register as UseFormRegister<FormTypes>}
         control={control as Control<FormTypes, any>}
         disabled={isProfileType}
+        setValue={setValue as UseFormSetValue<FormTypes>}
       />
       <div className={classes.FormBtns}>
         {!isProfileType && <Button disabled={!isValid}>

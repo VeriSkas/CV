@@ -36,5 +36,6 @@ export const SelectSettings: { [key: string]: IMySelect } = {
     defaultValue: '',
     disabled: false,
     multi: false,
+    required: true,
   },
 };

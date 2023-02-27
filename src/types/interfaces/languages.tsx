@@ -4,3 +4,8 @@ export interface Language {
   iso2: string;
   native_name?: string;
 }
+
+export interface LanguageOption {
+  label: string;
+  value: string;
+}

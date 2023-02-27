@@ -11,6 +11,15 @@ export const GET_LANGUAGES = gql`
   }
 `;
 
+export const GET_LANGUAGES_AS_OPTIONS = gql`
+  query getLanguages {
+    languages {
+      value: id
+      label: name
+    }
+  }
+`;
+
 export const CREATE_LANGUAGE = gql`
   mutation createLanguage($language: LanguageInput!) {
     createLanguage(language: $language) {

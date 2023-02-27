@@ -104,6 +104,7 @@ export interface IMySelect {
   defaultValue: string;
   disabled: boolean;
   multi: boolean;
+  required?: boolean;
 }
 
 export interface ILink {

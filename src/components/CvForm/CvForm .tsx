@@ -84,6 +84,7 @@ export const CvForm: FC<CvFormProps> = ({
         register={register as UseFormRegister<FormTypes>}
         control={control as Control<FormTypes, any>}
         disabled={type !== TypeForm.cvUser}
+        setValue={setValue as UseFormSetValue<FormTypes>}
       />
       <div>
         {(type === TypeForm.cvUser || role === Roles.admin.value) && (

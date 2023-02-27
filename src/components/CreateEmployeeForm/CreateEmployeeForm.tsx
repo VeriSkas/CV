@@ -55,6 +55,7 @@ export const CreateEmployeeForm: FC<{
         fieldsArray={[skills, languages]}
         register={register as UseFormRegister<FormTypes>}
         control={control as Control<FormTypes, any>}
+        setValue={setValue as UseFormSetValue<FormTypes>}
       />
       <div>
         <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>

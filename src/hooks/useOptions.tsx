@@ -13,6 +13,8 @@ import { GET_SKILLS_AS_OPTIONS } from '../apollo/queries/skills';
 import { SkillOption } from '../types/interfaces/skills';
 import { ProjectOption } from '../types/interfaces/project';
 import { GET_PROJECTS_OPTIONS } from '../apollo/queries/projects';
+import { GET_LANGUAGES_AS_OPTIONS } from '../apollo/queries/languages';
+import { LanguageOption } from '../types/interfaces/languages';
 
 export const useOptions = (label: string): OptionsType[] => {
   const { data: departments } = useQuery<{ departments: DepartmentOption[] }>(
@@ -27,10 +29,14 @@ export const useOptions = (label: string): OptionsType[] => {
   const { data: projects } = useQuery<{ projects: ProjectOption[] }>(
     GET_PROJECTS_OPTIONS
   );
+  const { data: languages } = useQuery<{ languages: LanguageOption[] }>(
+    GET_LANGUAGES_AS_OPTIONS
+  );
   const [departmentsValue, setDepartmentsValue] = useState<OptionsType[]>([]);
   const [positionsValue, setPositionsValue] = useState<OptionsType[]>([]);
   const [skillsValue, setSkillsValue] = useState<OptionsType[]>([]);
   const [projectsValue, setProjectsValue] = useState<OptionsType[]>([]);
+  const [languagesValue, setLanguagesValue] = useState<OptionsType[]>([]);
   let options: OptionsType[] = [];
 
   useEffect(() => {
@@ -57,6 +63,12 @@ export const useOptions = (label: string): OptionsType[] => {
     }
   }, [projects]);
 
+  useEffect(() => {
+    if (languages) {
+      setLanguagesValue(languages.languages);
+    }
+  }, [languages]);
+
   switch (label) {
     case InputLabels.department:
       options = departmentsValue;
@@ -69,6 +81,18 @@ export const useOptions = (label: string): OptionsType[] => {
       break;
     case InputLabels.skillsIds:
       options = skillsValue;
+      break;
+    case InputLabels.skills:
+      options = skillsValue.map((skill) => ({
+        value: skill.label,
+        label: skill.label,
+      }));
+      break;
+    case InputLabels.languages:
+      options = languagesValue.map((language) => ({
+        value: language.label,
+        label: language.label,
+      }));
       break;
     case InputLabels.projectsIds:
       options = projectsValue;

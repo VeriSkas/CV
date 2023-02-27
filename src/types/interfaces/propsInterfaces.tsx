@@ -44,12 +44,14 @@ export interface InputProps {
 export interface MySelectProps {
   label: string;
   multi: boolean;
-  defaultValue: string | string[];
+  defaultValue?: string | string[];
   disabled: boolean;
   labelName: string;
   control: Control<any, any>;
   setFormValue: UseFormSetValue<any>;
   getValues?: UseFormGetValues<any>;
+  controlName?: string;
+  required?: boolean;
 }
 
 export interface FieldArrayProps {
@@ -59,6 +61,8 @@ export interface FieldArrayProps {
   labelName?: string;
   radioInputs: IRadioInputs;
   disabled?: boolean;
+  setValue: UseFormSetValue<any>;
+  required?: boolean;
 }
 
 export interface IRadioInputs {

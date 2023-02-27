@@ -3,7 +3,7 @@
 
 .Table {
   padding: $tablePaddingHeight 0;
-  height: calc(100% - 2 * $tablePaddingHeight);
+  height: 100%;
 
   .TableHeader {
     display: grid;
@@ -53,6 +53,6 @@
 
   .TableBody {
     overflow-y: scroll;
-    height: 85%;
+    height: 100%
   }
 }

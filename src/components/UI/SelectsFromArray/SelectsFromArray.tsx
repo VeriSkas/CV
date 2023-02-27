@@ -30,6 +30,7 @@ export const SelectsFromArray: FC<{
           disabled={select.disabled}
           labelName={select.labelName}
           getValues={getValues}
+          required={select.required ?? false}
         />
       );
     });
