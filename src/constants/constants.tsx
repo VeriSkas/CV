@@ -32,6 +32,13 @@ import { IRole } from '../types/interfaces/user';
 
 export const MAX_photoSize = 500000;
 
+export const PhotoTypes = {
+  png: 'image/png',
+  jpg: 'image/jpg',
+  jpeg: 'image/jpeg',
+  gif: 'image/gif',
+};
+
 export const Roles: { [key: string]: IRole } = {
   admin: {
     label: 'Admin',

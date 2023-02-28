@@ -10,7 +10,7 @@ import {
   GET_USER,
   UPLOAD_AVATAR,
 } from '../../apollo/queries/users';
-import { MAX_photoSize } from '../../constants/constants';
+import { MAX_photoSize, PhotoTypes } from '../../constants/constants';
 import { ErrorMessages, TooltipText } from '../../constants/text';
 import { AvatarValue, UserInfo } from '../../types/interfaces/user';
 import classes from './Avatar.module.scss';
@@ -83,7 +83,17 @@ export const Avatar: FC<{
     const reader = new FileReader();
 
     if (event.target.files) {
-      if (event.target.files[0].size <= MAX_photoSize) {
+      if (event.target.files[0].size > MAX_photoSize) {
+        if (setError) {
+          setError(t(ErrorMessages.avatarSize));
+        }
+      } else if (
+        !Object.values(PhotoTypes).includes(event.target.files[0].type)
+      ) {
+        if (setError) {
+          setError(t(ErrorMessages.avatarType));
+        }
+      } else {
         reader.onloadend = () => {
           const image = {
             base64: reader.result?.toString() ?? '',
@@ -92,12 +102,7 @@ export const Avatar: FC<{
           };
           setImage((prev) => ({ ...prev, ...image }));
         };
-
         reader.readAsDataURL(event.target.files[0]);
-      } else {
-        if (setError) {
-          setError(t(ErrorMessages.avatarSize));
-        }
       }
     }
   };

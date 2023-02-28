@@ -1,3 +1,5 @@
+import { MAX_photoSize, PhotoTypes } from './constants';
+
 export const InputTypes = {
   text: 'text',
   email: 'email',
@@ -68,7 +70,10 @@ export const ErrorMessages = {
   inputMaxLength: (value: number) =>
     `You should enter less then ${value} symbols`,
   inputEmail: 'Enter valid email',
-  avatarSize: 'Photo size have to be less',
+  avatarSize: `Photo size have to be less ${MAX_photoSize} bites`,
+  avatarType: `You can add photo with only ${Object.keys(PhotoTypes).join(
+    ' '
+  )} types.`,
   default: 'Error',
   toggleTemplateError: 'You can`t update not your own CV',
 };
