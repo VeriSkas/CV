@@ -1,4 +1,11 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  DragEvent,
+  FC,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
@@ -23,6 +30,7 @@ export const Avatar: FC<{
 }> = ({ setError, user, disabled }) => {
   const { t } = useTranslation();
   const [image, setImage] = useState<AvatarValue | null>(null);
+  const [drag, setDrag] = useState(false);
   const [removeAvatar, { error: deleteError }] = useMutation(DELETE_AVATAR);
   const [uploadAvatar, { error: uploadError }] = useMutation(UPLOAD_AVATAR);
 
@@ -80,30 +88,32 @@ export const Avatar: FC<{
   };
 
   const onChangeFileInput = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.files) {
+      addFile(event.target.files[0]);
+    }
+  };
+
+  const addFile = (file: File): void => {
     const reader = new FileReader();
 
-    if (event.target.files) {
-      if (event.target.files[0].size > MAX_photoSize) {
-        if (setError) {
-          setError(t(ErrorMessages.avatarSize));
-        }
-      } else if (
-        !Object.values(PhotoTypes).includes(event.target.files[0].type)
-      ) {
-        if (setError) {
-          setError(t(ErrorMessages.avatarType));
-        }
-      } else {
-        reader.onloadend = () => {
-          const image = {
-            base64: reader.result?.toString() ?? '',
-            size: event.target.files ? +event.target.files[0].size : 0,
-            type: event.target.files ? event.target.files[0].type : '',
-          };
-          setImage((prev) => ({ ...prev, ...image }));
-        };
-        reader.readAsDataURL(event.target.files[0]);
+    if (file.size > MAX_photoSize) {
+      if (setError) {
+        setError(t(ErrorMessages.avatarSize));
       }
+    } else if (!Object.values(PhotoTypes).includes(file.type)) {
+      if (setError) {
+        setError(t(ErrorMessages.avatarType));
+      }
+    } else {
+      reader.onloadend = () => {
+        const image = {
+          base64: reader.result?.toString() ?? '',
+          size: +file.size,
+          type: file.type,
+        };
+        setImage((prev) => ({ ...prev, ...image }));
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -143,40 +153,75 @@ export const Avatar: FC<{
     });
   };
 
+  const dragStartHandler = (event: DragEvent<HTMLDivElement>): void => {
+    event.preventDefault();
+    setDrag(true);
+  };
+
+  const dragLeaveHandler = (event: DragEvent<HTMLDivElement>): void => {
+    event.preventDefault();
+    setDrag(false);
+  };
+
+  const dropHandler = (event: DragEvent): void => {
+    event.preventDefault();
+
+    if (event.dataTransfer) {
+      addFile(event.dataTransfer.files[0]);
+      setDrag(false);
+    }
+  };
+
+  const avatarRender = (): ReactNode => {
+    if (image?.base64 ?? user?.profile.avatar) {
+      return (
+        <>
+          <img src={image?.base64 ?? user?.profile.avatar ?? ''} />
+          {!disabled && (
+            <div
+              className={classes.BinIcon}
+              title={t(TooltipText.deleteAvatar)}
+              onClick={deleteAvatar}
+            >
+              <IconContext.Provider value={{ className: classes.Icon }}>
+                <RiDeleteBin6Line />
+              </IconContext.Provider>
+            </div>
+          )}
+        </>
+      );
+    }
+
+    return <span className={classes.Letter}>{user?.email[0] ?? ''}</span>;
+  };
+
   return (
     <div className={classes.Avatar}>
-      <div className={classes.UserLogo}>
-        {image?.base64 ?? user?.profile.avatar ? (
+      <div
+        className={`${classes.UserLogo} ${drag ? classes.DropArea : ''}`}
+        onDragStart={dragStartHandler}
+        onDragLeave={dragLeaveHandler}
+        onDragOver={dragStartHandler}
+        onDrop={dropHandler}
+      >
+        {!drag && (
           <>
-            <img src={image?.base64 ?? user?.profile.avatar ?? ''} />
-            {!disabled && (
-              <div
-                className={classes.BinIcon}
-                title={t(TooltipText.deleteAvatar)}
-                onClick={deleteAvatar}
-              >
-                <IconContext.Provider value={{ className: classes.Icon }}>
-                  <RiDeleteBin6Line />
-                </IconContext.Provider>
-              </div>
-            )}
+            {avatarRender()}
+            <label
+              className={classes.InputFile}
+              title={!disabled ? t(TooltipText.addAvatar) : ''}
+            >
+              <input
+                type={InputType.file}
+                className={classes.InputFile_input}
+                onChange={(event) => {
+                  onChangeFileInput(event);
+                }}
+                disabled={disabled}
+              />
+            </label>
           </>
-        ) : (
-          <span className={classes.Letter}>{user?.email[0] ?? ''}</span>
         )}
-        <label
-          className={classes.InputFile}
-          title={!disabled ? t(TooltipText.addAvatar) : ''}
-        >
-          <input
-            type={InputType.file}
-            className={classes.InputFile_input}
-            onChange={(event) => {
-              onChangeFileInput(event);
-            }}
-            disabled={disabled}
-          />
-        </label>
       </div>
     </div>
   );
