@@ -165,10 +165,10 @@ export const Avatar: FC<{
 
   const dropHandler = (event: DragEvent): void => {
     event.preventDefault();
+    setDrag(false);
 
-    if (event.dataTransfer) {
+    if (event.dataTransfer && !disabled) {
       addFile(event.dataTransfer.files[0]);
-      setDrag(false);
     }
   };
 
