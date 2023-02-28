@@ -112,7 +112,7 @@ export interface TableProps {
   headerOptions: { [key: string]: TableOption };
   dropDownOptions: DropDownOption[];
   dropDownHandler: (label: string, id: string) => void;
-  toggleTemplateCv?: (id: string) => void;
+  toggleTemplateCv?: (id: string, error?: string) => void;
   searchValue?: SearchValue;
   settingsBtnViewForUser: boolean;
   avatar: boolean;
@@ -169,5 +169,5 @@ export interface TablePageContainerProps {
   tableItems: UsedInTableObjectsType[] | null;
   loading: boolean;
   dropDownHandler: (label: string, id: string) => void;
-  toggleTemplateCv?: (id: string) => void;
+  toggleTemplateCv?: (id: string, error?: string) => void;
 }

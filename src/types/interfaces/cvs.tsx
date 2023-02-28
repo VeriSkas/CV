@@ -59,4 +59,5 @@ export interface TableCvItem {
   name: string;
   description: string;
   email: string | null;
+  userId: string;
 }

@@ -70,6 +70,7 @@ export const ErrorMessages = {
   inputEmail: 'Enter valid email',
   avatarSize: 'Photo size have to be less',
   default: 'Error',
+  toggleTemplateError: 'You can`t update not your own CV',
 };
 
 export const BAErrorMessages = {

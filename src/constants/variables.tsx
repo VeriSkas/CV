@@ -11,11 +11,12 @@ export const LSItems = {
   activeLanguage: 'activeLanguage',
 };
 
-export const objectKeysInTable = {
+export const hiddenObjectKeysInTable = {
   avatar: 'avatar',
   id: 'id',
   __typename: '__typename',
   is_template: 'is_template',
+  userId: 'userId',
 };
 
 export const TypeForm = {

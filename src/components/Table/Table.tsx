@@ -4,9 +4,9 @@ import { useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 
-import { MAIN_ROLE } from '../../apollo/state';
+import { MAIN_ROLE, USER_ID } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
-import { ContentText } from '../../constants/text';
+import { ContentText, ErrorMessages } from '../../constants/text';
 import {
   SortType,
   UsedInTableObjectsType
@@ -14,7 +14,10 @@ import {
 import { TableProps } from '../../types/interfaces/propsInterfaces';
 import { search } from '../../utils/search';
 import { TableItem } from '../TableItem/TableItem';
+import { TableCvItem } from '../../types/interfaces/cvs';
+import { MainPagesInfo } from '../../constants/mainPagesInfo';
 import classes from './Table.module.scss';
+import { hiddenObjectKeysInTable } from '../../constants/variables';
 
 export const Table: FC<TableProps> = ({
   items,
@@ -30,6 +33,7 @@ export const Table: FC<TableProps> = ({
   const { t } = useTranslation();
   const [headerValue, setHeaderValue] = useState(headerOptions);
   const [itemsValue, setItemsValue] = useState(items);
+  const userId = useReactiveVar(USER_ID);
   const role = useReactiveVar(MAIN_ROLE);
 
   useEffect(() => {
@@ -106,9 +110,9 @@ export const Table: FC<TableProps> = ({
     });
   };
 
-  const toggleTemplate = (id: string): void => {
+  const toggleTemplate = (id: string, error?: string): void => {
     if (toggleTemplateCv) {
-      toggleTemplateCv(id)
+      toggleTemplateCv(id, error)
     }
   }
 
@@ -128,6 +132,20 @@ export const Table: FC<TableProps> = ({
     }
 
     return returnedValue.map((item: UsedInTableObjectsType) => {
+      if (Object.prototype.hasOwnProperty.call(item, hiddenObjectKeysInTable.userId) && role !== Roles.admin.value) {
+        if ((item as TableCvItem).userId !== userId) {
+          return <TableItem
+            key={item.id}
+            item={item}
+            dropDownOptions={MainPagesInfo.cvsPageNotPersonal.dropDownOptions}
+            dropDownHandler={(label: string, id: string) => { dropDownHandler(label, id) }}
+            toggleTemplateCv={(id: string) => { toggleTemplate(id, ErrorMessages.toggleTemplateError) }}
+            settingsView={settingsBtnViewForUser}
+            avatar={avatar}
+          />;
+        }
+      }
+
       return <TableItem
         key={item.id}
         item={item}

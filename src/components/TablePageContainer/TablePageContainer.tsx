@@ -28,9 +28,9 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
     avatar,
   } = mainPagesInfo;
 
-  const toggleTemplate = (id: string): void => {
+  const toggleTemplate = (id: string, error?: string): void => {
     if (toggleTemplateCv) {
-      toggleTemplateCv(id);
+      toggleTemplateCv(id, error);
     }
   };
 

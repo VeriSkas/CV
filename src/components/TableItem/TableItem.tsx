@@ -10,7 +10,7 @@ import { DropDown } from '../UI/DropDown/DropDown';
 import classes from './TableItem.module.scss';
 import { TableCvItem } from '../../types/interfaces/cvs';
 import { TableItemProps } from '../../types/interfaces/propsInterfaces';
-import { objectKeysInTable } from '../../constants/variables';
+import { hiddenObjectKeysInTable } from '../../constants/variables';
 import { MAIN_ROLE } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
 
@@ -34,13 +34,9 @@ export const TableItem: FC<TableItemProps> = ({
   };
 
   const renderItemRow = (): ReactNode | string => {
-    const { avatar, id, __typename, is_template } = objectKeysInTable;
+    const { is_template } = hiddenObjectKeysInTable;
 
     return Object.keys(item).map((key: string) => {
-      if (key === avatar || key === id || key === __typename) {
-        return '';
-      }
-
       if (key === is_template) {
         const cv = item as TableCvItem;
 
@@ -65,6 +61,10 @@ export const TableItem: FC<TableItemProps> = ({
             )}
           </div>
         );
+      }
+
+      if (Object.prototype.hasOwnProperty.call(hiddenObjectKeysInTable, key)) {
+        return '';
       }
 
       return (

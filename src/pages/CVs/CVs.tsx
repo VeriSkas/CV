@@ -29,6 +29,7 @@ export const CVs: FC<{ setError: (error: string) => void }> = ({
         name: cv.name,
         description: cv.description,
         email: cv.user?.email ?? '',
+        userId: cv.user?.id ?? '',
       }));
 
       setCVs(TableCvItems);
@@ -59,17 +60,31 @@ export const CVs: FC<{ setError: (error: string) => void }> = ({
     }
   };
 
-  const toggleTemplateCv = async (id: string): Promise<void> => {
+  const toggleTemplateCv = async (
+    id: string,
+    error?: string
+  ): Promise<void> => {
     const updatedCv = findCvById(id);
     const changedCv = {
       name: updatedCv?.name,
       userId: updatedCv?.user?.id,
       description: updatedCv?.description,
-      skills: updatedCv?.skills,
-      languages: updatedCv?.languages,
+      skills: updatedCv?.skills.map((skill) => ({
+        skill_name: skill.skill_name,
+        mastery: skill.mastery,
+      })),
+      languages: updatedCv?.languages.map((language) => ({
+        language_name: language.language_name,
+        proficiency: language.proficiency,
+      })),
       projectsIds: updatedCv?.projects.map((project) => project.id),
       is_template: !updatedCv?.is_template,
     };
+
+    if (error) {
+      setError(error);
+      return;
+    }
 
     await updateCv({
       variables: {
