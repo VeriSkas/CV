@@ -1,4 +1,5 @@
 @import '../../../constants/styles/colors.scss';
+@import '../../../constants/styles/sizes.scss';
 
 .Button {
   display: flex;
@@ -53,6 +54,8 @@
     border: 1px solid $mainRed;
     color: $mainRed;
     box-shadow: none;
+    font-size: calc(11px + 3 * (100vw / 1536));
+    padding: calc(5px + 7 * (100vw / 1536));
 
     &:active {
       box-shadow: inset 2px 2px 1px rgba($color: #000000, $alpha: 0.3);
