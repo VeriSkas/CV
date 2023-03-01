@@ -7,6 +7,7 @@ import {
   positionsTableOptions,
   projectsTableOptions,
   skillsTableOptions,
+  tableTypes,
 } from './constants';
 import { PATH } from './paths';
 import { BtnText, PlaceholderText, TitleText } from './text';
@@ -32,6 +33,7 @@ const {
 
 export const MainPagesInfo = {
   languagesPage: {
+    tableType: tableTypes.languagesTable,
     linkTo: PATH.createLanguage,
     btnText: BtnText.createLanguage,
     title: TitleText.languages,
@@ -44,6 +46,7 @@ export const MainPagesInfo = {
     avatar: false,
   },
   positionsPage: {
+    tableType: tableTypes.positionsTable,
     linkTo: PATH.createPosition,
     btnText: BtnText.createPosition,
     title: TitleText.positions,
@@ -56,6 +59,7 @@ export const MainPagesInfo = {
     avatar: false,
   },
   skillsPage: {
+    tableType: tableTypes.skillsTable,
     linkTo: PATH.createSkill,
     btnText: BtnText.createSkill,
     title: TitleText.skills,
@@ -68,6 +72,7 @@ export const MainPagesInfo = {
     avatar: false,
   },
   departmentsPage: {
+    tableType: tableTypes.departmentsTable,
     linkTo: PATH.createDepartment,
     btnText: BtnText.createDepartment,
     title: TitleText.departments,
@@ -80,6 +85,7 @@ export const MainPagesInfo = {
     avatar: false,
   },
   cvsPage: {
+    tableType: tableTypes.cvsTable,
     linkTo: PATH.createCV,
     btnText: BtnText.createCV,
     title: TitleText.cvs,
@@ -91,19 +97,8 @@ export const MainPagesInfo = {
     settingsBtnViewForUser: true,
     avatar: false,
   },
-  cvsPageNotPersonal: {
-    linkTo: PATH.createCV,
-    btnText: BtnText.createCV,
-    title: TitleText.cvs,
-    placeholder: PlaceholderText.search,
-    headerOptions: cvsTableOptions,
-    dropDownOptions: [cv],
-    searchKey: [SearchKey.name],
-    createBtnViewForUser: true,
-    settingsBtnViewForUser: true,
-    avatar: false,
-  },
   cvsPageWithoutDeletingCV: {
+    tableType: tableTypes.cvsTable,
     linkTo: PATH.createCV,
     btnText: BtnText.createCV,
     title: TitleText.cvs,
@@ -116,6 +111,7 @@ export const MainPagesInfo = {
     avatar: false,
   },
   projectsPage: {
+    tableType: tableTypes.projectsTable,
     linkTo: PATH.createProject,
     btnText: BtnText.createProject,
     title: TitleText.projects,
@@ -128,6 +124,7 @@ export const MainPagesInfo = {
     avatar: false,
   },
   projectsPageUser: {
+    tableType: tableTypes.projectsTable,
     linkTo: PATH.createProject,
     btnText: BtnText.createProject,
     title: TitleText.projects,
@@ -140,6 +137,7 @@ export const MainPagesInfo = {
     avatar: false,
   },
   employeesPage: {
+    tableType: tableTypes.employeesTable,
     linkTo: PATH.createEmployee,
     btnText: BtnText.createEmployee,
     title: TitleText.employees,
@@ -152,6 +150,7 @@ export const MainPagesInfo = {
     avatar: true,
   },
   employeesPageUser: {
+    tableType: tableTypes.employeesTable,
     linkTo: PATH.createEmployee,
     btnText: BtnText.createEmployee,
     title: TitleText.employees,

@@ -147,6 +147,7 @@ export interface IFieldArray {
 }
 
 export interface IMainPagesInfo {
+  tableType: string;
   linkTo: string;
   btnText: string;
   title: string;

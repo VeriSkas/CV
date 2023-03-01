@@ -246,3 +246,13 @@ export const dropDownOptions: { [key: string]: DropDownOption } = {
     label: 'Update language',
   },
 };
+
+export const tableTypes: { [key: string]: string } = {
+  employeesTable: 'employeesTable',
+  projectsTable: 'projectsTable',
+  cvsTable: 'cvsTable',
+  departmentsTable: 'departmentsTable',
+  positionsTable: 'positionsTable',
+  skillsTable: 'skillsTable',
+  languagesTable: 'languagesTable',
+};

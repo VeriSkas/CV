@@ -107,6 +107,7 @@ export interface CvFormProps {
 }
 
 export interface TableProps {
+  tableType: string;
   items: UsedInTableObjectsType[] | null;
   loading: boolean;
   headerOptions: { [key: string]: TableOption };

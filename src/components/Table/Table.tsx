@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 
 import { MAIN_ROLE, USER_ID } from '../../apollo/state';
-import { Roles } from '../../constants/constants';
+import { Roles, tableTypes } from '../../constants/constants';
 import { ContentText, ErrorMessages } from '../../constants/text';
 import {
   SortType,
@@ -17,9 +17,9 @@ import { TableItem } from '../TableItem/TableItem';
 import { TableCvItem } from '../../types/interfaces/cvs';
 import { MainPagesInfo } from '../../constants/mainPagesInfo';
 import classes from './Table.module.scss';
-import { hiddenObjectKeysInTable } from '../../constants/variables';
 
 export const Table: FC<TableProps> = ({
+  tableType,
   items,
   loading,
   headerOptions,
@@ -132,12 +132,12 @@ export const Table: FC<TableProps> = ({
     }
 
     return returnedValue.map((item: UsedInTableObjectsType) => {
-      if (Object.prototype.hasOwnProperty.call(item, hiddenObjectKeysInTable.userId) && role !== Roles.admin.value) {
+      if (role !== Roles.admin.value && tableType === tableTypes.cvsTable) {
         if ((item as TableCvItem).userId !== userId) {
           return <TableItem
             key={item.id}
             item={item}
-            dropDownOptions={MainPagesInfo.cvsPageNotPersonal.dropDownOptions}
+            dropDownOptions={MainPagesInfo.cvsPageWithoutDeletingCV.dropDownOptions}
             dropDownHandler={(label: string, id: string) => { dropDownHandler(label, id) }}
             toggleTemplateCv={(id: string) => { toggleTemplate(id, ErrorMessages.toggleTemplateError) }}
             settingsView={settingsBtnViewForUser}

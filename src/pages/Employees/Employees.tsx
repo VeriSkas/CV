@@ -4,7 +4,7 @@ import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
 import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
-import { ACTIVE_USER_ID, MAIN_ROLE } from '../../apollo/state';
+import { ACTIVE_USER_ID, MAIN_ROLE, USER_ID } from '../../apollo/state';
 
 import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
 import { dropDownOptions, Roles } from '../../constants/constants';
@@ -21,6 +21,7 @@ export const Employees: FC<{
   const { loading, data, error } = useQuery<{ users: UserInfo[] }>(GET_USERS);
   const [deleteUser] = useMutation(DELETE_USER);
   const role = useReactiveVar(MAIN_ROLE);
+  const userId = useReactiveVar(USER_ID);
   const mainPagesInfo =
     role === Roles.admin.value
       ? MainPagesInfo.employeesPage
@@ -70,6 +71,14 @@ export const Employees: FC<{
           }
         },
       });
+    }
+
+    if (label === dropDownOptions.userProfile.label && userId === id) {
+      navigate(`${PATH.employees}/${id}${PATH.profile}`);
+      localStorage.setItem(LSItems.activeUser, id);
+      ACTIVE_USER_ID(id);
+
+      return;
     }
 
     if (

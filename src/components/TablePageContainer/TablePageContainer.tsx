@@ -16,6 +16,7 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
   const { t } = useTranslation();
   const [searchValue, setSearchValue] = useState('');
   const {
+    tableType,
     linkTo,
     btnText,
     title,
@@ -46,6 +47,7 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
       createBtnViewForUser={createBtnViewForUser}
     >
       <Table
+        tableType={tableType}
         items={tableItems}
         loading={loading}
         headerOptions={headerOptions}
