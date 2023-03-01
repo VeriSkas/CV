@@ -1,8 +1,10 @@
 @import '../../../constants/styles/colors.scss';
+@import '../../../constants/styles/sizes.scss';
 
 .Breadcrumbs {
   display: flex;
   margin: 5px 0;
+  height: $breadcrumbsHeight;
 
   a {
     display: flex;

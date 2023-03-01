@@ -82,8 +82,8 @@
 
   .Container {
     max-width: $maxContentWidth;
-    width: calc(100% - 40px);
-    height: calc(100% - $maxHeaderHeight - $breadcrumbsHeight);
+    width: calc(100% - 2 * $containerPaddingWidth);
+    height: calc(100% - $maxHeaderHeight);
     margin-top: $maxHeaderHeight;
   }
 }

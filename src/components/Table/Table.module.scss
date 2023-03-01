@@ -2,12 +2,12 @@
 @import '../../constants/styles/sizes.scss';
 
 .Table {
-  padding: $tablePaddingHeight 0;
-  height: 100%;
+  height: 90%;
 
   .TableHeader {
     display: grid;
     width: 100%;
+    height: 8%;
     grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
     grid-auto-flow: column;
     justify-items: center;
@@ -53,6 +53,26 @@
 
   .TableBody {
     overflow-y: scroll;
-    height: 100%
+    height: 92%
+  }
+}
+
+@media(max-width: 555px) {
+  .Table {
+    overflow-x: scroll;
+
+    .TableHeader {
+      width: 515px;
+    }
+
+    .TableBody {
+      width: 515px;
+    }
+  }
+}
+
+@media(max-width: 340px) {
+  .Table {
+    width: 300px;
   }
 }

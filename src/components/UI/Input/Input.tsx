@@ -24,13 +24,13 @@ export const Input: FC<InputProps> = ({
 
   return (
     <div className={classes.Input}>
-      {labelName && <label htmlFor={labelName}>{labelName}</label>}
+      {labelName && <label htmlFor={label}>{labelName}</label>}
       <div className={classes.Input_input}>
         <input
           {...register(label, { ...validation })}
           type={type && !toggle ? type : InputTypes.text}
           defaultValue={defaultValue ?? ''}
-          id={label && labelName}
+          id={label}
           readOnly={readonly ?? false}
           placeholder={t(placeholder ?? '')}
         />
