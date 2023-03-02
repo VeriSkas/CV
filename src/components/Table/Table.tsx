@@ -168,7 +168,10 @@ export const Table: FC<TableProps> = ({
       {loading ? (
         <p>{t(ContentText.loading)}</p>
       ) : (
-        <div className={classes.TableBody}>{renderTableRows()}</div>
+        <div className={classes.TableBody}>
+          {renderTableRows()}
+          <div className={classes.TableFooter}></div>
+        </div>
       )}
     </div>
   );

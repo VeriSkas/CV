@@ -33,15 +33,13 @@ export const SearchBar: FC<SearchBarProps> = ({
   return (
     <div className={classes.SearchBar}>
       <div className={classes.SearchPanel}>
-        <div className={classes.Search}>
-          <Search
-            placeholder={t(placeholder ?? '')}
-            value={searchValue}
-            onChange={(value) => {
-              searchHandler(value);
-            }}
-          />
-        </div>
+        <Search
+          placeholder={t(placeholder ?? '')}
+          value={searchValue}
+          onChange={(value) => {
+            searchHandler(value);
+          }}
+        />
         {(role === Roles.admin.value || createBtnViewForUser) && (
           <div className={classes.CreateEmployeeBtn}>
             <Link to={linkTo}>

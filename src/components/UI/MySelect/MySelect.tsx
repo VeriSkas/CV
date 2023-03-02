@@ -9,6 +9,7 @@ import {
   OptionsType,
 } from '../../../types/interfaces/propsInterfaces';
 import classes from './MySelect.module.scss';
+import { selectStyles } from './styles';
 
 export const MySelect: FC<MySelectProps> = ({
   control,
@@ -78,6 +79,8 @@ export const MySelect: FC<MySelectProps> = ({
               isMulti={multi}
               value={selectValue}
               onChange={onChangeHandler}
+              styles={selectStyles}
+              menuPlacement="auto"
             />
           );
         }}
