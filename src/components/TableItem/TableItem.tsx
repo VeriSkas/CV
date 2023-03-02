@@ -10,9 +10,10 @@ import { DropDown } from '../UI/DropDown/DropDown';
 import classes from './TableItem.module.scss';
 import { TableCvItem } from '../../types/interfaces/cvs';
 import { TableItemProps } from '../../types/interfaces/propsInterfaces';
-import { hiddenObjectKeysInTable } from '../../constants/variables';
+import { hiddenObjectKeysInTable, objectKeysInTable } from '../../constants/variables';
 import { MAIN_ROLE } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
+import { ContentText } from '../../constants/text';
 
 export const TableItem: FC<TableItemProps> = ({
   item,
@@ -61,6 +62,10 @@ export const TableItem: FC<TableItemProps> = ({
             )}
           </div>
         );
+      }
+
+      if (key === objectKeysInTable.end_date && !item[key as keyof UsedInTableObjectsType]) {
+        return ContentText.noEndDate;
       }
 
       if (Object.prototype.hasOwnProperty.call(hiddenObjectKeysInTable, key)) {

@@ -19,6 +19,10 @@ export const hiddenObjectKeysInTable = {
   userId: 'userId',
 };
 
+export const objectKeysInTable = {
+  end_date: 'end_date',
+};
+
 export const TypeForm = {
   profileType: 'profile',
   employeeProfile: 'employeeProfile',

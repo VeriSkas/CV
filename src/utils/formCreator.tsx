@@ -1,5 +1,5 @@
 import { inputs } from '../constants/inputsSettings';
-import { SelectSettings } from '../constants/SelectsSettings';
+import { SelectSettings } from '../constants/selectsSettings';
 import { InputLabelNames } from '../constants/text';
 import { TypeForm } from '../constants/variables';
 import { CvItemDetails } from '../types/interfaces/cvs';

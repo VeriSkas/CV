@@ -119,6 +119,7 @@ export const SubtitleText = {
 export const ContentText = {
   noValues: 'No values',
   loading: 'Loading...',
+  noEndDate: 'Till now',
 };
 
 export const BtnText = {
