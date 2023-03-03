@@ -26,6 +26,7 @@ export const InputLabels = {
   skills: 'skills',
   skillsIds: 'skillsIds',
   projectsIds: 'projectsIds',
+  cvsIds: 'cvsIds',
   language: 'language',
   languages: 'languages',
   nativeName: 'native_name',
@@ -34,6 +35,7 @@ export const InputLabels = {
   teamSize: 'team_size',
   startDate: 'start_date',
   endDate: 'end_date',
+  userId: 'userId',
 };
 
 export const InputLabelNames = {
@@ -50,11 +52,13 @@ export const InputLabelNames = {
   internalName: 'Internal name',
   skill: 'Skill',
   skills: 'Skills',
+  cvs: 'CVs',
   language: 'Language',
   languages: 'Languages',
   nativeName: 'Native name',
   iso2: 'Iso2 code',
   role: 'Role',
+  userId: 'User',
   domain: 'Domain',
   teamSize: 'Team size',
   startDate: 'Start date',
@@ -136,6 +140,7 @@ export const BtnText = {
   createPosition: 'Create position',
   createSkill: 'Create skill',
   createLanguage: 'Create language',
+  addNew: 'Add new...',
 };
 
 export const TooltipText = {

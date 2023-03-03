@@ -42,6 +42,7 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
       languages,
       departmentId,
       positionId,
+      cvsIds,
     }: IEmployeeForm,
     id?: string
   ): void => {
@@ -52,7 +53,7 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
         skills,
         languages,
       },
-      cvsIds: data?.user.cvs?.reduce((sv) => [...sv], []) ?? [],
+      cvsIds,
       departmentId,
       positionId,
     };

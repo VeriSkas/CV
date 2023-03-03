@@ -17,6 +17,15 @@ export const GET_USERS = gql`
   }
 `;
 
+export const GET_USERS_AS_OPTIONS = gql`
+  query getUsers {
+    users {
+      value: id
+      label: email
+    }
+  }
+`;
+
 export const GET_USER = gql`
   query getUser($id: ID!) {
     user(id: $id) {

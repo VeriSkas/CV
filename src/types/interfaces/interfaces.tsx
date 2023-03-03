@@ -32,7 +32,7 @@ export interface NewProjectForm {
   start_date: string;
   end_date?: string;
   team_size: number;
-  skillsIds: Array<{ value: string, label: string }>;
+  skillsIds: string[];
 }
 
 export interface NewCvForm {

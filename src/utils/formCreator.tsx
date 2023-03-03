@@ -2,75 +2,34 @@ import { inputs } from '../constants/inputsSettings';
 import { SelectSettings } from '../constants/selectsSettings';
 import { InputLabelNames } from '../constants/text';
 import { TypeForm } from '../constants/variables';
-import { CvItemDetails } from '../types/interfaces/cvs';
 import { IInput, IMySelect } from '../types/interfaces/interfaces';
-import { UserInfo } from '../types/interfaces/user';
 
-export const makeCvInputsList = (
-  type: string,
-  cv?: CvItemDetails
-): IInput[] => {
+export const makeInputsList = (type: string): IInput[] => {
   if (type === TypeForm.cvDetails) {
     return [
       {
         ...inputs.name,
         validation: {},
-        defaultValue: cv?.name ?? '',
         readonly: true,
       },
       {
         ...inputs.description,
         validation: {},
-        defaultValue: cv?.description ?? '',
         readonly: true,
       },
-      {
-        ...inputs.full_name,
-        defaultValue: cv?.user?.profile.full_name ?? '',
-        readonly: true,
-      },
-      {
-        ...inputs.position,
-        defaultValue: cv?.user?.position?.name ?? '',
-        readonly: true,
-      },
+      { ...inputs.full_name, readonly: true },
+      { ...inputs.position, readonly: true },
     ];
   } else if (type === TypeForm.cvUser) {
     return [
-      { ...inputs.name, defaultValue: cv?.name ?? '' },
-      {
-        ...inputs.description,
-        defaultValue: cv?.description ?? '',
-      },
-      {
-        ...inputs.full_name,
-        defaultValue: cv?.user?.profile.full_name ?? '',
-        readonly: true,
-      },
-      {
-        ...inputs.position,
-        defaultValue: cv?.user?.position?.name ?? '',
-        readonly: true,
-      },
+      { ...inputs.name },
+      { ...inputs.description },
+      { ...inputs.full_name, readonly: true },
+      { ...inputs.position, readonly: true },
     ];
   } else if (type === TypeForm.createCV) {
-    return [
-      { ...inputs.name, defaultValue: cv?.name ?? '' },
-      {
-        ...inputs.description,
-        defaultValue: cv?.description ?? '',
-      },
-    ];
-  }
-
-  return [];
-};
-
-export const makeEmployeeInputsList = (
-  type: string,
-  user?: UserInfo
-): IInput[] => {
-  if (type === TypeForm.updateEmployee) {
+    return [{ ...inputs.name }, { ...inputs.description }];
+  } else if (type === TypeForm.updateEmployee) {
     return [
       { ...inputs.first_name },
       { ...inputs.last_name },
@@ -110,16 +69,10 @@ export const makeEmployeeInputsList = (
         readonly: true,
       },
     ];
-  }
-
-  return [];
-};
-
-export const makeProjectInputsList = (
-  type: string,
-  user?: UserInfo
-): IInput[] => {
-  if (type === TypeForm.createProject || type === TypeForm.updateProject) {
+  } else if (
+    type === TypeForm.createProject ||
+    type === TypeForm.updateProject
+  ) {
     return [
       { ...inputs.name },
       { ...inputs.internal_name },
@@ -140,12 +93,7 @@ export const makeProjectInputsList = (
       { ...inputs.start_date, readonly: true, validation: {} },
       { ...inputs.end_date, readonly: true, validation: {} },
     ];
-  }
-  return [];
-};
-
-export const makeInputsList = (type: string): IInput[] => {
-  if (
+  } else if (
     type === TypeForm.createDepartment ||
     type === TypeForm.updateDepartment
   ) {
@@ -176,7 +124,7 @@ export const makeSelectsList = (type: string): IMySelect[] => {
   } else if (type === TypeForm.projectDetails) {
     return [{ ...SelectSettings.skillsIds, disabled: true }];
   } else if (type === TypeForm.createCV) {
-    return [{ ...SelectSettings.projectsIds }];
+    return [{ ...SelectSettings.projectsIds }, { ...SelectSettings.userId }];
   } else if (type === TypeForm.cvUser) {
     return [{ ...SelectSettings.projectsIds }];
   } else if (type === TypeForm.createEmployee) {
@@ -184,9 +132,14 @@ export const makeSelectsList = (type: string): IMySelect[] => {
       { ...SelectSettings.department },
       { ...SelectSettings.position },
       { ...SelectSettings.role },
+      { ...SelectSettings.cvsIds },
     ];
   } else if (type === TypeForm.updateEmployee) {
-    return [{ ...SelectSettings.department }, { ...SelectSettings.position }];
+    return [
+      { ...SelectSettings.department },
+      { ...SelectSettings.position },
+      { ...SelectSettings.cvsIds },
+    ];
   } else if (type === TypeForm.profileType) {
     return [{ ...SelectSettings.department }, { ...SelectSettings.position }];
   } else if (type === TypeForm.employeeProfile) {

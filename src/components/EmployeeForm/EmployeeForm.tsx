@@ -10,7 +10,7 @@ import { Button } from '../UI/Button/Button';
 import { EmployeeFormProps } from '../../types/interfaces/propsInterfaces';
 import { Avatar } from '../Avatar/Avatar';
 import { PATH } from '../../constants/paths';
-import { makeEmployeeInputsList, makeSelectsList } from '../../utils/formCreator';
+import { makeInputsList, makeSelectsList } from '../../utils/formCreator';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { FieldArrays } from '../../constants/fieldArrayVars';
 import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
@@ -49,6 +49,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
       email: user?.email ?? '',
       departmentId: user?.department?.id ?? '',
       positionId: user?.position?.id ?? '',
+      cvsIds: user?.cvs?.map(cv => cv.id) ?? [],
       skills,
       languages,
     },
@@ -84,7 +85,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
       />
       <InputsFromArray
         register={register as UseFormRegister<FormTypes>}
-        inputsArray={makeEmployeeInputsList(type, user)}
+        inputsArray={makeInputsList(type)}
         errors={errors}
       />
       <SelectsFromArray

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { GET_PROJECT, UPDATE_PROJECT } from '../../apollo/queries/projects';
 import { ACTIVE_PROJECT_ID, MAIN_ROLE } from '../../apollo/state';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { ProjectCreateForm } from '../../components/ProjectCreateForm/ProjectCreateForm';
+import { ProjectForm } from '../../components/ProjectForm/ProjectForm';
 import { PATH } from '../../constants/paths';
 import { ContentText, TitleText } from '../../constants/text';
 import { NewProjectForm } from '../../types/interfaces/interfaces';
@@ -47,9 +47,7 @@ export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
       ...data,
       end_date: data.end_date ? data.end_date : new Date().toISOString(),
       team_size: +data.team_size,
-      skillsIds: data.skillsIds.length
-        ? data.skillsIds.map((skill) => skill.value)
-        : [],
+      skillsIds: data.skillsIds,
     };
 
     await updateProject({
@@ -65,7 +63,7 @@ export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
       <>
         {loading && t(ContentText.loading)}
         {data && (
-          <ProjectCreateForm
+          <ProjectForm
             onSubmitForm={submitFormHandler}
             project={data.project}
             type={

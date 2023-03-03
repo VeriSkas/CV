@@ -16,6 +16,10 @@
   .Input {
     position: relative;
 
+    div:first-child {
+      margin: 0;
+    }
+
     .Icon {
       position: absolute;
       right: 50px;

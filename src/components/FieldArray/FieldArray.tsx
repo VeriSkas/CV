@@ -4,8 +4,9 @@ import { useFieldArray } from 'react-hook-form';
 import { IconContext } from 'react-icons';
 import { RxCross2 } from 'react-icons/rx';
 import { FaPlus } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
-import { InputTypes } from '../../constants/text';
+import { BtnText, InputTypes } from '../../constants/text';
 import { FieldArrayProps } from '../../types/interfaces/propsInterfaces';
 import classes from './FieldArray.module.scss';
 import { MySelect } from '../UI/MySelect/MySelect';
@@ -20,6 +21,7 @@ export const FieldArray: FC<FieldArrayProps> = ({
   required,
   setValue,
 }) => {
+  const { t } = useTranslation();
   const { fields, append, remove } = useFieldArray({
     control,
     name: label,
@@ -94,7 +96,7 @@ export const FieldArray: FC<FieldArrayProps> = ({
                   <FaPlus />
                 </IconContext.Provider>
               </div>
-              <span className={classes.AddFieldText}>Add new...</span>
+              <span className={classes.AddFieldText}>{t(BtnText.addNew)}</span>
             </div>
           </div>
         )}

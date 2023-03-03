@@ -27,6 +27,11 @@ export interface UserInfo {
   department: { name: string, id: string } | null;
 }
 
+export interface UserOption {
+  label: string;
+  value: string;
+}
+
 export interface TableUser {
   id: string;
   email: string;

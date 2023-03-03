@@ -105,3 +105,12 @@ export const UPDATE_CV = gql`
     }
   }
 `;
+
+export const GET_CVS_AS_OPTIONS = gql`
+  query GetCVs {
+    cvs {
+      value: id
+      label: name
+    }
+  }
+`;

@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 
-import { useMutation, useReactiveVar } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import { TitleText } from '../../constants/text';
 import { CvItem, CvItemDetails, NewCV } from '../../types/interfaces/cvs';
 import { NewCvForm } from '../../types/interfaces/interfaces';
 import { PATH } from '../../constants/paths';
-import { ACTIVE_CV_ID, USER_ID } from '../../apollo/state';
+import { ACTIVE_CV_ID } from '../../apollo/state';
 import { LSItems } from '../../constants/variables';
 
 export const CreateCV: FC<{ setError: (message: string) => void }> = ({
@@ -19,7 +19,6 @@ export const CreateCV: FC<{ setError: (message: string) => void }> = ({
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const userID = useReactiveVar(USER_ID);
   const [createCV, { data, error }] = useMutation<{ createCv: CvItemDetails }>(
     CREATE_CV
   );
@@ -41,7 +40,6 @@ export const CreateCV: FC<{ setError: (message: string) => void }> = ({
   const submitFormHandler = (data: NewCvForm): void => {
     const newCV: NewCV = {
       ...data,
-      userId: userID,
       is_template: false,
     };
 

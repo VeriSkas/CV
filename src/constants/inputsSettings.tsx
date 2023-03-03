@@ -154,7 +154,6 @@ export const inputs: { [key: string]: IInput } = {
     labelName: InputLabelNames.internalName,
     defaultValue: '',
     validation: {
-      required: { value: true, message: ErrorMessages.inputRequired },
       minLength: { value: 3, message: ErrorMessages.inputMinLength(3) },
       maxLength: { value: 32, message: ErrorMessages.inputMaxLength(32) },
     },

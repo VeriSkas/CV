@@ -1,3 +1,5 @@
+import { Skill } from './skills';
+
 export interface ProjectItem {
   id: string;
   name: string;
@@ -7,6 +9,7 @@ export interface ProjectItem {
   start_date: string;
   end_date: string | null;
   team_size: number;
+  tech_stack: Skill[];
 }
 
 export interface ProjectOption {

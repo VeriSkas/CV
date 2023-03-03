@@ -9,7 +9,7 @@ import { PATH } from '../../constants/paths';
 import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { FormTypes, NewCvForm } from '../../types/interfaces/interfaces';
-import { makeCvInputsList, makeSelectsList } from '../../utils/formCreator';
+import { makeInputsList, makeSelectsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
@@ -40,7 +40,7 @@ export const CvCreateForm: FC<{
     <form onSubmit={handleSubmit(submitForm)}>
       <InputsFromArray
         register={register as UseFormRegister<FormTypes>}
-        inputsArray={makeCvInputsList(TypeForm.createCV)}
+        inputsArray={makeInputsList(TypeForm.createCV)}
         errors={errors}
       />
       <SelectsFromArray

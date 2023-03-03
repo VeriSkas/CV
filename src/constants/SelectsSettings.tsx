@@ -16,6 +16,13 @@ export const SelectSettings: { [key: string]: IMySelect } = {
     disabled: false,
     multi: true,
   },
+  cvsIds: {
+    label: InputLabels.cvsIds,
+    labelName: InputLabelNames.cvs,
+    defaultValue: '',
+    disabled: false,
+    multi: true,
+  },
   department: {
     label: InputLabels.department,
     labelName: InputLabelNames.department,
@@ -37,5 +44,12 @@ export const SelectSettings: { [key: string]: IMySelect } = {
     disabled: false,
     multi: false,
     required: true,
+  },
+  userId: {
+    label: InputLabels.userId,
+    labelName: InputLabelNames.userId,
+    defaultValue: '',
+    disabled: false,
+    multi: false,
   },
 };

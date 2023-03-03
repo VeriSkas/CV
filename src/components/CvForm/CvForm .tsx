@@ -14,7 +14,7 @@ import { BtnType, TypeForm } from '../../constants/variables';
 import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
 import { CvDetailForm, FormTypes } from '../../types/interfaces/interfaces';
 import { CvFormProps } from '../../types/interfaces/propsInterfaces';
-import { makeCvInputsList, makeSelectsList } from '../../utils/formCreator';
+import { makeInputsList, makeSelectsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
@@ -70,7 +70,7 @@ export const CvForm: FC<CvFormProps> = ({
     <form onSubmit={handleSubmit(submitForm)}>
       <InputsFromArray
         register={register as UseFormRegister<FormTypes>}
-        inputsArray={makeCvInputsList(type, cv)}
+        inputsArray={makeInputsList(type)}
         errors={errors}
       />
       <SelectsFromArray

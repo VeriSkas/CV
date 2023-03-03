@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { CREATE_USER, GET_USERS } from '../../apollo/queries/users';
 import { CreateEmployeeForm } from '../../components/CreateEmployeeForm/CreateEmployeeForm';
@@ -10,12 +11,32 @@ import { Roles } from '../../constants/constants';
 import { TitleText } from '../../constants/text';
 import { NewEmployeeForm } from '../../types/interfaces/interfaces';
 import { UserInfo } from '../../types/interfaces/user';
+import { PATH } from '../../constants/paths';
+import { LSItems } from '../../constants/variables';
+import { ACTIVE_USER_ID } from '../../apollo/state';
 
 export const CreateEmployee: FC<{ setError: (error: string) => void }> = ({
   setError,
 }) => {
   const { t } = useTranslation();
-  const [createUser, { error }] = useMutation(CREATE_USER);
+  const navigate = useNavigate();
+  const [createUser, { error, data }] = useMutation(CREATE_USER);
+
+  useEffect(() => {
+    if (error) {
+      setError(error.message);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (data) {
+      const { id } = data.createUser;
+
+      localStorage.setItem(LSItems.activeUser, id);
+      ACTIVE_USER_ID(id);
+      navigate(PATH.employee);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (error) {
@@ -32,16 +53,17 @@ export const CreateEmployee: FC<{ setError: (error: string) => void }> = ({
       last_name,
       password,
       positionId,
+      cvsIds,
       role,
       skills,
     } = data;
     const employee = {
       auth: { email, password },
       profile: { first_name, last_name, skills, languages },
-      cvsIds: [],
-      departmentId: departmentId?.value ?? '',
-      positionId: positionId?.value ?? '',
-      role: role.value ?? Roles.employee.value,
+      cvsIds: cvsIds ?? [],
+      departmentId: departmentId ?? '',
+      positionId: positionId ?? '',
+      role: role ?? Roles.employee.value,
     };
 
     await createUser({

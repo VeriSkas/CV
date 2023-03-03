@@ -61,3 +61,8 @@ export interface TableCvItem {
   email: string | null;
   userId: string;
 }
+
+export interface CvOption {
+  label: string;
+  value: string;
+}

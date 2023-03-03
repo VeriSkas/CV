@@ -10,7 +10,7 @@ import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { FormTypes, NewEmployeeForm } from '../../types/interfaces/interfaces';
 import {
-  makeEmployeeInputsList,
+  makeInputsList,
   makeSelectsList,
 } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
@@ -43,7 +43,7 @@ export const CreateEmployeeForm: FC<{
     <form onSubmit={handleSubmit(submitForm)}>
       <InputsFromArray
         register={register as UseFormRegister<FormTypes>}
-        inputsArray={makeEmployeeInputsList(TypeForm.createEmployee)}
+        inputsArray={makeInputsList(TypeForm.createEmployee)}
         errors={errors}
       />
       <SelectsFromArray
