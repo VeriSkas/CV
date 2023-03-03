@@ -51,6 +51,7 @@ export const CvForm: FC<CvFormProps> = ({
       description: cv?.description,
       full_name: cv?.user?.profile?.full_name,
       positionId: cv?.user?.position?.name,
+      userId: cv?.user?.id,
       projectsIds,
       skills,
       languages,

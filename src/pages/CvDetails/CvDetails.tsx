@@ -18,7 +18,7 @@ import { PATH } from '../../constants/paths';
 export const CvDetails: FC<{ setError: (error: string) => void }> = ({
   setError,
 }) => {
-  const userId = useReactiveVar(USER_ID);
+  const userID = useReactiveVar(USER_ID);
   const activeCV = useReactiveVar(ACTIVE_CV_ID);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -43,11 +43,17 @@ export const CvDetails: FC<{ setError: (error: string) => void }> = ({
   }, [updatedCvData]);
 
   const submitFormHandler = async (
-    data: CvDetailForm,
+    {
+      description,
+      is_template,
+      languages,
+      name,
+      projectsIds,
+      skills,
+      userId,
+    }: CvDetailForm,
     id?: string
   ): Promise<void> => {
-    const { description, is_template, languages, name, projectsIds, skills } =
-      data;
     const cv = {
       description,
       userId,
@@ -74,7 +80,7 @@ export const CvDetails: FC<{ setError: (error: string) => void }> = ({
               await submitFormHandler(data, id);
             }}
             type={
-              role === Roles.admin.value || userId === data?.cv.user?.id
+              role === Roles.admin.value || userID === data?.cv.user?.id
                 ? TypeForm.cvUser
                 : TypeForm.cvDetails
             }

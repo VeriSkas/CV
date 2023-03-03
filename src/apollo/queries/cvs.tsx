@@ -61,12 +61,30 @@ export const GET_CV = gql`
 export const CREATE_CV = gql`
   mutation CreateCV($cv: CvInput!) {
     createCv(cv: $cv) {
-      is_template
       id
+      is_template
       name
       description
       user {
+        id
         email
+        profile {
+          full_name
+        }
+        position {
+          name
+        }
+      }
+      projects {
+        id
+      }
+      skills {
+        skill_name
+        mastery
+      }
+      languages {
+        language_name
+        proficiency
       }
     }
   }

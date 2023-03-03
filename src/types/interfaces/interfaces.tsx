@@ -80,6 +80,7 @@ export interface CvDetailForm {
   full_name: string;
   positionId: string;
   projectsIds: string[];
+  userId: string;
   skills: SkillItemInDB[];
   languages: LanguageItemInDB[];
   is_template: boolean;

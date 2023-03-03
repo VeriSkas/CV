@@ -21,12 +21,7 @@ export const makeInputsList = (type: string): IInput[] => {
       { ...inputs.position, readonly: true },
     ];
   } else if (type === TypeForm.cvUser) {
-    return [
-      { ...inputs.name },
-      { ...inputs.description },
-      { ...inputs.full_name, readonly: true },
-      { ...inputs.position, readonly: true },
-    ];
+    return [{ ...inputs.name }, { ...inputs.description }];
   } else if (type === TypeForm.createCV) {
     return [{ ...inputs.name }, { ...inputs.description }];
   } else if (type === TypeForm.updateEmployee) {
@@ -126,7 +121,7 @@ export const makeSelectsList = (type: string): IMySelect[] => {
   } else if (type === TypeForm.createCV) {
     return [{ ...SelectSettings.projectsIds }, { ...SelectSettings.userId }];
   } else if (type === TypeForm.cvUser) {
-    return [{ ...SelectSettings.projectsIds }];
+    return [{ ...SelectSettings.projectsIds }, { ...SelectSettings.userId }];
   } else if (type === TypeForm.createEmployee) {
     return [
       { ...SelectSettings.department },
