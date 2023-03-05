@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import {
   OperationVariables,
@@ -17,22 +17,41 @@ import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
 import { ACTIVE_USER_ID, MAIN_ROLE } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
+import { useParams } from 'react-router-dom';
 
 export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   setError,
 }) => {
   const { t } = useTranslation();
-  const activeUserID = useReactiveVar(ACTIVE_USER_ID);
-  const { loading, data } = useQuery<{ user: UserInfo }, OperationVariables>(
-    GET_USER,
-    {
-      variables: {
-        id: activeUserID,
-      },
-    }
-  );
-  const [updateUser] = useMutation(UPDATE_USER);
+  const { id } = useParams();
+  const { loading, data, error } = useQuery<
+    { user: UserInfo },
+    OperationVariables
+  >(GET_USER, {
+    variables: {
+      id,
+    },
+  });
+  const [updateUser, { error: updatedError }] = useMutation(UPDATE_USER);
   const role = useReactiveVar(MAIN_ROLE);
+
+  useEffect(() => {
+    if (data) {
+      ACTIVE_USER_ID(id);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (updatedError) {
+      setError(updatedError.message);
+    }
+  }, [updatedError]);
+
+  useEffect(() => {
+    if (error) {
+      setError(error.message);
+    }
+  }, [error]);
 
   const updateEmployee = (
     {

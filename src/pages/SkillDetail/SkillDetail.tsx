@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { GET_SKILLS, UPDATE_SKILL } from '../../apollo/queries/skills';
 import { ACTIVE_SKILL_ID } from '../../apollo/state';
@@ -18,12 +18,9 @@ export const SkillDetail: FC<{ setError: (error: string) => void }> = ({
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const activeSkillID = useReactiveVar(ACTIVE_SKILL_ID);
-  const [updateSkill, { error, data: updatedData }] =
-    useMutation(UPDATE_SKILL);
-  const { data: skills, loading } = useQuery<{ skills: Skill[] }>(
-    GET_SKILLS
-  );
+  const { skillId } = useParams();
+  const [updateSkill, { error, data: updatedData }] = useMutation(UPDATE_SKILL);
+  const { data: skills, loading } = useQuery<{ skills: Skill[] }>(GET_SKILLS);
   const [skill, setSkill] = useState<Skill | null>(null);
 
   useEffect(() => {
@@ -40,11 +37,14 @@ export const SkillDetail: FC<{ setError: (error: string) => void }> = ({
 
   useEffect(() => {
     if (skills) {
-      setSkill(
-        skills.skills.find(
-          (skill: Skill) => skill.id === activeSkillID
-        ) as Skill
+      const activeSkill = skills.skills.find(
+        (skill: Skill) => skill.id === skillId
       );
+
+      if (activeSkill) {
+        setSkill(activeSkill);
+        ACTIVE_SKILL_ID(skillId);
+      }
     }
   }, [skills]);
 
@@ -77,4 +77,4 @@ export const SkillDetail: FC<{ setError: (error: string) => void }> = ({
       </>
     </FormContainer>
   );
-}
+};

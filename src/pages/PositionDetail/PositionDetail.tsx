@@ -1,13 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import {
-  GET_POSITIONS,
-  UPDATE_POSITION,
-} from '../../apollo/queries/positions';
+import { GET_POSITIONS, UPDATE_POSITION } from '../../apollo/queries/positions';
 import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { PATH } from '../../constants/paths';
@@ -21,7 +18,7 @@ export const PositionDetail: FC<{ setError: (error: string) => void }> = ({
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const activePositionID = useReactiveVar(ACTIVE_POSITION_ID);
+  const { positionId } = useParams();
   const [updatePosition, { error, data: updatedData }] =
     useMutation(UPDATE_POSITION);
   const { data: positions, loading } = useQuery<{ positions: Position[] }>(
@@ -43,11 +40,14 @@ export const PositionDetail: FC<{ setError: (error: string) => void }> = ({
 
   useEffect(() => {
     if (positions) {
-      setPosition(
-        positions.positions.find(
-          (position: Position) => position.id === activePositionID
-        ) as Position
+      const activePosition = positions.positions.find(
+        (position: Position) => position.id === positionId
       );
+
+      if (activePosition) {
+        setPosition(activePosition);
+        ACTIVE_POSITION_ID(positionId);
+      }
     }
   }, [positions]);
 

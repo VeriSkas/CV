@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { GET_CV, UPDATE_CV } from '../../apollo/queries/cvs';
 import { CvForm } from '../../components/CvForm/CvForm ';
@@ -19,22 +19,38 @@ export const CvDetails: FC<{ setError: (error: string) => void }> = ({
   setError,
 }) => {
   const userID = useReactiveVar(USER_ID);
-  const activeCV = useReactiveVar(ACTIVE_CV_ID);
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { loading, data } = useQuery<{ cv: CvItemDetails }>(GET_CV, {
+  const { cvId: id } = useParams();
+  const {
+    loading,
+    data,
+    error: cvError,
+  } = useQuery<{ cv: CvItemDetails }>(GET_CV, {
     variables: {
-      id: activeCV,
+      id,
     },
   });
   const [updateCv, { data: updatedCvData, error }] = useMutation(UPDATE_CV);
   const role = useReactiveVar(MAIN_ROLE);
 
   useEffect(() => {
+    if (data) {
+      ACTIVE_CV_ID(id);
+    }
+  }, [data]);
+
+  useEffect(() => {
     if (error) {
       setError(error.message);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (cvError) {
+      setError(cvError.message);
+    }
+  }, [cvError]);
 
   useEffect(() => {
     if (updatedCvData) {

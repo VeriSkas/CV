@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { GET_PROJECT, UPDATE_PROJECT } from '../../apollo/queries/projects';
 import { ACTIVE_PROJECT_ID, MAIN_ROLE } from '../../apollo/state';
@@ -20,11 +20,13 @@ export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const activeProjectID = useReactiveVar(ACTIVE_PROJECT_ID);
-  const { loading, data } = useQuery<{ project: ProjectItem }>(GET_PROJECT, {
-    variables: {
-      id: activeProjectID,
-    },
+  const { projectId: id } = useParams();
+  const {
+    loading,
+    data,
+    error: getProjectError,
+  } = useQuery<{ project: ProjectItem }>(GET_PROJECT, {
+    variables: { id },
   });
   const [updateProject, { error, data: projectUpdated }] =
     useMutation(UPDATE_PROJECT);
@@ -42,6 +44,18 @@ export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
     }
   }, [error]);
 
+  useEffect(() => {
+    if (data) {
+      ACTIVE_PROJECT_ID(id);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (getProjectError) {
+      setError(getProjectError.message);
+    }
+  }, [getProjectError]);
+
   const submitFormHandler = async (data: NewProjectForm): Promise<void> => {
     const project = {
       ...data,
@@ -52,7 +66,7 @@ export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
 
     await updateProject({
       variables: {
-        id: activeProjectID,
+        id,
         project,
       },
     });

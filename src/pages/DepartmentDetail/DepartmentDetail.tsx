@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -12,7 +12,7 @@ import { ContentText, TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { ACTIVE_DEPARTMENT_ID } from '../../apollo/state';
 import { Department } from '../../types/interfaces/departments';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PATH } from '../../constants/paths';
 import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 
@@ -21,9 +21,12 @@ export const DepartmentDetail: FC<{ setError: (error: string) => void }> = ({
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const activeDepartment = useReactiveVar(ACTIVE_DEPARTMENT_ID);
-  const [updateDepartment, { error, data: updatedData }] = useMutation(UPDATE_DEPARTMENT);
-  const { data: departments, loading } = useQuery<{ departments: Department[] }>(GET_DEPARTMENTS);
+  const { departmentId } = useParams();
+  const [updateDepartment, { error, data: updatedData }] =
+    useMutation(UPDATE_DEPARTMENT);
+  const { data: departments, loading } = useQuery<{
+    departments: Department[],
+  }>(GET_DEPARTMENTS);
   const [department, setDepartment] = useState<Department | null>(null);
 
   useEffect(() => {
@@ -34,17 +37,20 @@ export const DepartmentDetail: FC<{ setError: (error: string) => void }> = ({
 
   useEffect(() => {
     if (updatedData) {
-      navigate(PATH.departments)
+      navigate(PATH.departments);
     }
   }, [updatedData]);
 
   useEffect(() => {
     if (departments) {
-      setDepartment(
-        departments.departments.find(
-          (department: Department) => department.id === activeDepartment
-        ) as Department
+      const activeDepartment = departments.departments.find(
+        (department: Department) => department.id === departmentId
       );
+
+      if (activeDepartment) {
+        setDepartment(activeDepartment);
+        ACTIVE_DEPARTMENT_ID(departmentId);
+      }
     }
   }, [departments]);
 
@@ -67,14 +73,14 @@ export const DepartmentDetail: FC<{ setError: (error: string) => void }> = ({
       <>
         {loading && t(ContentText.loading)}
         {department && (
-        <FormWithOnlyName
-          onSubmitForm={submitFormHandler}
-          type={TypeForm.updateDepartment}
-          returnPath={PATH.departments}
-          item={department ?? undefined}
-        />
+          <FormWithOnlyName
+            onSubmitForm={submitFormHandler}
+            type={TypeForm.updateDepartment}
+            returnPath={PATH.departments}
+            item={department ?? undefined}
+          />
         )}
-     </>
+      </>
     </FormContainer>
   );
 };

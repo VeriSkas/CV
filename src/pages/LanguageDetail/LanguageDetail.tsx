@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { GET_LANGUAGES, UPDATE_LANGUAGE } from '../../apollo/queries/languages';
 import { ACTIVE_LANGUAGE_ID } from '../../apollo/state';
@@ -19,7 +19,7 @@ export const LanguageDetail: FC<{ setError: (error: string) => void }> = ({
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const activeLanguageID = useReactiveVar(ACTIVE_LANGUAGE_ID);
+  const { languageId } = useParams();
   const [updateLanguage, { error, data: updatedData }] =
     useMutation(UPDATE_LANGUAGE);
   const { data: languages, loading } = useQuery<{ languages: Language[] }>(
@@ -41,18 +41,18 @@ export const LanguageDetail: FC<{ setError: (error: string) => void }> = ({
 
   useEffect(() => {
     if (languages) {
-      setLanguage(
-        languages.languages.find(
-          (language: Language) => language.id === activeLanguageID
-        ) as Language
+      const activeLanguage = languages.languages.find(
+        (language: Language) => language.id === languageId
       );
+
+      if (activeLanguage) {
+        setLanguage(activeLanguage);
+        ACTIVE_LANGUAGE_ID(languageId);
+      }
     }
   }, [languages]);
 
-  const submitFormHandler = (
-    language: ILanguageForm,
-    id?: string
-  ): void => {
+  const submitFormHandler = (language: ILanguageForm, id?: string): void => {
     void updateLanguage({
       variables: {
         id,
@@ -75,4 +75,4 @@ export const LanguageDetail: FC<{ setError: (error: string) => void }> = ({
       </>
     </FormContainer>
   );
-}
+};
