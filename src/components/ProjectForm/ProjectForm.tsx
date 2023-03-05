@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Control, FieldErrorsImpl, useForm, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { Control, FieldErrorsImpl, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -28,7 +28,6 @@ export const ProjectForm: FC<{
     reset,
     control,
     setValue,
-    getValues,
     formState: { errors, isValid },
   } = useForm<NewProjectForm>({
     mode: 'all',
@@ -60,7 +59,6 @@ export const ProjectForm: FC<{
         selectsArray={makeSelectsList(type)}
         control={control as Control<FormTypes, any>}
         setValue={setValue as UseFormSetValue<FormTypes>}
-        getValues={getValues as UseFormGetValues<FormTypes>}
       />
       <div>
         {type !== TypeForm.projectDetails && <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>}

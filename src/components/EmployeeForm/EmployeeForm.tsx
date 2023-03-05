@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Control, useForm, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { Control, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -37,7 +37,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     register,
     handleSubmit,
     setValue,
-    getValues,
     reset,
     control,
     formState: { errors, isValid },
@@ -92,7 +91,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         selectsArray={makeSelectsList(type)}
         control={control as Control<FormTypes, any>}
         setValue={setValue as UseFormSetValue<FormTypes>}
-        getValues={getValues as UseFormGetValues<FormTypes>}
       />
       <FieldsArrayFromArray
         fieldsArray={[skillFields, languageFields]}

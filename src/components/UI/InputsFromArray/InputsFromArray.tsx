@@ -19,7 +19,7 @@ export const InputsFromArray: FC<{
           labelName={input.labelName ?? ''}
           label={input.label}
           defaultValue={input.defaultValue ?? ''}
-          placeholder={input.labelName ?? input.label}
+          placeholder={''}
           validation={input.validation}
           readonly={input.readonly ?? false}
           register={register}

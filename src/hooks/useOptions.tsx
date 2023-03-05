@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import { useQuery } from '@apollo/client';
 
 import { GET_DEPARTMENTS_AS_OPTIONS } from '../apollo/queries/departments';
@@ -33,96 +31,37 @@ export const useOptions = (label: string): OptionsType[] => {
     GET_USERS_AS_OPTIONS
   );
   const { data: cvs } = useQuery<{ cvs: OptionsType[] }>(GET_CVS_AS_OPTIONS);
-  const [departmentsValue, setDepartmentsValue] = useState<OptionsType[]>([]);
-  const [positionsValue, setPositionsValue] = useState<OptionsType[]>([]);
-  const [skillsValue, setSkillsValue] = useState<OptionsType[]>([]);
-  const [projectsValue, setProjectsValue] = useState<OptionsType[]>([]);
-  const [languagesValue, setLanguagesValue] = useState<OptionsType[]>([]);
-  const [cvsValue, setCvsValue] = useState<OptionsType[]>([]);
-  const [usersValue, setUsersValue] = useState<OptionsType[]>([]);
-  let options: OptionsType[] = [];
-
-  useEffect(() => {
-    if (departments) {
-      setDepartmentsValue(departments.departments);
-    }
-  }, [departments]);
-
-  useEffect(() => {
-    if (positions) {
-      setPositionsValue(positions.positions);
-    }
-  }, [positions]);
-
-  useEffect(() => {
-    if (users) {
-      setUsersValue(users.users);
-    }
-  }, [users]);
-
-  useEffect(() => {
-    if (skills) {
-      setSkillsValue(skills.skills);
-    }
-  }, [skills]);
-
-  useEffect(() => {
-    if (cvs) {
-      setCvsValue(cvs.cvs);
-    }
-  }, [cvs]);
-
-  useEffect(() => {
-    if (projects) {
-      setProjectsValue(projects.projects);
-    }
-  }, [projects]);
-
-  useEffect(() => {
-    if (languages) {
-      setLanguagesValue(languages.languages);
-    }
-  }, [languages]);
 
   switch (label) {
     case InputLabels.department:
-      options = departmentsValue;
-      break;
+      return departments ? departments.departments : [];
     case InputLabels.position:
-      options = positionsValue;
-      break;
+      return positions ? positions.positions : [];
     case InputLabels.role:
-      options = [...Object.values(Roles)];
-      break;
+      return [...Object.values(Roles)];
     case InputLabels.cvsIds:
-      options = cvsValue;
-      break;
+      return cvs ? cvs.cvs : [];
     case InputLabels.userId:
-      options = usersValue;
-      break;
+      return users ? users.users : [];
     case InputLabels.skillsIds:
-      options = skillsValue;
-      break;
+      return skills ? skills.skills : [];
     case InputLabels.skills:
-      options = skillsValue.map((skill) => ({
-        value: skill.label,
-        label: skill.label,
-      }));
-      break;
+      return skills
+        ? skills.skills.map((skill) => ({
+            value: skill.label,
+            label: skill.label,
+          }))
+        : [];
     case InputLabels.languages:
-      options = languagesValue.map((language) => ({
-        value: language.label,
-        label: language.label,
-      }));
-      break;
+      return languages
+        ? languages.languages.map((language) => ({
+            value: language.label,
+            label: language.label,
+          }))
+        : [];
     case InputLabels.projectsIds:
-      options = projectsValue;
-      break;
-
-    default:
-      options = [];
-      break;
+      return projects ? projects.projects : [];
   }
 
-  return options;
+  return [];
 };

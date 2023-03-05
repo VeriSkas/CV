@@ -80,7 +80,7 @@ export const CREATE_USER = gql`
       id
       email
       profile {
-        full_name
+        first_name
         last_name
         full_name
         avatar

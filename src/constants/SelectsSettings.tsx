@@ -15,6 +15,7 @@ export const SelectSettings: { [key: string]: IMySelect } = {
     defaultValue: '',
     disabled: false,
     multi: true,
+    required: true,
   },
   cvsIds: {
     label: InputLabels.cvsIds,

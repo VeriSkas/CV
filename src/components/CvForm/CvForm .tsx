@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { useReactiveVar } from '@apollo/client';
-import { Control, useForm, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { Control, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -41,7 +41,6 @@ export const CvForm: FC<CvFormProps> = ({
     reset,
     control,
     setValue,
-    getValues,
     formState: { errors, isValid },
   } = useForm<CvDetailForm>({
     mode: 'all',
@@ -78,7 +77,6 @@ export const CvForm: FC<CvFormProps> = ({
         selectsArray={makeSelectsList(type)}
         control={control as Control<FormTypes, any>}
         setValue={setValue as UseFormSetValue<FormTypes>}
-        getValues={getValues as UseFormGetValues<FormTypes>}
       />
       <FieldsArrayFromArray
         fieldsArray={[skillFields, languageFields]}

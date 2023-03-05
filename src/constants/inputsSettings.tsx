@@ -11,6 +11,7 @@ export const inputs: { [key: string]: IInput } = {
   email: {
     type: InputTypes.email,
     label: InputLabels.email,
+    labelName: InputLabelNames.email,
     defaultValue: '',
     validation: {
       required: { value: true, message: ErrorMessages.inputRequired },
@@ -25,6 +26,7 @@ export const inputs: { [key: string]: IInput } = {
   password: {
     type: InputTypes.password,
     label: InputLabels.password,
+    labelName: InputLabelNames.password,
     defaultValue: '',
     validation: {
       required: { value: true, message: ErrorMessages.inputRequired },
