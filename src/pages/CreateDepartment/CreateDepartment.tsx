@@ -10,10 +10,10 @@ import {
 
 import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { Department } from '../../types/interfaces/departments';
 import { PATH } from '../../constants/paths';
+import '../../i18n/i18n';
 
 export const CreateDepartment: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -55,7 +55,7 @@ export const CreateDepartment: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.createDepartment)}>
+    <FormContainer title={t('TitleText.createDepartment')}>
       <FormWithOnlyName
         onSubmitForm={submitFormHandler}
         type={TypeForm.createDepartment}

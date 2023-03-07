@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useReactiveVar } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 
 import { Auth } from './pages/Auth/Auth';
 import { CreateEmployee } from './pages/CreateEmployee/CreateEmployee';
@@ -22,7 +23,6 @@ import { Languages } from './pages/Languages/Languages';
 import { USER_TOKEN } from './apollo/state';
 import { CreateProject } from './pages/CreateProject/CreateProject';
 import { ProjectDetailPage } from './pages/ProjectDetailPage/ProjectDetailPage';
-import { ContentText } from './constants/text';
 import { CreateDepartment } from './pages/CreateDepartment/CreateDepartment';
 import { DepartmentDetail } from './pages/DepartmentDetail/DepartmentDetail';
 import { PositionDetail } from './pages/PositionDetail/PositionDetail';
@@ -31,6 +31,9 @@ import { CreateSkill } from './pages/CreateSkill/CreateSkill';
 import { SkillDetail } from './pages/SkillDetail/SkillDetail';
 import { CreateLanguage } from './pages/CreateLanguage/CreateLanguage';
 import { LanguageDetail } from './pages/LanguageDetail/LanguageDetail';
+import { LSItems } from './constants/variables';
+import { SupportedLanguages } from './constants/constants';
+import './i18n/i18n';
 
 const ProjectsPage = React.lazy(
   async () => await import('./pages/ProjectsPage/ProjectsPage')
@@ -57,9 +60,18 @@ const CVsPage = React.lazy(async () => await import('./pages/CVsPage/CVsPage'));
 
 export const App: FC = () => {
   const token = useReactiveVar(USER_TOKEN);
+  const { t, i18n } = useTranslation();
   const [isLoggedIn, setLoggedIn] = useState<boolean>(() => !!token);
   const [errorMessage, setErrorMessage] = useState<string>('');
   let link = isLoggedIn ? PATH.employees : PATH.login;
+  const language =
+    localStorage.getItem(LSItems.pageLanguage) ?? SupportedLanguages.en;
+
+  useEffect(() => {
+    if (language) {
+      void i18n.changeLanguage(language);
+    }
+  }, [i18n]);
 
   useEffect(() => {
     link = isLoggedIn ? PATH.employees : PATH.login;
@@ -74,7 +86,7 @@ export const App: FC = () => {
       <Route
         path={PATH.employees}
         element={
-          <React.Suspense fallback={ContentText.loading}>
+          <React.Suspense fallback={t('ContentText.loading')}>
             <EmployeesPage />
           </React.Suspense>
         }
@@ -123,7 +135,7 @@ export const App: FC = () => {
       <Route
         path={PATH.projects}
         element={
-          <React.Suspense fallback={ContentText.loading}>
+          <React.Suspense fallback={t('ContentText.loading')}>
             <ProjectsPage />
           </React.Suspense>
         }
@@ -153,7 +165,7 @@ export const App: FC = () => {
       <Route
         path={PATH.cvs}
         element={
-          <React.Suspense fallback={ContentText.loading}>
+          <React.Suspense fallback={t('ContentText.loading')}>
             <CVsPage />
           </React.Suspense>
         }
@@ -192,7 +204,7 @@ export const App: FC = () => {
       <Route
         path={PATH.departments}
         element={
-          <React.Suspense fallback={ContentText.loading}>
+          <React.Suspense fallback={t('ContentText.loading')}>
             <DepartmentsPage />
           </React.Suspense>
         }
@@ -231,7 +243,7 @@ export const App: FC = () => {
       <Route
         path={PATH.positions}
         element={
-          <React.Suspense fallback={ContentText.loading}>
+          <React.Suspense fallback={t('ContentText.loading')}>
             <PositionPage />
           </React.Suspense>
         }
@@ -270,7 +282,7 @@ export const App: FC = () => {
       <Route
         path={PATH.skills}
         element={
-          <React.Suspense fallback={ContentText.loading}>
+          <React.Suspense fallback={t('ContentText.loading')}>
             <SkillsPage />
           </React.Suspense>
         }
@@ -309,7 +321,7 @@ export const App: FC = () => {
       <Route
         path={PATH.languages}
         element={
-          <React.Suspense fallback={ContentText.loading}>
+          <React.Suspense fallback={t('ContentText.loading')}>
             <LanguagesPage />
           </React.Suspense>
         }
@@ -352,7 +364,7 @@ export const App: FC = () => {
       <Route
         path={PATH.login}
         element={
-          <React.Suspense fallback={ContentText.loading}>
+          <React.Suspense fallback={t('ContentText.loading')}>
             <SignInAndUp />
           </React.Suspense>
         }
@@ -374,7 +386,7 @@ export const App: FC = () => {
       <Route
         path={PATH.signUp}
         element={
-          <React.Suspense fallback={ContentText.loading}>
+          <React.Suspense fallback={t('ContentText.loading')}>
             <SignInAndUp />
           </React.Suspense>
         }

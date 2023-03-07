@@ -5,7 +5,7 @@ import { IconContext } from 'react-icons';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { RxCross2 } from 'react-icons/rx';
 
-import { ErrorMessages } from '../../../constants/text';
+import '../../../i18n/i18n';
 import classes from './Notification.module.scss';
 
 export const Notification: FC<{
@@ -41,7 +41,7 @@ export const Notification: FC<{
             </IconContext.Provider>
           </div>
           <p className={classes.Message}>
-            {t(message ?? ErrorMessages.default)}
+            {t(message ?? 'ErrorMessages.default')}
           </p>
           <div className={classes.Cross} onClick={onClose}>
             <IconContext.Provider value={{ className: classes.Icon }}>

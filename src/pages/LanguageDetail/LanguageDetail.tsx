@@ -9,10 +9,10 @@ import { ACTIVE_LANGUAGE_ID } from '../../apollo/state';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { LanguageForm } from '../../components/LanguageForm/LanguageForm';
 import { PATH } from '../../constants/paths';
-import { ContentText, TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { ILanguageForm } from '../../types/interfaces/interfaces';
 import { Language } from '../../types/interfaces/languages';
+import '../../i18n/i18n';
 
 export const LanguageDetail: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -62,9 +62,9 @@ export const LanguageDetail: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.updateLanguage)}>
+    <FormContainer title={t('TitleText.updateLanguage')}>
       <>
-        {loading && t(ContentText.loading)}
+        {loading && t('ContentText.loading')}
         {language && (
           <LanguageForm
             onSubmitForm={submitFormHandler}

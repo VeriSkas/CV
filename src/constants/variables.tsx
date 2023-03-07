@@ -9,6 +9,7 @@ export const LSItems = {
   activePosition: 'activePosition',
   activeSkill: 'activeSkill',
   activeLanguage: 'activeLanguage',
+  pageLanguage: 'pageLanguage',
 };
 
 export const hiddenObjectKeysInTable = {

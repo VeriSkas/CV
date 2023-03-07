@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { FormTypes, IEmployeeForm } from '../../types/interfaces/interfaces';
-import { BtnText } from '../../constants/text';
 import { Button } from '../UI/Button/Button';
 import { EmployeeFormProps } from '../../types/interfaces/propsInterfaces';
 import { Avatar } from '../Avatar/Avatar';
@@ -18,6 +17,7 @@ import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
 import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
 import classes from './EmployeeForm.module.scss';
+import '../../i18n/i18n';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -101,10 +101,10 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
       />
       <div className={classes.FormBtns}>
         {!isProfileType && <Button disabled={!isValid}>
-          {submitBtnText ?? t(BtnText.saveChanges)}
+          {submitBtnText ?? t('BtnText.saveChanges')}
         </Button>}
         <Link to={PATH.employees}>
-          <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
+          <Button type={BtnType.transparent}>{t('BtnText.return')}</Button>
         </Link>
       </div>
     </form>

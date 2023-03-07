@@ -1,16 +1,19 @@
 import React, { FC, useEffect, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 
 import { links } from '../../../constants/constants';
 import { IParams, PARAMS } from '../../../constants/paths';
+import '../../../i18n/i18n';
 import classes from './Breadcrumbs.module.scss';
 
 export const Breadcrumbs: FC<{ paramName?: string }> = ({ paramName }) => {
   const param = useParams();
   const location = useLocation();
+  const { t } = useTranslation();
   const [paramValue, setParamValue] = useState('');
   const [pathValue, setPathValue] = useState('');
 
@@ -38,7 +41,7 @@ export const Breadcrumbs: FC<{ paramName?: string }> = ({ paramName }) => {
         <IconContext.Provider value={{ className: classes.Icon }}>
           {links.home.icon}
         </IconContext.Provider>
-        {links.home.label}
+        {t(links.home.label)}
       </a>
       {pathValue && <NavLink
         end
@@ -48,7 +51,7 @@ export const Breadcrumbs: FC<{ paramName?: string }> = ({ paramName }) => {
         <IconContext.Provider value={{ className: classes.Icon }}>
           <MdOutlineKeyboardArrowRight />
         </IconContext.Provider>
-        {links[pathValue].label}
+        {t(links[pathValue].label)}
       </NavLink>}
       {paramValue && pathValue && <NavLink
         to={location.pathname}
@@ -65,7 +68,7 @@ export const Breadcrumbs: FC<{ paramName?: string }> = ({ paramName }) => {
           {links[PARAMS[pathValue as keyof IParams]].icon}
         </IconContext.Provider>
         <span className={classes.LinkText}>
-          {paramName ?? links[PARAMS[pathValue as keyof IParams]].label}
+          {paramName ?? t(links[PARAMS[pathValue as keyof IParams]].label)}
         </span>
       </NavLink>}
     </div>

@@ -8,13 +8,13 @@ import {
   UPDATE_DEPARTMENT,
 } from '../../apollo/queries/departments';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { ContentText, TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { ACTIVE_DEPARTMENT_ID } from '../../apollo/state';
 import { Department } from '../../types/interfaces/departments';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PATH } from '../../constants/paths';
 import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
+import '../../i18n/i18n';
 
 export const DepartmentDetail: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -69,9 +69,9 @@ export const DepartmentDetail: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.updateDepartment)}>
+    <FormContainer title={t('TitleText.updateDepartment')}>
       <>
-        {loading && t(ContentText.loading)}
+        {loading && t('ContentText.loading')}
         {department && (
           <FormWithOnlyName
             onSubmitForm={submitFormHandler}

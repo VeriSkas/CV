@@ -12,10 +12,10 @@ import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
 import { IEmployeeForm } from '../../types/interfaces/interfaces';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 import { UpdatedUser, UserInfo } from '../../types/interfaces/user';
-import { ContentText, TitleText } from '../../constants/text';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
 import { USER_ID } from '../../apollo/state';
+import '../../i18n/i18n';
 
 export const Profile: FC<{ setError: (message: string) => void }> = ({
   setError,
@@ -70,9 +70,9 @@ export const Profile: FC<{ setError: (message: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.profile)}>
+    <FormContainer title={t('TitleText.profile')}>
       <>
-        {loading && t(ContentText.loading)}
+        {loading && t('ContentText.loading')}
         {data && (
           <EmployeeForm
             user={data.user}

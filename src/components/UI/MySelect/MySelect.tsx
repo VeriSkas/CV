@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 
 import { useOptions } from '../../../hooks/useOptions';
@@ -10,6 +11,7 @@ import {
 } from '../../../types/interfaces/propsInterfaces';
 import classes from './MySelect.module.scss';
 import { selectStyles } from './styles';
+import '../../../i18n/i18n';
 
 export const MySelect: FC<MySelectProps> = ({
   control,
@@ -22,6 +24,7 @@ export const MySelect: FC<MySelectProps> = ({
   required,
 }) => {
   const options: OptionsType[] = useOptions(label);
+  const { t } = useTranslation();
 
   const onChangeHandler = (value: any): void => {
     if (multi) {
@@ -39,7 +42,7 @@ export const MySelect: FC<MySelectProps> = ({
 
   return (
     <div className={classes.MySelect}>
-      <label>{labelName}</label>
+      <label>{t(labelName)}</label>
       <Controller
         name={controlName ?? label}
         control={control}

@@ -8,12 +8,12 @@ import { GET_CV, UPDATE_CV } from '../../apollo/queries/cvs';
 import { CvForm } from '../../components/CvForm/CvForm ';
 import { CvItemDetails } from '../../types/interfaces/cvs';
 import { CvDetailForm } from '../../types/interfaces/interfaces';
-import { ContentText, TitleText } from '../../constants/text';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
 import { ACTIVE_CV_ID, MAIN_ROLE, USER_ID } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
 import { PATH } from '../../constants/paths';
+import '../../i18n/i18n';
 
 export const CvDetails: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -86,9 +86,9 @@ export const CvDetails: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.cvDetails)}>
+    <FormContainer title={t('TitleText.cvDetails')}>
       <>
-        {loading && <div>{t(ContentText.loading)}</div>}
+        {loading && <div>{t('ContentText.loading')}</div>}
         {data && (
           <CvForm
             cv={data.cv}

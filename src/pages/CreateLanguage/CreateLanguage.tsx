@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 
 import { CREATE_LANGUAGE, GET_LANGUAGES } from '../../apollo/queries/languages';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { LanguageForm } from '../../components/LanguageForm/LanguageForm';
 import { ILanguageForm } from '../../types/interfaces/interfaces';
 import { Language } from '../../types/interfaces/languages';
+import '../../i18n/i18n';
 
 export const CreateLanguage: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -49,7 +49,7 @@ export const CreateLanguage: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.createLanguage)}>
+    <FormContainer title={t('TitleText.createLanguage')}>
       <LanguageForm
         onSubmitForm={submitFormHandler}
         type={TypeForm.createLanguage}

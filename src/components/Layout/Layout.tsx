@@ -9,13 +9,14 @@ import { Header } from '../UI/Header/Header';
 import { SideBar } from '../SideBar/SideBar';
 import { DropDown } from '../UI/DropDown/DropDown';
 import { links } from '../../constants/constants';
-import classes from './Layout.module.scss';
 import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
 import { LayoutProps } from '../../types/interfaces/propsInterfaces';
 import { UserInfoShort } from '../../types/interfaces/user';
 import { Notification } from '../UI/Notification/Notification';
 import { PATH } from '../../constants/paths';
 import { USER_ID, USER_TOKEN } from '../../apollo/state';
+import { LanguageIcon } from '../LanguageIcon/LanguageIcon';
+import classes from './Layout.module.scss';
 
 export const Layout: FC<LayoutProps> = ({
   auth,
@@ -104,9 +105,13 @@ export const Layout: FC<LayoutProps> = ({
                       onClick={(label: string) => {
                         onCloseDropDown(label);
                       }}
+                      onCloseHandler={() => {
+                        setIsOpenDropDown(false);
+                      }}
                     />
                   )}
                 </div>
+                <LanguageIcon />
               </div>
             </div>
           </Header>

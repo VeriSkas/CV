@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 import { FieldArrays } from '../../constants/fieldArrayVars';
 import { PATH } from '../../constants/paths';
-import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { FormTypes, NewEmployeeForm } from '../../types/interfaces/interfaces';
 import {
@@ -17,6 +16,7 @@ import { Button } from '../UI/Button/Button';
 import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
+import '../../i18n/i18n';
 
 export const CreateEmployeeForm: FC<{
   onSubmitForm: (data: NewEmployeeForm) => void,
@@ -58,9 +58,9 @@ export const CreateEmployeeForm: FC<{
         setValue={setValue as UseFormSetValue<FormTypes>}
       />
       <div>
-        <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>
+        <Button disabled={!isValid}>{t('BtnText.saveChanges')}</Button>
         <Link to={PATH.employees}>
-          <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
+          <Button type={BtnType.transparent}>{t('BtnText.return')}</Button>
         </Link>
       </div>
     </form>

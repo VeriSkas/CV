@@ -7,9 +7,9 @@ import { CREATE_SKILL, GET_SKILLS } from '../../apollo/queries/skills';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 import { PATH } from '../../constants/paths';
-import { TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { Skill } from '../../types/interfaces/skills';
+import '../../i18n/i18n';
 
 export const CreateSkill: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -46,7 +46,7 @@ export const CreateSkill: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.createSkill)}>
+    <FormContainer title={t('TitleText.createSkill')}>
       <FormWithOnlyName
         onSubmitForm={submitFormHandler}
         type={TypeForm.createSkill}

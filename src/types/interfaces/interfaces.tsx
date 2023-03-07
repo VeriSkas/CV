@@ -125,6 +125,7 @@ export interface DropDownOption {
   label: string;
   to?: string;
   icon?: JSX.Element;
+  iso?: string;
 }
 
 export interface SortType {

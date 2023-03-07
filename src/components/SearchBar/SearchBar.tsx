@@ -11,11 +11,11 @@ import { SearchBarProps } from '../../types/interfaces/propsInterfaces';
 import { Search } from '../Search/Search';
 import { Button } from '../UI/Button/Button';
 import classes from './SearchBar.module.scss';
+import '../../i18n/i18n';
 
 export const SearchBar: FC<SearchBarProps> = ({
   linkTo,
   btnText,
-  title,
   placeholder,
   onChangeSearch,
   createBtnViewForUser,
@@ -34,7 +34,7 @@ export const SearchBar: FC<SearchBarProps> = ({
     <div className={classes.SearchBar}>
       <div className={classes.SearchPanel}>
         <Search
-          placeholder={t(placeholder ?? '')}
+          placeholder={placeholder ? t(placeholder) : ''}
           value={searchValue}
           onChange={(value) => {
             searchHandler(value);
@@ -43,7 +43,9 @@ export const SearchBar: FC<SearchBarProps> = ({
         {(role === Roles.admin.value || createBtnViewForUser) && (
           <div className={classes.CreateEmployeeBtn}>
             <Link to={linkTo}>
-              <Button type={BtnType.transparentWithBorder}>{t(btnText)}</Button>
+              <Button type={BtnType.transparentWithBorder}>
+                {t(`${btnText}`)}
+              </Button>
             </Link>
           </div>
         )}

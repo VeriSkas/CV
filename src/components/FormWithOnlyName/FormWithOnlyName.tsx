@@ -4,7 +4,6 @@ import { FieldErrorsImpl, useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { BtnText } from '../../constants/text';
 import { BtnType } from '../../constants/variables';
 import { Department } from '../../types/interfaces/departments';
 import { FormTypes } from '../../types/interfaces/interfaces';
@@ -13,6 +12,7 @@ import { Skill } from '../../types/interfaces/skills';
 import { makeInputsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
+import '../../i18n/i18n';
 
 export const FormWithOnlyName: FC<{
     onSubmitForm: (
@@ -49,9 +49,9 @@ export const FormWithOnlyName: FC<{
           errors={errors as Partial<FieldErrorsImpl<FormTypes>>}
         />
         <div>
-          <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>
+          <Button disabled={!isValid}>{t('BtnText.saveChanges')}</Button>
           <Link to={returnPath}>
-            <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
+            <Button type={BtnType.transparent}>{t('BtnText.return')}</Button>
           </Link>
         </div>
       </form>

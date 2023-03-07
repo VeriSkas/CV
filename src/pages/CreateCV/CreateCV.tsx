@@ -7,12 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { CREATE_CV, GET_CVS } from '../../apollo/queries/cvs';
 import { CvCreateForm } from '../../components/CvCreateForm/CvCreateForm';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { TitleText } from '../../constants/text';
 import { CvItem, CvItemDetails, NewCV } from '../../types/interfaces/cvs';
 import { NewCvForm } from '../../types/interfaces/interfaces';
 import { PATH } from '../../constants/paths';
 import { ACTIVE_CV_ID } from '../../apollo/state';
 import { LSItems } from '../../constants/variables';
+import '../../i18n/i18n';
 
 export const CreateCV: FC<{ setError: (message: string) => void }> = ({
   setError,
@@ -65,7 +65,7 @@ export const CreateCV: FC<{ setError: (message: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.createCV)}>
+    <FormContainer title={t('TitleText.createCV')}>
       <CvCreateForm onSubmitForm={submitFormHandler} />
     </FormContainer>
   );

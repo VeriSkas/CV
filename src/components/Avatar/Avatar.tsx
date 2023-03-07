@@ -17,11 +17,11 @@ import {
   GET_USER,
   UPLOAD_AVATAR,
 } from '../../apollo/queries/users';
-import { MAX_photoSize, PhotoTypes } from '../../constants/constants';
-import { ErrorMessages, TooltipText } from '../../constants/text';
+import { PhotoTypes, Sizes } from '../../constants/constants';
 import { AvatarValue, UserInfo } from '../../types/interfaces/user';
-import classes from './Avatar.module.scss';
 import { InputType } from '../../constants/variables';
+import classes from './Avatar.module.scss';
+import '../../i18n/i18n';
 
 export const Avatar: FC<{
   setError: (message: string) => void,
@@ -96,13 +96,19 @@ export const Avatar: FC<{
   const addFile = (file: File): void => {
     const reader = new FileReader();
 
-    if (file.size > MAX_photoSize) {
+    if (file.size > Sizes.MAX_photoSize) {
       if (setError) {
-        setError(t(ErrorMessages.avatarSize));
+        setError(
+          t('ErrorMessages.avatarSize', { MAX_photoSize: Sizes.MAX_photoSize })
+        );
       }
     } else if (!Object.values(PhotoTypes).includes(file.type)) {
       if (setError) {
-        setError(t(ErrorMessages.avatarType));
+        setError(
+          t('ErrorMessages.avatarType', {
+            PhotoTypes: Object.keys(PhotoTypes).join(' '),
+          })
+        );
       }
     } else {
       reader.onloadend = () => {
@@ -180,7 +186,7 @@ export const Avatar: FC<{
           {!disabled && (
             <div
               className={classes.BinIcon}
-              title={t(TooltipText.deleteAvatar)}
+              title={t('TooltipText.deleteAvatar')}
               onClick={deleteAvatar}
             >
               <IconContext.Provider value={{ className: classes.Icon }}>
@@ -209,7 +215,7 @@ export const Avatar: FC<{
             {avatarRender()}
             <label
               className={classes.InputFile}
-              title={!disabled ? t(TooltipText.addAvatar) : ''}
+              title={!disabled ? t('TooltipText.addAvatar') : ''}
             >
               <input
                 type={InputType.file}

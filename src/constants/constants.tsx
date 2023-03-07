@@ -30,13 +30,27 @@ import {
 } from '../apollo/state';
 import { IRole } from '../types/interfaces/user';
 
-export const MAX_photoSize = 500000;
+export const Sizes = {
+  MAX_photoSize: 500000,
+  MAX_inputLength: 100,
+  MIN_inputLength: 2,
+  MAX_inputValue: 100,
+  MIN_inputValue: 1,
+  MAX_passwordLength: 32,
+  MIN_passwordLength: 5,
+  MIN_emailLength: 5,
+};
 
 export const PhotoTypes = {
   png: 'image/png',
   jpg: 'image/jpg',
   jpeg: 'image/jpeg',
   gif: 'image/gif',
+};
+
+export const SupportedLanguages = {
+  en: 'en',
+  ru: 'ru',
 };
 
 export const Roles: { [key: string]: IRole } = {
@@ -53,197 +67,253 @@ export const Roles: { [key: string]: IRole } = {
 export const links: { [key: string]: ILink } = {
   home: {
     to: PATH.main,
-    label: 'Home',
+    label: 'Links.home',
     icon: <MdOutlineHouse />,
   },
   employees: {
     to: PATH.employees,
-    label: 'Employees',
+    label: 'Links.employees',
     icon: <MdPeopleAlt />,
   },
   employee: {
     to: `${PATH.employees}/${ACTIVE_USER_ID()}`,
-    label: 'Person',
+    label: 'Links.person',
     icon: <MdPersonOutline />,
   },
   projects: {
     to: PATH.projects,
-    label: 'Projects',
+    label: 'Links.projects',
     icon: <GrWorkshop />,
   },
   project: {
     to: `${PATH.projects}/${ACTIVE_PROJECT_ID()}`,
-    label: 'Project',
+    label: 'Links.project',
     icon: <MdCardTravel />,
   },
   cvs: {
     to: PATH.cvs,
-    label: 'CVs',
+    label: 'Links.cvs',
     icon: <FaAddressCard />,
   },
   cv: {
     to: `${PATH.cvs}/${ACTIVE_CV_ID()}`,
-    label: 'CV',
+    label: 'Links.cv',
     icon: <FaAddressCard />,
   },
   departments: {
     to: PATH.departments,
-    label: 'Departments',
+    label: 'Links.departments',
     icon: <MdHomeWork />,
   },
   department: {
     to: `${PATH.departments}/${PATH.department}`,
-    label: 'Department',
+    label: 'Links.department',
     icon: <MdHomeWork />,
   },
   positions: {
     to: PATH.positions,
-    label: 'Positions',
+    label: 'Links.positions',
     icon: <MdHomeRepairService />,
   },
   position: {
     to: `${PATH.positions}/${PATH.position}`,
-    label: 'Positions',
+    label: 'Links.position',
     icon: <MdHomeRepairService />,
   },
   skills: {
     to: PATH.skills,
-    label: 'Skills',
+    label: 'Links.skills',
     icon: <MdHardware />,
   },
   skill: {
     to: `${PATH.skills}/${PATH.skill}`,
-    label: 'Skill',
+    label: 'Links.skill',
     icon: <MdHardware />,
   },
   languages: {
     to: PATH.languages,
-    label: 'Languages',
+    label: 'Links.languages',
     icon: <MdLanguage />,
   },
   language: {
     to: `${PATH.languages}/${PATH.language}`,
-    label: 'Languages',
+    label: 'Links.language',
     icon: <MdLanguage />,
   },
   logout: {
     to: PATH.login,
-    label: 'Logout',
+    label: 'Links.logout',
     icon: <MdLogout />,
   },
   profile: {
     to: `${PATH.employees}/${USER_ID()}${PATH.profile}`,
-    label: 'Profile',
+    label: 'Links.profile',
     icon: <CgProfile />,
   },
   settings: {
     to: PATH.settings,
-    label: 'Settings',
+    label: 'Links.settings',
     icon: <MdSettings />,
   },
 };
 
 export const employeeTableOptions: { [key: string]: TableOption } = {
-  first_name: { name: 'First Name', active: false, disabled: false },
-  last_name: { name: 'Last Name', active: false, disabled: false },
-  email: { name: 'Email', active: false, disabled: false },
-  department_name: { name: 'Department', active: false, disabled: false },
-  position_name: { name: 'Position', active: false, disabled: false },
+  first_name: {
+    name: 'HeaderOptionsNames.firstName',
+    active: false,
+    disabled: false,
+  },
+  last_name: {
+    name: 'HeaderOptionsNames.lastName',
+    active: false,
+    disabled: false,
+  },
+  email: { name: 'HeaderOptionsNames.email', active: false, disabled: false },
+  department_name: {
+    name: 'HeaderOptionsNames.department',
+    active: false,
+    disabled: false,
+  },
+  position_name: {
+    name: 'HeaderOptionsNames.position',
+    active: false,
+    disabled: false,
+  },
 };
 
 export const projectsTableOptions: { [key: string]: TableOption } = {
-  name: { name: 'Name', active: false, disabled: false },
-  internal_name: { name: 'Internal Name', active: false, disabled: false },
-  domain: { name: 'Domain', active: false, disabled: false },
-  start_date: { name: 'Start Date', active: false, disabled: false },
-  end_date: { name: 'End Date', active: false, disabled: false },
-  team_size: { name: 'Team Size', active: false, disabled: true },
+  name: { name: 'HeaderOptionsNames.name', active: false, disabled: false },
+  internal_name: {
+    name: 'HeaderOptionsNames.internalName',
+    active: false,
+    disabled: false,
+  },
+  domain: { name: 'HeaderOptionsNames.domain', active: false, disabled: false },
+  start_date: {
+    name: 'HeaderOptionsNames.startDate',
+    active: false,
+    disabled: false,
+  },
+  end_date: {
+    name: 'HeaderOptionsNames.endDate',
+    active: false,
+    disabled: false,
+  },
+  team_size: {
+    name: 'HeaderOptionsNames.teamSize',
+    active: false,
+    disabled: true,
+  },
 };
 
 export const cvsTableOptions: { [key: string]: TableOption } = {
-  is_template: { name: 'Template', active: false, disabled: true },
-  name: { name: 'Name', active: false, disabled: false },
-  description: { name: 'Description', active: false, disabled: true },
-  email: { name: 'Employee', active: false, disabled: false },
+  is_template: {
+    name: 'HeaderOptionsNames.template',
+    active: false,
+    disabled: true,
+  },
+  name: { name: 'HeaderOptionsNames.name', active: false, disabled: false },
+  description: {
+    name: 'HeaderOptionsNames.description',
+    active: false,
+    disabled: true,
+  },
+  email: {
+    name: 'HeaderOptionsNames.employee',
+    active: false,
+    disabled: false,
+  },
 };
 
 export const departmentsTableOptions: { [key: string]: TableOption } = {
-  name: { name: 'Department name', active: false, disabled: false },
+  name: {
+    name: 'HeaderOptionsNames.departmentName',
+    active: false,
+    disabled: false,
+  },
 };
 
 export const positionsTableOptions: { [key: string]: TableOption } = {
-  name: { name: 'Position name', active: false, disabled: false },
+  name: {
+    name: 'HeaderOptionsNames.positionName',
+    active: false,
+    disabled: false,
+  },
 };
 
 export const skillsTableOptions: { [key: string]: TableOption } = {
-  name: { name: 'Skill name', active: false, disabled: false },
+  name: {
+    name: 'HeaderOptionsNames.skillName',
+    active: false,
+    disabled: false,
+  },
 };
 
 export const languagesTableOptions: { [key: string]: TableOption } = {
-  iso2: { name: 'Iso2 code', active: false, disabled: true },
-  name: { name: 'Language', active: false, disabled: false },
+  iso2: { name: 'HeaderOptionsNames.iso2', active: false, disabled: true },
+  name: { name: 'HeaderOptionsNames.language', active: false, disabled: false },
 };
 
 export const dropDownOptions: { [key: string]: DropDownOption } = {
   updateUser: {
     to: `${PATH.employees}/${ACTIVE_USER_ID()}`,
-    label: 'Update employee',
+    label: 'OptionLabelName.updateEmployee',
   },
   userProfile: {
     to: `${PATH.employees}/${ACTIVE_USER_ID()}`,
-    label: 'Profile',
+    label: 'OptionLabelName.profile',
   },
   removeUser: {
     to: PATH.employees,
-    label: 'Delete employee',
+    label: 'OptionLabelName.deleteEmployee',
   },
   project: {
     to: `${PATH.projects}/${ACTIVE_PROJECT_ID()}`,
-    label: 'Project',
+    label: 'OptionLabelName.project',
   },
   removeProject: {
     to: PATH.projects,
-    label: 'Delete project',
+    label: 'OptionLabelName.deleteProject',
   },
   cv: {
     to: `${PATH.cvs}/${ACTIVE_CV_ID()}`,
-    label: 'CV',
+    label: 'OptionLabelName.cv',
   },
   removeCV: {
     to: PATH.cvs,
-    label: 'Delete CV',
+    label: 'OptionLabelName.deleteCv',
   },
   removeDepartment: {
     to: PATH.departments,
-    label: 'Delete department',
+    label: 'OptionLabelName.deleteDepartment',
   },
   department: {
     to: PATH.department,
-    label: 'Update department',
+    label: 'OptionLabelName.updateDepartment',
   },
   removePosition: {
     to: PATH.positions,
-    label: 'Delete position',
+    label: 'OptionLabelName.deletePosition',
   },
   position: {
     to: PATH.position,
-    label: 'Update position',
+    label: 'OptionLabelName.updatePosition',
   },
   removeSkill: {
     to: PATH.skills,
-    label: 'Delete skill',
+    label: 'OptionLabelName.deleteSkill',
   },
   skill: {
     to: PATH.skill,
-    label: 'Update skill',
+    label: 'OptionLabelName.updateSkill',
   },
   removeLanguage: {
     to: PATH.languages,
-    label: 'Delete language',
+    label: 'OptionLabelName.deleteLanguage',
   },
   language: {
     to: PATH.language,
-    label: 'Update language',
+    label: 'OptionLabelName.updateLanguage',
   },
 };
 
@@ -255,4 +325,15 @@ export const tableTypes: { [key: string]: string } = {
   positionsTable: 'positionsTable',
   skillsTable: 'skillsTable',
   languagesTable: 'languagesTable',
+};
+
+export const languagesOptions = {
+  english: {
+    iso: 'en',
+    label: 'LanguagesOptions.english',
+  },
+  russian: {
+    iso: 'ru',
+    label: 'LanguagesOptions.russian',
+  },
 };

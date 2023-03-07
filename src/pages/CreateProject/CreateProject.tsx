@@ -7,12 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { CREATE_PROJECT, GET_PROJECTS } from '../../apollo/queries/projects';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { ProjectForm } from '../../components/ProjectForm/ProjectForm';
-import { TitleText } from '../../constants/text';
 import { NewProjectForm } from '../../types/interfaces/interfaces';
 import { LSItems, TypeForm } from '../../constants/variables';
 import { ACTIVE_PROJECT_ID } from '../../apollo/state';
 import { PATH } from '../../constants/paths';
 import { ProjectItem } from '../../types/interfaces/project';
+import '../../i18n/i18n';
 
 export const CreateProject: FC<{ setError: (message: string) => void }> = ({
   setError,
@@ -67,7 +67,7 @@ export const CreateProject: FC<{ setError: (message: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.createProject)}>
+    <FormContainer title={t('TitleText.createProject')}>
       <ProjectForm
         onSubmitForm={submitFormHandler}
         type={TypeForm.createProject}

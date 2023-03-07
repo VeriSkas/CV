@@ -8,10 +8,10 @@ import { GET_POSITIONS, UPDATE_POSITION } from '../../apollo/queries/positions';
 import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { PATH } from '../../constants/paths';
-import { ContentText, TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { Position } from '../../types/interfaces/positions';
 import { ACTIVE_POSITION_ID } from '../../apollo/state';
+import '../../i18n/i18n';
 
 export const PositionDetail: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -66,9 +66,9 @@ export const PositionDetail: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.updatePosition)}>
+    <FormContainer title={t('TitleText.updatePosition')}>
       <>
-        {loading && t(ContentText.loading)}
+        {loading && t('ContentText.loading')}
         {position && (
           <FormWithOnlyName
             onSubmitForm={submitFormHandler}
