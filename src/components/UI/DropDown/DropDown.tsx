@@ -8,12 +8,23 @@ import { DropDownOption } from '../../../types/interfaces/interfaces';
 import { DropDownProps } from '../../../types/interfaces/propsInterfaces';
 import classes from './DropDown.module.scss';
 
-export const DropDown: FC<DropDownProps> = ({ options, onClick }) => {
+export const DropDown: FC<DropDownProps> = ({
+  options,
+  onClick,
+  onCloseHandler,
+}) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(true);
 
   const onClose = (): void => {
     setIsOpen(false);
+    onCloseHandler();
+  };
+
+  const onClickHandler = (label: string): void => {
+    onClick(label);
+    setIsOpen(false);
+    onCloseHandler();
   };
 
   const renderOptions = (): ReactNode => {
@@ -22,7 +33,7 @@ export const DropDown: FC<DropDownProps> = ({ options, onClick }) => {
         <li
           key={option.label}
           onClick={() => {
-            onClick(option.label);
+            onClickHandler(option.iso ?? option.label);
           }}
         >
           {option.to && (
@@ -35,6 +46,9 @@ export const DropDown: FC<DropDownProps> = ({ options, onClick }) => {
               <span className={classes.OptionName}>{t(option.label)}</span>
             </NavLink>
           )}
+          {option.iso && (
+            <span className={classes.OptionName}>{t(option.label)}</span>
+          )}
         </li>
       );
     });
@@ -45,12 +59,7 @@ export const DropDown: FC<DropDownProps> = ({ options, onClick }) => {
       <div className={classes.DropDown}>
         <ul>{renderOptions()}</ul>
       </div>
-      <div
-        className={classes.BackDrop}
-        onClick={() => {
-          onClose();
-        }}
-      ></div>
+      <div className={classes.BackDrop} onClick={onClose}></div>
     </>
   ) : (
     <></>

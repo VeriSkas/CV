@@ -10,7 +10,6 @@ import {
   tableTypes,
 } from './constants';
 import { PATH } from './paths';
-import { BtnText, PlaceholderText, TitleText } from './text';
 import { SearchKey } from './variables';
 
 const {
@@ -35,9 +34,9 @@ export const MainPagesInfo = {
   languagesPage: {
     tableType: tableTypes.languagesTable,
     linkTo: PATH.createLanguage,
-    btnText: BtnText.createLanguage,
-    title: TitleText.languages,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createLanguage',
+    title: 'TitleText.languages',
+    placeholder: 'PlaceholderText.search',
     headerOptions: languagesTableOptions,
     dropDownOptions: [language, removeLanguage],
     searchKey: [SearchKey.name],
@@ -48,9 +47,9 @@ export const MainPagesInfo = {
   positionsPage: {
     tableType: tableTypes.positionsTable,
     linkTo: PATH.createPosition,
-    btnText: BtnText.createPosition,
-    title: TitleText.positions,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createPosition',
+    title: 'TitleText.positions',
+    placeholder: 'PlaceholderText.search',
     headerOptions: positionsTableOptions,
     dropDownOptions: [position, removePosition],
     searchKey: [SearchKey.name],
@@ -61,9 +60,9 @@ export const MainPagesInfo = {
   skillsPage: {
     tableType: tableTypes.skillsTable,
     linkTo: PATH.createSkill,
-    btnText: BtnText.createSkill,
-    title: TitleText.skills,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createSkill',
+    title: 'TitleText.skills',
+    placeholder: 'PlaceholderText.search',
     headerOptions: skillsTableOptions,
     dropDownOptions: [skill, removeSkill],
     searchKey: [SearchKey.name],
@@ -74,9 +73,9 @@ export const MainPagesInfo = {
   departmentsPage: {
     tableType: tableTypes.departmentsTable,
     linkTo: PATH.createDepartment,
-    btnText: BtnText.createDepartment,
-    title: TitleText.departments,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createDepartment',
+    title: 'TitleText.departments',
+    placeholder: 'PlaceholderText.search',
     headerOptions: departmentsTableOptions,
     dropDownOptions: [department, removeDepartment],
     searchKey: [SearchKey.name],
@@ -87,9 +86,9 @@ export const MainPagesInfo = {
   cvsPage: {
     tableType: tableTypes.cvsTable,
     linkTo: PATH.createCV,
-    btnText: BtnText.createCV,
-    title: TitleText.cvs,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createCV',
+    title: 'TitleText.cvs',
+    placeholder: 'PlaceholderText.search',
     headerOptions: cvsTableOptions,
     dropDownOptions: [cv, removeCV],
     searchKey: [SearchKey.name],
@@ -100,9 +99,9 @@ export const MainPagesInfo = {
   cvsPageWithoutDeletingCV: {
     tableType: tableTypes.cvsTable,
     linkTo: PATH.createCV,
-    btnText: BtnText.createCV,
-    title: TitleText.cvs,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createCV',
+    title: 'TitleText.cvs',
+    placeholder: 'PlaceholderText.search',
     headerOptions: cvsTableOptions,
     dropDownOptions: [cv],
     searchKey: [SearchKey.name],
@@ -113,9 +112,9 @@ export const MainPagesInfo = {
   projectsPage: {
     tableType: tableTypes.projectsTable,
     linkTo: PATH.createProject,
-    btnText: BtnText.createProject,
-    title: TitleText.projects,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createProject',
+    title: 'TitleText.projects',
+    placeholder: 'PlaceholderText.search',
     headerOptions: projectsTableOptions,
     dropDownOptions: [project, removeProject],
     searchKey: [SearchKey.name, SearchKey.internal_name],
@@ -126,9 +125,9 @@ export const MainPagesInfo = {
   projectsPageUser: {
     tableType: tableTypes.projectsTable,
     linkTo: PATH.createProject,
-    btnText: BtnText.createProject,
-    title: TitleText.projects,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createProject',
+    title: 'TitleText.projects',
+    placeholder: 'PlaceholderText.search',
     headerOptions: projectsTableOptions,
     dropDownOptions: [project],
     searchKey: [SearchKey.name, SearchKey.internal_name],
@@ -139,9 +138,9 @@ export const MainPagesInfo = {
   employeesPage: {
     tableType: tableTypes.employeesTable,
     linkTo: PATH.createEmployee,
-    btnText: BtnText.createEmployee,
-    title: TitleText.employees,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createEmployee',
+    title: 'TitleText.employees',
+    placeholder: 'PlaceholderText.search',
     headerOptions: employeeTableOptions,
     dropDownOptions: [updateUser, removeUser],
     searchKey: [SearchKey.first_name, SearchKey.last_name],
@@ -152,9 +151,9 @@ export const MainPagesInfo = {
   employeesPageUser: {
     tableType: tableTypes.employeesTable,
     linkTo: PATH.createEmployee,
-    btnText: BtnText.createEmployee,
-    title: TitleText.employees,
-    placeholder: PlaceholderText.search,
+    btnText: 'BtnText.createEmployee',
+    title: 'TitleText.employees',
+    placeholder: 'PlaceholderText.search',
     headerOptions: employeeTableOptions,
     dropDownOptions: [userProfile],
     searchKey: [SearchKey.first_name, SearchKey.last_name],

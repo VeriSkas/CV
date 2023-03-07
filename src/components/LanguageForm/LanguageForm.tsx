@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { PATH } from '../../constants/paths';
-import { BtnText } from '../../constants/text';
 import { BtnType } from '../../constants/variables';
 import { FormTypes, ILanguageForm } from '../../types/interfaces/interfaces';
 import { Language } from '../../types/interfaces/languages';
 import { makeInputsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
+import '../../i18n/i18n';
 
 export const LanguageForm: FC<{
   onSubmitForm: (
@@ -49,9 +49,9 @@ export const LanguageForm: FC<{
         errors={errors as Partial<FieldErrorsImpl<FormTypes>>}
       />
       <div>
-        <Button disabled={!isValid}>{t(BtnText.saveChanges)}</Button>
+        <Button disabled={!isValid}>{t('BtnText.saveChanges')}</Button>
         <Link to={PATH.languages}>
-          <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
+          <Button type={BtnType.transparent}>{t('BtnText.return')}</Button>
         </Link>
       </div>
     </form>

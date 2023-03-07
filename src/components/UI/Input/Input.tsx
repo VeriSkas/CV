@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 
 import { InputProps } from '../../../types/interfaces/propsInterfaces';
 import { InputTypes } from '../../../constants/text';
+import { errorMessagesCreator } from '../../../utils/errorCreator';
+import '../../../i18n/i18n';
 import classes from './Input.module.scss';
 
 export const Input: FC<InputProps> = ({
@@ -24,7 +26,7 @@ export const Input: FC<InputProps> = ({
 
   return (
     <div className={classes.Input}>
-      {labelName && <label htmlFor={label}>{labelName}</label>}
+      {labelName && <label htmlFor={label}>{t(labelName)}</label>}
       <div className={classes.Input_input}>
         <input
           {...register(label, { ...validation })}
@@ -34,7 +36,7 @@ export const Input: FC<InputProps> = ({
           readOnly={readonly ?? false}
           placeholder={t(placeholder ?? '')}
         />
-        {error && <span>{t(error)}</span>}
+        {error && <span>{t(error, errorMessagesCreator(error, label))}</span>}
         {type === InputTypes.password && (
           <div
             className={classes.Eye}

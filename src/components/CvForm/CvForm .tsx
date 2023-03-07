@@ -9,7 +9,6 @@ import { MAIN_ROLE } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
 import { FieldArrays } from '../../constants/fieldArrayVars';
 import { PATH } from '../../constants/paths';
-import { BtnText } from '../../constants/text';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
 import { CvDetailForm, FormTypes } from '../../types/interfaces/interfaces';
@@ -19,6 +18,7 @@ import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
 import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
+import '../../i18n/i18n';
 
 export const CvForm: FC<CvFormProps> = ({
   cv,
@@ -88,11 +88,11 @@ export const CvForm: FC<CvFormProps> = ({
       <div>
         {(type === TypeForm.cvUser || role === Roles.admin.value) && (
           <Button disabled={!isValid}>
-            {submitBtnText ?? t(BtnText.saveChanges)}
+            {submitBtnText ?? t('BtnText.saveChanges')}
           </Button>
         )}
         <Link to={PATH.cvs}>
-          <Button type={BtnType.transparent}>{t(BtnText.return)}</Button>
+          <Button type={BtnType.transparent}>{t('BtnText.return')}</Button>
         </Link>
       </div>
     </form>

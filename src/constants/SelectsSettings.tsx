@@ -1,17 +1,17 @@
 import { IMySelect } from '../types/interfaces/interfaces';
-import { InputLabelNames, InputLabels } from './text';
+import { InputLabels } from './text';
 
 export const SelectSettings: { [key: string]: IMySelect } = {
   skillsIds: {
     label: InputLabels.skillsIds,
-    labelName: InputLabelNames.skills,
+    labelName: 'InputLabelNames.skills',
     defaultValue: '',
     disabled: false,
     multi: true,
   },
   projectsIds: {
     label: InputLabels.projectsIds,
-    labelName: InputLabelNames.projects,
+    labelName: 'InputLabelNames.projects',
     defaultValue: '',
     disabled: false,
     multi: true,
@@ -19,28 +19,28 @@ export const SelectSettings: { [key: string]: IMySelect } = {
   },
   cvsIds: {
     label: InputLabels.cvsIds,
-    labelName: InputLabelNames.cvs,
+    labelName: 'InputLabelNames.cvs',
     defaultValue: '',
     disabled: false,
     multi: true,
   },
   department: {
     label: InputLabels.department,
-    labelName: InputLabelNames.department,
+    labelName: 'InputLabelNames.department',
     defaultValue: '',
     disabled: false,
     multi: false,
   },
   position: {
     label: InputLabels.position,
-    labelName: InputLabelNames.position,
+    labelName: 'InputLabelNames.position',
     defaultValue: '',
     disabled: false,
     multi: false,
   },
   role: {
     label: InputLabels.role,
-    labelName: InputLabelNames.role,
+    labelName: 'InputLabelNames.role',
     defaultValue: '',
     disabled: false,
     multi: false,
@@ -48,7 +48,7 @@ export const SelectSettings: { [key: string]: IMySelect } = {
   },
   userId: {
     label: InputLabels.userId,
-    labelName: InputLabelNames.userId,
+    labelName: 'InputLabelNames.userId',
     defaultValue: '',
     disabled: false,
     multi: false,

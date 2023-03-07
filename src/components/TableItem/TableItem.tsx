@@ -3,6 +3,7 @@ import React, { FC, ReactNode, useState } from 'react';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
 import { IconContext } from 'react-icons';
+import { useTranslation } from 'react-i18next';
 import { useReactiveVar } from '@apollo/client';
 
 import { UsedInTableObjectsType } from '../../types/interfaces/interfaces';
@@ -13,7 +14,6 @@ import { TableItemProps } from '../../types/interfaces/propsInterfaces';
 import { hiddenObjectKeysInTable, objectKeysInTable } from '../../constants/variables';
 import { MAIN_ROLE } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
-import { ContentText } from '../../constants/text';
 
 export const TableItem: FC<TableItemProps> = ({
   item,
@@ -25,6 +25,7 @@ export const TableItem: FC<TableItemProps> = ({
 }) => {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
   const role = useReactiveVar(MAIN_ROLE);
+  const { t } = useTranslation();
 
   const toggleDropDown = (): void => {
     setIsOpenDropDown((prev) => !prev);
@@ -65,7 +66,7 @@ export const TableItem: FC<TableItemProps> = ({
       }
 
       if (key === objectKeysInTable.end_date && !item[key as keyof UsedInTableObjectsType]) {
-        return ContentText.noEndDate;
+        return t('ContentText.noEndDate');
       }
 
       if (Object.prototype.hasOwnProperty.call(hiddenObjectKeysInTable, key)) {
@@ -105,6 +106,9 @@ export const TableItem: FC<TableItemProps> = ({
               options={dropDownOptions}
               onClick={(label: string) => {
                 onClickDropDown(label);
+              }}
+              onCloseHandler={() => {
+                setIsOpenDropDown(false);
               }}
             />
           )}

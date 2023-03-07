@@ -9,9 +9,9 @@ import { ACTIVE_SKILL_ID } from '../../apollo/state';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 import { PATH } from '../../constants/paths';
-import { ContentText, TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { Skill } from '../../types/interfaces/skills';
+import '../../i18n/i18n';
 
 export const SkillDetail: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -63,9 +63,9 @@ export const SkillDetail: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.updateSkill)}>
+    <FormContainer title={t('TitleText.updateSkill')}>
       <>
-        {loading && t(ContentText.loading)}
+        {loading && t('ContentText.loading')}
         {skill && (
           <FormWithOnlyName
             onSubmitForm={submitFormHandler}

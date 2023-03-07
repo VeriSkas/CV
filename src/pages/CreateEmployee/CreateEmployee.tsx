@@ -8,12 +8,12 @@ import { CREATE_USER, GET_USERS } from '../../apollo/queries/users';
 import { CreateEmployeeForm } from '../../components/CreateEmployeeForm/CreateEmployeeForm';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { Roles } from '../../constants/constants';
-import { TitleText } from '../../constants/text';
 import { NewEmployeeForm } from '../../types/interfaces/interfaces';
 import { UserInfo } from '../../types/interfaces/user';
 import { PATH } from '../../constants/paths';
 import { LSItems } from '../../constants/variables';
 import { ACTIVE_USER_ID } from '../../apollo/state';
+import '../../i18n/i18n';
 
 export const CreateEmployee: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -88,7 +88,7 @@ export const CreateEmployee: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.createEmployee)}>
+    <FormContainer title={t('TitleText.createEmployee')}>
       <CreateEmployeeForm onSubmitForm={createEmployee} />
     </FormContainer>
   );

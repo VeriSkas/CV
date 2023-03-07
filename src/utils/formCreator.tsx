@@ -1,6 +1,5 @@
 import { inputs } from '../constants/inputsSettings';
 import { SelectSettings } from '../constants/selectsSettings';
-import { InputLabelNames } from '../constants/text';
 import { TypeForm } from '../constants/variables';
 import { IInput, IMySelect } from '../types/interfaces/interfaces';
 
@@ -30,7 +29,6 @@ export const makeInputsList = (type: string): IInput[] => {
       { ...inputs.last_name },
       {
         ...inputs.email,
-        labelName: InputLabelNames.email,
         validation: {},
         readonly: true,
       },
@@ -41,7 +39,6 @@ export const makeInputsList = (type: string): IInput[] => {
       { ...inputs.last_name },
       {
         ...inputs.email,
-        labelName: InputLabelNames.email,
         validation: {},
         readonly: true,
       },
@@ -50,8 +47,8 @@ export const makeInputsList = (type: string): IInput[] => {
     return [
       { ...inputs.first_name, validation: {} },
       { ...inputs.last_name, validation: {} },
-      { ...inputs.email, labelName: InputLabelNames.email },
-      { ...inputs.password, labelName: InputLabelNames.password },
+      { ...inputs.email },
+      { ...inputs.password },
     ];
   } else if (type === TypeForm.employeeProfile) {
     return [
@@ -59,7 +56,6 @@ export const makeInputsList = (type: string): IInput[] => {
       { ...inputs.last_name, readonly: true },
       {
         ...inputs.email,
-        labelName: InputLabelNames.email,
         validation: {},
         readonly: true,
       },

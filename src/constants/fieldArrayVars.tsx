@@ -1,6 +1,6 @@
 import { IFieldArray } from '../types/interfaces/interfaces';
 import { IRadioInputs } from '../types/interfaces/propsInterfaces';
-import { InputLabelNames, InputLabels } from './text';
+import { InputLabels } from './text';
 
 export const OptionsForFieldArrays: { [key: string]: IRadioInputs } = {
   skills: {
@@ -68,12 +68,12 @@ export const OptionsForFieldArrays: { [key: string]: IRadioInputs } = {
 export const FieldArrays: { [key: string]: IFieldArray } = {
   skills: {
     label: InputLabels.skills,
-    labelName: InputLabelNames.skills,
+    labelName: 'InputLabelNames.skills',
     radioInputs: OptionsForFieldArrays.skills,
   },
   languages: {
     label: InputLabels.languages,
-    labelName: InputLabelNames.languages,
+    labelName: 'InputLabelNames.languages',
     radioInputs: OptionsForFieldArrays.languages,
   },
 };

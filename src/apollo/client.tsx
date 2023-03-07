@@ -3,7 +3,9 @@ import { ApolloClient, from, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
+import { SupportedLanguages } from '../constants/constants';
 import { BAErrorMessages } from '../constants/text';
+import { LSItems } from '../constants/variables';
 import { USER_TOKEN } from './state';
 
 const URI = 'https://cv-project-js.inno.ws/api/graphql';
@@ -22,10 +24,13 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
+  const language =
+    localStorage.getItem(LSItems.pageLanguage) ?? SupportedLanguages.en;
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
       if (message === BAErrorMessages.unauthorized) {
         localStorage.clear();
+        localStorage.setItem(LSItems.pageLanguage, language);
         USER_TOKEN('');
       }
     });

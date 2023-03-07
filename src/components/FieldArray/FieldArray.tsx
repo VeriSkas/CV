@@ -6,10 +6,11 @@ import { RxCross2 } from 'react-icons/rx';
 import { FaPlus } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
-import { BtnText, InputTypes } from '../../constants/text';
+import { InputTypes } from '../../constants/text';
 import { FieldArrayProps } from '../../types/interfaces/propsInterfaces';
 import classes from './FieldArray.module.scss';
 import { MySelect } from '../UI/MySelect/MySelect';
+import '../../i18n/i18n';
 
 export const FieldArray: FC<FieldArrayProps> = ({
   register,
@@ -47,7 +48,7 @@ export const FieldArray: FC<FieldArrayProps> = ({
 
   return (
     <div className={classes.FieldArray}>
-      {labelName && <h4>{labelName}</h4>}
+      {labelName && <h4>{t(labelName)}</h4>}
       <ul>
         {fields.map((item, index) => {
           return (
@@ -96,7 +97,9 @@ export const FieldArray: FC<FieldArrayProps> = ({
                   <FaPlus />
                 </IconContext.Provider>
               </div>
-              <span className={classes.AddFieldText}>{t(BtnText.addNew)}</span>
+              <span className={classes.AddFieldText}>
+                {t('BtnText.addNew')}
+              </span>
             </div>
           </div>
         )}

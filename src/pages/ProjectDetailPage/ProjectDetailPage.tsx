@@ -9,11 +9,11 @@ import { ACTIVE_PROJECT_ID, MAIN_ROLE } from '../../apollo/state';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { ProjectForm } from '../../components/ProjectForm/ProjectForm';
 import { PATH } from '../../constants/paths';
-import { ContentText, TitleText } from '../../constants/text';
 import { NewProjectForm } from '../../types/interfaces/interfaces';
 import { ProjectItem } from '../../types/interfaces/project';
 import { Roles } from '../../constants/constants';
 import { TypeForm } from '../../constants/variables';
+import '../../i18n/i18n';
 
 export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -73,9 +73,9 @@ export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.projectDetails)}>
+    <FormContainer title={t('TitleText.projectDetails')}>
       <>
-        {loading && t(ContentText.loading)}
+        {loading && t('ContentText.loading')}
         {data && (
           <ProjectForm
             onSubmitForm={submitFormHandler}

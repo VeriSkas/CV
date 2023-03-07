@@ -6,7 +6,6 @@ import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 
 import { MAIN_ROLE, USER_ID } from '../../apollo/state';
 import { Roles, tableTypes } from '../../constants/constants';
-import { ContentText, ErrorMessages } from '../../constants/text';
 import {
   SortType,
   UsedInTableObjectsType
@@ -16,6 +15,7 @@ import { search } from '../../utils/search';
 import { TableItem } from '../TableItem/TableItem';
 import { TableCvItem } from '../../types/interfaces/cvs';
 import { MainPagesInfo } from '../../constants/mainPagesInfo';
+import '../../i18n/i18n';
 import classes from './Table.module.scss';
 
 export const Table: FC<TableProps> = ({
@@ -120,14 +120,14 @@ export const Table: FC<TableProps> = ({
     let returnedValue = itemsValue;
 
     if (!returnedValue) {
-      return <p>{t(ContentText.noValues)}</p>;
+      return <p>{t('ContentText.noValues')}</p>;
     }
 
     if (searchValue?.value) {
       returnedValue = search(returnedValue, searchValue);
 
       if (!returnedValue.length) {
-        return <p>{t(ContentText.noValues)}</p>;
+        return <p>{t('ContentText.noValues')}</p>;
       }
     }
 
@@ -139,7 +139,9 @@ export const Table: FC<TableProps> = ({
             item={item}
             dropDownOptions={MainPagesInfo.cvsPageWithoutDeletingCV.dropDownOptions}
             dropDownHandler={(label: string, id: string) => { dropDownHandler(label, id) }}
-            toggleTemplateCv={(id: string) => { toggleTemplate(id, ErrorMessages.toggleTemplateError) }}
+            toggleTemplateCv={(id: string) => {
+              toggleTemplate(id, t('ErrorMessages.toggleTemplateError'))
+            }}
             settingsView={settingsBtnViewForUser}
             avatar={avatar}
           />;
@@ -166,7 +168,7 @@ export const Table: FC<TableProps> = ({
         {(role === Roles.admin.value || settingsBtnViewForUser) && <div></div>}
       </div>
       {loading ? (
-        <p>{t(ContentText.loading)}</p>
+        <p>{t('ContentText.loading')}</p>
       ) : (
         <div className={classes.TableBody}>
           {renderTableRows()}

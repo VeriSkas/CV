@@ -7,17 +7,17 @@ import {
   useReactiveVar,
 } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
 import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
 import { IEmployeeForm } from '../../types/interfaces/interfaces';
 import { UpdatedUser, UserInfo } from '../../types/interfaces/user';
-import { ContentText, TitleText } from '../../constants/text';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
 import { ACTIVE_USER_ID, MAIN_ROLE } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
-import { useParams } from 'react-router-dom';
+import '../../i18n/i18n';
 
 export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   setError,
@@ -86,9 +86,9 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.updateUser)}>
+    <FormContainer title={t('TitleText.updateUser')}>
       <>
-        {loading && t(ContentText.loading)}
+        {loading && t('ContentText.loading')}
         {data && (
           <EmployeeForm
             user={data.user}

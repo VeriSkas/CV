@@ -6,10 +6,10 @@ import { useTranslation } from 'react-i18next';
 import { CREATE_POSITION, GET_POSITIONS } from '../../apollo/queries/positions';
 import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { TitleText } from '../../constants/text';
 import { TypeForm } from '../../constants/variables';
 import { Position } from '../../types/interfaces/positions';
 import { PATH } from '../../constants/paths';
+import '../../i18n/i18n';
 
 export const CreatePosition: FC<{ setError: (error: string) => void }> = ({
   setError,
@@ -51,7 +51,7 @@ export const CreatePosition: FC<{ setError: (error: string) => void }> = ({
   };
 
   return (
-    <FormContainer title={t(TitleText.createPosition)}>
+    <FormContainer title={t('TitleText.createPosition')}>
       <FormWithOnlyName
         onSubmitForm={submitFormHandler}
         type={TypeForm.createPosition}
