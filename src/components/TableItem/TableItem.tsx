@@ -107,9 +107,6 @@ export const TableItem: FC<TableItemProps> = ({
               onClick={(label: string) => {
                 onClickDropDown(label);
               }}
-              onCloseHandler={() => {
-                setIsOpenDropDown(false);
-              }}
             />
           )}
         </div>

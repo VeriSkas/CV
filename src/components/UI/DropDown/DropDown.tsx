@@ -8,23 +8,17 @@ import { DropDownOption } from '../../../types/interfaces/interfaces';
 import { DropDownProps } from '../../../types/interfaces/propsInterfaces';
 import classes from './DropDown.module.scss';
 
-export const DropDown: FC<DropDownProps> = ({
-  options,
-  onClick,
-  onCloseHandler,
-}) => {
+export const DropDown: FC<DropDownProps> = ({ options, onClick }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(true);
 
   const onClose = (): void => {
     setIsOpen(false);
-    onCloseHandler();
   };
 
   const onClickHandler = (label: string): void => {
     onClick(label);
     setIsOpen(false);
-    onCloseHandler();
   };
 
   const renderOptions = (): ReactNode => {

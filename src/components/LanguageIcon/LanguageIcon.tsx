@@ -37,9 +37,6 @@ export const LanguageIcon: FC<{}> = () => {
           onClick={(label: string) => {
             onCloseDropDown(label);
           }}
-          onCloseHandler={() => {
-            setIsOpenDropDown(false);
-          }}
         />
       )}
     </div>
