@@ -1,6 +1,9 @@
-.LoginSignUpForm {
+.LoginSignUpForm_form {
   max-width: 560px;
+  max-height: 500px;
   width: 100%;
+  height: 100%;
+  overflow-y: auto;
 
   h1 {
     margin: 0px 0px 24px;

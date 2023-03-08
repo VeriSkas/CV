@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: 64px;
+    height: $maxHeaderHeight;
     background: $mainBlack;
     box-shadow: 1px 1px 5px $mainBlack;
 
@@ -39,8 +39,10 @@
     }
   }
 
-  ul {
+  .NavLinks {
     padding: 10px;
+    overflow-y: auto;
+    height: calc(100% - $maxHeaderHeight);
 
     li {
       display: flex;

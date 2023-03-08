@@ -62,7 +62,7 @@ export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = ({
             </IconContext.Provider>
           </span>
         </div>
-        <ul>{renderLinks()}</ul>
+        <ul className={classes.NavLinks}>{renderLinks()}</ul>
       </nav>
       {isOpen && <Backdrop onClick={onClose} />}
     </>

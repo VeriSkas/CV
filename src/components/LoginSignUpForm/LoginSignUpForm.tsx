@@ -37,25 +37,23 @@ export const LoginSignUpForm: FC<LoginSignUpFormProps> = ({
   };
 
   return (
-    <div className={classes.LoginSignUpForm}>
-      <form
-        onSubmit={handleSubmit(submitForm)}
-        className={classes.LoginSignUpForm_form}
-      >
-        <h1>{t(text.title)}</h1>
-        <h3>{t(text.subtitle)}</h3>
-        <InputsFromArray
-          register={register as UseFormRegister<FormTypes>}
-          inputsArray={authInputs}
-          errors={errors}
-        />
-        <div className={classes.FormBtns}>
-          <Button disabled={!isValid}>{t(text.submitBtn)}</Button>
-          <Link to={path}>
-            <Button type={BtnType.transparent}>{t(text.btn)}</Button>
-          </Link>
-        </div>
-      </form>
-    </div>
+    <form
+      onSubmit={handleSubmit(submitForm)}
+      className={classes.LoginSignUpForm_form}
+    >
+      <h1>{t(text.title)}</h1>
+      <h3>{t(text.subtitle)}</h3>
+      <InputsFromArray
+        register={register as UseFormRegister<FormTypes>}
+        inputsArray={authInputs}
+        errors={errors}
+      />
+      <div className={classes.FormBtns}>
+        <Button disabled={!isValid}>{t(text.submitBtn)}</Button>
+        <Link to={path}>
+          <Button type={BtnType.transparent}>{t(text.btn)}</Button>
+        </Link>
+      </div>
+    </form>
   );
 };
