@@ -21,13 +21,13 @@ import { PhotoTypes, Sizes } from '../../constants/constants';
 import { AvatarValue, UserInfo } from '../../types/interfaces/user';
 import { InputType } from '../../constants/variables';
 import classes from './Avatar.module.scss';
+import { openNotification } from '../UI/Notification/Notification';
 import '../../i18n/i18n';
 
 export const Avatar: FC<{
-  setError: (message: string) => void,
   user?: UserInfo,
   disabled: boolean,
-}> = ({ setError, user, disabled }) => {
+}> = ({ user, disabled }) => {
   const { t } = useTranslation();
   const [image, setImage] = useState<AvatarValue | null>(null);
   const [drag, setDrag] = useState(false);
@@ -35,12 +35,12 @@ export const Avatar: FC<{
   const [uploadAvatar, { error: uploadError }] = useMutation(UPLOAD_AVATAR);
 
   useEffect(() => {
-    if (uploadError && setError) {
-      setError(uploadError.message);
+    if (uploadError) {
+      openNotification(uploadError.message);
     }
 
-    if (deleteError && setError) {
-      setError(deleteError.message);
+    if (deleteError) {
+      openNotification(deleteError.message);
     }
   }, [deleteError, uploadError]);
 
@@ -88,7 +88,7 @@ export const Avatar: FC<{
   };
 
   const onChangeFileInput = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.files) {
+    if (event.target.files?.length) {
       addFile(event.target.files[0]);
     }
   };
@@ -97,19 +97,15 @@ export const Avatar: FC<{
     const reader = new FileReader();
 
     if (file.size > Sizes.MAX_photoSize) {
-      if (setError) {
-        setError(
-          t('ErrorMessages.avatarSize', { MAX_photoSize: Sizes.MAX_photoSize })
-        );
-      }
+      openNotification(
+        t('ErrorMessages.avatarSize', { MAX_photoSize: Sizes.MAX_photoSize })
+      );
     } else if (!Object.values(PhotoTypes).includes(file.type)) {
-      if (setError) {
-        setError(
-          t('ErrorMessages.avatarType', {
-            PhotoTypes: Object.keys(PhotoTypes).join(' '),
-          })
-        );
-      }
+      openNotification(
+        t('ErrorMessages.avatarType', {
+          PhotoTypes: Object.keys(PhotoTypes).join(' '),
+        })
+      );
     } else {
       reader.onloadend = () => {
         const image = {

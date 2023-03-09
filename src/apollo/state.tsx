@@ -1,6 +1,7 @@
 import { makeVar } from '@apollo/client';
 
 import { LSItems } from '../constants/variables';
+import { INotification } from '../types/interfaces/notification';
 
 export const MAIN_ROLE = makeVar(localStorage.getItem(LSItems.role) ?? '');
 
@@ -35,3 +36,8 @@ export const ACTIVE_SKILL_ID = makeVar(
 export const ACTIVE_LANGUAGE_ID = makeVar(
   localStorage.getItem(LSItems.activeLanguage) ?? ''
 );
+
+export const NOTIFICATION = makeVar<INotification>({
+  isVisible: false,
+  message: '',
+});

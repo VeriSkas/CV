@@ -11,12 +11,15 @@ import { TablePageContainer } from '../../components/TablePageContainer/TablePag
 import { MainPagesInfo } from '../../constants/mainPagesInfo';
 import { ACTIVE_CV_ID } from '../../apollo/state';
 import { LSItems } from '../../constants/variables';
+import { openNotification } from '../../components/UI/Notification/Notification';
 
-export const CVs: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const CVs: FC<{}> = () => {
   const navigate = useNavigate();
-  const { loading, data } = useQuery<{ cvs: CvItem[] }>(GET_CVS);
+  const {
+    loading,
+    data,
+    error: getCvsError,
+  } = useQuery<{ cvs: CvItem[] }>(GET_CVS);
   const [cvs, setCVs] = useState<TableCvItem[] | null>(null);
   const [removeCv, { error }] = useMutation(DELETE_CV);
   const [updateCv, { error: updateCvError }] = useMutation(UPDATE_CV);
@@ -37,14 +40,20 @@ export const CVs: FC<{ setError: (error: string) => void }> = ({
   }, [data]);
 
   useEffect(() => {
+    if (getCvsError) {
+      openNotification(getCvsError.message);
+    }
+  }, [getCvsError]);
+
+  useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 
   useEffect(() => {
     if (updateCvError) {
-      setError(updateCvError.message);
+      openNotification(updateCvError.message);
     }
   }, [updateCvError]);
 
@@ -82,7 +91,7 @@ export const CVs: FC<{ setError: (error: string) => void }> = ({
     };
 
     if (error) {
-      setError(error);
+      openNotification(error);
       return;
     }
 

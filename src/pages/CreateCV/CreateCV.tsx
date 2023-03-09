@@ -12,11 +12,10 @@ import { NewCvForm } from '../../types/interfaces/interfaces';
 import { PATH } from '../../constants/paths';
 import { ACTIVE_CV_ID } from '../../apollo/state';
 import { LSItems } from '../../constants/variables';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const CreateCV: FC<{ setError: (message: string) => void }> = ({
-  setError,
-}) => {
+export const CreateCV: FC<{}> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [createCV, { data, error }] = useMutation<{ createCv: CvItemDetails }>(
@@ -33,7 +32,7 @@ export const CreateCV: FC<{ setError: (message: string) => void }> = ({
     }
 
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [data, error]);
 

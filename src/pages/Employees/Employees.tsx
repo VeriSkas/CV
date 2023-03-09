@@ -5,21 +5,19 @@ import { useNavigate } from 'react-router-dom';
 
 import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
 import { ACTIVE_USER_ID, MAIN_ROLE, USER_ID } from '../../apollo/state';
-
 import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
 import { dropDownOptions, Roles } from '../../constants/constants';
 import { MainPagesInfo } from '../../constants/mainPagesInfo';
 import { PATH } from '../../constants/paths';
 import { TableUser, UserInfo } from '../../types/interfaces/user';
 import { LSItems } from '../../constants/variables';
+import { openNotification } from '../../components/UI/Notification/Notification';
 
-export const Employees: FC<{
-  setError: (error: string) => void,
-}> = ({ setError }) => {
+export const Employees: FC<{}> = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState<TableUser[] | null>(null);
   const { loading, data, error } = useQuery<{ users: UserInfo[] }>(GET_USERS);
-  const [deleteUser] = useMutation(DELETE_USER);
+  const [deleteUser, { error: deleteError }] = useMutation(DELETE_USER);
   const role = useReactiveVar(MAIN_ROLE);
   const userId = useReactiveVar(USER_ID);
   const mainPagesInfo =
@@ -44,9 +42,15 @@ export const Employees: FC<{
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (deleteError) {
+      openNotification(deleteError.message);
+    }
+  }, [deleteError]);
 
   const dropDownHandler = async (label: string, id: string): Promise<void> => {
     if (label === dropDownOptions.removeUser.label) {

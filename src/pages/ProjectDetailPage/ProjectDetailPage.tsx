@@ -13,11 +13,10 @@ import { NewProjectForm } from '../../types/interfaces/interfaces';
 import { ProjectItem } from '../../types/interfaces/project';
 import { Roles } from '../../constants/constants';
 import { TypeForm } from '../../constants/variables';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const ProjectDetailPage: FC<{}> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { projectId: id } = useParams();
@@ -40,7 +39,7 @@ export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 
@@ -52,7 +51,7 @@ export const ProjectDetailPage: FC<{ setError: (error: string) => void }> = ({
 
   useEffect(() => {
     if (getProjectError) {
-      setError(getProjectError.message);
+      openNotification(getProjectError.message);
     }
   }, [getProjectError]);
 

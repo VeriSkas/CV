@@ -11,10 +11,9 @@ import { dropDownOptions } from '../../constants/constants';
 import { PATH } from '../../constants/paths';
 import { LSItems } from '../../constants/variables';
 import { ACTIVE_SKILL_ID } from '../../apollo/state';
+import { openNotification } from '../../components/UI/Notification/Notification';
 
-export const Skills: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const Skills: FC<{}> = () => {
   const navigate = useNavigate();
   const [skills, setSkills] = useState<Skill[] | null>(null);
   const { data, error, loading } = useQuery<{ skills: Skill[] }>(GET_SKILLS);
@@ -28,13 +27,13 @@ export const Skills: FC<{ setError: (error: string) => void }> = ({
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 
   useEffect(() => {
     if (removeError) {
-      setError(removeError.message);
+      openNotification(removeError.message);
     }
   }, [removeError]);
 

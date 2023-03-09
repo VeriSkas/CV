@@ -16,14 +16,13 @@ import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
 import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
-import classes from './EmployeeForm.module.scss';
 import '../../i18n/i18n';
+import classes from './EmployeeForm.module.scss';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
   submitBtnText,
   onSubmitForm,
-  setError,
   type,
 }) => {
   const skills = user?.profile?.skills?.reduce<SkillItemInDB[]>((acc, skill): SkillItemInDB[] => {
@@ -56,12 +55,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   const isProfileType = type === TypeForm.employeeProfile;
   const { skills: skillFields, languages: languageFields } = FieldArrays;
 
-  const setErrorHandler = (message: string): void => {
-    if (setError) {
-      setError(message);
-    }
-  };
-
   const submitForm = (data: IEmployeeForm): void => {
     onSubmitForm(data, user?.id ?? '');
 
@@ -76,9 +69,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
       className={classes.EmployeeForm_form}
     >
       <Avatar
-        setError={(message: string) => {
-          setErrorHandler(message);
-        }}
         user={user}
         disabled={isProfileType}
       />

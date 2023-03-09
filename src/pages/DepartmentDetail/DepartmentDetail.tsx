@@ -14,26 +14,35 @@ import { Department } from '../../types/interfaces/departments';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PATH } from '../../constants/paths';
 import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const DepartmentDetail: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const DepartmentDetail: FC<{}> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { departmentId } = useParams();
   const [updateDepartment, { error, data: updatedData }] =
     useMutation(UPDATE_DEPARTMENT);
-  const { data: departments, loading } = useQuery<{
+  const {
+    data: departments,
+    loading,
+    error: getError,
+  } = useQuery<{
     departments: Department[],
   }>(GET_DEPARTMENTS);
   const [department, setDepartment] = useState<Department | null>(null);
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (getError) {
+      openNotification(getError.message);
+    }
+  }, [getError]);
 
   useEffect(() => {
     if (updatedData) {

@@ -13,18 +13,17 @@ import { UserInfo } from '../../types/interfaces/user';
 import { PATH } from '../../constants/paths';
 import { LSItems } from '../../constants/variables';
 import { ACTIVE_USER_ID } from '../../apollo/state';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const CreateEmployee: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const CreateEmployee: FC<{}> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [createUser, { error, data }] = useMutation(CREATE_USER);
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 
@@ -37,12 +36,6 @@ export const CreateEmployee: FC<{ setError: (error: string) => void }> = ({
       navigate(PATH.employee);
     }
   }, [data]);
-
-  useEffect(() => {
-    if (error) {
-      setError(error.message);
-    }
-  }, [error]);
 
   const createEmployee = async (data: NewEmployeeForm): Promise<void> => {
     const {

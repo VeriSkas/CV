@@ -9,17 +9,16 @@ import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnly
 import { PATH } from '../../constants/paths';
 import { TypeForm } from '../../constants/variables';
 import { Skill } from '../../types/interfaces/skills';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const CreateSkill: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const CreateSkill: FC<{}> = () => {
   const { t } = useTranslation();
   const [createSkill, { error }] = useMutation(CREATE_SKILL);
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 

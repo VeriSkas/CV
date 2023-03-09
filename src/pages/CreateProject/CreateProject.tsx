@@ -12,11 +12,10 @@ import { LSItems, TypeForm } from '../../constants/variables';
 import { ACTIVE_PROJECT_ID } from '../../apollo/state';
 import { PATH } from '../../constants/paths';
 import { ProjectItem } from '../../types/interfaces/project';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const CreateProject: FC<{ setError: (message: string) => void }> = ({
-  setError,
-}) => {
+export const CreateProject: FC<{}> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [createProject, { error, data }] = useMutation<{
@@ -33,7 +32,7 @@ export const CreateProject: FC<{ setError: (message: string) => void }> = ({
     }
 
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error, data]);
 

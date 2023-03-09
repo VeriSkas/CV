@@ -12,26 +12,33 @@ import { PATH } from '../../constants/paths';
 import { TypeForm } from '../../constants/variables';
 import { ILanguageForm } from '../../types/interfaces/interfaces';
 import { Language } from '../../types/interfaces/languages';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const LanguageDetail: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const LanguageDetail: FC<{}> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { languageId } = useParams();
   const [updateLanguage, { error, data: updatedData }] =
     useMutation(UPDATE_LANGUAGE);
-  const { data: languages, loading } = useQuery<{ languages: Language[] }>(
-    GET_LANGUAGES
-  );
+  const {
+    data: languages,
+    loading,
+    error: getError,
+  } = useQuery<{ languages: Language[] }>(GET_LANGUAGES);
   const [language, setLanguage] = useState<Language | null>(null);
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (getError) {
+      openNotification(getError.message);
+    }
+  }, [getError]);
 
   useEffect(() => {
     if (updatedData) {

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { SideBar } from '../SideBar/SideBar';
 import { LayoutProps } from '../../types/interfaces/propsInterfaces';
@@ -6,21 +6,8 @@ import { Notification } from '../UI/Notification/Notification';
 import { ContentHeader } from '../ContentHeader/ContentHeader';
 import classes from './Layout.module.scss';
 
-export const Layout: FC<LayoutProps> = ({
-  auth,
-  login,
-  errorMessage,
-  setErrorMessage,
-  children,
-}) => {
+export const Layout: FC<LayoutProps> = ({ auth, login, children }) => {
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
-  const [isOpenNotification, setIsOpenNotification] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (errorMessage) {
-      setIsOpenNotification(true);
-    }
-  }, [errorMessage]);
 
   const onOpenSidebar = (isOpen: boolean): void => {
     setIsOpenSidebar(isOpen);
@@ -28,11 +15,6 @@ export const Layout: FC<LayoutProps> = ({
 
   const onClose = (): void => {
     setIsOpenSidebar(false);
-  };
-
-  const onCloseNotification = (status: boolean): void => {
-    setIsOpenNotification(false);
-    setErrorMessage('');
   };
 
   const setAuth = (isAuth: boolean): void => {
@@ -50,14 +32,7 @@ export const Layout: FC<LayoutProps> = ({
       ) : (
         <div>{children}</div>
       )}
-      {errorMessage && isOpenNotification && (
-        <Notification
-          message={errorMessage}
-          onCloseHandler={(status: boolean) => {
-            onCloseNotification(status);
-          }}
-        />
-      )}
+      <Notification />
     </>
   );
 };

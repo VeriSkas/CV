@@ -17,11 +17,10 @@ import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
 import { ACTIVE_USER_ID, MAIN_ROLE } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
-  setError,
-}) => {
+export const UpdateEmployee: FC<{}> = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const { loading, data, error } = useQuery<
@@ -43,13 +42,13 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
 
   useEffect(() => {
     if (updatedError) {
-      setError(updatedError.message);
+      openNotification(updatedError.message);
     }
   }, [updatedError]);
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 
@@ -94,9 +93,6 @@ export const UpdateEmployee: FC<{ setError: (message: string) => void }> = ({
             user={data.user}
             onSubmitForm={(data, id) => {
               updateEmployee(data, id);
-            }}
-            setError={(message: string) => {
-              setError(message);
             }}
             type={
               role === Roles.admin.value

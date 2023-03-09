@@ -8,11 +8,11 @@ import { PATH } from '../../constants/paths';
 import { signUpFormText } from '../../constants/text';
 import { MAIN_ROLE, USER_ID, USER_TOKEN } from '../../apollo/state';
 import { LSItems } from '../../constants/variables';
+import { openNotification } from '../../components/UI/Notification/Notification';
 
 export const SignUp: FC<{
   auth: (isAuth: boolean) => void,
-  setError: (error: string) => void,
-}> = ({ auth, setError }) => {
+}> = ({ auth }) => {
   const [signUp, { data: userData, error }] = useMutation(SIGN_UP);
   const text = signUpFormText;
 
@@ -30,7 +30,7 @@ export const SignUp: FC<{
     }
 
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [userData, error]);
 

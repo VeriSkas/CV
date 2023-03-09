@@ -11,10 +11,9 @@ import { dropDownOptions } from '../../constants/constants';
 import { ACTIVE_LANGUAGE_ID } from '../../apollo/state';
 import { LSItems } from '../../constants/variables';
 import { PATH } from '../../constants/paths';
+import { openNotification } from '../../components/UI/Notification/Notification';
 
-export const Languages: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const Languages: FC<{}> = () => {
   const navigate = useNavigate();
   const [languages, setLanguages] = useState<Language[] | null>(null);
   const { data, error, loading } = useQuery<{ languages: Language[] }>(
@@ -35,13 +34,13 @@ export const Languages: FC<{ setError: (error: string) => void }> = ({
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 
   useEffect(() => {
     if (removeError) {
-      setError(removeError.message);
+      openNotification(removeError.message);
     }
   }, [removeError]);
 

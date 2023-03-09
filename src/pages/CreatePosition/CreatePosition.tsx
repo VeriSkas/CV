@@ -9,17 +9,16 @@ import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
 import { Position } from '../../types/interfaces/positions';
 import { PATH } from '../../constants/paths';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const CreatePosition: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const CreatePosition: FC<{}> = () => {
   const { t } = useTranslation();
   const [createPosition, { error }] = useMutation(CREATE_POSITION);
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 

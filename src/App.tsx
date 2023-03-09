@@ -62,7 +62,6 @@ export const App: FC = () => {
   const token = useReactiveVar(USER_TOKEN);
   const { t, i18n } = useTranslation();
   const [isLoggedIn, setLoggedIn] = useState<boolean>(() => !!token);
-  const [errorMessage, setErrorMessage] = useState<string>('');
   let link = isLoggedIn ? PATH.employees : PATH.login;
   const language =
     localStorage.getItem(LSItems.pageLanguage) ?? SupportedLanguages.en;
@@ -91,46 +90,10 @@ export const App: FC = () => {
           </React.Suspense>
         }
       >
-        <Route
-          index
-          element={
-            <Employees
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.userProfile}
-          element={
-            <Profile
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.employee}
-          element={
-            <UpdateEmployee
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.createEmployeeAbs}
-          element={
-            <CreateEmployee
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
+        <Route index element={<Employees />} />
+        <Route path={PATH.userProfile} element={<Profile />} />
+        <Route path={PATH.employee} element={<UpdateEmployee />} />
+        <Route path={PATH.createEmployeeAbs} element={<CreateEmployee />} />
       </Route>
       <Route
         path={PATH.projects}
@@ -141,26 +104,8 @@ export const App: FC = () => {
         }
       >
         <Route index element={<Projects />} />
-        <Route
-          path={PATH.createProject}
-          element={
-            <CreateProject
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.project}
-          element={
-            <ProjectDetailPage
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
+        <Route path={PATH.createProject} element={<CreateProject />} />
+        <Route path={PATH.project} element={<ProjectDetailPage />} />
       </Route>
       <Route
         path={PATH.cvs}
@@ -170,36 +115,9 @@ export const App: FC = () => {
           </React.Suspense>
         }
       >
-        <Route
-          index
-          element={
-            <CVs
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.cv}
-          element={
-            <CvDetails
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.createCV}
-          element={
-            <CreateCV
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
+        <Route index element={<CVs />} />
+        <Route path={PATH.cv} element={<CvDetails />} />
+        <Route path={PATH.createCV} element={<CreateCV />} />
       </Route>
       <Route
         path={PATH.departments}
@@ -209,36 +127,9 @@ export const App: FC = () => {
           </React.Suspense>
         }
       >
-        <Route
-          index
-          element={
-            <Departments
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.createDepartment}
-          element={
-            <CreateDepartment
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.department}
-          element={
-            <DepartmentDetail
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
+        <Route index element={<Departments />} />
+        <Route path={PATH.createDepartment} element={<CreateDepartment />} />
+        <Route path={PATH.department} element={<DepartmentDetail />} />
       </Route>
       <Route
         path={PATH.positions}
@@ -248,36 +139,9 @@ export const App: FC = () => {
           </React.Suspense>
         }
       >
-        <Route
-          index
-          element={
-            <Positions
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.position}
-          element={
-            <PositionDetail
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.createPosition}
-          element={
-            <CreatePosition
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
+        <Route index element={<Positions />} />
+        <Route path={PATH.position} element={<PositionDetail />} />
+        <Route path={PATH.createPosition} element={<CreatePosition />} />
       </Route>
       <Route
         path={PATH.skills}
@@ -287,36 +151,9 @@ export const App: FC = () => {
           </React.Suspense>
         }
       >
-        <Route
-          index
-          element={
-            <Skills
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.skill}
-          element={
-            <SkillDetail
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.createSkill}
-          element={
-            <CreateSkill
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
+        <Route index element={<Skills />} />
+        <Route path={PATH.skill} element={<SkillDetail />} />
+        <Route path={PATH.createSkill} element={<CreateSkill />} />
       </Route>
       <Route
         path={PATH.languages}
@@ -326,36 +163,9 @@ export const App: FC = () => {
           </React.Suspense>
         }
       >
-        <Route
-          index
-          element={
-            <Languages
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.createLanguage}
-          element={
-            <CreateLanguage
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
-        <Route
-          path={PATH.language}
-          element={
-            <LanguageDetail
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
-            />
-          }
-        />
+        <Route index element={<Languages />} />
+        <Route path={PATH.createLanguage} element={<CreateLanguage />} />
+        <Route path={PATH.language} element={<LanguageDetail />} />
       </Route>
     </>
   );
@@ -376,9 +186,6 @@ export const App: FC = () => {
               auth={(isAuth: boolean) => {
                 setAuth(isAuth);
               }}
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
             />
           }
         />
@@ -398,9 +205,6 @@ export const App: FC = () => {
               auth={(isAuth: boolean) => {
                 setAuth(isAuth);
               }}
-              setError={(error: string) => {
-                setErrorMessage(error);
-              }}
             />
           }
         />
@@ -414,10 +218,6 @@ export const App: FC = () => {
         login={isLoggedIn}
         auth={(isAuth: boolean) => {
           setAuth(isAuth);
-        }}
-        errorMessage={errorMessage}
-        setErrorMessage={(message: string) => {
-          setErrorMessage(message);
         }}
       >
         <Routes>

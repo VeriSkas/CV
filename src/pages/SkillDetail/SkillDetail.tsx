@@ -11,21 +11,30 @@ import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnly
 import { PATH } from '../../constants/paths';
 import { TypeForm } from '../../constants/variables';
 import { Skill } from '../../types/interfaces/skills';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const SkillDetail: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const SkillDetail: FC<{}> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { skillId } = useParams();
   const [updateSkill, { error, data: updatedData }] = useMutation(UPDATE_SKILL);
-  const { data: skills, loading } = useQuery<{ skills: Skill[] }>(GET_SKILLS);
+  const {
+    data: skills,
+    loading,
+    error: getError,
+  } = useQuery<{ skills: Skill[] }>(GET_SKILLS);
   const [skill, setSkill] = useState<Skill | null>(null);
 
   useEffect(() => {
+    if (getError) {
+      openNotification(getError.message);
+    }
+  }, [getError]);
+
+  useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 

@@ -11,26 +11,33 @@ import { PATH } from '../../constants/paths';
 import { TypeForm } from '../../constants/variables';
 import { Position } from '../../types/interfaces/positions';
 import { ACTIVE_POSITION_ID } from '../../apollo/state';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const PositionDetail: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const PositionDetail: FC<{}> = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { positionId } = useParams();
   const [updatePosition, { error, data: updatedData }] =
     useMutation(UPDATE_POSITION);
-  const { data: positions, loading } = useQuery<{ positions: Position[] }>(
-    GET_POSITIONS
-  );
+  const {
+    data: positions,
+    loading,
+    error: getError,
+  } = useQuery<{ positions: Position[] }>(GET_POSITIONS);
   const [position, setPosition] = useState<Position | null>(null);
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (getError) {
+      openNotification(getError.message);
+    }
+  }, [getError]);
 
   useEffect(() => {
     if (updatedData) {

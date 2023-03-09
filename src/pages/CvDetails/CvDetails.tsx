@@ -13,11 +13,10 @@ import { TypeForm } from '../../constants/variables';
 import { ACTIVE_CV_ID, MAIN_ROLE, USER_ID } from '../../apollo/state';
 import { Roles } from '../../constants/constants';
 import { PATH } from '../../constants/paths';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const CvDetails: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const CvDetails: FC<{}> = () => {
   const userID = useReactiveVar(USER_ID);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -42,13 +41,13 @@ export const CvDetails: FC<{ setError: (error: string) => void }> = ({
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 
   useEffect(() => {
     if (cvError) {
-      setError(cvError.message);
+      openNotification(cvError.message);
     }
   }, [cvError]);
 

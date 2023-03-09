@@ -9,17 +9,16 @@ import { TypeForm } from '../../constants/variables';
 import { LanguageForm } from '../../components/LanguageForm/LanguageForm';
 import { ILanguageForm } from '../../types/interfaces/interfaces';
 import { Language } from '../../types/interfaces/languages';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const CreateLanguage: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const CreateLanguage: FC<{}> = () => {
   const { t } = useTranslation();
   const [createLanguage, { error }] = useMutation(CREATE_LANGUAGE);
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 

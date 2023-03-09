@@ -13,17 +13,16 @@ import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
 import { Department } from '../../types/interfaces/departments';
 import { PATH } from '../../constants/paths';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const CreateDepartment: FC<{ setError: (error: string) => void }> = ({
-  setError,
-}) => {
+export const CreateDepartment: FC<{}> = () => {
   const { t } = useTranslation();
   const [createDepartment, { error }] = useMutation(CREATE_DEPARTMENT);
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 

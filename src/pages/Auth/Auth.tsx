@@ -8,11 +8,11 @@ import { PATH } from '../../constants/paths';
 import { authFormText } from '../../constants/text';
 import { MAIN_ROLE, USER_ID, USER_TOKEN } from '../../apollo/state';
 import { LSItems } from '../../constants/variables';
+import { openNotification } from '../../components/UI/Notification/Notification';
 
 export const Auth: FC<{
   auth: (isAuth: boolean) => void,
-  setError: (error: string) => void,
-}> = ({ auth, setError }) => {
+}> = ({ auth }) => {
   const [authUser, { data: userData, error }] = useLazyQuery(AUTH);
   const text = authFormText;
 
@@ -30,7 +30,7 @@ export const Auth: FC<{
     }
 
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [userData, error]);
 

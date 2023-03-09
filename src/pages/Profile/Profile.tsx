@@ -15,11 +15,10 @@ import { UpdatedUser, UserInfo } from '../../types/interfaces/user';
 import { FormContainer } from '../../components/FormContainer/FormContainer';
 import { TypeForm } from '../../constants/variables';
 import { USER_ID } from '../../apollo/state';
+import { openNotification } from '../../components/UI/Notification/Notification';
 import '../../i18n/i18n';
 
-export const Profile: FC<{ setError: (message: string) => void }> = ({
-  setError,
-}) => {
+export const Profile: FC<{}> = () => {
   const { t } = useTranslation();
   const userID = useReactiveVar(USER_ID);
   const { loading, data } = useQuery<{ user: UserInfo }, OperationVariables>(
@@ -34,7 +33,7 @@ export const Profile: FC<{ setError: (message: string) => void }> = ({
 
   useEffect(() => {
     if (error) {
-      setError(error.message);
+      openNotification(error.message);
     }
   }, [error]);
 
@@ -78,9 +77,6 @@ export const Profile: FC<{ setError: (message: string) => void }> = ({
             user={data.user}
             onSubmitForm={(value, id) => {
               updateUser(value, id);
-            }}
-            setError={(message: string) => {
-              setError(message);
             }}
             type={TypeForm.profileType}
           />
