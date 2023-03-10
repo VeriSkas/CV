@@ -29,8 +29,7 @@ export const LoginSignUpForm: FC<LoginSignUpFormProps> = ({
   const authInputs = [{ ...inputs.email }, { ...inputs.password }];
 
   const submitForm = (data: Inputs): void => {
-    const email = data.email;
-    const password = data.password;
+    const { email, password } = data;
 
     onSubmit({ email, password });
     reset();

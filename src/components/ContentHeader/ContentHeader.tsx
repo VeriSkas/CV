@@ -13,15 +13,16 @@ import { UserInfoShort } from '../../types/interfaces/user';
 import { LanguageIcon } from '../LanguageIcon/LanguageIcon';
 import { DropDown } from '../UI/DropDown/DropDown';
 import { Header } from '../UI/Header/Header';
+import { ContentHeaderProps } from '../../types/interfaces/propsInterfaces';
 import classes from './ContentHeader.module.scss';
 
-export const ContentHeader: FC<{
-  setOpenSidebar: (isOpen: boolean) => void,
-  setAuth: (isAuth: boolean) => void,
-}> = ({ setOpenSidebar, setAuth }) => {
+export const ContentHeader: FC<ContentHeaderProps> = ({
+  setOpenSidebar,
+  setAuth,
+}) => {
   const userId = useReactiveVar(USER_ID);
   const navigate = useNavigate();
-  const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
   const { data: UserInfo } = useQuery<{ user: UserInfoShort }>(
     GET_USER_LOGO_INFO,
     {

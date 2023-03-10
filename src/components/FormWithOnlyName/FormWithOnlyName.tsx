@@ -5,24 +5,19 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { BtnType } from '../../constants/variables';
-import { Department } from '../../types/interfaces/departments';
 import { FormTypes } from '../../types/interfaces/interfaces';
-import { Position } from '../../types/interfaces/positions';
-import { Skill } from '../../types/interfaces/skills';
 import { makeInputsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
+import { FormWithOnlyNameProps } from '../../types/interfaces/propsInterfaces';
 import '../../i18n/i18n';
 
-export const FormWithOnlyName: FC<{
-    onSubmitForm: (
-        data: { name: string },
-        id?: string
-      ) => void;
-    item?: Department | Position | Skill;
-    returnPath: string;
-    type: string;
-  }> = ({ onSubmitForm, item, type, returnPath }) => {
+export const FormWithOnlyName: FC<FormWithOnlyNameProps> = ({
+  onSubmitForm,
+  item,
+  type,
+  returnPath
+}) => {
     const { t } = useTranslation();
     const {
       register,

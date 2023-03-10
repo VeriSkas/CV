@@ -8,6 +8,7 @@ import { MAIN_ROLE, USER_ID } from '../../apollo/state';
 import { Roles, tableTypes } from '../../constants/constants';
 import {
   SortType,
+  TableOption,
   UsedInTableObjectsType
 } from '../../types/interfaces/interfaces';
 import { TableProps } from '../../types/interfaces/propsInterfaces';
@@ -31,8 +32,8 @@ export const Table: FC<TableProps> = ({
   settingsBtnViewForUser,
 }) => {
   const { t } = useTranslation();
-  const [headerValue, setHeaderValue] = useState(headerOptions);
-  const [itemsValue, setItemsValue] = useState(items);
+  const [headerValue, setHeaderValue] = useState<{ [key: string]: TableOption }>(headerOptions);
+  const [itemsValue, setItemsValue] = useState<UsedInTableObjectsType[] | null>(items);
   const userId = useReactiveVar(USER_ID);
   const role = useReactiveVar(MAIN_ROLE);
 
@@ -76,39 +77,37 @@ export const Table: FC<TableProps> = ({
     if (newUsersValue) { setItemsValue(() => [...newUsersValue]) }
   }
 
-  const renderHeaderOptions = (): ReactNode => {
-    return Object.keys(headerOptions).map((key) => {
-      const option = headerOptions[key];
-      const activeOptionIcon =
-        <div className={classes.SortArrow}>
-          {option.ascendingSort ? <MdArrowDownward /> : <MdArrowUpward />}
-        </div>;
-      const inactiveOptionIcon =
-        <div className={classes.SortArrowHover}>
-          <MdArrowDownward />
-        </div>;
-      const disabledOption = <h5>{t(option.name)}</h5>;
-      const enabledOption =
-        <>
-          <h5
-            onClick={() => {
-              turnOnSort(key);
-            }}
-          >
-            {t(option.name)}
-          </h5>
-            {option.active ? activeOptionIcon : inactiveOptionIcon}
-        </>
+  const renderHeaderOptions = (): ReactNode => Object.keys(headerOptions).map((key) => {
+    const option = headerOptions[key];
+    const activeOptionIcon =
+      <div className={classes.SortArrow}>
+        {option.ascendingSort ? <MdArrowDownward /> : <MdArrowUpward />}
+      </div>;
+    const inactiveOptionIcon =
+      <div className={classes.SortArrowHover}>
+        <MdArrowDownward />
+      </div>;
+    const disabledOption = <h5>{t(option.name)}</h5>;
+    const enabledOption =
+      <>
+        <h5
+          onClick={() => {
+            turnOnSort(key);
+          }}
+        >
+          {t(option.name)}
+        </h5>
+          {option.active ? activeOptionIcon : inactiveOptionIcon}
+      </>
 
-      return (
-        <div key={option.name} className={classes.HeaderOption}>
-          <span className={classes.Option}>
-            {option.disabled ? disabledOption : enabledOption}
-          </span>
-        </div>
-      );
-    });
-  };
+    return (
+      <div key={option.name} className={classes.HeaderOption}>
+        <span className={classes.Option}>
+          {option.disabled ? disabledOption : enabledOption}
+        </span>
+      </div>
+    );
+  });
 
   const toggleTemplate = (id: string, error?: string): void => {
     if (toggleTemplateCv) {
@@ -132,20 +131,22 @@ export const Table: FC<TableProps> = ({
     }
 
     return returnedValue.map((item: UsedInTableObjectsType) => {
-      if (role !== Roles.admin.value && tableType === tableTypes.cvsTable) {
-        if ((item as TableCvItem).userId !== userId) {
-          return <TableItem
-            key={item.id}
-            item={item}
-            dropDownOptions={MainPagesInfo.cvsPageWithoutDeletingCV.dropDownOptions}
-            dropDownHandler={(label: string, id: string) => { dropDownHandler(label, id) }}
-            toggleTemplateCv={(id: string) => {
-              toggleTemplate(id, t('ErrorMessages.toggleTemplateError'))
-            }}
-            settingsView={settingsBtnViewForUser}
-            avatar={avatar}
-          />;
-        }
+      if (
+        role !== Roles.admin.value &&
+        tableType === tableTypes.cvsTable &&
+        (item as TableCvItem).userId !== userId
+      ) {
+        return <TableItem
+          key={item.id}
+          item={item}
+          dropDownOptions={MainPagesInfo.cvsPageWithoutDeletingCV.dropDownOptions}
+          dropDownHandler={(label: string, id: string) => { dropDownHandler(label, id) }}
+          toggleTemplateCv={(id: string) => {
+            toggleTemplate(id, t('ErrorMessages.toggleTemplateError'))
+          }}
+          settingsView={settingsBtnViewForUser}
+          avatar={avatar}
+        />;
       }
 
       return <TableItem

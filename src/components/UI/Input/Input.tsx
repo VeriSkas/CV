@@ -22,7 +22,7 @@ export const Input: FC<InputProps> = ({
   placeholder,
 }) => {
   const { t } = useTranslation();
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState<boolean>(false);
 
   return (
     <div className={classes.Input}>

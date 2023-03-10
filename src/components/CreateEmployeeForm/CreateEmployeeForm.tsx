@@ -16,11 +16,10 @@ import { Button } from '../UI/Button/Button';
 import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
+import { CreateEmployeeFormProps } from '../../types/interfaces/propsInterfaces';
 import '../../i18n/i18n';
 
-export const CreateEmployeeForm: FC<{
-  onSubmitForm: (data: NewEmployeeForm) => void,
-}> = ({ onSubmitForm }) => {
+export const CreateEmployeeForm: FC<CreateEmployeeFormProps> = ({ onSubmitForm }) => {
   const { t } = useTranslation();
   const {
     register,

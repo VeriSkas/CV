@@ -1,16 +1,34 @@
 import { ReactElement, ReactNode } from 'react';
 
-import { Control, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import {
+  Control,
+  FieldErrorsImpl,
+  UseFormRegister,
+  UseFormSetValue,
+} from 'react-hook-form';
 
 import { CvItemDetails } from './cvs';
+import { Department } from './departments';
 import {
   CvDetailForm,
   DropDownOption,
+  FormTypes,
   IEmployeeForm,
+  IFieldArray,
+  IInput,
+  ILanguageForm,
   IMainPagesInfo,
+  IMySelect,
+  NewCvForm,
+  NewEmployeeForm,
+  NewProjectForm,
   TableOption,
   UsedInTableObjectsType,
 } from './interfaces';
+import { Language } from './languages';
+import { Position } from './positions';
+import { ProjectItem } from './project';
+import { Skill } from './skills';
 import { UserInfo } from './user';
 
 export interface ButtonProps {
@@ -82,6 +100,89 @@ export interface LoginSignUpFormProps {
 export interface DropDownProps {
   options: DropDownOption[];
   onClick: (label: string) => void;
+}
+
+export interface AvatarProps {
+  user?: UserInfo;
+  disabled: boolean;
+}
+
+export interface ContentHeaderProps {
+  setOpenSidebar: (isOpen: boolean) => void;
+  setAuth: (isAuth: boolean) => void;
+}
+
+export interface CreateEmployeeFormProps {
+  onSubmitForm: (data: NewEmployeeForm) => void;
+}
+
+export interface CvCreateFormProps {
+  onSubmitForm: (data: NewCvForm) => void;
+}
+
+export interface FormContainerProps {
+  title: string;
+  children: ReactElement;
+}
+
+export interface FormWithOnlyNameProps {
+  onSubmitForm: (data: { name: string }, id?: string) => void;
+  item?: Department | Position | Skill;
+  returnPath: string;
+  type: string;
+}
+
+export interface LanguageFormProps {
+  onSubmitForm: (data: ILanguageForm, id?: string) => void;
+  item?: Language;
+  type: string;
+}
+
+export interface BackdropProps {
+  onClick: () => void;
+}
+
+export interface BreadcrumbsProps {
+  paramName?: string;
+}
+
+export interface FieldsArrayFromArrayProps {
+  fieldsArray: IFieldArray[];
+  register: UseFormRegister<FormTypes>;
+  control: Control<FormTypes, any>;
+  disabled?: boolean;
+  setValue: UseFormSetValue<any>;
+}
+
+export interface SideBarProps {
+  onClose: () => void;
+  isOpen: boolean;
+}
+
+export interface AuthProps {
+  auth: (isAuth: boolean) => void;
+}
+
+export interface SignUpProps {
+  auth: (isAuth: boolean) => void;
+}
+
+export interface SelectsFromArrayProps {
+  selectsArray: IMySelect[];
+  control: Control<FormTypes, any>;
+  setValue: UseFormSetValue<FormTypes>;
+}
+
+export interface InputsFromArrayProps {
+  register: UseFormRegister<FormTypes>;
+  inputsArray: IInput[];
+  errors: Partial<FieldErrorsImpl<FormTypes>>;
+}
+
+export interface ProjectFormProps {
+  onSubmitForm: (data: NewProjectForm) => void;
+  project?: ProjectItem;
+  type: string;
 }
 
 export interface EmployeeFormProps {

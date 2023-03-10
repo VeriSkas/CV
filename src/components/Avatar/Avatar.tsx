@@ -20,17 +20,16 @@ import {
 import { PhotoTypes, Sizes } from '../../constants/constants';
 import { AvatarValue, UserInfo } from '../../types/interfaces/user';
 import { InputType } from '../../constants/variables';
-import classes from './Avatar.module.scss';
 import { openNotification } from '../UI/Notification/Notification';
+import { AvatarProps } from '../../types/interfaces/propsInterfaces';
+import { useDrag } from '../../hooks/useDrag';
 import '../../i18n/i18n';
+import classes from './Avatar.module.scss';
 
-export const Avatar: FC<{
-  user?: UserInfo,
-  disabled: boolean,
-}> = ({ user, disabled }) => {
+export const Avatar: FC<AvatarProps> = ({ user, disabled }) => {
   const { t } = useTranslation();
   const [image, setImage] = useState<AvatarValue | null>(null);
-  const [drag, setDrag] = useState(false);
+  const { drag, dragStartHandler, dropHandler, dragLeaveHandler } = useDrag();
   const [removeAvatar, { error: deleteError }] = useMutation(DELETE_AVATAR);
   const [uploadAvatar, { error: uploadError }] = useMutation(UPLOAD_AVATAR);
 
@@ -155,19 +154,8 @@ export const Avatar: FC<{
     });
   };
 
-  const dragStartHandler = (event: DragEvent<HTMLDivElement>): void => {
-    event.preventDefault();
-    setDrag(true);
-  };
-
-  const dragLeaveHandler = (event: DragEvent<HTMLDivElement>): void => {
-    event.preventDefault();
-    setDrag(false);
-  };
-
-  const dropHandler = (event: DragEvent): void => {
-    event.preventDefault();
-    setDrag(false);
+  const dropDownHandler = (event: DragEvent<Element>): void => {
+    dropHandler(event);
 
     if (event.dataTransfer && !disabled) {
       addFile(event.dataTransfer.files[0]);
@@ -204,7 +192,7 @@ export const Avatar: FC<{
         onDragStart={dragStartHandler}
         onDragLeave={dragLeaveHandler}
         onDragOver={dragStartHandler}
-        onDrop={dropHandler}
+        onDrop={dropDownHandler}
       >
         {!drag && (
           <>

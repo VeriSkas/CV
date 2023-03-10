@@ -23,7 +23,7 @@ export const SearchBar: FC<SearchBarProps> = ({
 }) => {
   const { t } = useTranslation();
   const role = useReactiveVar(MAIN_ROLE);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState<string>('');
 
   const searchHandler = (value: string): void => {
     setSearchValue(value);

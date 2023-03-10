@@ -14,7 +14,7 @@ export const TablePageContainer: FC<TablePageContainerProps> = ({
   toggleTemplateCv,
 }) => {
   const { t } = useTranslation();
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState<string>('');
   const {
     tableType,
     linkTo,

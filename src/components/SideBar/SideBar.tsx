@@ -6,13 +6,11 @@ import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 
 import { links } from '../../constants/constants';
-import classes from './SideBar.module.scss';
 import { Backdrop } from '../UI/Backdrop/Backdrop';
+import { SideBarProps } from '../../types/interfaces/propsInterfaces';
+import classes from './SideBar.module.scss';
 
-export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = ({
-  onClose,
-  isOpen,
-}) => {
+export const SideBar: FC<SideBarProps> = ({ onClose, isOpen }) => {
   const { t } = useTranslation();
   const {
     employees,
@@ -33,20 +31,17 @@ export const SideBar: FC<{ onClose: () => void, isOpen: boolean }> = ({
     languages,
   ];
 
-  const renderLinks = (): ReactNode => {
-    return navLinks.map((link) => {
-      return (
-        <li key={link.label}>
-          <NavLink to={link.to} onClick={onClose}>
-            <IconContext.Provider value={{ className: classes.Icon }}>
-              {link.icon}
-            </IconContext.Provider>
-            <span>{t(link.label)}</span>
-          </NavLink>
-        </li>
-      );
-    });
-  };
+  const renderLinks = (): ReactNode =>
+    navLinks.map((link) => (
+      <li key={link.label}>
+        <NavLink to={link.to} onClick={onClose}>
+          <IconContext.Provider value={{ className: classes.Icon }}>
+            {link.icon}
+          </IconContext.Provider>
+          <span>{t(link.label)}</span>
+        </NavLink>
+      </li>
+    ));
 
   return (
     <>

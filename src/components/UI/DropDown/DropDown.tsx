@@ -10,7 +10,7 @@ import classes from './DropDown.module.scss';
 
 export const DropDown: FC<DropDownProps> = ({ options, onClick }) => {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const onClose = (): void => {
     setIsOpen(false);
@@ -21,32 +21,29 @@ export const DropDown: FC<DropDownProps> = ({ options, onClick }) => {
     setIsOpen(false);
   };
 
-  const renderOptions = (): ReactNode => {
-    return options.map((option: DropDownOption) => {
-      return (
-        <li
-          key={option.label}
-          onClick={() => {
-            onClickHandler(option.iso ?? option.label);
-          }}
-        >
-          {option.to && (
-            <NavLink to={option.to}>
-              {option.icon && (
-                <IconContext.Provider value={{ className: classes.Icon }}>
-                  {option.icon}
-                </IconContext.Provider>
-              )}
-              <span className={classes.OptionName}>{t(option.label)}</span>
-            </NavLink>
-          )}
-          {option.iso && (
+  const renderOptions = (): ReactNode =>
+    options.map((option: DropDownOption) => (
+      <li
+        key={option.label}
+        onClick={() => {
+          onClickHandler(option.iso ?? option.label);
+        }}
+      >
+        {option.to && (
+          <NavLink to={option.to}>
+            {option.icon && (
+              <IconContext.Provider value={{ className: classes.Icon }}>
+                {option.icon}
+              </IconContext.Provider>
+            )}
             <span className={classes.OptionName}>{t(option.label)}</span>
-          )}
-        </li>
-      );
-    });
-  };
+          </NavLink>
+        )}
+        {option.iso && (
+          <span className={classes.OptionName}>{t(option.label)}</span>
+        )}
+      </li>
+    ));
 
   return isOpen ? (
     <>

@@ -22,7 +22,7 @@ export const Select: FC<SelectProps> = ({
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeValue, setActiveValue] = useState(() => defaultValue);
+  const [activeValue, setActiveValue] = useState<string>(() => defaultValue);
   const options: OptionsType[] | null = useOptions(label);
 
   const changeActiveOption = (value: string, optionLabel: string): void => {
@@ -31,8 +31,8 @@ export const Select: FC<SelectProps> = ({
     setActiveValue(optionLabel);
   };
 
-  const renderOptions = (options: OptionsType[] | []): ReactNode => {
-    return options.map((option) => {
+  const renderOptions = (options: OptionsType[] | []): ReactNode =>
+    options.map((option) => {
       const cls =
         option.label === activeValue
           ? `${classes.Option} ${classes.active}`
@@ -50,7 +50,6 @@ export const Select: FC<SelectProps> = ({
         </li>
       );
     });
-  };
 
   const toggleOptions = (): void => {
     setIsOpen((prev) => !prev);

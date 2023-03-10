@@ -7,24 +7,21 @@ import { NavLink, useLocation, useParams } from 'react-router-dom';
 
 import { links } from '../../../constants/constants';
 import { IParams, PARAMS } from '../../../constants/paths';
+import { BreadcrumbsProps } from '../../../types/interfaces/propsInterfaces';
 import '../../../i18n/i18n';
 import classes from './Breadcrumbs.module.scss';
 
-export const Breadcrumbs: FC<{ paramName?: string }> = ({ paramName }) => {
+export const Breadcrumbs: FC<BreadcrumbsProps> = ({ paramName }) => {
   const param = useParams();
   const location = useLocation();
   const { t } = useTranslation();
-  const [paramValue, setParamValue] = useState('');
-  const [pathValue, setPathValue] = useState('');
+  const [paramValue, setParamValue] = useState<string>('');
+  const [pathValue, setPathValue] = useState<string>('');
 
   useEffect(() => {
     const paramKey = Object.keys(param)[0];
 
-    if (paramKey) {
-      setParamValue(paramKey);
-    } else {
-      setParamValue('');
-    }
+    paramKey ? setParamValue(paramKey) : setParamValue('');
   }, [param]);
 
   useEffect(() => {

@@ -13,11 +13,10 @@ import { Button } from '../UI/Button/Button';
 import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
+import { CvCreateFormProps } from '../../types/interfaces/propsInterfaces';
 import '../../i18n/i18n';
 
-export const CvCreateForm: FC<{
-  onSubmitForm: (data: NewCvForm) => void,
-}> = ({ onSubmitForm }) => {
+export const CvCreateForm: FC<CvCreateFormProps> = ({ onSubmitForm }) => {
   const { t } = useTranslation();
   const {
     register,

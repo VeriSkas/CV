@@ -9,10 +9,9 @@ import { signUpFormText } from '../../constants/text';
 import { MAIN_ROLE, USER_ID, USER_TOKEN } from '../../apollo/state';
 import { LSItems } from '../../constants/variables';
 import { openNotification } from '../../components/UI/Notification/Notification';
+import { SignUpProps } from '../../types/interfaces/propsInterfaces';
 
-export const SignUp: FC<{
-  auth: (isAuth: boolean) => void,
-}> = ({ auth }) => {
+export const SignUp: FC<SignUpProps> = ({ auth }) => {
   const [signUp, { data: userData, error }] = useMutation(SIGN_UP);
   const text = signUpFormText;
 

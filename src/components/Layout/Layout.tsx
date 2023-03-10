@@ -7,7 +7,7 @@ import { ContentHeader } from '../ContentHeader/ContentHeader';
 import classes from './Layout.module.scss';
 
 export const Layout: FC<LayoutProps> = ({ auth, login, children }) => {
-  const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+  const [isOpenSidebar, setIsOpenSidebar] = useState<boolean>(false);
 
   const onOpenSidebar = (isOpen: boolean): void => {
     setIsOpenSidebar(isOpen);

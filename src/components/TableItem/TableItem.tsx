@@ -23,7 +23,7 @@ export const TableItem: FC<TableItemProps> = ({
   settingsView,
   avatar,
 }) => {
-  const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
   const role = useReactiveVar(MAIN_ROLE);
   const { t } = useTranslation();
 

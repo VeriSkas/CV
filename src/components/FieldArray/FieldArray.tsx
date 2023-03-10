@@ -8,9 +8,9 @@ import { useTranslation } from 'react-i18next';
 
 import { InputTypes } from '../../constants/text';
 import { FieldArrayProps } from '../../types/interfaces/propsInterfaces';
-import classes from './FieldArray.module.scss';
 import { MySelect } from '../UI/MySelect/MySelect';
 import '../../i18n/i18n';
+import classes from './FieldArray.module.scss';
 
 export const FieldArray: FC<FieldArrayProps> = ({
   register,
@@ -29,22 +29,19 @@ export const FieldArray: FC<FieldArrayProps> = ({
   });
   const { inputValueName, name, options } = radioInputs;
 
-  const radioInputsRender = (index: number): ReactNode => {
-    return options.map((option: { value: string, label: string }) => {
-      return (
-        <React.Fragment key={`${option.value} ${index}`}>
-          <input
-            {...register(`${label}.${index}.${name}`)}
-            id={`${option.value} ${index}`}
-            type={InputTypes.radio}
-            value={option.value}
-            disabled={disabled}
-          />
-          <label htmlFor={`${option.value} ${index}`}>{option.label}</label>
-        </React.Fragment>
-      );
-    });
-  };
+  const radioInputsRender = (index: number): ReactNode =>
+    options.map((option: { value: string, label: string }) => (
+      <React.Fragment key={`${option.value} ${index}`}>
+        <input
+          {...register(`${label}.${index}.${name}`)}
+          id={`${option.value} ${index}`}
+          type={InputTypes.radio}
+          value={option.value}
+          disabled={disabled}
+        />
+        <label htmlFor={`${option.value} ${index}`}>{option.label}</label>
+      </React.Fragment>
+    ));
 
   return (
     <div className={classes.FieldArray}>

@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC } from 'react';
 
 import { useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
@@ -37,31 +37,23 @@ export const Notification: FC<{}> = () => {
     hideNotification();
   };
 
-  const renderNotification = (): ReactElement => {
-    if (isVisible) {
-      return (
-        <div className={classes.Notification}>
-          <div className={classes.Type}>
-            <IconContext.Provider
-              value={{ className: `${classes.Icon} ${classes.IconType}` }}
-            >
-              <AiOutlineExclamationCircle />
-            </IconContext.Provider>
-          </div>
-          <p className={classes.Message}>
-            {t(message ?? 'ErrorMessages.default')}
-          </p>
-          <div className={classes.Cross} onClick={onClose}>
-            <IconContext.Provider value={{ className: classes.Icon }}>
-              <RxCross2 />
-            </IconContext.Provider>
-          </div>
-        </div>
-      );
-    }
-
-    return <></>;
-  };
-
-  return renderNotification();
+  return isVisible ? (
+    <div className={classes.Notification}>
+      <div className={classes.Type}>
+        <IconContext.Provider
+          value={{ className: `${classes.Icon} ${classes.IconType}` }}
+        >
+          <AiOutlineExclamationCircle />
+        </IconContext.Provider>
+      </div>
+      <p className={classes.Message}>{t(message ?? 'ErrorMessages.default')}</p>
+      <div className={classes.Cross} onClick={onClose}>
+        <IconContext.Provider value={{ className: classes.Icon }}>
+          <RxCross2 />
+        </IconContext.Provider>
+      </div>
+    </div>
+  ) : (
+    <></>
+  );
 };

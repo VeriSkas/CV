@@ -9,10 +9,9 @@ import { authFormText } from '../../constants/text';
 import { MAIN_ROLE, USER_ID, USER_TOKEN } from '../../apollo/state';
 import { LSItems } from '../../constants/variables';
 import { openNotification } from '../../components/UI/Notification/Notification';
+import { AuthProps } from '../../types/interfaces/propsInterfaces';
 
-export const Auth: FC<{
-  auth: (isAuth: boolean) => void,
-}> = ({ auth }) => {
+export const Auth: FC<AuthProps> = ({ auth }) => {
   const [authUser, { data: userData, error }] = useLazyQuery(AUTH);
   const text = authFormText;
 

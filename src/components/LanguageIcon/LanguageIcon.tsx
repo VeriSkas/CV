@@ -10,7 +10,7 @@ import { DropDown } from '../UI/DropDown/DropDown';
 import classes from './LanguageIcon.module.scss';
 
 export const LanguageIcon: FC<{}> = () => {
-  const [isOpenDropDown, setIsOpenDropDown] = useState(false);
+  const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
   const { i18n } = useTranslation();
   const { english, russian } = languagesOptions;
   const dropdownOptions = [english, russian];

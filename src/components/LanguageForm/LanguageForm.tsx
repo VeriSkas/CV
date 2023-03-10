@@ -7,20 +7,13 @@ import { Link } from 'react-router-dom';
 import { PATH } from '../../constants/paths';
 import { BtnType } from '../../constants/variables';
 import { FormTypes, ILanguageForm } from '../../types/interfaces/interfaces';
-import { Language } from '../../types/interfaces/languages';
 import { makeInputsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
+import { LanguageFormProps } from '../../types/interfaces/propsInterfaces';
 import '../../i18n/i18n';
 
-export const LanguageForm: FC<{
-  onSubmitForm: (
-      data: ILanguageForm,
-      id?: string
-    ) => void;
-  item?: Language;
-  type: string;
-}> = ({ onSubmitForm, item, type }) => {
+export const LanguageForm: FC<LanguageFormProps> = ({ onSubmitForm, item, type }) => {
   const { t } = useTranslation();
   const {
     register,

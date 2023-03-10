@@ -1,13 +1,11 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import { FormContainerProps } from '../../types/interfaces/propsInterfaces';
 import classes from './FormContainer.module.scss';
 
-export const FormContainer: FC<{ title: string, children: ReactElement }> = ({
-  title,
-  children,
-}) => {
+export const FormContainer: FC<FormContainerProps> = ({ title, children }) => {
   const { t } = useTranslation();
 
   return (

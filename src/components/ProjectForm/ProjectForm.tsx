@@ -1,26 +1,26 @@
 import React, { FC } from 'react';
 
-import { Control, FieldErrorsImpl, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import {
+  Control,
+  FieldErrorsImpl,
+  useForm,
+  UseFormRegister,
+  UseFormSetValue
+} from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { PATH } from '../../constants/paths';
 import { BtnType, TypeForm } from '../../constants/variables';
 import { FormTypes, NewProjectForm } from '../../types/interfaces/interfaces';
-import { ProjectItem } from '../../types/interfaces/project';
 import { makeInputsList, makeSelectsList } from '../../utils/formCreator';
 import { Button } from '../UI/Button/Button';
 import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
 import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
+import { ProjectFormProps } from '../../types/interfaces/propsInterfaces';
 import '../../i18n/i18n';
 
-export const ProjectForm: FC<{
-  onSubmitForm: (
-    data: NewProjectForm,
-  ) => void;
-  project?: ProjectItem;
-  type: string;
- }> = ({ onSubmitForm, project, type }) => {
+export const ProjectForm: FC<ProjectFormProps> = ({ onSubmitForm, project, type }) => {
   const { t } = useTranslation();
   const {
     register,

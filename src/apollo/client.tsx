@@ -23,18 +23,17 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors }) => {
   const language =
     localStorage.getItem(LSItems.pageLanguage) ?? SupportedLanguages.en;
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({ message }) => {
-      if (message === BAErrorMessages.unauthorized) {
-        localStorage.clear();
-        localStorage.setItem(LSItems.pageLanguage, language);
-        USER_TOKEN('');
-      }
-    });
-  }
+
+  graphQLErrors?.forEach(({ message }) => {
+    if (message === BAErrorMessages.unauthorized) {
+      localStorage.clear();
+      localStorage.setItem(LSItems.pageLanguage, language);
+      USER_TOKEN('');
+    }
+  });
 });
 
 export const client = new ApolloClient({
