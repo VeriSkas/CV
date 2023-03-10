@@ -4,17 +4,17 @@ import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { GET_CV, UPDATE_CV } from '../../apollo/queries/cvs';
-import { CvForm } from '../../components/CvForm/CvForm ';
-import { CvItemDetails } from '../../types/interfaces/cvs';
-import { CvDetailForm } from '../../types/interfaces/interfaces';
-import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { TypeForm } from '../../constants/variables';
-import { ACTIVE_CV_ID, MAIN_ROLE, USER_ID } from '../../apollo/state';
-import { Roles } from '../../constants/constants';
-import { PATH } from '../../constants/paths';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import '../../i18n/i18n';
+import { GET_CV, UPDATE_CV } from 'queries/cvs';
+import { CvForm } from 'myComponents/CvForm/CvForm ';
+import { CvItemDetails } from 'interfaces/cvs';
+import { CvDetailForm } from 'interfaces/interfaces';
+import { FormContainer } from 'myComponents/FormContainer/FormContainer';
+import { TypeForm } from 'constants/variables';
+import { ACTIVE_CV_ID, MAIN_ROLE, USER_ID } from 'apollo/state';
+import { Roles } from 'constants/constants';
+import { PATH } from 'constants/paths';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import 'i18n/i18n';
 
 export const CvDetails: FC<{}> = () => {
   const userID = useReactiveVar(USER_ID);

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { FormContainerProps } from '../../types/interfaces/propsInterfaces';
+import { FormContainerProps } from 'interfaces/propsInterfaces';
 import classes from './FormContainer.module.scss';
 
 export const FormContainer: FC<FormContainerProps> = ({ title, children }) => {

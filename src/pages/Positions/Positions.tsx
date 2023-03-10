@@ -3,15 +3,15 @@ import React, { FC, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
-import { DELETE_POSITION, GET_POSITIONS } from '../../apollo/queries/positions';
-import { Position } from '../../types/interfaces/positions';
-import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
-import { MainPagesInfo } from '../../constants/mainPagesInfo';
-import { dropDownOptions } from '../../constants/constants';
-import { PATH } from '../../constants/paths';
-import { LSItems } from '../../constants/variables';
-import { ACTIVE_POSITION_ID } from '../../apollo/state';
-import { openNotification } from '../../components/UI/Notification/Notification';
+import { DELETE_POSITION, GET_POSITIONS } from 'queries/positions';
+import { Position } from 'interfaces/positions';
+import { TablePageContainer } from 'myComponents/TablePageContainer/TablePageContainer';
+import { MainPagesInfo } from 'constants/mainPagesInfo';
+import { dropDownOptions } from 'constants/constants';
+import { PATH } from 'constants/paths';
+import { LSItems } from 'constants/variables';
+import { ACTIVE_POSITION_ID } from 'apollo/state';
+import { openNotification } from 'uiComponents/Notification/Notification';
 
 export const Positions: FC<{}> = () => {
   const navigate = useNavigate();

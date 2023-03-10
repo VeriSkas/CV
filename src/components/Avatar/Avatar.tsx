@@ -12,18 +12,14 @@ import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
-import {
-  DELETE_AVATAR,
-  GET_USER,
-  UPLOAD_AVATAR,
-} from '../../apollo/queries/users';
-import { PhotoTypes, Sizes } from '../../constants/constants';
-import { AvatarValue, UserInfo } from '../../types/interfaces/user';
-import { InputType } from '../../constants/variables';
-import { openNotification } from '../UI/Notification/Notification';
-import { AvatarProps } from '../../types/interfaces/propsInterfaces';
-import { useDrag } from '../../hooks/useDrag';
-import '../../i18n/i18n';
+import { DELETE_AVATAR, GET_USER, UPLOAD_AVATAR } from 'queries/users';
+import { PhotoTypes, Sizes } from 'constants/constants';
+import { AvatarValue, UserInfo } from 'interfaces/user';
+import { InputType } from 'constants/variables';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import { AvatarProps } from 'interfaces/propsInterfaces';
+import { useDrag } from 'hooks/useDrag';
+import 'i18n/i18n';
 import classes from './Avatar.module.scss';
 
 export const Avatar: FC<AvatarProps> = ({ user, disabled }) => {

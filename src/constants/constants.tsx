@@ -16,19 +16,15 @@ import { FaAddressCard } from 'react-icons/fa';
 import { GrWorkshop } from 'react-icons/gr';
 import { CgProfile } from 'react-icons/cg';
 
-import {
-  DropDownOption,
-  TableOption,
-  ILink,
-} from '../types/interfaces/interfaces';
+import { DropDownOption, TableOption, ILink } from 'interfaces/interfaces';
 import { PATH } from './paths';
 import {
   ACTIVE_CV_ID,
   ACTIVE_PROJECT_ID,
   ACTIVE_USER_ID,
   USER_ID,
-} from '../apollo/state';
-import { IRole } from '../types/interfaces/user';
+} from 'apollo/state';
+import { IRole } from 'interfaces/user';
 
 export const Sizes = {
   MAX_photoSize: 500000,

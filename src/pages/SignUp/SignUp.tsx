@@ -2,14 +2,14 @@ import React, { FC, useEffect } from 'react';
 
 import { useMutation } from '@apollo/client';
 
-import { SIGN_UP } from '../../apollo/queries/signUp';
-import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
-import { PATH } from '../../constants/paths';
-import { signUpFormText } from '../../constants/text';
-import { MAIN_ROLE, USER_ID, USER_TOKEN } from '../../apollo/state';
-import { LSItems } from '../../constants/variables';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import { SignUpProps } from '../../types/interfaces/propsInterfaces';
+import { SIGN_UP } from 'queries/signUp';
+import { LoginSignUpForm } from 'myComponents/LoginSignUpForm/LoginSignUpForm';
+import { PATH } from 'constants/paths';
+import { signUpFormText } from 'constants/text';
+import { MAIN_ROLE, USER_ID, USER_TOKEN } from 'apollo/state';
+import { LSItems } from 'constants/variables';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import { SignUpProps } from 'interfaces/propsInterfaces';
 
 export const SignUp: FC<SignUpProps> = ({ auth }) => {
   const [signUp, { data: userData, error }] = useMutation(SIGN_UP);

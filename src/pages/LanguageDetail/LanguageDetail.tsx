@@ -4,16 +4,16 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { GET_LANGUAGES, UPDATE_LANGUAGE } from '../../apollo/queries/languages';
-import { ACTIVE_LANGUAGE_ID } from '../../apollo/state';
-import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { LanguageForm } from '../../components/LanguageForm/LanguageForm';
-import { PATH } from '../../constants/paths';
-import { TypeForm } from '../../constants/variables';
-import { ILanguageForm } from '../../types/interfaces/interfaces';
-import { Language } from '../../types/interfaces/languages';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import '../../i18n/i18n';
+import { GET_LANGUAGES, UPDATE_LANGUAGE } from 'queries/languages';
+import { ACTIVE_LANGUAGE_ID } from 'apollo/state';
+import { FormContainer } from 'myComponents/FormContainer/FormContainer';
+import { LanguageForm } from 'myComponents/LanguageForm/LanguageForm';
+import { PATH } from 'constants/paths';
+import { TypeForm } from 'constants/variables';
+import { ILanguageForm } from 'interfaces/interfaces';
+import { Language } from 'interfaces/languages';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import 'i18n/i18n';
 
 export const LanguageDetail: FC<{}> = () => {
   const { t } = useTranslation();

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { FieldsArrayFromArrayProps } from '../../../types/interfaces/propsInterfaces';
+import { FieldsArrayFromArrayProps } from 'interfaces/propsInterfaces';
 import { FieldArray } from '../../FieldArray/FieldArray';
 
 export const FieldsArrayFromArray: FC<FieldsArrayFromArrayProps> = ({

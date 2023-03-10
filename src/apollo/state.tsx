@@ -1,8 +1,8 @@
 import { makeVar } from '@apollo/client';
 
-import { LSItems } from '../constants/variables';
-import { INotification } from '../types/interfaces/notification';
-import { makeStateVar } from '../utils/apollo';
+import { LSItems } from 'constants/variables';
+import { INotification } from 'interfaces/notification';
+import { makeStateVar } from 'utils/apollo';
 
 export const MAIN_ROLE = makeStateVar(LSItems.role);
 

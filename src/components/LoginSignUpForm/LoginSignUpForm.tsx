@@ -4,12 +4,12 @@ import { useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { inputs } from '../../constants/inputsSettings';
-import { BtnType } from '../../constants/variables';
-import { FormTypes, Inputs } from '../../types/interfaces/interfaces';
-import { LoginSignUpFormProps } from '../../types/interfaces/propsInterfaces';
-import { Button } from '../UI/Button/Button';
-import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
+import { inputs } from 'constants/inputsSettings';
+import { BtnType } from 'constants/variables';
+import { FormTypes, Inputs } from 'interfaces/interfaces';
+import { LoginSignUpFormProps } from 'interfaces/propsInterfaces';
+import { Button } from 'uiComponents/Button/Button';
+import { InputsFromArray } from 'uiComponents/InputsFromArray/InputsFromArray';
 import classes from './LoginSignUpForm.module.scss';
 
 export const LoginSignUpForm: FC<LoginSignUpFormProps> = ({

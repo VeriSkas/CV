@@ -5,15 +5,15 @@ import { IconContext } from 'react-icons';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
 
-import { GET_USER_LOGO_INFO } from '../../apollo/queries/users';
-import { USER_ID, USER_TOKEN } from '../../apollo/state';
-import { links } from '../../constants/constants';
-import { PATH } from '../../constants/paths';
-import { UserInfoShort } from '../../types/interfaces/user';
+import { GET_USER_LOGO_INFO } from 'queries/users';
+import { USER_ID, USER_TOKEN } from 'apollo/state';
+import { links } from 'constants/constants';
+import { PATH } from 'constants/paths';
+import { UserInfoShort } from 'interfaces/user';
 import { LanguageIcon } from '../LanguageIcon/LanguageIcon';
-import { DropDown } from '../UI/DropDown/DropDown';
-import { Header } from '../UI/Header/Header';
-import { ContentHeaderProps } from '../../types/interfaces/propsInterfaces';
+import { DropDown } from 'uiComponents/DropDown/DropDown';
+import { Header } from 'uiComponents/Header/Header';
+import { ContentHeaderProps } from 'interfaces/propsInterfaces';
 import classes from './ContentHeader.module.scss';
 
 export const ContentHeader: FC<ContentHeaderProps> = ({

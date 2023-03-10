@@ -1,5 +1,5 @@
-import { Sizes } from '../constants/constants';
-import { InputLabels } from '../constants/text';
+import { Sizes } from 'constants/constants';
+import { InputLabels } from 'constants/text';
 
 export const errorMessagesCreator = (type: string, label: string): object => {
   switch (type) {

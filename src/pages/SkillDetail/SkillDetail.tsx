@@ -4,15 +4,15 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { GET_SKILLS, UPDATE_SKILL } from '../../apollo/queries/skills';
-import { ACTIVE_SKILL_ID } from '../../apollo/state';
-import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { FormWithOnlyName } from '../../components/FormWithOnlyName/FormWithOnlyName';
-import { PATH } from '../../constants/paths';
-import { TypeForm } from '../../constants/variables';
-import { Skill } from '../../types/interfaces/skills';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import '../../i18n/i18n';
+import { GET_SKILLS, UPDATE_SKILL } from 'queries/skills';
+import { ACTIVE_SKILL_ID } from 'apollo/state';
+import { FormContainer } from 'myComponents/FormContainer/FormContainer';
+import { FormWithOnlyName } from 'myComponents/FormWithOnlyName/FormWithOnlyName';
+import { PATH } from 'constants/paths';
+import { TypeForm } from 'constants/variables';
+import { Skill } from 'interfaces/skills';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import 'i18n/i18n';
 
 export const SkillDetail: FC<{}> = () => {
   const { t } = useTranslation();

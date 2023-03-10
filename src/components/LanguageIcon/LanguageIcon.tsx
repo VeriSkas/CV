@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import { IoLanguage } from 'react-icons/io5';
 
-import { languagesOptions } from '../../constants/constants';
-import { LSItems } from '../../constants/variables';
-import { DropDown } from '../UI/DropDown/DropDown';
+import { languagesOptions } from 'constants/constants';
+import { LSItems } from 'constants/variables';
+import { DropDown } from 'uiComponents/DropDown/DropDown';
 import classes from './LanguageIcon.module.scss';
 
 export const LanguageIcon: FC<{}> = () => {

@@ -3,10 +3,10 @@ import React, { FC } from 'react';
 import { useQuery, useReactiveVar } from '@apollo/client';
 import { Outlet } from 'react-router-dom';
 
-import { GET_DEPARTMENTS } from '../../apollo/queries/departments';
-import { ACTIVE_DEPARTMENT_ID } from '../../apollo/state';
-import { Breadcrumbs } from '../../components/UI/Breadcrumbs/Breadcrumbs';
-import { Department } from '../../types/interfaces/departments';
+import { GET_DEPARTMENTS } from 'queries/departments';
+import { ACTIVE_DEPARTMENT_ID } from 'apollo/state';
+import { Breadcrumbs } from 'uiComponents/Breadcrumbs/Breadcrumbs';
+import { Department } from 'interfaces/departments';
 
 const DepartmentsPage: FC<{}> = () => {
   const activeDepartmentID = useReactiveVar(ACTIVE_DEPARTMENT_ID);

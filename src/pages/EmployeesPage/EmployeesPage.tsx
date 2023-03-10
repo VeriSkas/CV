@@ -3,10 +3,10 @@ import React, { FC } from 'react';
 import { useQuery, useReactiveVar } from '@apollo/client';
 import { Outlet } from 'react-router-dom';
 
-import { GET_USER } from '../../apollo/queries/users';
-import { ACTIVE_USER_ID } from '../../apollo/state';
-import { Breadcrumbs } from '../../components/UI/Breadcrumbs/Breadcrumbs';
-import { UserInfo } from '../../types/interfaces/user';
+import { GET_USER } from 'queries/users';
+import { ACTIVE_USER_ID } from 'apollo/state';
+import { Breadcrumbs } from 'uiComponents/Breadcrumbs/Breadcrumbs';
+import { UserInfo } from 'interfaces/user';
 
 const EmployeesPage: FC<{}> = () => {
   const activeUserID = useReactiveVar(ACTIVE_USER_ID);

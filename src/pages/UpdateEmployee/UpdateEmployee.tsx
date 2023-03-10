@@ -9,16 +9,16 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
-import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
-import { IEmployeeForm } from '../../types/interfaces/interfaces';
-import { UpdatedUser, UserInfo } from '../../types/interfaces/user';
-import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { TypeForm } from '../../constants/variables';
-import { ACTIVE_USER_ID, MAIN_ROLE } from '../../apollo/state';
-import { Roles } from '../../constants/constants';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import '../../i18n/i18n';
+import { GET_USER, UPDATE_USER } from 'queries/users';
+import { EmployeeForm } from 'myComponents/EmployeeForm/EmployeeForm';
+import { IEmployeeForm } from 'interfaces/interfaces';
+import { UpdatedUser, UserInfo } from 'interfaces/user';
+import { FormContainer } from 'myComponents/FormContainer/FormContainer';
+import { TypeForm } from 'constants/variables';
+import { ACTIVE_USER_ID, MAIN_ROLE } from 'apollo/state';
+import { Roles } from 'constants/constants';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import 'i18n/i18n';
 
 export const UpdateEmployee: FC<{}> = () => {
   const { t } = useTranslation();

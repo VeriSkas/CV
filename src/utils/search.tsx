@@ -1,5 +1,5 @@
-import { UsedInTableObjectsType } from '../types/interfaces/interfaces';
-import { SearchValue } from '../types/interfaces/propsInterfaces';
+import { UsedInTableObjectsType } from 'interfaces/interfaces';
+import { SearchValue } from 'interfaces/propsInterfaces';
 
 export const search = (
   items: UsedInTableObjectsType[],

@@ -10,15 +10,15 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { PATH } from '../../constants/paths';
-import { BtnType, TypeForm } from '../../constants/variables';
-import { FormTypes, NewProjectForm } from '../../types/interfaces/interfaces';
-import { makeInputsList, makeSelectsList } from '../../utils/formCreator';
-import { Button } from '../UI/Button/Button';
-import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
-import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
-import { ProjectFormProps } from '../../types/interfaces/propsInterfaces';
-import '../../i18n/i18n';
+import { PATH } from 'constants/paths';
+import { BtnType, TypeForm } from 'constants/variables';
+import { FormTypes, NewProjectForm } from 'interfaces/interfaces';
+import { makeInputsList, makeSelectsList } from 'utils/formCreator';
+import { Button } from 'uiComponents/Button/Button';
+import { InputsFromArray } from 'uiComponents/InputsFromArray/InputsFromArray';
+import { SelectsFromArray } from 'uiComponents/SelectsFromArray/SelectsFromArray';
+import { ProjectFormProps } from 'interfaces/propsInterfaces';
+import 'i18n/i18n';
 
 export const ProjectForm: FC<ProjectFormProps> = ({ onSubmitForm, project, type }) => {
   const { t } = useTranslation();

@@ -8,15 +8,15 @@ import {
 } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
-import { GET_USER, UPDATE_USER } from '../../apollo/queries/users';
-import { IEmployeeForm } from '../../types/interfaces/interfaces';
-import { EmployeeForm } from '../../components/EmployeeForm/EmployeeForm';
-import { UpdatedUser, UserInfo } from '../../types/interfaces/user';
-import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { TypeForm } from '../../constants/variables';
-import { USER_ID } from '../../apollo/state';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import '../../i18n/i18n';
+import { GET_USER, UPDATE_USER } from 'queries/users';
+import { IEmployeeForm } from 'interfaces/interfaces';
+import { EmployeeForm } from 'myComponents/EmployeeForm/EmployeeForm';
+import { UpdatedUser, UserInfo } from 'interfaces/user';
+import { FormContainer } from 'myComponents/FormContainer/FormContainer';
+import { TypeForm } from 'constants/variables';
+import { USER_ID } from 'apollo/state';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import 'i18n/i18n';
 
 export const Profile: FC<{}> = () => {
   const { t } = useTranslation();

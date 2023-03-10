@@ -1,4 +1,4 @@
-import { IInput } from '../types/interfaces/interfaces';
+import { IInput } from 'interfaces/interfaces';
 import { Sizes } from './constants';
 import { regExpForEmail } from './regExp';
 import { InputLabels, InputTypes } from './text';

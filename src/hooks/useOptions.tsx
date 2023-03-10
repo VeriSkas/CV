@@ -1,15 +1,15 @@
 import { useQuery } from '@apollo/client';
 
-import { GET_DEPARTMENTS_AS_OPTIONS } from '../apollo/queries/departments';
-import { GET_POSITIONS_AS_OPTIONS } from '../apollo/queries/positions';
-import { Roles } from '../constants/constants';
-import { InputLabels } from '../constants/text';
-import { OptionsType } from '../types/interfaces/propsInterfaces';
-import { GET_SKILLS_AS_OPTIONS } from '../apollo/queries/skills';
-import { GET_PROJECTS_OPTIONS } from '../apollo/queries/projects';
-import { GET_LANGUAGES_AS_OPTIONS } from '../apollo/queries/languages';
-import { GET_CVS_AS_OPTIONS } from '../apollo/queries/cvs';
-import { GET_USERS_AS_OPTIONS } from '../apollo/queries/users';
+import { GET_DEPARTMENTS_AS_OPTIONS } from 'queries/departments';
+import { GET_POSITIONS_AS_OPTIONS } from 'queries/positions';
+import { Roles } from 'constants/constants';
+import { InputLabels } from 'constants/text';
+import { OptionsType } from 'interfaces/propsInterfaces';
+import { GET_SKILLS_AS_OPTIONS } from 'queries/skills';
+import { GET_PROJECTS_OPTIONS } from 'queries/projects';
+import { GET_LANGUAGES_AS_OPTIONS } from 'queries/languages';
+import { GET_CVS_AS_OPTIONS } from 'queries/cvs';
+import { GET_USERS_AS_OPTIONS } from 'queries/users';
 
 export const useOptions = (label: string): OptionsType[] => {
   const { data: departments } = useQuery<{ departments: OptionsType[] }>(

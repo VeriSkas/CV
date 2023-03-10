@@ -4,16 +4,16 @@ import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { CREATE_PROJECT, GET_PROJECTS } from '../../apollo/queries/projects';
-import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { ProjectForm } from '../../components/ProjectForm/ProjectForm';
-import { NewProjectForm } from '../../types/interfaces/interfaces';
-import { LSItems, TypeForm } from '../../constants/variables';
-import { ACTIVE_PROJECT_ID } from '../../apollo/state';
-import { PATH } from '../../constants/paths';
-import { ProjectItem } from '../../types/interfaces/project';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import '../../i18n/i18n';
+import { CREATE_PROJECT, GET_PROJECTS } from 'queries/projects';
+import { FormContainer } from 'myComponents/FormContainer/FormContainer';
+import { ProjectForm } from 'myComponents/ProjectForm/ProjectForm';
+import { NewProjectForm } from 'interfaces/interfaces';
+import { LSItems, TypeForm } from 'constants/variables';
+import { ACTIVE_PROJECT_ID } from 'apollo/state';
+import { PATH } from 'constants/paths';
+import { ProjectItem } from 'interfaces/project';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import 'i18n/i18n';
 
 export const CreateProject: FC<{}> = () => {
   const { t } = useTranslation();

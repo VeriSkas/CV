@@ -4,10 +4,10 @@ import { IconContext } from 'react-icons';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useTranslation } from 'react-i18next';
 
-import { InputProps } from '../../../types/interfaces/propsInterfaces';
-import { InputTypes } from '../../../constants/text';
-import { errorMessagesCreator } from '../../../utils/errorCreator';
-import '../../../i18n/i18n';
+import { InputProps } from 'interfaces/propsInterfaces';
+import { InputTypes } from 'constants/text';
+import { errorMessagesCreator } from 'utils/errorCreator';
+import 'i18n/i18n';
 import classes from './Input.module.scss';
 
 export const Input: FC<InputProps> = ({

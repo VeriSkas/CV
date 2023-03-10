@@ -4,19 +4,19 @@ import { useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 
-import { MAIN_ROLE, USER_ID } from '../../apollo/state';
-import { Roles, tableTypes } from '../../constants/constants';
+import { MAIN_ROLE, USER_ID } from 'apollo/state';
+import { Roles, tableTypes } from 'constants/constants';
 import {
   SortType,
   TableOption,
   UsedInTableObjectsType
-} from '../../types/interfaces/interfaces';
-import { TableProps } from '../../types/interfaces/propsInterfaces';
+} from 'interfaces/interfaces';
+import { TableProps } from 'interfaces/propsInterfaces';
 import { search } from '../../utils/search';
 import { TableItem } from '../TableItem/TableItem';
-import { TableCvItem } from '../../types/interfaces/cvs';
-import { MainPagesInfo } from '../../constants/mainPagesInfo';
-import '../../i18n/i18n';
+import { TableCvItem } from 'interfaces/cvs';
+import { MainPagesInfo } from 'constants/mainPagesInfo';
+import 'i18n/i18n';
 import classes from './Table.module.scss';
 
 export const Table: FC<TableProps> = ({

@@ -4,14 +4,14 @@ import { useReactiveVar } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { MAIN_ROLE } from '../../apollo/state';
-import { Roles } from '../../constants/constants';
-import { BtnType } from '../../constants/variables';
-import { SearchBarProps } from '../../types/interfaces/propsInterfaces';
+import { MAIN_ROLE } from 'apollo/state';
+import { Roles } from 'constants/constants';
+import { BtnType } from 'constants/variables';
+import { SearchBarProps } from 'interfaces/propsInterfaces';
 import { Search } from '../Search/Search';
-import { Button } from '../UI/Button/Button';
+import { Button } from 'uiComponents/Button/Button';
 import classes from './SearchBar.module.scss';
-import '../../i18n/i18n';
+import 'i18n/i18n';
 
 export const SearchBar: FC<SearchBarProps> = ({
   linkTo,

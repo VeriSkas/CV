@@ -3,15 +3,15 @@ import React, { FC, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
-import { DELETE_SKILL, GET_SKILLS } from '../../apollo/queries/skills';
-import { Skill } from '../../types/interfaces/skills';
-import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
-import { MainPagesInfo } from '../../constants/mainPagesInfo';
-import { dropDownOptions } from '../../constants/constants';
-import { PATH } from '../../constants/paths';
-import { LSItems } from '../../constants/variables';
-import { ACTIVE_SKILL_ID } from '../../apollo/state';
-import { openNotification } from '../../components/UI/Notification/Notification';
+import { DELETE_SKILL, GET_SKILLS } from 'queries/skills';
+import { Skill } from 'interfaces/skills';
+import { TablePageContainer } from 'myComponents/TablePageContainer/TablePageContainer';
+import { MainPagesInfo } from 'constants/mainPagesInfo';
+import { dropDownOptions } from 'constants/constants';
+import { PATH } from 'constants/paths';
+import { LSItems } from 'constants/variables';
+import { ACTIVE_SKILL_ID } from 'apollo/state';
+import { openNotification } from 'uiComponents/Notification/Notification';
 
 export const Skills: FC<{}> = () => {
   const navigate = useNavigate();

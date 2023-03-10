@@ -3,9 +3,9 @@ import { ApolloClient, from, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
-import { SupportedLanguages } from '../constants/constants';
-import { BAErrorMessages } from '../constants/text';
-import { LSItems } from '../constants/variables';
+import { SupportedLanguages } from 'constants/constants';
+import { BAErrorMessages } from 'constants/text';
+import { LSItems } from 'constants/variables';
 import { USER_TOKEN } from './state';
 
 const URI = 'https://cv-project-js.inno.ws/api/graphql';

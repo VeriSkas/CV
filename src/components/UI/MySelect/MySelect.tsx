@@ -4,14 +4,11 @@ import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 
-import { useOptions } from '../../../hooks/useOptions';
-import {
-  MySelectProps,
-  OptionsType,
-} from '../../../types/interfaces/propsInterfaces';
+import { useOptions } from 'hooks/useOptions';
+import { MySelectProps, OptionsType } from 'interfaces/propsInterfaces';
 import classes from './MySelect.module.scss';
 import { selectStyles } from './styles';
-import '../../../i18n/i18n';
+import 'i18n/i18n';
 
 export const MySelect: FC<MySelectProps> = ({
   control,

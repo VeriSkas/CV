@@ -5,10 +5,10 @@ import { IconContext } from 'react-icons';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 
-import { links } from '../../../constants/constants';
-import { IParams, PARAMS } from '../../../constants/paths';
-import { BreadcrumbsProps } from '../../../types/interfaces/propsInterfaces';
-import '../../../i18n/i18n';
+import { links } from 'constants/constants';
+import { IParams, PARAMS } from 'constants/paths';
+import { BreadcrumbsProps } from 'interfaces/propsInterfaces';
+import 'i18n/i18n';
 import classes from './Breadcrumbs.module.scss';
 
 export const Breadcrumbs: FC<BreadcrumbsProps> = ({ paramName }) => {

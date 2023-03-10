@@ -4,14 +4,14 @@ import { FieldErrorsImpl, useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { PATH } from '../../constants/paths';
-import { BtnType } from '../../constants/variables';
-import { FormTypes, ILanguageForm } from '../../types/interfaces/interfaces';
-import { makeInputsList } from '../../utils/formCreator';
-import { Button } from '../UI/Button/Button';
-import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
-import { LanguageFormProps } from '../../types/interfaces/propsInterfaces';
-import '../../i18n/i18n';
+import { PATH } from 'constants/paths';
+import { BtnType } from 'constants/variables';
+import { FormTypes, ILanguageForm } from 'interfaces/interfaces';
+import { makeInputsList } from 'utils/formCreator';
+import { Button } from 'uiComponents/Button/Button';
+import { InputsFromArray } from 'uiComponents/InputsFromArray/InputsFromArray';
+import { LanguageFormProps } from 'interfaces/propsInterfaces';
+import 'i18n/i18n';
 
 export const LanguageForm: FC<LanguageFormProps> = ({ onSubmitForm, item, type }) => {
   const { t } = useTranslation();

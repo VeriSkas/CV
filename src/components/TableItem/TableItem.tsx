@@ -6,14 +6,14 @@ import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 import { useReactiveVar } from '@apollo/client';
 
-import { UsedInTableObjectsType } from '../../types/interfaces/interfaces';
-import { DropDown } from '../UI/DropDown/DropDown';
+import { UsedInTableObjectsType } from 'interfaces/interfaces';
+import { DropDown } from 'uiComponents/DropDown/DropDown';
 import classes from './TableItem.module.scss';
-import { TableCvItem } from '../../types/interfaces/cvs';
-import { TableItemProps } from '../../types/interfaces/propsInterfaces';
-import { hiddenObjectKeysInTable, objectKeysInTable } from '../../constants/variables';
-import { MAIN_ROLE } from '../../apollo/state';
-import { Roles } from '../../constants/constants';
+import { TableCvItem } from 'interfaces/cvs';
+import { TableItemProps } from 'interfaces/propsInterfaces';
+import { hiddenObjectKeysInTable, objectKeysInTable } from 'constants/variables';
+import { MAIN_ROLE } from 'apollo/state';
+import { Roles } from 'constants/constants';
 
 export const TableItem: FC<TableItemProps> = ({
   item,

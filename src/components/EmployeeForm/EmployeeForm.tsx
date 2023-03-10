@@ -4,20 +4,19 @@ import { Control, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-f
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { FormTypes, IEmployeeForm } from '../../types/interfaces/interfaces';
-import { Button } from '../UI/Button/Button';
-import { EmployeeFormProps } from '../../types/interfaces/propsInterfaces';
+import { FormTypes, IEmployeeForm } from 'interfaces/interfaces';
+import { Button } from 'uiComponents/Button/Button';
+import { EmployeeFormProps } from 'interfaces/propsInterfaces';
 import { Avatar } from '../Avatar/Avatar';
-import { PATH } from '../../constants/paths';
-import { makeInputsList, makeSelectsList } from '../../utils/formCreator';
-import { BtnType, TypeForm } from '../../constants/variables';
-import { FieldArrays } from '../../constants/fieldArrayVars';
-import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
-import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
-import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
-import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
-import '../../i18n/i18n';
-import classes from './EmployeeForm.module.scss';
+import { PATH } from 'constants/paths';
+import { makeInputsList, makeSelectsList } from 'utils/formCreator';
+import { BtnType, TypeForm } from 'constants/variables';
+import { FieldArrays } from 'constants/fieldArrayVars';
+import { LanguageItemInDB, SkillItemInDB } from 'interfaces/cvs';
+import { InputsFromArray } from 'uiComponents/InputsFromArray/InputsFromArray';
+import { SelectsFromArray } from 'uiComponents/SelectsFromArray/SelectsFromArray';
+import { FieldsArrayFromArray } from 'uiComponents/FieldsArrayFromArray/FieldsArrayFromArray';
+import 'i18n/i18n';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({
   user,
@@ -66,7 +65,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
   return (
     <form
       onSubmit={handleSubmit(submitForm)}
-      className={classes.EmployeeForm_form}
     >
       <Avatar
         user={user}
@@ -89,7 +87,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         disabled={isProfileType}
         setValue={setValue as UseFormSetValue<FormTypes>}
       />
-      <div className={classes.FormBtns}>
+      <div>
         {!isProfileType && <Button disabled={!isValid}>
           {submitBtnText ?? t('BtnText.saveChanges')}
         </Button>}

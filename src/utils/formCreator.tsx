@@ -1,7 +1,7 @@
-import { inputs } from '../constants/inputsSettings';
-import { SelectSettings } from '../constants/selectsSettings';
-import { TypeForm } from '../constants/variables';
-import { IInput, IMySelect } from '../types/interfaces/interfaces';
+import { inputs } from 'constants/inputsSettings';
+import { SelectSettings } from 'constants/selectsSettings';
+import { TypeForm } from 'constants/variables';
+import { IInput, IMySelect } from 'interfaces/interfaces';
 
 export const makeInputsList = (type: string): IInput[] => {
   switch (type) {

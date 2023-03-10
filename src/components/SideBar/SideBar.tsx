@@ -5,9 +5,9 @@ import { RxCross2 } from 'react-icons/rx';
 import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 
-import { links } from '../../constants/constants';
-import { Backdrop } from '../UI/Backdrop/Backdrop';
-import { SideBarProps } from '../../types/interfaces/propsInterfaces';
+import { links } from 'constants/constants';
+import { Backdrop } from 'uiComponents/Backdrop/Backdrop';
+import { SideBarProps } from 'interfaces/propsInterfaces';
 import classes from './SideBar.module.scss';
 
 export const SideBar: FC<SideBarProps> = ({ onClose, isOpen }) => {

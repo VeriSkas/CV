@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { SelectsFromArrayProps } from '../../../types/interfaces/propsInterfaces';
+import { SelectsFromArrayProps } from 'interfaces/propsInterfaces';
 import { MySelect } from '../MySelect/MySelect';
 
 export const SelectsFromArray: FC<SelectsFromArrayProps> = ({

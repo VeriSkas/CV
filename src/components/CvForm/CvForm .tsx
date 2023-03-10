@@ -5,20 +5,20 @@ import { Control, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-f
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { MAIN_ROLE } from '../../apollo/state';
-import { Roles } from '../../constants/constants';
-import { FieldArrays } from '../../constants/fieldArrayVars';
-import { PATH } from '../../constants/paths';
-import { BtnType, TypeForm } from '../../constants/variables';
-import { LanguageItemInDB, SkillItemInDB } from '../../types/interfaces/cvs';
-import { CvDetailForm, FormTypes } from '../../types/interfaces/interfaces';
-import { CvFormProps } from '../../types/interfaces/propsInterfaces';
-import { makeInputsList, makeSelectsList } from '../../utils/formCreator';
-import { Button } from '../UI/Button/Button';
-import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
-import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
-import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
-import '../../i18n/i18n';
+import { MAIN_ROLE } from 'apollo/state';
+import { Roles } from 'constants/constants';
+import { FieldArrays } from 'constants/fieldArrayVars';
+import { PATH } from 'constants/paths';
+import { BtnType, TypeForm } from 'constants/variables';
+import { LanguageItemInDB, SkillItemInDB } from 'interfaces/cvs';
+import { CvDetailForm, FormTypes } from 'interfaces/interfaces';
+import { CvFormProps } from 'interfaces/propsInterfaces';
+import { makeInputsList, makeSelectsList } from 'utils/formCreator';
+import { Button } from 'uiComponents/Button/Button';
+import { InputsFromArray } from 'uiComponents/InputsFromArray/InputsFromArray';
+import { SelectsFromArray } from 'uiComponents/SelectsFromArray/SelectsFromArray';
+import { FieldsArrayFromArray } from 'uiComponents/FieldsArrayFromArray/FieldsArrayFromArray';
+import 'i18n/i18n';
 
 export const CvForm: FC<CvFormProps> = ({
   cv,

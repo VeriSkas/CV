@@ -3,15 +3,15 @@ import React, { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 
-import { DELETE_CV, GET_CVS, UPDATE_CV } from '../../apollo/queries/cvs';
-import { dropDownOptions } from '../../constants/constants';
-import { CvItem, TableCvItem } from '../../types/interfaces/cvs';
-import { PATH } from '../../constants/paths';
-import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
-import { MainPagesInfo } from '../../constants/mainPagesInfo';
-import { ACTIVE_CV_ID } from '../../apollo/state';
-import { LSItems } from '../../constants/variables';
-import { openNotification } from '../../components/UI/Notification/Notification';
+import { DELETE_CV, GET_CVS, UPDATE_CV } from 'queries/cvs';
+import { dropDownOptions } from 'constants/constants';
+import { CvItem, TableCvItem } from 'interfaces/cvs';
+import { PATH } from 'constants/paths';
+import { TablePageContainer } from 'myComponents/TablePageContainer/TablePageContainer';
+import { MainPagesInfo } from 'constants/mainPagesInfo';
+import { ACTIVE_CV_ID } from 'apollo/state';
+import { LSItems } from 'constants/variables';
+import { openNotification } from 'uiComponents/Notification/Notification';
 
 export const CVs: FC<{}> = () => {
   const navigate = useNavigate();

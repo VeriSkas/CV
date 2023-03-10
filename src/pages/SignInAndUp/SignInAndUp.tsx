@@ -3,11 +3,11 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet } from 'react-router-dom';
 
-import { LanguageIcon } from '../../components/LanguageIcon/LanguageIcon';
-import { Header } from '../../components/UI/Header/Header';
-import { PATH } from '../../constants/paths';
+import { LanguageIcon } from 'myComponents/LanguageIcon/LanguageIcon';
+import { Header } from 'uiComponents/Header/Header';
+import { PATH } from 'constants/paths';
 import classes from './SignInAndUp.module.scss';
-import '../../i18n/i18n';
+import 'i18n/i18n';
 
 const SignInAndUp: FC = () => {
   const { t } = useTranslation();

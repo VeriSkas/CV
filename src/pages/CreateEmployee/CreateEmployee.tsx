@@ -4,17 +4,17 @@ import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { CREATE_USER, GET_USERS } from '../../apollo/queries/users';
-import { CreateEmployeeForm } from '../../components/CreateEmployeeForm/CreateEmployeeForm';
-import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { Roles } from '../../constants/constants';
-import { NewEmployeeForm } from '../../types/interfaces/interfaces';
-import { UserInfo } from '../../types/interfaces/user';
-import { PATH } from '../../constants/paths';
-import { LSItems } from '../../constants/variables';
-import { ACTIVE_USER_ID } from '../../apollo/state';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import '../../i18n/i18n';
+import { CREATE_USER, GET_USERS } from 'queries/users';
+import { CreateEmployeeForm } from 'myComponents/CreateEmployeeForm/CreateEmployeeForm';
+import { FormContainer } from 'myComponents/FormContainer/FormContainer';
+import { Roles } from 'constants/constants';
+import { NewEmployeeForm } from 'interfaces/interfaces';
+import { UserInfo } from 'interfaces/user';
+import { PATH } from 'constants/paths';
+import { LSItems } from 'constants/variables';
+import { ACTIVE_USER_ID } from 'apollo/state';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import 'i18n/i18n';
 
 export const CreateEmployee: FC<{}> = () => {
   const { t } = useTranslation();

@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 
 import { SideBar } from '../SideBar/SideBar';
-import { LayoutProps } from '../../types/interfaces/propsInterfaces';
-import { Notification } from '../UI/Notification/Notification';
+import { LayoutProps } from 'interfaces/propsInterfaces';
+import { Notification } from 'uiComponents/Notification/Notification';
 import { ContentHeader } from '../ContentHeader/ContentHeader';
 import classes from './Layout.module.scss';
 

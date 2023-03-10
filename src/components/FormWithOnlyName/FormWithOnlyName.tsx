@@ -4,13 +4,13 @@ import { FieldErrorsImpl, useForm, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { BtnType } from '../../constants/variables';
-import { FormTypes } from '../../types/interfaces/interfaces';
-import { makeInputsList } from '../../utils/formCreator';
-import { Button } from '../UI/Button/Button';
-import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
-import { FormWithOnlyNameProps } from '../../types/interfaces/propsInterfaces';
-import '../../i18n/i18n';
+import { BtnType } from 'constants/variables';
+import { FormTypes } from 'interfaces/interfaces';
+import { makeInputsList } from 'utils/formCreator';
+import { Button } from 'uiComponents/Button/Button';
+import { InputsFromArray } from 'uiComponents/InputsFromArray/InputsFromArray';
+import { FormWithOnlyNameProps } from 'interfaces/propsInterfaces';
+import 'i18n/i18n';
 
 export const FormWithOnlyName: FC<FormWithOnlyNameProps> = ({
   onSubmitForm,

@@ -1,4 +1,4 @@
-import { IMySelect } from '../types/interfaces/interfaces';
+import { IMySelect } from 'interfaces/interfaces';
 import { InputLabels } from './text';
 
 export const SelectSettings: { [key: string]: IMySelect } = {

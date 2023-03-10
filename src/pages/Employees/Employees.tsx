@@ -3,15 +3,15 @@ import React, { FC, useEffect, useState } from 'react';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
-import { DELETE_USER, GET_USERS } from '../../apollo/queries/users';
-import { ACTIVE_USER_ID, MAIN_ROLE, USER_ID } from '../../apollo/state';
-import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
-import { dropDownOptions, Roles } from '../../constants/constants';
-import { MainPagesInfo } from '../../constants/mainPagesInfo';
-import { PATH } from '../../constants/paths';
-import { TableUser, UserInfo } from '../../types/interfaces/user';
-import { LSItems } from '../../constants/variables';
-import { openNotification } from '../../components/UI/Notification/Notification';
+import { DELETE_USER, GET_USERS } from 'queries/users';
+import { ACTIVE_USER_ID, MAIN_ROLE, USER_ID } from 'apollo/state';
+import { TablePageContainer } from 'myComponents/TablePageContainer/TablePageContainer';
+import { dropDownOptions, Roles } from 'constants/constants';
+import { MainPagesInfo } from 'constants/mainPagesInfo';
+import { PATH } from 'constants/paths';
+import { TableUser, UserInfo } from 'interfaces/user';
+import { LSItems } from 'constants/variables';
+import { openNotification } from 'uiComponents/Notification/Notification';
 
 export const Employees: FC<{}> = () => {
   const navigate = useNavigate();

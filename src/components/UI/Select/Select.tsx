@@ -4,12 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
-import { useOptions } from '../../../hooks/useOptions';
+import { useOptions } from 'hooks/useOptions';
 
-import {
-  OptionsType,
-  SelectProps,
-} from '../../../types/interfaces/propsInterfaces';
+import { OptionsType, SelectProps } from 'interfaces/propsInterfaces';
 import classes from './Select.module.scss';
 
 export const Select: FC<SelectProps> = ({

@@ -3,18 +3,15 @@ import React, { FC, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  DELETE_DEPARTMENT,
-  GET_DEPARTMENTS,
-} from '../../apollo/queries/departments';
-import { Department } from '../../types/interfaces/departments';
-import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
-import { MainPagesInfo } from '../../constants/mainPagesInfo';
-import { dropDownOptions } from '../../constants/constants';
-import { PATH } from '../../constants/paths';
-import { LSItems } from '../../constants/variables';
-import { ACTIVE_DEPARTMENT_ID } from '../../apollo/state';
-import { openNotification } from '../../components/UI/Notification/Notification';
+import { DELETE_DEPARTMENT, GET_DEPARTMENTS } from 'queries/departments';
+import { Department } from 'interfaces/departments';
+import { TablePageContainer } from 'myComponents/TablePageContainer/TablePageContainer';
+import { MainPagesInfo } from 'constants/mainPagesInfo';
+import { dropDownOptions } from 'constants/constants';
+import { PATH } from 'constants/paths';
+import { LSItems } from 'constants/variables';
+import { ACTIVE_DEPARTMENT_ID } from 'apollo/state';
+import { openNotification } from 'uiComponents/Notification/Notification';
 
 export const Departments: FC<{}> = () => {
   const navigate = useNavigate();

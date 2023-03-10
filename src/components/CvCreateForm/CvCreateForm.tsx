@@ -4,17 +4,17 @@ import { Control, useForm, UseFormRegister, UseFormSetValue } from 'react-hook-f
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { FieldArrays } from '../../constants/fieldArrayVars';
-import { PATH } from '../../constants/paths';
-import { BtnType, TypeForm } from '../../constants/variables';
-import { FormTypes, NewCvForm } from '../../types/interfaces/interfaces';
-import { makeInputsList, makeSelectsList } from '../../utils/formCreator';
-import { Button } from '../UI/Button/Button';
-import { FieldsArrayFromArray } from '../UI/FieldsArrayFromArray/FieldsArrayFromArray';
-import { InputsFromArray } from '../UI/InputsFromArray/InputsFromArray';
-import { SelectsFromArray } from '../UI/SelectsFromArray/SelectsFromArray';
-import { CvCreateFormProps } from '../../types/interfaces/propsInterfaces';
-import '../../i18n/i18n';
+import { FieldArrays } from 'constants/fieldArrayVars';
+import { PATH } from 'constants/paths';
+import { BtnType, TypeForm } from 'constants/variables';
+import { FormTypes, NewCvForm } from 'interfaces/interfaces';
+import { makeInputsList, makeSelectsList } from 'utils/formCreator';
+import { Button } from 'uiComponents/Button/Button';
+import { FieldsArrayFromArray } from 'uiComponents/FieldsArrayFromArray/FieldsArrayFromArray';
+import { InputsFromArray } from 'uiComponents/InputsFromArray/InputsFromArray';
+import { SelectsFromArray } from 'uiComponents/SelectsFromArray/SelectsFromArray';
+import { CvCreateFormProps } from 'interfaces/propsInterfaces';
+import 'i18n/i18n';
 
 export const CvCreateForm: FC<CvCreateFormProps> = ({ onSubmitForm }) => {
   const { t } = useTranslation();

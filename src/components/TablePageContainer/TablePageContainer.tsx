@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { TablePageContainerProps } from '../../types/interfaces/propsInterfaces';
+import { TablePageContainerProps } from 'interfaces/propsInterfaces';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { Table } from '../Table/Table';
 

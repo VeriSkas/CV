@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 
-import { DropDownOption } from '../../../types/interfaces/interfaces';
-import { DropDownProps } from '../../../types/interfaces/propsInterfaces';
+import { DropDownOption } from 'interfaces/interfaces';
+import { DropDownProps } from 'interfaces/propsInterfaces';
 import classes from './DropDown.module.scss';
 
 export const DropDown: FC<DropDownProps> = ({ options, onClick }) => {

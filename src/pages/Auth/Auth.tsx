@@ -2,14 +2,14 @@ import React, { FC, useEffect } from 'react';
 
 import { useLazyQuery } from '@apollo/client';
 
-import { AUTH } from '../../apollo/queries/auth';
-import { LoginSignUpForm } from '../../components/LoginSignUpForm/LoginSignUpForm';
-import { PATH } from '../../constants/paths';
-import { authFormText } from '../../constants/text';
-import { MAIN_ROLE, USER_ID, USER_TOKEN } from '../../apollo/state';
-import { LSItems } from '../../constants/variables';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import { AuthProps } from '../../types/interfaces/propsInterfaces';
+import { AUTH } from 'queries/auth';
+import { LoginSignUpForm } from 'myComponents/LoginSignUpForm/LoginSignUpForm';
+import { PATH } from 'constants/paths';
+import { authFormText } from 'constants/text';
+import { MAIN_ROLE, USER_ID, USER_TOKEN } from 'apollo/state';
+import { LSItems } from 'constants/variables';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import { AuthProps } from 'interfaces/propsInterfaces';
 
 export const Auth: FC<AuthProps> = ({ auth }) => {
   const [authUser, { data: userData, error }] = useLazyQuery(AUTH);

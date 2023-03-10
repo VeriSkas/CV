@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Auth } from './pages/Auth/Auth';
 import { CreateEmployee } from './pages/CreateEmployee/CreateEmployee';
 import { Employees } from './pages/Employees/Employees';
-import { Layout } from './components/Layout/Layout';
+import { Layout } from 'myComponents/Layout/Layout';
 import { Profile } from './pages/Profile/Profile';
 import { SignUp } from './pages/SignUp/SignUp';
 import { UpdateEmployee } from './pages/UpdateEmployee/UpdateEmployee';

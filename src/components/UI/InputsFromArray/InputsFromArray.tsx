@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 
 import { FieldError } from 'react-hook-form';
 
-import { FormTypes } from '../../../types/interfaces/interfaces';
-import { InputsFromArrayProps } from '../../../types/interfaces/propsInterfaces';
+import { FormTypes } from 'interfaces/interfaces';
+import { InputsFromArrayProps } from 'interfaces/propsInterfaces';
 import { Input } from '../Input/Input';
 
 export const InputsFromArray: FC<InputsFromArrayProps> = ({

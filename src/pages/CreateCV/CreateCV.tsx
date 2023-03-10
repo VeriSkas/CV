@@ -4,16 +4,16 @@ import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { CREATE_CV, GET_CVS } from '../../apollo/queries/cvs';
-import { CvCreateForm } from '../../components/CvCreateForm/CvCreateForm';
-import { FormContainer } from '../../components/FormContainer/FormContainer';
-import { CvItem, CvItemDetails, NewCV } from '../../types/interfaces/cvs';
-import { NewCvForm } from '../../types/interfaces/interfaces';
-import { PATH } from '../../constants/paths';
-import { ACTIVE_CV_ID } from '../../apollo/state';
-import { LSItems } from '../../constants/variables';
-import { openNotification } from '../../components/UI/Notification/Notification';
-import '../../i18n/i18n';
+import { CREATE_CV, GET_CVS } from 'queries/cvs';
+import { CvCreateForm } from 'myComponents/CvCreateForm/CvCreateForm';
+import { FormContainer } from 'myComponents/FormContainer/FormContainer';
+import { CvItem, CvItemDetails, NewCV } from 'interfaces/cvs';
+import { NewCvForm } from 'interfaces/interfaces';
+import { PATH } from 'constants/paths';
+import { ACTIVE_CV_ID } from 'apollo/state';
+import { LSItems } from 'constants/variables';
+import { openNotification } from 'uiComponents/Notification/Notification';
+import 'i18n/i18n';
 
 export const CreateCV: FC<{}> = () => {
   const { t } = useTranslation();

@@ -3,15 +3,15 @@ import React, { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 
-import { DELETE_LANGUAGE, GET_LANGUAGES } from '../../apollo/queries/languages';
-import { Language } from '../../types/interfaces/languages';
-import { TablePageContainer } from '../../components/TablePageContainer/TablePageContainer';
-import { MainPagesInfo } from '../../constants/mainPagesInfo';
-import { dropDownOptions } from '../../constants/constants';
-import { ACTIVE_LANGUAGE_ID } from '../../apollo/state';
-import { LSItems } from '../../constants/variables';
-import { PATH } from '../../constants/paths';
-import { openNotification } from '../../components/UI/Notification/Notification';
+import { DELETE_LANGUAGE, GET_LANGUAGES } from 'queries/languages';
+import { Language } from 'interfaces/languages';
+import { TablePageContainer } from 'myComponents/TablePageContainer/TablePageContainer';
+import { MainPagesInfo } from 'constants/mainPagesInfo';
+import { dropDownOptions } from 'constants/constants';
+import { ACTIVE_LANGUAGE_ID } from 'apollo/state';
+import { LSItems } from 'constants/variables';
+import { PATH } from 'constants/paths';
+import { openNotification } from 'uiComponents/Notification/Notification';
 
 export const Languages: FC<{}> = () => {
   const navigate = useNavigate();

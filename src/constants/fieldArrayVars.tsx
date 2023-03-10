@@ -1,5 +1,5 @@
-import { IFieldArray } from '../types/interfaces/interfaces';
-import { IRadioInputs } from '../types/interfaces/propsInterfaces';
+import { IFieldArray } from 'interfaces/interfaces';
+import { IRadioInputs } from 'interfaces/propsInterfaces';
 import { InputLabels } from './text';
 
 export const OptionsForFieldArrays: { [key: string]: IRadioInputs } = {
