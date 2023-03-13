@@ -21,7 +21,10 @@ export const makeInputsList = (type: string): IInput[] => {
         { ...inputs.position, readonly: true },
       ];
 
-    case TypeForm.cvUser || TypeForm.createCV:
+    case TypeForm.cvUser:
+      return [{ ...inputs.name }, { ...inputs.description }];
+
+    case TypeForm.createCV:
       return [{ ...inputs.name }, { ...inputs.description }];
 
     case TypeForm.updateEmployee:
@@ -65,7 +68,18 @@ export const makeInputsList = (type: string): IInput[] => {
         },
       ];
 
-    case TypeForm.createProject || TypeForm.updateProject:
+    case TypeForm.createProject:
+      return [
+        { ...inputs.name },
+        { ...inputs.internal_name },
+        { ...inputs.description },
+        { ...inputs.domain },
+        { ...inputs.team_size },
+        { ...inputs.start_date },
+        { ...inputs.end_date },
+      ];
+
+    case TypeForm.updateProject:
       return [
         { ...inputs.name },
         { ...inputs.internal_name },
@@ -87,16 +101,32 @@ export const makeInputsList = (type: string): IInput[] => {
         { ...inputs.end_date, readonly: true, validation: {} },
       ];
 
-    case TypeForm.createDepartment || TypeForm.updateDepartment:
+    case TypeForm.createDepartment:
       return [{ ...inputs.departmentName }];
 
-    case TypeForm.updatePosition || TypeForm.createPosition:
+    case TypeForm.updateDepartment:
+      return [{ ...inputs.departmentName }];
+
+    case TypeForm.createPosition:
       return [{ ...inputs.positionName }];
 
-    case TypeForm.updateSkill || TypeForm.createSkill:
+    case TypeForm.updatePosition:
+      return [{ ...inputs.positionName }];
+
+    case TypeForm.createSkill:
       return [{ ...inputs.skillName }];
 
-    case TypeForm.updateLanguage || TypeForm.createLanguage:
+    case TypeForm.updateSkill:
+      return [{ ...inputs.skillName }];
+
+    case TypeForm.createLanguage:
+      return [
+        { ...inputs.languageName },
+        { ...inputs.iso2 },
+        { ...inputs.nativeName },
+      ];
+
+    case TypeForm.updateLanguage:
       return [
         { ...inputs.languageName },
         { ...inputs.iso2 },
@@ -110,7 +140,10 @@ export const makeInputsList = (type: string): IInput[] => {
 
 export const makeSelectsList = (type: string): IMySelect[] => {
   switch (type) {
-    case TypeForm.createProject || TypeForm.updateProject:
+    case TypeForm.createProject:
+      return [{ ...SelectSettings.skillsIds }];
+
+    case TypeForm.updateProject:
       return [{ ...SelectSettings.skillsIds }];
 
     case TypeForm.projectDetails:

@@ -1,16 +1,8 @@
-const prod = process.env.NODE_ENV === 'production';
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  mode: prod ? 'production' : 'development',
   entry: './src/index.tsx',
-  output: {
-    path: __dirname + '/dist/',
-    filename: 'bundle.js',
-    publicPath: '/',
-  },
   resolve: {
     alias: {
       pages: path.resolve(__dirname, 'src/pages/'),
@@ -41,10 +33,6 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
-  },
-  devtool: prod ? undefined : 'source-map',
-  devServer: {
-    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

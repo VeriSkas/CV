@@ -35,7 +35,13 @@
 <img src="./src/assets/readme/cv8.png" alt="cv app img" height="450" />
 <h2>How to run the app</h2>
 <p>Для того, чтобы запустить приложение, нужно:</p>
-<ol>
+<a
+  href="https://veriskas.github.io/CV/"
+  target="_blank"
+>
+  Нажать сюда
+</a>
+<ol> Или
   <li>Запустить Вашу IDE.</li>
   <li>Открыть нужную папку с приложением CURRICULUM-VITAE</li>
   <li>

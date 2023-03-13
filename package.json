@@ -2,13 +2,17 @@
   "name": "curriculum-vitae",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
+  "homepage": "https://veriskas.github.io/CV/",
   "scripts": {
-    "start": "webpack serve --port 3000",
-    "build": "NODE_ENV=production webpack",
+    "start": "webpack serve --config webpack.dev",
+    "build": "webpack --config webpack.prod",
     "lint": "eslint",
     "prepare": "husky install",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -53,6 +57,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.4",
+    "gh-pages": "^5.0.0",
     "graphql": "^16.6.0",
     "i18next": "^22.4.9",
     "react": "^18.2.0",
