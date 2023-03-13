@@ -31,6 +31,8 @@ import { ProjectItem } from './project';
 import { Skill } from './skills';
 import { UserInfo } from './user';
 
+export type OutletContextType = (id: string) => void;
+
 export interface ButtonProps {
   type?: string;
   onClick?: () => void;

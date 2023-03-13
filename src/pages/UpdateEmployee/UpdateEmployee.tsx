@@ -7,7 +7,7 @@ import {
   useReactiveVar,
 } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
 
 import { GET_USER, UPDATE_USER } from 'queries/users';
 import { EmployeeForm } from 'myComponents/EmployeeForm/EmployeeForm';
@@ -18,11 +18,13 @@ import { TypeForm } from 'constants/variables';
 import { ACTIVE_USER_ID, MAIN_ROLE } from 'apollo/state';
 import { Roles } from 'constants/constants';
 import { openNotification } from 'uiComponents/Notification/Notification';
+import { OutletContextType } from 'interfaces/propsInterfaces';
 import 'i18n/i18n';
 
 export const UpdateEmployee: FC<{}> = () => {
   const { t } = useTranslation();
   const { id } = useParams();
+  const setUser = useOutletContext<OutletContextType>();
   const { loading, data, error } = useQuery<
     { user: UserInfo },
     OperationVariables
@@ -36,6 +38,13 @@ export const UpdateEmployee: FC<{}> = () => {
 
   useEffect(() => {
     if (data) {
+      const { first_name, last_name } = data.user.profile;
+
+      setUser(
+        first_name || last_name
+          ? `${first_name ?? ''} ${last_name ?? ''}`
+          : data.user.email
+      );
       ACTIVE_USER_ID(id);
     }
   }, [data]);
