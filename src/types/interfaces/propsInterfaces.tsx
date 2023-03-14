@@ -111,7 +111,6 @@ export interface AvatarProps {
 
 export interface ContentHeaderProps {
   setOpenSidebar: (isOpen: boolean) => void;
-  setAuth: (isAuth: boolean) => void;
 }
 
 export interface CreateEmployeeFormProps {
@@ -159,14 +158,6 @@ export interface FieldsArrayFromArrayProps {
 export interface SideBarProps {
   onClose: () => void;
   isOpen: boolean;
-}
-
-export interface AuthProps {
-  auth: (isAuth: boolean) => void;
-}
-
-export interface SignUpProps {
-  auth: (isAuth: boolean) => void;
 }
 
 export interface SelectsFromArrayProps {
@@ -229,8 +220,6 @@ export interface TableItemProps {
 }
 
 export interface LayoutProps {
-  auth: (isAuth: boolean) => void;
-  login: boolean;
   children: ReactNode;
 }
 

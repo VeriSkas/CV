@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useReactiveVar } from '@apollo/client';
@@ -61,8 +61,6 @@ const CVsPage = React.lazy(async () => await import('./pages/CVsPage/CVsPage'));
 export const App: FC = () => {
   const token = useReactiveVar(USER_TOKEN);
   const { t, i18n } = useTranslation();
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(() => !!token);
-  let link = isLoggedIn ? PATH.employees : PATH.login;
   const language =
     localStorage.getItem(LSItems.pageLanguage) ?? SupportedLanguages.en;
 
@@ -71,14 +69,6 @@ export const App: FC = () => {
       void i18n.changeLanguage(language);
     }
   }, [i18n]);
-
-  useEffect(() => {
-    link = isLoggedIn ? PATH.employees : PATH.login;
-  }, [isLoggedIn]);
-
-  const setAuth = (auth: boolean): void => {
-    setLoggedIn(auth);
-  };
 
   const protectedRoutes = (
     <>
@@ -179,16 +169,7 @@ export const App: FC = () => {
           </React.Suspense>
         }
       >
-        <Route
-          index
-          element={
-            <Auth
-              auth={(isAuth: boolean) => {
-                setAuth(isAuth);
-              }}
-            />
-          }
-        />
+        <Route index element={<Auth />} />
       </Route>
       <Route
         path={PATH.signUp}
@@ -198,31 +179,22 @@ export const App: FC = () => {
           </React.Suspense>
         }
       >
-        <Route
-          index
-          element={
-            <SignUp
-              auth={(isAuth: boolean) => {
-                setAuth(isAuth);
-              }}
-            />
-          }
-        />
+        <Route index element={<SignUp />} />
       </Route>
     </>
   );
 
   return (
     <div className="App">
-      <Layout
-        login={isLoggedIn}
-        auth={(isAuth: boolean) => {
-          setAuth(isAuth);
-        }}
-      >
+      <Layout>
         <Routes>
-          {isLoggedIn ? protectedRoutes : unProtectedRoutes}
-          <Route path="*" element={<Navigate to={link} replace />} />
+          {token ? protectedRoutes : unProtectedRoutes}
+          <Route
+            path="*"
+            element={
+              <Navigate to={token ? PATH.employees : PATH.login} replace />
+            }
+          />
         </Routes>
       </Layout>
     </div>

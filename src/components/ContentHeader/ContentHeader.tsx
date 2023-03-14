@@ -16,10 +16,7 @@ import { Header } from 'uiComponents/Header/Header';
 import { ContentHeaderProps } from 'interfaces/propsInterfaces';
 import classes from './ContentHeader.module.scss';
 
-export const ContentHeader: FC<ContentHeaderProps> = ({
-  setOpenSidebar,
-  setAuth,
-}) => {
+export const ContentHeader: FC<ContentHeaderProps> = ({ setOpenSidebar }) => {
   const userId = useReactiveVar(USER_ID);
   const navigate = useNavigate();
   const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
@@ -47,7 +44,6 @@ export const ContentHeader: FC<ContentHeaderProps> = ({
     if (label === links.logout.label) {
       localStorage.clear();
       USER_TOKEN('');
-      setAuth(false);
     }
   };
 
