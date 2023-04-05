@@ -1,0 +1,14 @@
+@import 'styles/sizes.scss';
+
+.SearchBar {
+  width: 100%;
+  height: calc(100% - $breadcrumbsHeight);
+
+  .SearchPanel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 8%;
+  }
+}

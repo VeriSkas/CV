@@ -1,15 +1,31 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "jsx": "react",
-    "module": "esnext",
-    "moduleResolution": "node",
     "lib": [
       "dom",
       "esnext"
     ],
     "strict": true,
     "sourceMap": true,
-    "target": "ES2015",
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "esnext",
+    "target": "ES5",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "paths": {
+      "pages": ["./src/pages/*"],
+      "uiComponents/*": ["./src/components/UI/*"],
+      "myComponents/*": ["./src/components/*"],
+      "constants/*": ["./src/constants/*"],
+      "styles/*": ["./src/constants/styles/*"],
+      "queries/*": ["./src/apollo/queries/*"],
+      "apollo/*": ["./src/apollo/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "utils/*": ["./src/utils/*"],
+      "i18n/*": ["./src/i18n/*"],
+      "interfaces/*": ["./src/types/interfaces/*"]
+    },
   }
 }

@@ -1,0 +1,15 @@
+@import 'styles/colors.scss';
+
+.Header {
+  position: fixed;
+  z-index: 90;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 64px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: $mainBlack;
+  box-shadow: 1px 1px 5px $mainBlack;
+}

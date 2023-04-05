@@ -1,0 +1,64 @@
+.Header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  a {
+    position: relative;
+    display: inline-block;
+    max-width: 360px;
+    min-width: 150px;
+    padding: 12px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-bottom 2s;
+
+    .HeaderBtn {
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    &:after {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: rgb(198, 48, 49);
+      content: "";
+      transition: width 0.3s ease-out;
+    }
+
+    &:first-child {
+      &:after {
+        right: 0;
+      }
+    }
+
+    &:last-child {
+      &:after {
+        left: 0;
+      }
+    }
+  }
+
+  .Active {
+    .HeaderBtn {
+      color: rgb(198, 48, 49);
+    }
+
+    &::after {
+      width: 100% !important;
+    }
+  }
+}
+
+.Content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: calc(100vh - 64px);
+  margin-top: 64px;
+}

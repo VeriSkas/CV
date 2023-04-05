@@ -11,6 +11,7 @@
     "eslint:recommended"
   ],
   "parserOptions": {
+    "project": "./tsconfig.json",
     "ecmaVersion": "latest",
     "sourceType": "module",
     "ecmaFeatures": {
@@ -26,7 +27,22 @@
     "react/jsx-uses-vars": "error",
     "react/jsx-uses-react": "error",
     "no-unused-vars": "off",
+    "comma-dangle":"off",
+    "semi":"off",
+    "space-before-function-paren": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/semi": "off",
+    "@typescript-eslint/comma-dangle": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/consistent-indexed-object-style": "off",
+    "@typescript-eslint/space-before-function-paren": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "multiline-ternary": "off",
     "no-restricted-syntax": [
       "error",
       {
@@ -40,6 +56,14 @@
     "react-hooks/exhaustive-deps": "off",
     "react/react-in-jsx-scope": "off"
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ],
   "plugins": [
     "react",
     "react-hooks",

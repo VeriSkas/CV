@@ -1,0 +1,70 @@
+@import 'styles/colors.scss';
+@import 'styles/sizes.scss';
+
+.Button {
+  display: flex;
+  width: calc(100% - 10px);
+  align-items: center;
+  justify-content: center;
+  border: none;
+  min-width: 64px;
+  padding: 10px 15px;
+  margin: 10px 5px;
+  background: $mainRed;
+  box-shadow: 1px 1px 1px rgba($color: #000000, $alpha: 0.7);
+  box-sizing: border-box;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all .5s;
+
+  &:active {
+    box-shadow: inset 2px 2px 1px rgba($color: #000000, $alpha: 0.7);
+  }
+
+  &:hover {
+    background: $redHoverBtn;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &.transparent {
+    background: none;
+    color: $mainRed;
+    box-shadow: none;
+
+    &:active {
+      box-shadow: inset 2px 2px 1px rgba($color: #000000, $alpha: 0.3);
+      background: $redActiveBtn;
+    }
+
+    &:hover {
+      box-shadow: 1px 1px 1px rgba($color: #000000, $alpha: 0.3);
+      background: $transparentActiveBtn;
+    }
+  }
+
+  &.transparentWithBorder {
+    background: none;
+    border: 1px solid $mainRed;
+    color: $mainRed;
+    box-shadow: none;
+    font-size: calc(11px + 3 * (100vw / 1536));
+    padding: calc(5px + 7 * (100vw / 1536));
+
+    &:active {
+      box-shadow: inset 2px 2px 1px rgba($color: #000000, $alpha: 0.3);
+      background: $transparentActiveBtn;
+    }
+
+    &:hover {
+      box-shadow: 1px 1px 1px rgba($color: #000000, $alpha: 0.3);
+      background: $transparentActiveBtn;
+    }
+  }
+}

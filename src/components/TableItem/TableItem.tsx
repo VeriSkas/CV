@@ -1,0 +1,116 @@
+import React, { FC, ReactNode, useState } from 'react';
+
+import { SlOptionsVertical } from 'react-icons/sl';
+import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
+import { IconContext } from 'react-icons';
+import { useTranslation } from 'react-i18next';
+import { useReactiveVar } from '@apollo/client';
+
+import { UsedInTableObjectsType } from 'interfaces/interfaces';
+import { DropDown } from 'uiComponents/DropDown/DropDown';
+import classes from './TableItem.module.scss';
+import { TableCvItem } from 'interfaces/cvs';
+import { TableItemProps } from 'interfaces/propsInterfaces';
+import { hiddenObjectKeysInTable, objectKeysInTable } from 'constants/variables';
+import { MAIN_ROLE } from 'apollo/state';
+import { Roles } from 'constants/constants';
+
+export const TableItem: FC<TableItemProps> = ({
+  item,
+  dropDownOptions,
+  dropDownHandler,
+  toggleTemplateCv,
+  settingsView,
+  avatar,
+}) => {
+  const [isOpenDropDown, setIsOpenDropDown] = useState<boolean>(false);
+  const role = useReactiveVar(MAIN_ROLE);
+  const { t } = useTranslation();
+
+  const toggleDropDown = (): void => {
+    setIsOpenDropDown((prev) => !prev);
+  };
+
+  const onClickDropDown = (label: string): void => {
+    dropDownHandler(label, item.id);
+  };
+
+  const renderItemRow = (): ReactNode | string => {
+    const { is_template } = hiddenObjectKeysInTable;
+
+    return Object.keys(item).map((key: string) => {
+      if (key === is_template) {
+        const cv = item as TableCvItem;
+
+        return (
+          <div className={classes.Item} key={key} onClick={toggleTemplate}>
+            {cv[key as keyof TableCvItem] ? (
+              <IconContext.Provider
+                value={{
+                  className: `${classes.IconChecked}`,
+                }}
+              >
+                <MdCheckBox />
+              </IconContext.Provider>
+            ) : (
+              <IconContext.Provider
+                value={{
+                  className: `${classes.IconUnchecked}`,
+                }}
+              >
+                <MdCheckBoxOutlineBlank />
+              </IconContext.Provider>
+            )}
+          </div>
+        );
+      }
+
+      if (key === objectKeysInTable.end_date && !item[key as keyof UsedInTableObjectsType]) {
+        return t('ContentText.noEndDate');
+      }
+
+      if (Object.prototype.hasOwnProperty.call(hiddenObjectKeysInTable, key)) {
+        return '';
+      }
+
+      return (
+        <div className={classes.Item} key={key}>
+          {item[key as keyof UsedInTableObjectsType]}
+        </div>
+      );
+    });
+  };
+
+  const toggleTemplate = (): void => {
+    if (toggleTemplateCv) {
+      toggleTemplateCv(item.id)
+    }
+  }
+
+  return (
+    <div className={classes.TableItem}>
+      {avatar && <div className={classes.Item}>
+        {'avatar' in item && item.avatar && (
+          <img src={item.avatar} className={classes.UserAvatar} />
+        )}
+        {'avatar' in item && !item.avatar && (
+          <div className={classes.UserLogo}>{item.email[0] || ' '}</div>
+        )}
+      </div>}
+      {renderItemRow()}
+      {(role === Roles.admin.value || settingsView) && <div className={classes.Item}>
+        <div className={classes.Options} onClick={toggleDropDown}>
+          <SlOptionsVertical />
+          {isOpenDropDown && (
+            <DropDown
+              options={dropDownOptions}
+              onClick={(label: string) => {
+                onClickDropDown(label);
+              }}
+            />
+          )}
+        </div>
+      </div>}
+    </div>
+  );
+};
